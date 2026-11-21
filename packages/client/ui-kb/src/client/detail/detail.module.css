@@ -27,6 +27,8 @@
   margin: 0 0 16px;
   font-size: var(--matter-alias-font-size-title);
   line-height: var(--matter-alias-line-height-title);
+  /* ISS-931：裸 h2 默认 700 超限，显式定 600（判据 R2c 字重 ≤600）。 */
+  font-weight: 600;
   /* 信息层级（判词 4）：标题用主文字 + 足够留白，不靠堆色。 */
   color: var(--matter-alias-text-primary);
 }

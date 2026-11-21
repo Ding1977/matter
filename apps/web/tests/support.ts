@@ -233,6 +233,122 @@ export function captureAria(page: Awaited<ReturnType<Browser["newPage"]>>): Prom
   return page.locator("body").ariaSnapshot()
 }
 
+/**
+ * 层级断言行号的取值来源：theme.css 的 title CSS 自定义属性名（不是写死的像素数）。
+ * 取 `--matter-static-font-size-title`：它是主题里定义的最大排版档，
+ * 任何比它大的可见文字都必须是页面一级标题，否则就是层级倒挂。
+ */
+export const FONT_TITLE_VAR = "--matter-static-font-size-title"
+
+/** theme.css 的仓库相对路径（唯一取值家，不抄字面量）。 */
+export const THEME_CSS = join(ROOT, "packages/client/ui-theme/src/client/theme.css")
+
+/**
+ * 从 theme.css 读 title 字号 CSS 自定义属性的 px 值。读不到就报错（不静默回落默认）。
+ * ⛔ 只读样式文件，不读 .env —— replay 调用链同样不碰环境。
+ */
+export async function readTitleFontPx(): Promise<number> {
+  const css = await readFile(THEME_CSS, "utf8")
+  const match = new RegExp(`${FONT_TITLE_VAR}\\s*:\\s*(\\d+(?:\\.\\d+)?)px`).exec(css)
+  if (match === null) {
+    throw new Error(`theme.css 缺 ${FONT_TITLE_VAR}（${THEME_CSS}）；层级断言不猜阈值`)
+  }
+  const px = Number(match[1])
+  if (!Number.isFinite(px) || px <= 0) throw new Error(`${FONT_TITLE_VAR} 非法：${match[1]}`)
+  return px
+}
+
+/** 真机取到的最大字号可见文本元素（role/level 用隐式语义解析）。 */
+export interface LargestText {
+  readonly tag: string
+  readonly role: string | null
+  readonly level: string | null
+  readonly text: string
+  readonly fontSizePx: number
+  readonly fontWeight: string
+}
+
+/**
+ * 遍历可见文本元素，取 computed `fontSize` 最大者。
+ * 可见口径：有直接文本节点 + 有布局盒 + 非 hidden + 不在 aria-hidden 子树。
+ * @param page - 已就绪的快照页。
+ */
+export function probeLargestText(page: Awaited<ReturnType<Browser["newPage"]>>): Promise<LargestText | null> {
+  return page.evaluate(() => {
+    let best: LargestText | null = null
+    for (const el of Array.from(document.body.querySelectorAll("*"))) {
+      const direct = Array.from(el.childNodes).some((n) => n.nodeType === 3 && (n.textContent ?? "").trim() !== "")
+      if (!direct) continue
+      if (el.closest('[aria-hidden="true"]') !== null) continue
+      const cs = getComputedStyle(el)
+      if (cs.display === "none" || cs.visibility === "hidden" || cs.opacity === "0") continue
+      if (el.getClientRects().length === 0) continue
+      const px = Number.parseFloat(cs.fontSize)
+      if (!Number.isFinite(px)) continue
+      if (best === null || px > best.fontSizePx) {
+        const tag = el.tagName.toLowerCase()
+        const explicitRole = el.getAttribute("role")
+        const explicitLevel = el.getAttribute("aria-level")
+        const h = /^h([1-6])$/.exec(tag)
+        best = {
+          tag,
+          role: explicitRole ?? (h !== null ? "heading" : null),
+          level: explicitLevel ?? (h !== null ? h[1] : null),
+          text: (el.textContent ?? "").trim().slice(0, 40),
+          fontSizePx: px,
+          fontWeight: cs.fontWeight,
+        }
+      }
+    }
+    return best
+  })
+}
+
+/**
+ * computed-style 层级断言：页面最大字号元素的 role 必须是 heading/level=1，
+ * 且最大字号不得低于 theme.css 的 title token（否则是整页缩字号的假通过）。
+ * @param page - 已就绪的快照页。
+ * @param label - 人读标签（报错点名场景+视口）。
+ * @returns 实测最大字号元素，供回报"最大字号元素是什么、字号多少"。
+ */
+export async function assertHeadingHierarchy(
+  page: Awaited<ReturnType<Browser["newPage"]>>,
+  label: string,
+): Promise<LargestText> {
+  const threshold = await readTitleFontPx()
+  const max = await probeLargestText(page)
+  if (max === null) throw new Error(`[层级] ${label}：没有可见文本元素，无法判层级`)
+  if (max.fontSizePx < threshold) {
+    throw new Error(
+      `[层级] ${label}：最大字号 ${String(max.fontSizePx)}px < ${FONT_TITLE_VAR}=${String(threshold)}px`
+      + `（<${max.tag}>「${max.text}」）`,
+    )
+  }
+  if (max.role !== "heading" || max.level !== "1") {
+    throw new Error(
+      `[层级] ${label}：最大字号元素 <${max.tag}>「${max.text}」 ${String(max.fontSizePx)}px`
+      + ` role=${String(max.role)} level=${String(max.level)}，应为 heading/1`,
+    )
+  }
+  return max
+}
+
+/** 打断文档列表 RPC：制造真实错误态（不是 mock 组件状态）。 */
+export async function breakDocumentList(page: Awaited<ReturnType<Browser["newPage"]>>): Promise<void> {
+  await page.route("**/api/document/list", (route) => route.abort("failed"))
+}
+
+/** 延迟文档列表 RPC：制造真实的「数据未返回」窗口。 */
+export async function delayDocumentList(
+  page: Awaited<ReturnType<Browser["newPage"]>>,
+  ms = 8_000,
+): Promise<void> {
+  await page.route("**/api/document/list", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, ms))
+    await route.continue()
+  })
+}
+
 /** 首个差异（1-based 行号）；无差异返回 null。 */
 export interface FirstDiff {
   readonly line: number

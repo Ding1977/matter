@@ -24,7 +24,9 @@
   overflow: hidden; /* 三栏之和 = 视口宽，杜绝横向溢出；审查截图 09 的 scrollW>viewport 由此消除。 */
   background: var(--matter-alias-surface);
   color: var(--matter-alias-text-primary);
-  --page-shell-grab: 4px;
+  /* 抽屉栈：少量局部命名层（不建全局 z 表）。 */
+  --page-shell-z-backdrop: 30;
+  --page-shell-z-drawer: 31;
 }
 
 /* 属性栏缺席：内联已把 props-w 发布为 0，这里只隐藏 DOM、不改轴。 */
@@ -65,21 +67,82 @@
   line-height: var(--matter-alias-line-height-caption);
 }
 
-/* 宽度把手：仅指针设备给出悬浮反馈（判词 4：hover 进 @media）。 */
-.grip {
-  border: 0;
-  background: transparent;
-  cursor: col-resize;
+/* 抽屉入口：仅 drawer 态由 KbShell 渲染，真开合（不再「0 宽 + 打不开」）。 */
+.drawerToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  margin: 0 0 8px;
+  border: 0.5px solid var(--matter-alias-border-subtle);
+  border-radius: var(--matter-alias-radius-control);
+  background: var(--matter-alias-surface-raised);
+  color: var(--matter-alias-text-primary);
+  font-size: var(--matter-alias-font-size-body);
+  cursor: pointer;
 }
-
-@media (hover: hover) {
-  .grip:hover {
-    background: var(--matter-alias-surface-selected);
-  }
-}
-
-/* 焦点态用 focus-visible，键盘目标可辨（判词 11 的焦点组合）。 */
-.grip:focus-visible {
+.drawerToggle:focus-visible {
   outline: var(--matter-alias-focus-ring-width) solid var(--matter-alias-focus-ring-color);
-  outline-offset: -1px;
+  outline-offset: -2px;
+}
+
+/* 侧栏内容：抽屉态变成真浮层。closed 态移出视口、open 态滑入（可点、可关闭）。 */
+.root[data-side='drawer'] .sidebarNav {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(280px, 85vw);
+  box-sizing: border-box;
+  z-index: var(--page-shell-z-drawer);
+  padding: 16px;
+  background: var(--matter-alias-surface-raised);
+  border-right: 0.5px solid var(--matter-alias-border-subtle);
+  transform: translateX(-100%);
+  transition: transform 150ms ease-in-out;
+}
+.root[data-side='drawer'][data-drawer-open='on'] .sidebarNav {
+  transform: translateX(0);
+}
+
+/* 抽屉遮罩：只拦截点击关闭，不模糊背景（遮罩不模糊）。 */
+.drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--page-shell-z-backdrop);
+  border: 0;
+  padding: 0;
+  background: var(--matter-alias-text-primary);
+  opacity: 0.28;
+  cursor: default;
+}
+
+/* 列表错误态（ISS-931 必修3）：与「暂无文档」空态视觉、语义分离。 */
+.listError {
+  padding: var(--matter-alias-line-height-body);
+  color: var(--matter-alias-danger);
+  font-size: var(--matter-alias-font-size-body);
+  line-height: var(--matter-alias-line-height-body);
+}
+.listError p {
+  margin: 0 0 8px;
+}
+.listError button {
+  border: 0.5px solid var(--matter-alias-accent);
+  border-radius: var(--matter-alias-radius-control);
+  background: var(--matter-alias-surface);
+  color: var(--matter-alias-text-primary);
+  font: inherit;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+.listError button:focus-visible {
+  outline: var(--matter-alias-focus-ring-width) solid var(--matter-alias-focus-ring-color);
+  outline-offset: -2px;
+}
+.listLoading {
+  color: var(--matter-alias-text-muted);
+  font-size: var(--matter-alias-font-size-secondary);
+  line-height: var(--matter-alias-line-height-secondary);
 }

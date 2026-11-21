@@ -31,6 +31,12 @@
   --matter-static-color-red-60: #d5484f;
   /* 成功绿（ISS-544）：dsw success 状态族的语义来源。 */
   --matter-static-color-green-60: #2f9e6e;
+  /* 警示琥珀（ISS-931）：dsw warn 状态族的语义来源；与 danger 红区分，警告不染成错误。 */
+  --matter-static-color-amber: #d99a1c;
+
+  /* 字体族静态值（ISS-931）：桥接层只按名字映射，族名只在本层出现一次。 */
+  --matter-static-font-family-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --matter-static-font-family-code: ui-monospace, Menlo, monospace;
 
   /* 圆角静态值（原有 sm4/md8，ISS-544 补 12/16/20/28） */
   --matter-static-radius-sm: 4px;
@@ -70,6 +76,7 @@
   --matter-alias-accent-contrast: var(--matter-static-color-white);
   --matter-alias-danger: var(--matter-static-color-red-60);
   --matter-alias-success: var(--matter-static-color-green-60);
+  --matter-alias-warn: var(--matter-static-color-amber);
   --matter-alias-interactive-bg-hover: var(--matter-static-color-blue-10);
 
   /* 圆角 6 档真梯度（沿用原 control/panel 名 + 新增 xs/sm/md/lg/xl/2xl） */

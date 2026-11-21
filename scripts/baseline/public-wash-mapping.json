@@ -30,9 +30,9 @@
     705
   ],
   "legacy_distinct_tokens": 36,
-  "distinct_tokens": 427,
+  "distinct_tokens": 430,
   "total_4plus_occurrences_current_main": 363,
-  "next_small_id": 930,
+  "next_small_id": 933,
   "appended": [
     {
       "token": "ISS-537",
@@ -2379,6 +2379,24 @@
       "to": "ISS-929",
       "batch": "ISS-930",
       "occurrences": 8
+    },
+    {
+      "token": "ISS-930",
+      "to": "ISS-930",
+      "batch": "ISS-930",
+      "occurrences": 10
+    },
+    {
+      "token": "ISS-931",
+      "to": "ISS-931",
+      "batch": "ISS-933",
+      "occurrences": 43
+    },
+    {
+      "token": "ISS-932",
+      "to": "ISS-932",
+      "batch": "ISS-933",
+      "occurrences": 5
     }
   ],
   "mapping": {
@@ -2808,7 +2826,10 @@
     "ISS-926": "ISS-926",
     "ISS-927": "ISS-927",
     "ISS-928": "ISS-928",
-    "ISS-929": "ISS-929"
+    "ISS-929": "ISS-929",
+    "ISS-930": "ISS-930",
+    "ISS-931": "ISS-931",
+    "ISS-932": "ISS-932"
   },
   "per_token_counts": {
     "ISS-530": 16,
@@ -3237,6 +3258,9 @@
     "ISS-926": 11,
     "ISS-927": 1,
     "ISS-928": 3,
-    "ISS-929": 8
+    "ISS-929": 8,
+    "ISS-930": 10,
+    "ISS-931": 43,
+    "ISS-932": 5
   }
 }

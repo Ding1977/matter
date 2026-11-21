@@ -19,14 +19,17 @@
  */
 :root {
   --ds-ease-in-out: ease-in-out;
-  --ds-font-family-code: ui-monospace, Menlo, monospace;
+  /* ISS-931：族名只住 Matter static 层，桥接层按名映射，不写具体族名。 */
+  --ds-font-family-code: var(--matter-static-font-family-code);
   --ds-transition-duration: 150ms;
   --dsh-button-outline-color: #1a1c20;
   --dsh-content-font-delta: 0px;
   --dsh-content-font-delta-secondary: 0px;
   --dsh-content-font-size: 14px;
-  --dsh-content-font-size-secondary: 14px;
-  --dsh-file-type-default-color: #1a1c20;
+  /* ISS-931：secondary 落 13px 档（原 14px 与 primary 同档，secondary 形同虚设）。 */
+  --dsh-content-font-size-secondary: var(--matter-alias-font-size-secondary);
+  /* ISS-931 parity：官方 var() 转发项一律回转发，不写死数值。 */
+  --dsh-file-type-default-color: var(--dsw-static-deepseek-500);
   --dsh-file-type-icon-color: #9096a0;
   --dsh-file-type-violet: #1a1c20;
   --dsh-frame-chrome-top: var(--matter-alias-overlay-top);
@@ -46,25 +49,26 @@
   --dsh-submenu-parent: #1a1c20;
   --dsh-submenu-row-offset: 8px;
   --dsh-toast-hold: #1a1c20;
-  --dsl-code-block-background: #1a1c20;
-  --dsl-code-block-banner-background-color: #1a1c20;
+  --dsl-code-block-background: var(--dsw-alias-markdown-code-block);
+  --dsl-code-block-banner-background-color: var(--dsw-alias-markdown-code-block-banner);
   --dsl-code-block-banner-font: #1a1c20;
-  --dsl-code-block-border-radius: 4px;
-  --dsl-code-block-content-font: #1a1c20;
+  --dsl-code-block-border-radius: var(--dsw-radius-lg);
+  --dsl-code-block-content-font: var(--dsw-font-markdown-code-block);
   --dsl-code-block-line-number-width: 8px;
   --dsl-code-block-line-white-space: 8px;
-  --dsl-command-whitespace: 8px;
+  --dsl-command-whitespace: var(--dsl-terminal-command-whitespace, pre);
   --dsl-read-gutter: 8px;
-  --dsl-search-line-height: 8px;
-  --dsl-search-radius: 4px;
+  /* designer 实测漂移：官方 22px，桥接手抄 8px；改走 Matter body 行高档（解析 22px）。 */
+  --dsl-search-line-height: var(--matter-alias-line-height-body);
+  --dsl-search-radius: var(--dsw-radius-lg);
   --dsl-terminal-command-whitespace: 8px;
-  --dsl-terminal-font: #1a1c20;
+  --dsl-terminal-font: var(--dsw-font-markdown-code-block);
   --dsl-terminal-gutter: 8px;
   --dsl-terminal-line-height: 8px;
   --dsl-terminal-line-whitespace: 8px;
   --dsl-terminal-output-max-height: 8px;
-  --dsl-terminal-radius: 4px;
-  --dsl-web-radius: 4px;
+  --dsl-terminal-radius: var(--dsw-radius-lg);
+  --dsl-web-radius: var(--dsw-radius-lg);
   --dsw-alias-bg-base: var(--matter-alias-surface);
   --dsw-alias-bg-layer-1: var(--matter-alias-surface);
   --dsw-alias-bg-layer-2: var(--matter-alias-surface);
@@ -106,7 +110,8 @@
   --dsw-alias-label-caption: var(--matter-alias-text-muted);
   --dsw-alias-label-dimmed: var(--matter-alias-text-muted);
   --dsw-alias-label-error: var(--matter-alias-danger);
-  --dsw-alias-label-primary: var(--matter-alias-accent);
+  /* ISS-931 必修5：主文字是近黑/近白正文色，不是 accent 蓝（原 #3d6df2）。 */
+  --dsw-alias-label-primary: var(--matter-alias-text-primary);
   --dsw-alias-label-primary-foreground: var(--matter-alias-accent);
   --dsw-alias-label-secondary: var(--matter-alias-text-muted);
   --dsw-alias-label-shimmer: var(--matter-alias-text-muted);
@@ -121,12 +126,14 @@
   --dsw-alias-scrollbar-hover-l2: var(--matter-alias-surface-selected);
   --dsw-alias-state-business-primary: var(--matter-alias-accent);
   --dsw-alias-state-error-primary: var(--matter-alias-danger);
-  --dsw-alias-state-idle-primary: var(--matter-alias-accent);
+  /* ISS-931：idle = 非活动次要态，挂主文字的弱化档，不挂强调蓝。 */
+  --dsw-alias-state-idle-primary: var(--matter-alias-text-muted);
   --dsw-alias-state-success-primary: var(--matter-alias-success);
   --dsw-alias-state-success-tertiary: var(--matter-alias-success);
-  --dsw-alias-state-warn-label: var(--matter-alias-danger);
-  --dsw-alias-state-warn-primary: var(--matter-alias-danger);
-  --dsw-alias-state-warn-tertiary: var(--matter-alias-danger);
+  /* ISS-931：warn = 警告，挂 warn 语义色，不挂 danger 红。 */
+  --dsw-alias-state-warn-label: var(--matter-alias-warn);
+  --dsw-alias-state-warn-primary: var(--matter-alias-warn);
+  --dsw-alias-state-warn-tertiary: var(--matter-alias-warn);
   --dsw-alias-switch-thumb: var(--matter-alias-text-primary);
   --dsw-alias-toast-action: var(--matter-alias-text-primary);
   --dsw-alias-toast-bg: var(--matter-alias-surface);
@@ -139,47 +146,51 @@
   --dsw-elevation-soft: var(--matter-alias-elevation-soft);
   --dsw-focus-ring-color: var(--matter-alias-focus-ring-color);
   --dsw-focus-ring-width: var(--matter-alias-focus-ring-width);
-  --dsw-font-family: ui-monospace, Menlo, monospace;
+  /* ISS-931：普通界面用系统字体栈（原写成等宽体，整页原件渲染成 monospace）。 */
+  --dsw-font-family: var(--matter-static-font-family-ui);
   --dsw-font-markdown-base: 14px;
   --dsw-font-markdown-base-strong: 14px;
   --dsw-font-markdown-code: 14px;
   --dsw-font-markdown-code-block: 14px;
-  --dsw-font-markdown-code-font-family: ui-monospace, Menlo, monospace;
+  --dsw-font-markdown-code-font-family: var(--matter-static-font-family-code);
   --dsw-font-markdown-h1: 24px;
   --dsw-font-markdown-h2: 20px;
   --dsw-font-markdown-h3: 16px;
   --dsw-font-markdown-h4: 14px;
   --dsw-font-markdown-table: 14px;
   --dsw-font-markdown-table-head: 14px;
-  --dsw-font-xs-13: 13px;
-  --dsw-mask-blur: blur(8px);
-  --dsw-menu-backdrop-filter: blur(8px);
+  --dsw-font-xs-13: var(--matter-alias-font-size-secondary);
+  /* ISS-931：模态遮罩不模糊（原 blur(8px) 违 §1.1.4/§1.5.4）。 */
+  --dsw-mask-blur: none;
+  --dsw-menu-backdrop-filter: none;
   --dsw-menu-surface-fill: #ffffff;
-  --dsw-radius-lg: 4px;
-  --dsw-radius-md: 4px;
-  --dsw-radius-panel: 4px;
-  --dsw-radius-sm: 4px;
-  --dsw-radius-xl: 4px;
-  --dsw-radius-xs: 4px;
+  /* ISS-931 必修4：六档圆角梯度接 Matter alias（原六档全 4px，被压平）。 */
+  --dsw-radius-lg: var(--matter-alias-radius-lg);
+  --dsw-radius-md: var(--matter-alias-radius-md);
+  --dsw-radius-panel: var(--matter-alias-radius-2xl);
+  --dsw-radius-sm: var(--matter-alias-radius-sm);
+  --dsw-radius-xl: var(--matter-alias-radius-xl);
+  --dsw-radius-xs: var(--matter-alias-radius-xs);
   --dsw-shadow-lv3: 0 8px 24px rgba(0,0,0,0.12);
   --dsw-specific-bubble: #1a1c20;
   --dsw-specific-input-major: #1a1c20;
   --dsw-specific-menu: #1a1c20;
-  --dsw-static-amber-400: #d99a1c;
-  --dsw-static-amber-500: #d99a1c;
-  --dsw-static-deepseek-450: #3d6df2;
-  --dsw-static-deepseek-500: #3d6df2;
-  --dsw-static-green-500: #2f9e6e;
-  --dsw-static-neutral-bluish-300: #c9ccd3;
-  --dsw-static-red-600: #1a1c20;
+  /* ISS-931 parity：--dsw-static-* 逐条对齐官方调色板（原手抄值 7 条全漂）。 */
+  --dsw-static-amber-400: #f7ad31;
+  --dsw-static-amber-500: #f59e0b;
+  --dsw-static-deepseek-450: #5686fe;
+  --dsw-static-deepseek-500: #4176e6;
+  --dsw-static-green-500: #22c55e;
+  --dsw-static-neutral-bluish-300: #cfd3d6;
+  --dsw-static-red-600: #ec1313;
   --json-tree-collapsed-lines: 8px;
-  --json-tree-hover: #e8effc;
-  --json-tree-icon: #9096a0;
-  --json-tree-keyword: #1a1c20;
-  --json-tree-number: #1a1c20;
-  --json-tree-property: #1a1c20;
-  --json-tree-punctuation: #1a1c20;
+  --json-tree-hover: var(--dsw-alias-json-tree-hover);
+  --json-tree-icon: var(--dsw-alias-json-tree-icon);
+  --json-tree-keyword: var(--dsw-alias-json-tree-keyword);
+  --json-tree-number: var(--dsw-alias-json-tree-number);
+  --json-tree-property: var(--dsw-alias-json-tree-property);
+  --json-tree-punctuation: var(--dsw-alias-json-tree-punctuation);
   --json-tree-row-height: 8px;
-  --json-tree-string: #1a1c20;
+  --json-tree-string: var(--dsw-alias-json-tree-string);
   --segmented-tabs-inset: 8px;
 }

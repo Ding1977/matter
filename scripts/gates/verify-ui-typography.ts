@@ -30,6 +30,8 @@ export interface ExceptionEntry {
 export interface ExpectedExceptions {
   s1: Record<string, ExceptionEntry>
   s2: Record<string, ExceptionEntry>
+  /** S3：h2 引用的 title/column 类未声明 font-weight（ISS-931 reviewer 洞）。 */
+  s3: Record<string, ExceptionEntry>
 }
 
 /**
@@ -43,7 +45,7 @@ export function judgeTypography(actual: ScanFindings, expected: ExpectedExceptio
   if (expected === null) return unjudged(gate, "no-baseline", "typography-exceptions.json 读不到或不是合法 JSON ⇒ 判不了")
 
   const findings: string[] = []
-  for (const which of ["s1", "s2"] as const) {
+  for (const which of ["s1", "s2", "s3"] as const) {
     const exp = expected[which] ?? {}
     const act = actual[which] ?? {}
     for (const [at, entry] of Object.entries(exp)) {
@@ -68,7 +70,7 @@ export function readExpected(): ExpectedExceptions | null {
     const parsed: unknown = JSON.parse(fs.readFileSync(EXPECTED, "utf8"))
     if (typeof parsed !== "object" || parsed === null) return null
     const obj = parsed as Partial<ExpectedExceptions>
-    if (typeof obj.s1 !== "object" || typeof obj.s2 !== "object") return null
+    if (typeof obj.s1 !== "object" || typeof obj.s2 !== "object" || typeof obj.s3 !== "object") return null
     return obj as ExpectedExceptions
   } catch {
     return null

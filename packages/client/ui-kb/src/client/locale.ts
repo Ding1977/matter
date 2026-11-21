@@ -46,6 +46,14 @@ export interface Messages {
   readonly propertiesTitleLabel: string
   /** 列表行展开时的操作提示（ISS-544，状态五组合的展开态）。 */
   readonly rowActionHint: string
+  /** 列表取数失败的错误态文案（ISS-931 必修3，区别于「暂无文档」）。 */
+  readonly listErrorHint: string
+  /** 错误态的重试动作文案（ISS-931 必修3）。 */
+  readonly listRetryAction: string
+  /** 480 抽屉开合按钮的无障碍名（ISS-931 必修2）。 */
+  readonly navToggleLabel: string
+  /** 480 抽屉遮罩关闭按钮的无障碍名（ISS-931 必修2）。 */
+  readonly navCloseLabel: string
 }
 
 /**
@@ -67,5 +75,9 @@ export function resolveMessages(t: Translator = identityTranslator): Messages {
     propertiesIdLabel: t("编号"),
     propertiesTitleLabel: t("标题"),
     rowActionHint: t("操作"),
+    listErrorHint: t("加载失败，请检查网络或服务后重试"),
+    listRetryAction: t("重试"),
+    navToggleLabel: t("打开文档导航"),
+    navCloseLabel: t("关闭文档导航"),
   }
 }

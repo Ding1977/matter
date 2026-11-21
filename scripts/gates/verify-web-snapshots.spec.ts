@@ -26,8 +26,8 @@ export function run_spec(): boolean {
   // 正例
   {
     const r = judgeWebSnapshots(mkInput())
-    ok("正例：replay 全绿 + 9 基线 ⇒ passed", r.status === "passed")
-    ok("正例：detail 带 9 基线读数", (r.detail ?? "").includes("9"))
+    ok(`正例：replay 全绿 + ${String(EXPECTED_GOLDENS)} 基线 ⇒ passed`, r.status === "passed")
+    ok(`正例：detail 带 ${String(EXPECTED_GOLDENS)} 基线读数`, (r.detail ?? "").includes(String(EXPECTED_GOLDENS)))
   }
 
   // 反例：测试红
@@ -40,15 +40,15 @@ export function run_spec(): boolean {
 
   // 反例：基线数量漂移
   {
-    const r = judgeWebSnapshots(mkInput({ goldenCount: 8 }))
+    const r = judgeWebSnapshots(mkInput({ goldenCount: EXPECTED_GOLDENS - 1 }))
     ok("反例：少一个基线 ⇒ failed（不是绿）", r.status === "failed")
-    ok("反例：点名数量 8/9", (r.findings ?? []).some((f) => f.detail.includes("8") && f.detail.includes("9")))
+    ok(`反例：点名数量 ${String(EXPECTED_GOLDENS - 1)}/${String(EXPECTED_GOLDENS)}`, (r.findings ?? []).some((f) => f.detail.includes(String(EXPECTED_GOLDENS - 1)) && f.detail.includes(String(EXPECTED_GOLDENS))))
   }
 
-  // 反例：数量对但测试红 —— 不许「9 个文件在盘上」被当成绿
+  // 反例：数量对但测试红 —— 不许「N 个文件在盘上」被当成绿
   {
     const r = judgeWebSnapshots(mkInput({ rc: 1, output: "some test failed" }))
-    ok("反例：9 基线但 rc≠0 ⇒ failed", r.status === "failed")
+    ok(`反例：${String(EXPECTED_GOLDENS)} 基线但 rc≠0 ⇒ failed`, r.status === "failed")
     ok("反例：无场景标签时也 failed（不吞红）", (r.findings ?? []).some((f) => f.detail.includes("replay 有测试红")))
   }
 

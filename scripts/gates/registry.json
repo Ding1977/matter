@@ -1,5 +1,17 @@
 [
   {
+    "id": "verify-ui-style-contracts",
+    "semantics": ["static"],
+    "spec": "verify-ui-style-contracts.spec.ts",
+    "tiers": ["fast", "full", "ci"],
+    "owner": "builder",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-932 / DOC-533 段五+段四：S3 圆角越档/拼错 token + S4 颜色只用 alias + S6 阴影描边不配对。判据本体在 packages/client/ui-theme/tests/style-contracts-scan.ts + style-contracts.test.ts（照 DSH radius-styles / color-tokens / elevation-styles 形态移植）。合法集从 theme.css 动态读圆角 8 档（不写死六档值）；S4 判 hex/颜色函数/white|black/static 色板，豁免 box-shadow/mask/alpha-0；S6 照 DSH 前缀 pattern 判 elevation 阴影+中性 alias border 同用，state 色板豁免。射程 apps/web/src + packages/client 各包 src，排除 ui-theme 自有源（真值源+桥接层）。例外落 expected/style-exceptions.json 且每条带理由，toEqual 精确相等。静态扫描秒级（实测 ~0.02s），进 fast 供 dev 高频。spec 6/6 含必然失败反向对照（多/少/code 漂移/空理由/读不到）。判据落差：S3 判不了「六档圆角桥接全塌 4px」（4px 小细节豁免，归 S5 parity / #165 / ISS-931）。",
+    "cells": []
+  },
+  {
     "id": "verify-ui-typography",
     "semantics": ["static"],
     "spec": "verify-ui-typography.spec.ts",
@@ -43,7 +55,7 @@
     "since": "2026-11-21",
     "status": "active",
     "timeoutMs": 180000,
-    "note": "段一浏览器快照回归（Playwright + ARIA + MATTER_SNAPSHOT 三态）：replay 只读比对 3 场景×3 视口共 9 条基线，红点名场景+视口+行号。⛔ 不进 fast（要起 host+vite+Chromium）；⛔ 判据只以 MATTER_SNAPSHOT=replay 起测试，绝不写基线。缺 vitest/Chromium/0 基线判不了（不是绿）。判据本体 scripts/gates/verify-web-snapshots.ts，spec 自检含正反/干扰/缺输入向量。",
+    "note": "段一+段二浏览器快照回归（Playwright + ARIA + MATTER_SNAPSHOT 三态）：replay 只读比对 5 视口×3 页 + 错误态/加载态各 1 共 17 条基线，红点名场景+视口+行号；每条同时跑 computed-style 层级断言（阈值读 theme.css token，最大字号元素必须是 heading/level=1）。⛔ 不进 fast（要起 host+vite+Chromium）；⛔ 判据只以 MATTER_SNAPSHOT=replay 起测试，绝不写基线。缺 vitest/Chromium/0 基线判不了（不是绿）。判据本体 scripts/gates/verify-web-snapshots.ts，spec 自检含正反/干扰/缺输入向量。",
     "cells": []
   },
   {
@@ -2927,6 +2939,30 @@
     "status": "active",
     "timeoutMs": 60000,
     "note": "ISS-906 / P0 门禁对齐·bundle 纯度。重写（不移植 DSH client-bundle-purity.spec.ts + browser-bundled-externals.ts + bundle-input-isolation.ts）：那套依赖 tsdown clientBundle/staticLinked preset、lib/client.js 产物、experimental 包输入隔离、product-isolation.ts，本仓全无对应物；本仓 client 包是 @matter/client-*、浏览器面是 src/client 树、lib/ 与 dist/ 是 gitignore 构建产物（build:shell 当前因外部包缺 export 失败），照搬恒红。按本仓结构做纯静态判 5 条：node 核心模块 / server-only 原生模块 / 兄弟 client 包越层 / apps/web 根路径引 client 包 / 产物面 node 符号（产物在盘才扫）。type-only 擦除不计。三态 fail-closed：0 浏览器面文件 unjudged(no-corpus)。spec 14 断言含 5 条规则各自必红 + 真语料绿 + 真语料注入越层引用必红。红证据：ui-model/src/client/index.ts 注入 import '@matter/client-ui-kb/client' ⇒ failed 点名 index.ts:9。不进 fast。",
+    "cells": []
+  },
+  {
+    "id": "verify-layout-manifest",
+    "semantics": ["contracts", "static"],
+    "spec": "verify-layout-manifest.spec.ts",
+    "tiers": ["fast", "full", "ci"],
+    "owner": "linmo",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "2332 号单 / AGENTS.md Repository layout 一致性：代码块列的目录 ⇄ 仓库真实目录，多一个（幻影）红、少一个（漏项）红。顶层全量对账 + packages/ 组级对账（GROUP_SCOPED 防整组删光）；豁免清单逐条写明理由（forge-* 冻结旧树、机器目录、辅助/历史/资产目录），只在真值侧剔除。真值取 git tree（git ls-tree -d）而非裸扫磁盘，保证本机与 CI 同集；AGENTS.md / layout 块 / git tree 读不到 ⇒ unjudged 不判绿。spec 含正例 + 顶层反例×2（多 ghost/、少 apps/）+ 组级反例×3 + 豁免 + 缺输入×3 + 元断言×2 + 真仓绿；删 apps/ 一行即红。纯文本+目录比对毫秒级，进 fast。射程落差：只查顶层 + packages/ 组级，不查 docs/ 等子目录；未入库的临时目录不算「多一个」。",
+    "cells": []
+  },
+  {
+    "id": "verify-bridge-parity",
+    "semantics": ["contracts"],
+    "spec": "verify-bridge-parity.spec.ts",
+    "tiers": ["full", "ci"],
+    "owner": "builder",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "ISS-931 designer 复审追加：守官方 var() 转发与 --dsw-static-* 调色板 parity，漂移即红。契约快照 fixtures/official-token-contract.json 由已装官方包实扫生成（dsh-client-ui-primitives@0.2.2-rc.2 lib/**/*.css + dsh-client-ui-theme@0.2.2-rc.1 调色板）；判据逻辑复用 packages/client/ui-theme/tests/bridge-parity.check.mjs（单一真相源），本 gate 只翻译 GateResult。三判：①官方定义 var() 的项桥接侧必须仍 var()（防「伪装的裸值」，含删项假绿反向钉死）②静态调色板桥接值===官方值（禁手抄）③designer 点名 --dsl-search-line-height 解析 22px。不进 fast（读契约快照，非高频轻档）；active spec 条目自动派生 verify-bridge-parity-selftest 进 gateselfcheck。spec 含正向 + 三组漂移反向 + 删项假绿反证。",
     "cells": []
   }
 ]

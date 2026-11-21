@@ -54,19 +54,59 @@ describe("dsw-alias 语义映射（无字面 hex）", () => {
 })
 
 describe("改色单点生效（改一处 matter-alias，dsw 消费面同步变色）", () => {
-  it("label-primary 经 accent → static blue-60；改 static blue-60 即改 dsw 解析色", () => {
-    // 链：--dsw-alias-label-primary → var(--matter-alias-accent) → var(--matter-static-color-blue-60) → #3d6df2
-    expect(bridgeDefs.get("--dsw-alias-label-primary")).toBe("var(--matter-alias-accent)")
-    expect(themeDefs.get("--matter-alias-accent")).toBe("var(--matter-static-color-blue-60)")
+  it("label-primary 经 text-primary → static black；改 static black 即改 dsw 解析色", () => {
+    // ISS-931 必修5：主文字必须是近黑正文色，不是 accent 蓝。
+    // 链：--dsw-alias-label-primary → var(--matter-alias-text-primary) → var(--matter-static-color-black) → #1a1c20
+    expect(bridgeDefs.get("--dsw-alias-label-primary")).toBe("var(--matter-alias-text-primary)")
+    expect(themeDefs.get("--matter-alias-text-primary")).toBe("var(--matter-static-color-black)")
     const before = resolve("--dsw-alias-label-primary", allDefs)
-    expect(before?.toLowerCase()).toBe("#3d6df2")
+    expect(before?.toLowerCase()).toBe("#1a1c20")
+    expect(before?.toLowerCase()).not.toBe("#3d6df2")
 
-    // 改一处 static（单点）：把 blue-60 指向新原子色，alias 与 dsw 均不改。
+    // 改一处 static（单点）：把 black 指向新原子色，alias 与 dsw 均不改。
     const changedDefs = new Map(allDefs)
-    changedDefs.set("--matter-static-color-blue-60", "#123456")
+    changedDefs.set("--matter-static-color-black", "#123456")
     const after = resolve("--dsw-alias-label-primary", changedDefs)
     expect(after?.toLowerCase()).toBe("#123456")
     expect(after).not.toBe(before)
+  })
+
+  it("ISS-931 必修4：--dsw-radius-* 六档解析成 4/8/12/16/20/28，不再是清一色 4px", () => {
+    const expected: Record<string, string> = {
+      "--dsw-radius-xs": "4px",
+      "--dsw-radius-sm": "8px",
+      "--dsw-radius-md": "12px",
+      "--dsw-radius-lg": "16px",
+      "--dsw-radius-xl": "20px",
+      "--dsw-radius-panel": "28px",
+    }
+    for (const [name, px] of Object.entries(expected)) {
+      expect(/^var\(--matter-alias-radius-/.test(bridgeDefs.get(name) ?? ""), `${name} 必须挂 matter alias 而非裸值`).toBe(true)
+      expect(resolve(name, allDefs), `${name} 解析值`).toBe(px)
+    }
+    const values = Object.values(expected)
+    expect(new Set(values).size, "六档必须是六个不同的梯度值").toBe(6)
+  })
+
+  it("ISS-931 待爆弹：warn 挂 warn / idle 挂弱化主文字 / 遮罩不模糊 / 界面字体非等宽", () => {
+    // warn 族挂 warn 语义（琥珀），不再挂 danger 红。
+    expect(bridgeDefs.get("--dsw-alias-state-warn-primary")).toBe("var(--matter-alias-warn)")
+    expect(bridgeDefs.get("--dsw-alias-state-warn-label")).toBe("var(--matter-alias-warn)")
+    expect(bridgeDefs.get("--dsw-alias-state-warn-tertiary")).toBe("var(--matter-alias-warn)")
+    expect(resolve("--dsw-alias-state-warn-primary", allDefs)?.toLowerCase()).not.toBe(
+      resolve("--matter-alias-danger", allDefs)?.toLowerCase(),
+    )
+    // idle 挂弱化主文字，不再挂 accent 蓝。
+    expect(bridgeDefs.get("--dsw-alias-state-idle-primary")).toBe("var(--matter-alias-text-muted)")
+    // 遮罩不模糊。
+    expect(bridgeDefs.get("--dsw-mask-blur")).toBe("none")
+    expect(bridgeDefs.get("--dsw-menu-backdrop-filter")).toBe("none")
+    // 界面字体族走 Matter static，不写具体族名。
+    expect(bridgeDefs.get("--dsw-font-family")).toBe("var(--matter-static-font-family-ui)")
+    expect(resolve("--dsw-font-family", allDefs)).toContain("system-ui")
+    // secondary 落 13px 档。
+    expect(bridgeDefs.get("--dsh-content-font-size-secondary")).toBe("var(--matter-alias-font-size-secondary)")
+    expect(resolve("--dsh-content-font-size-secondary", allDefs)).toBe("13px")
   })
 
   it("elevation / focus-ring / overlay-top 消费面均挂 matter alias", () => {

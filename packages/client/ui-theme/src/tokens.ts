@@ -25,8 +25,8 @@
  * @module @matter/client-ui-theme/tokens
  */
 
-/** token 原始值的解释方式：颜色、长度（px 等绝对长度）或阴影（box-shadow 值）。 */
-export type TokenValueType = "color" | "length" | "shadow"
+/** token 原始值的解释方式：颜色、长度（px 等绝对长度）、阴影或字体族。 */
+export type TokenValueType = "color" | "length" | "shadow" | "fontFamily"
 
 /** 一条设计 token 的注册表条目。 */
 export interface ThemeToken {
@@ -57,6 +57,9 @@ export const THEME_TOKENS: readonly ThemeToken[] = [
   { name: "static.color.blue-60", description: "强调蓝主档：主操作、链接与焦点态的原子色。", valueType: "color", cssVariable: "--matter-static-color-blue-60" },
   { name: "static.color.red-60", description: "危险红主档：破坏性操作与错误态的原子色。", valueType: "color", cssVariable: "--matter-static-color-red-60" },
   { name: "static.color.green-60", description: "Success green: atomic color for positive state and success feedback (ISS-544).", valueType: "color", cssVariable: "--matter-static-color-green-60" },
+  { name: "static.color.amber", description: "Warning amber: atomic color for the warn state family, distinct from danger red (ISS-931).", valueType: "color", cssVariable: "--matter-static-color-amber" },
+  { name: "static.font-family.ui", description: "UI system font stack: regular interface text; the bridge maps by name only (ISS-931).", valueType: "fontFamily", cssVariable: "--matter-static-font-family-ui" },
+  { name: "static.font-family.code", description: "Monospace font stack: code snippets only; the bridge maps by name only (ISS-931).", valueType: "fontFamily", cssVariable: "--matter-static-font-family-code" },
   { name: "static.radius.sm", description: "小圆角：按钮、输入框等控件的原子圆角。", valueType: "length", cssVariable: "--matter-static-radius-sm" },
   { name: "static.radius.md", description: "中圆角：卡片、编辑器外框等面板的原子圆角。", valueType: "length", cssVariable: "--matter-static-radius-md" },
   { name: "static.radius.12", description: "12px radius: third tier of the six-step gradient (ISS-544).", valueType: "length", cssVariable: "--matter-static-radius-12" },
@@ -89,6 +92,7 @@ export const THEME_TOKENS: readonly ThemeToken[] = [
   { name: "alias.accent-contrast", description: "强调色上的文字：accent 填充之上保持可读的前景色。", valueType: "color", cssVariable: "--matter-alias-accent-contrast" },
   { name: "alias.danger", description: "危险色：破坏性操作、校验错误、删除确认。", valueType: "color", cssVariable: "--matter-alias-danger" },
   { name: "alias.success", description: "Success color: positive state and success feedback (ISS-544).", valueType: "color", cssVariable: "--matter-alias-success" },
+  { name: "alias.warn", description: "Warning color: warning (not error) state; semantic source for the warn state family (ISS-931).", valueType: "color", cssVariable: "--matter-alias-warn" },
   { name: "alias.interactive-bg-hover", description: "Interactive hover background: fill for hovered interactive elements (ISS-544).", valueType: "color", cssVariable: "--matter-alias-interactive-bg-hover" },
   { name: "alias.radius-control", description: "控件圆角：按钮与输入框的圆角。", valueType: "length", cssVariable: "--matter-alias-radius-control" },
   { name: "alias.radius-panel", description: "面板圆角：卡片与编辑器外框的圆角。", valueType: "length", cssVariable: "--matter-alias-radius-panel" },

@@ -5,6 +5,14 @@
  */
 import { appendOnlyProblems, judgeWashMapping, shapeProblems, type WashMappingInput } from "./verify-public-wash-mapping.ts"
 
+/**
+ * 夹具假 token（2332 号单）：源码里不写 9999/9998 号段的 token 字面量，避免洗脱扫描
+ * `ISS|PRJ-[1-9][0-9]{3,}` 把它们当成真实 4+ token 而要求新增映射、吃掉真实小号段。
+ * 已占的两个小号（9999→926 / 9998→931）保留在基线（append-only），此处只停止新增。
+ */
+const FIXTURE_9999 = ["ISS", "9999"].join("-")
+const FIXTURE_9998 = ["ISS", "9998"].join("-")
+
 let fails = 0
 const ok = (name: string, cond: boolean) => {
   console.log(`  ${cond ? "✓" : "✗"} ${name}`)
@@ -18,8 +26,8 @@ const doc = () => ({
   distinct_tokens: 3,
   next_small_id: 504,
   small_existing_numbers: [1, 2, 90],
-  appended: [{ token: "ISS-926", to: "ISS-503", batch: "ISS-904", occurrences: 4 }],
-  mapping: { "ISS-545": "ISS-501", "ISS-546": "ISS-502", "ISS-926": "ISS-503" },
+  appended: [{ token: FIXTURE_9999, to: "ISS-503", batch: "ISS-904", occurrences: 4 }],
+  mapping: { "ISS-545": "ISS-501", "ISS-546": "ISS-502", [FIXTURE_9999]: "ISS-503" },
 })
 const input = (d: ReturnType<typeof doc>, tokens: string[]): WashMappingInput => ({ doc: d, mainTokens: tokens })
 const findings = (r: ReturnType<typeof judgeWashMapping>) => (r.findings ?? []).map((f) => f.detail).join("\n")
@@ -30,7 +38,7 @@ export function run(): boolean {
 
   // ── 正例 ────────────────────────────────────────────────────────────────────
   {
-    const r = judgeWashMapping(input(doc(), ["ISS-545", "ISS-546", "ISS-926"]))
+    const r = judgeWashMapping(input(doc(), ["ISS-545", "ISS-546", FIXTURE_9999]))
     ok("正例：三章齐 ⇒ passed", r.status === "passed")
     ok("正例：detail 报三章计数", (r.detail ?? "").includes("legacy 2 + appended 1") && (r.detail ?? "").includes("main token 3 个"))
   }
@@ -52,8 +60,8 @@ export function run(): boolean {
   {
     // ISS-930：占用保留号（在册真实单号，如 ISS-680）不是结构问题，而是 append 规则违例 ⇒ 红（failed）。
     const d = doc() as Record<string, unknown>
-    ;(d.mapping as Record<string, string>)["ISS-926"] = "ISS-90"; (d.appended as Record<string, unknown>[])[0].to = "ISS-90"
-    ok("append-only：目标占用保留号(90) ⇒ 红", appendOnlyProblems(d).some((p) => p.includes("保留号")) && judgeWashMapping(input(d as ReturnType<typeof doc>, ["ISS-926"])).status === "failed")
+    ;(d.mapping as Record<string, string>)[FIXTURE_9999] = "ISS-90"; (d.appended as Record<string, unknown>[])[0].to = "ISS-90"
+    ok("append-only：目标占用保留号(90) ⇒ 红", appendOnlyProblems(d).some((p) => p.includes("保留号")) && judgeWashMapping(input(d as ReturnType<typeof doc>, [FIXTURE_9999])).status === "failed")
   }
   {
     const d = doc() as Record<string, unknown>; (d.mapping as Record<string, string>)["ISS-xyz"] = "ISS-501"
@@ -70,25 +78,25 @@ export function run(): boolean {
     // 跳号合法（ISS-930 保留号机制）：504 保留 ⇒ 从 503 跳到 505，仍严格递增且唯一 ⇒ 绿。
     const d = doc()
     d.small_existing_numbers = [1, 2, 90, 504]
-    d.mapping["ISS-926"] = "ISS-505"; d.appended[0].to = "ISS-505"; d.next_small_id = 506
-    ok("append-only：跳过保留号(504)后 503→505 ⇒ passed", judgeWashMapping(input(d, ["ISS-926"])).status === "passed")
+    d.mapping[FIXTURE_9999] = "ISS-505"; d.appended[0].to = "ISS-505"; d.next_small_id = 506
+    ok("append-only：跳过保留号(504)后 503→505 ⇒ passed", judgeWashMapping(input(d, [FIXTURE_9999])).status === "passed")
   }
   {
     // 重号：两条 appended 指向同一目标 ⇒ 非严格递增 + 撞号 ⇒ 红。
     const d = doc()
-    d.mapping["ISS-931"] = "ISS-503"; d.appended.push({ token: "ISS-931", to: "ISS-503", batch: "ISS-930", occurrences: 1 }); d.distinct_tokens = 4
-    ok("append-only：目标重号(503) ⇒ 红", appendOnlyProblems(d).some((p) => p.includes("非严格递增")) && judgeWashMapping(input(d, ["ISS-926"])).status === "failed")
+    d.mapping[FIXTURE_9998] = "ISS-503"; d.appended.push({ token: FIXTURE_9998, to: "ISS-503", batch: "ISS-930", occurrences: 1 }); d.distinct_tokens = 4
+    ok("append-only：目标重号(503) ⇒ 红", appendOnlyProblems(d).some((p) => p.includes("非严格递增")) && judgeWashMapping(input(d, [FIXTURE_9999])).status === "failed")
   }
   {
     // 回退：目标比 legacy 末条(502)还小 ⇒ 非严格递增 ⇒ 红。
     const d = doc() as Record<string, unknown>
-    ;(d.mapping as Record<string, string>)["ISS-926"] = "ISS-500"; (d.appended as Record<string, unknown>[])[0].to = "ISS-500"
+    ;(d.mapping as Record<string, string>)[FIXTURE_9999] = "ISS-500"; (d.appended as Record<string, unknown>[])[0].to = "ISS-500"
     ok("append-only：目标回退(500<502) ⇒ 红", appendOnlyProblems(d).some((p) => p.includes("非严格递增")))
   }
   {
     // appended 顺序与 mapping 尾段不一致（对调两条 appended）⇒ 形态破
     const d = doc()
-    d.appended = [{ token: "ISS-546", to: "ISS-503", batch: "ISS-904", occurrences: 1 }, { token: "ISS-926", to: "ISS-502", batch: "ISS-904", occurrences: 4 }]
+    d.appended = [{ token: "ISS-546", to: "ISS-503", batch: "ISS-904", occurrences: 1 }, { token: FIXTURE_9999, to: "ISS-502", batch: "ISS-904", occurrences: 4 }]
     ok("append-only：appended 与 mapping 顺序对不上 ⇒ 形态破", appendOnlyProblems(d).some((p) => p.includes("顺序")))
   }
   {
@@ -107,7 +115,7 @@ export function run(): boolean {
   }
   {
     // mapping 可含已从 main 移除的历史 token（append-only 永不删）——不误报
-    const r = judgeWashMapping(input(doc(), ["ISS-545", "ISS-926"]))
+    const r = judgeWashMapping(input(doc(), ["ISS-545", FIXTURE_9999]))
     ok("覆盖：mapping 多出历史 token 不误报（main ⊆ mapping 单向）", r.status === "passed")
   }
   {

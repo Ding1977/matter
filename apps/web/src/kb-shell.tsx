@@ -26,6 +26,7 @@ import { plainRich } from "@matter/client-ui-blocks/client"
 import { installEditorStyles } from "./editor-css.ts"
 import { PageShell, DEFAULT_SHELL_WIDTH } from "./page-shell.tsx"
 import css from "./kb-shell.module.css"
+import shellCss from "./page-shell.module.css"
 
 /** in-process stub 文档（不传 port 时的默认数据源，保留供既有测试）。 */
 export interface StubDoc {
@@ -132,6 +133,14 @@ export interface KbShellProps {
  */
 export const KbShell: FC<KbShellProps> = (props) => {
   const [activeId, setActiveId] = useState<string | null>(null)
+  // 列表取数态（ISS-931 必修3）：loading / ready（成功，rows 可能为空）/ error（失败，给文案+重试）。
+  // 绝不把 error 伪装成空列表——「暂无文档」只在 ready 且 rows=[] 时出现。
+  const [listState, setListState] = useState<"loading" | "ready" | "error">(
+    props.port === undefined ? "ready" : "loading",
+  )
+  const [listEpoch, setListEpoch] = useState(0)
+  // 抽屉开合（ISS-931 必修2）：480 侧栏不再「宽归 0 且打不开」，由汉堡按钮真开合。
+  const [drawerOpen, setDrawerOpen] = useState(false)
   // 视口宽（审查必修）：驱动三栏宽度轴；真机读 window.innerWidth + resize，SSR/测试回落默认。
   const [viewportWidth, setViewportWidth] = useState<number>(() =>
     typeof window === "undefined" ? DEFAULT_SHELL_WIDTH : window.innerWidth,
@@ -158,9 +167,13 @@ export const KbShell: FC<KbShellProps> = (props) => {
   useEffect(() => {
     if (port === undefined) return
     let alive = true
-    void port.list().then((rows) => { if (alive) setRemoteRows(rows) })
+    setListState("loading")
+    void port.list().then(
+      (rows) => { if (alive) { setRemoteRows(rows); setListState("ready") } },
+      () => { if (alive) setListState("error") },
+    )
     return () => { alive = false }
-  }, [port])
+  }, [port, listEpoch])
 
   const rows = port === undefined ? stubRows : remoteRows
   const loadDoc = port === undefined
@@ -186,17 +199,42 @@ export const KbShell: FC<KbShellProps> = (props) => {
 
   const activeRow = rows.find((r) => r.id === activeId)
 
+  // 列表主体（ISS-931 必修3）：error 独立成态（文案 + 重试），绝不复用空列表的「暂无文档」。
+  const listBody: ReactNode = listState === "error"
+    ? createElement(
+        "div",
+        { "data-ui-kb": "list-error", className: shellCss.listError, role: "alert" },
+        createElement("p", { "data-ui-kb": "list-error-hint" }, messages.listErrorHint),
+        createElement(
+          "button",
+          { type: "button", "data-ui-kb": "list-retry", onClick: () => setListEpoch((n) => n + 1) },
+          messages.listRetryAction,
+        ),
+      )
+    : listState === "loading"
+      ? createElement("p", { "data-ui-kb": "list-loading", className: shellCss.listLoading }, messages.loadingHint)
+      : createElement(ListComponent, { rows, onOpen: open, messages, selectedId: activeId })
+
   return createElement(
     PageShell,
     {
       // 宽驱动（审查必修）：视口宽注入宽度轴，窄宽下右栏先收缩、中栏保 400、侧栏收起/抽屉。
       width: viewportWidth,
+      // 抽屉开合（ISS-931 必修2）：根上打 data-drawer-open，浮层/遮罩由 CSS 消费。
+      drawerOpen,
+      onDrawerClose: () => setDrawerOpen(false),
+      drawerCloseLabel: messages.navCloseLabel,
       // renderSlot 注入：侧栏/内容/属性栏三槽各司其职；列表与详情挂在内容槽。
-      renderSlot: (slot) => {
+      renderSlot: (slot, ctx) => {
         if (slot === "shell.sidebar") {
           return createElement(
             "nav",
-            { "data-shell": "sidebar", "aria-label": messages.sidebarTitle },
+            {
+              id: "kb-sidebar-nav",
+              "data-shell": "sidebar",
+              "aria-label": messages.sidebarTitle,
+              className: shellCss.sidebarNav,
+            },
             createElement("h2", { className: css.title }, messages.sidebarTitle),
           )
         }
@@ -218,8 +256,23 @@ export const KbShell: FC<KbShellProps> = (props) => {
         return createElement(
           "div",
           { "data-shell": "surface", "data-demo": "kb-shell" },
+          // 抽屉入口（ISS-931 必修2）：仅 drawer 态渲染汉堡按钮，真开合 nav。
+          ctx.side === "drawer"
+            ? createElement(
+                "button",
+                {
+                  type: "button",
+                  className: shellCss.drawerToggle,
+                  "aria-label": messages.navToggleLabel,
+                  "aria-expanded": String(drawerOpen),
+                  "aria-controls": "kb-sidebar-nav",
+                  onClick: () => setDrawerOpen((v) => !v),
+                },
+                "☰",
+              )
+            : null,
           createElement("h2", { className: css.title }, messages.listTitle),
-          createElement(ListComponent, { rows, onOpen: open, messages, selectedId: activeId }),
+          listBody,
           activeId === null
             ? null
             : createElement(DocDetail, {

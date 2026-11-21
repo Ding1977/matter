@@ -18,7 +18,9 @@ import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import {
   cssFindings,
+  headingClassRefs,
   headingFindings,
+  headingWeightFindings,
   readConfig,
   scanRepo,
   weightTiers,
@@ -30,10 +32,11 @@ const EXCEPTIONS = JSON.parse(
 ) as {
   s1: Record<string, { code: string; reason: string }>
   s2: Record<string, { code: string; reason: string }>
+  s3: Record<string, { code: string; reason: string }>
 }
 
 /** 把带理由的例外投影成 finding 映射，供 toEqual 精确对账。 */
-function expectedFindings(which: "s1" | "s2"): Record<string, string> {
+function expectedFindings(which: "s1" | "s2" | "s3"): Record<string, string> {
   return Object.fromEntries(Object.entries(EXCEPTIONS[which]).map(([at, e]) => [at, e.code]))
 }
 
@@ -107,6 +110,33 @@ describe("S2 字号/字重只用档位 · 自测正反例（证明会红）", ()
   })
 })
 
+describe("S3 h2 类字重显式声明 · 自测正反例（证明会红，ISS-931 reviewer 洞）", () => {
+  const ts = [{ rel: "apps/web/src/_s3.tsx", text: 'createElement("h2", { className: css.title }, "hi")' }]
+
+  it("抽得到 h2 的 className 类名", () => {
+    expect(headingClassRefs(ts[0]!.text, ts[0]!.rel)).toEqual([{ className: "title", line: 1 }])
+  })
+
+  it("CSS 类写了 font-weight ⇒ 绿；没写 ⇒ 红（死代码假象也会被抓）", () => {
+    expect(headingWeightFindings(ts, [{ rel: "apps/web/src/_s3.module.css", text: ".title { font-size: 18px; font-weight: 600 }" }])).toEqual({})
+    expect(headingWeightFindings(ts, [{ rel: "apps/web/src/_s3.module.css", text: ".title { font-size: 18px }" }])).toEqual({
+      "apps/web/src/_s3.tsx:1": ".title 缺 font-weight",
+    })
+  })
+
+  it("另写一个带 600 的 .columnTitle 但 h2 仍用裸 .title ⇒ 仍红（死代码不冒充修复）", () => {
+    const css = ".title { font-size: 18px }\n.columnTitle { font-size: 18px; font-weight: 600 }"
+    expect(headingWeightFindings(ts, [{ rel: "apps/web/src/_s3.module.css", text: css }])).toEqual({
+      "apps/web/src/_s3.tsx:1": ".title 缺 font-weight",
+    })
+  })
+
+  it("非 title/column 类不受本判据管（不制造假红）", () => {
+    const other = [{ rel: "apps/web/src/_s3.tsx", text: 'createElement("h2", { className: css.sidebarNav }, "hi")' }]
+    expect(headingWeightFindings(other, [])).toEqual({})
+  })
+})
+
 describe("全仓扫 · 例外清单精确相等（多一条少一条都红）", () => {
   it("S1：全仓裸标题 == 例外清单（修完 kb-shell 三处后应恰好相等）", () => {
     expect(scanRepo().s1).toEqual(expectedFindings("s1"))
@@ -116,8 +146,12 @@ describe("全仓扫 · 例外清单精确相等（多一条少一条都红）", 
     expect(scanRepo().s2).toEqual(expectedFindings("s2"))
   })
 
+  it("S3：全仓 h2 title/column 类缺字重 == 例外清单（当前为空）", () => {
+    expect(scanRepo().s3).toEqual(expectedFindings("s3"))
+  })
+
   it("每条例外都有非空理由", () => {
-    for (const which of ["s1", "s2"] as const) {
+    for (const which of ["s1", "s2", "s3"] as const) {
       for (const [at, entry] of Object.entries(EXCEPTIONS[which])) {
         expect(entry.reason?.trim().length, `例外 ${which} ${at} 必须有理由`).toBeGreaterThan(0)
       }

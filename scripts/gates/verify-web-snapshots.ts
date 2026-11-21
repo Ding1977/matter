@@ -4,8 +4,10 @@
  * ## 它判什么
  *
  * 在 **replay（只读）** 态跑 apps/web/tests/ui.snapshot.ts：
- *   · 9 个场景基线必须与当前 ARIA 树逐字一致（任何一行漂移即红，报场景+视口+行号）；
- *   · 基线数量必须恰好 9（3 场景 × 3 视口）——少了/多了都是配置漂移，不判绿；
+ *   · 17 个场景基线必须与当前 ARIA 树逐字一致（任何一行漂移即红，报场景+视口+行号）；
+ *   · 基线数量必须恰好 17（5 视口 × 3 页 + 错误态/加载态各 1）——少了/多了都是配置漂移，不判绿；
+ *   · 每条快照同时跑 computed-style 层级断言（阈值读 theme.css token）：最大字号元素
+ *     必须是 heading/level=1，任一改坏即红；
  *   · 缺 vitest / 缺 Chromium / 0 基线 = 判不了（2），不许当绿。
  *
  * ⛔ 本判据**永远以 MATTER_SNAPSHOT=replay 起测试**，绝不传 record/refresh：
@@ -23,8 +25,8 @@ const GATE = "verify-web-snapshots"
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..")
 const GOLDEN_DIR = path.join(REPO, "apps", "web", "tests", "expected")
 const CONFIG = "vitest.web.config.ts"
-/** 段一固定 3 场景 × 3 视口（与 ui.snapshot.ts 同源）。改这里必须同步改测试与 spec。 */
-export const EXPECTED_GOLDENS = 9
+/** 段二固定：5 视口 × 3 页 + 错误态/加载态各 1（与 ui.snapshot.ts 同源）。改这里必须同步改测试与 spec。 */
+export const EXPECTED_GOLDENS = 17
 
 /** 判据输入（纯函数喂构造数据，spec 不真起浏览器）。 */
 export interface SnapshotRunInput {
@@ -58,7 +60,7 @@ export function judgeWebSnapshots(input: SnapshotRunInput): GateResult {
     return {
       gate: GATE,
       status: "failed",
-      findings: [{ detail: `基线数量 = ${String(input.goldenCount)}，应为 ${String(EXPECTED_GOLDENS)}（3 场景 × 3 视口）` }],
+      findings: [{ detail: `基线数量 = ${String(input.goldenCount)}，应为 ${String(EXPECTED_GOLDENS)}（5 视口 × 3 页 + 错误态/加载态各 1）` }],
     }
   }
   if (input.rc === 0) {

@@ -47,6 +47,12 @@ export interface PageShellProps {
   readonly side?: ShellSide
   /** 覆盖解析出的属性栏开合（一般不需要）。 */
   readonly properties?: boolean
+  /** 抽屉态侧栏是否打开（ISS-931 必修2）。 */
+  readonly drawerOpen?: boolean
+  /** 点遮罩关闭抽屉（ISS-931 必修2）。 */
+  readonly onDrawerClose?: () => void
+  /** 遮罩关闭按钮的无障碍名（从 ui-kb 字典注入，shell 不硬编码文案）。 */
+  readonly drawerCloseLabel?: string
   /** 调用方附加 className（clsx 后置，支持覆盖）。 */
   readonly className?: string
 }
@@ -80,6 +86,7 @@ export const PageShell: FC<PageShellProps> = (props) => {
       "data-shell": "page",
       "data-side": side,
       "data-properties": properties ? "on" : "off",
+      "data-drawer-open": side === "drawer" && props.drawerOpen === true ? "on" : "off",
       "data-viewport-w": layout.viewportWidth,
       className: clsx(css.root, props.className),
       style: axis,
@@ -87,5 +94,14 @@ export const PageShell: FC<PageShellProps> = (props) => {
     createElement("aside", { "data-shell-slot": "sidebar", className: css.sidebar }, slot("shell.sidebar")),
     createElement("main", { "data-shell-slot": "content", className: css.content }, slot("shell.content")),
     createElement("aside", { "data-shell-slot": "properties", className: css.properties }, slot("shell.properties")),
+    // 抽屉遮罩：仅 drawer + 打开态渲染，点一下即关（单一关闭路径，键盘 Esc 留 D2）。
+    side === "drawer" && props.drawerOpen === true
+      ? createElement("button", {
+          type: "button",
+          className: css.drawerBackdrop,
+          "aria-label": props.drawerCloseLabel,
+          onClick: props.onDrawerClose,
+        })
+      : null,
   )
 }

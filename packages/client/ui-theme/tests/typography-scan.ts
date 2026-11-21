@@ -35,6 +35,8 @@ export interface TypographyConfig {
 export interface ScanFindings {
   readonly s1: Readonly<Record<string, string>>
   readonly s2: Readonly<Record<string, string>>
+  /** S3：h2 引用的 title/column 类，其 CSS 规则未显式声明 font-weight（ISS-931 reviewer 洞）。 */
+  readonly s3: Readonly<Record<string, string>>
 }
 
 /**
@@ -220,6 +222,106 @@ export function headingFindings(source: string, rel: string): Record<string, str
   return out
 }
 
+/**
+ * 抽 h2 上 className 引用的类名（css.title / "foo-title" / clsx(css.a, css.b) 等静态形态）。
+ * @param source - TS/TSX 全文。
+ * @param rel - 仓库相对路径。
+ * @returns 类名 + 行号列表。
+ */
+/** className 表达式里静态可读的类名（css.x / "a b" / clsx(...) / 三元）。 */
+function classNameNames(expr: ts.Expression | undefined): string[] {
+  if (expr === undefined) return []
+  if (ts.isPropertyAccessExpression(expr)) return [expr.name.text]
+  if (ts.isStringLiteral(expr)) return expr.text.split(/\s+/).filter((s) => s.length > 0)
+  if (ts.isCallExpression(expr)) return expr.arguments.flatMap(classNameNames)
+  if (ts.isConditionalExpression(expr)) return [...classNameNames(expr.whenTrue), ...classNameNames(expr.whenFalse)]
+  if (ts.isIdentifier(expr)) return [expr.text]
+  return []
+}
+
+/** createElement 的 props 对象里 className 的类名。 */
+function createClassNames(props: ts.Expression | undefined, sf: ts.SourceFile): string[] {
+  if (props === undefined || !ts.isObjectLiteralExpression(props)) return []
+  return props.properties.flatMap((p) =>
+    ts.isPropertyAssignment(p) && p.name.getText(sf) === "className" ? classNameNames(p.initializer) : [],
+  )
+}
+
+/** JSX 标题节点上 className 的类名。 */
+function jsxClassNames(node: ts.JsxOpeningElement | ts.JsxSelfClosingElement, sf: ts.SourceFile): string[] {
+  if (!HEADING.test(node.tagName.getText(sf))) return []
+  return node.attributes.properties.flatMap((attr) =>
+    ts.isJsxAttribute(attr) && attr.name.getText(sf) === "className" ? classNameNames(attr.initializer) : [],
+  )
+}
+
+/** createElement 调用是否创建 h1–h6。 */
+function isHeadingCreate(node: ts.CallExpression, sf: ts.SourceFile): boolean {
+  const callee = node.expression
+  const isCreate =
+    (ts.isIdentifier(callee) && callee.text === "createElement") ||
+    (ts.isPropertyAccessExpression(callee) && callee.name.text === "createElement")
+  const first = node.arguments[0]
+  return isCreate && first !== undefined && ts.isStringLiteral(first) && HEADING.test(first.text)
+}
+
+export function headingClassRefs(source: string, rel: string): ReadonlyArray<{ readonly className: string; readonly line: number }> {
+  const kind = rel.endsWith(".tsx") ? ts.ScriptKind.TSX : ts.ScriptKind.TS
+  const sf = ts.createSourceFile(rel, source, ts.ScriptTarget.Latest, true, kind)
+  const out: Array<{ className: string; line: number }> = []
+  const lineOf = (n: ts.Node): number => sf.getLineAndCharacterOfPosition(n.getStart(sf)).line + 1
+
+  const visit = (node: ts.Node): void => {
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      for (const className of jsxClassNames(node, sf)) out.push({ className, line: lineOf(node) })
+    }
+    if (ts.isCallExpression(node) && isHeadingCreate(node, sf)) {
+      for (const className of createClassNames(node.arguments[1], sf)) out.push({ className, line: lineOf(node) })
+    }
+    ts.forEachChild(node, visit)
+  }
+  visit(sf)
+  return out
+}
+
+/** 从 CSS 全文抽「其规则显式声明了 font-weight」的类名集合。 */
+export function classesWithDeclaredWeight(css: string): Set<string> {
+  const withoutComments = css.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, " "))
+  const out = new Set<string>()
+  for (const rule of withoutComments.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    const selector = rule[1] ?? ""
+    const body = rule[2] ?? ""
+    if (!/(?:^|;)\s*font-weight\s*:/.test(body)) continue
+    for (const m of selector.matchAll(/\.([A-Za-z0-9_-]+)/g)) out.add(m[1])
+  }
+  return out
+}
+
+/**
+ * S3：h2 引用的 title/column 类若无显式 font-weight 声明 ⇒ 红。
+ * 治的病：h2 吃浏览器默认 700，静态 .title 只写字号没写字重 ⇒ computed 仍 700、层级倒挂；
+ * 而另写一个带 600 的 .columnTitle 却没被 h2 引用 ⇒ 死代码制造「已修」假象。
+ * @param tsFiles - TS/TSX 文件（rel/text）。
+ * @param cssFiles - CSS 文件（rel/text）。
+ * @returns key=`rel:line` → code=`.类名 缺 font-weight`。
+ */
+export function headingWeightFindings(
+  tsFiles: ReadonlyArray<{ readonly rel: string; readonly text: string }>,
+  cssFiles: ReadonlyArray<{ readonly rel: string; readonly text: string }>,
+): Record<string, string> {
+  const weighted = new Set<string>()
+  for (const f of cssFiles) for (const c of classesWithDeclaredWeight(f.text)) weighted.add(c)
+  const out: Record<string, string> = {}
+  for (const f of tsFiles) {
+    for (const ref of headingClassRefs(f.text, f.rel)) {
+      if (!/(?:^|[_-])(?:column|title)/i.test(ref.className)) continue
+      if (weighted.has(ref.className)) continue
+      out[`${f.rel}:${ref.line}`] = `.${ref.className} 缺 font-weight`
+    }
+  }
+  return out
+}
+
 /** 递归列目录下指定后缀的文件（跳过 node_modules / dist / 点目录）。 */
 function walk(dir: string, exts: readonly string[]): string[] {
   if (!existsSync(dir)) return []
@@ -256,15 +358,21 @@ export function scanRoots(): string[] {
 export function scanRepo(cfg: TypographyConfig = readConfig()): ScanFindings {
   const s1: Record<string, string> = {}
   const s2: Record<string, string> = {}
+  const tsFiles: Array<{ rel: string; text: string }> = []
+  const cssFiles: Array<{ rel: string; text: string }> = []
   for (const root of scanRoots()) {
     for (const file of walk(root, [".ts", ".tsx"])) {
       const rel = file.slice(REPO.length).split("\\").join("/")
-      Object.assign(s1, headingFindings(readFileSync(file, "utf8"), rel))
+      const text = readFileSync(file, "utf8")
+      tsFiles.push({ rel, text })
+      Object.assign(s1, headingFindings(text, rel))
     }
     for (const file of walk(root, [".css"])) {
       const rel = file.slice(REPO.length).split("\\").join("/")
-      Object.assign(s2, cssFindings(readFileSync(file, "utf8"), rel, cfg))
+      const text = readFileSync(file, "utf8")
+      cssFiles.push({ rel, text })
+      Object.assign(s2, cssFindings(text, rel, cfg))
     }
   }
-  return { s1, s2 }
+  return { s1, s2, s3: headingWeightFindings(tsFiles, cssFiles) }
 }
