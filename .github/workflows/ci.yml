@@ -40,4 +40,7 @@ jobs:
       - name: Install pnpm
         run: corepack enable && corepack prepare pnpm@11.28.5 --activate
       - run: pnpm install --frozen-lockfile
+      # 包入口是 build 产物 lib/index.js（不在版本库、被 .gitignore 排除）——
+      # 没有前置 build，test lane 解析 @matter/* 入口即红。
+      - run: pnpm run build
       - run: pnpm run test
