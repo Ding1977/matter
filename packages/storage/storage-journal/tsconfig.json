@@ -1,0 +1,12 @@
+{
+  // 同 @matter/storage-json 的包级形态（ISS-508 / ISS-515）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"]
+  // ⛔ **没有 references**：本包不 import 任何 @matter/* 包（连 @matter/storage 都不 import，
+  //    那是「另一个 seam」的定义）。加 references 等于声称有一条构建期依赖 —— 而它不存在。
+}

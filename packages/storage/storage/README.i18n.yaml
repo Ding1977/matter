@@ -1,0 +1,43 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/storage/storage/README.md
+/:
+  en: d8641b5eb4b5addf
+  zh: 0d2877570c8f5349
+/matter-storage:
+  en: 17f5b67f6b1da4b4
+  zh: fd7e093321f92b96
+/matter-storage/summary:
+  en: 869ff43db475dd26
+  zh: 1a9e14df25751b8a
+/matter-storage/table-of-contents:
+  en: ca5dc537b0599b2a
+  zh: 15f3ce72c7f8bae7
+/matter-storage/use-this-package:
+  en: 636a183f24870b79
+  zh: 3e88098742cf6e38
+/matter-storage/use-this-package/what-you-get:
+  en: e61d44fb32347893
+  zh: ddb386973f6c5616
+/matter-storage/use-this-package/failures-and-recovery:
+  en: 7bcb60c39ec0f956
+  zh: 70f370a35d88ab49
+/matter-storage/understand-the-implementation:
+  en: a5db8486082c1725
+  zh: fb186465c9d8b673
+/matter-storage/understand-the-implementation/design-concept:
+  en: dde31c7aef3cd49f
+  zh: 8dd122b48d655048
+/matter-storage/understand-the-implementation/the-stale-disposer-guard:
+  en: 19edd24d990148db
+  zh: f1edf0e9a45b2b6c
+/matter-storage/understand-the-implementation/the-backend-contract:
+  en: 66ce31555a4c061f
+  zh: 5a7acfd8b1643127
+/matter-storage/understand-the-implementation/source-map:
+  en: fa27dd64f752ed5c
+  zh: 0c62ae3044f70649
+/matter-storage/known-limitations-and-deferred-work:
+  en: 6ba838cb3f769af7
+  zh: 8c0886216c96070e

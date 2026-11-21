@@ -1,0 +1,24 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# 复算口径：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 路径取英文侧，中文侧按节序配对；改任一侧正文须同步另一侧并重算该行。
+/matter-document-controller:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-document-controller/summary:
+  en: b387a4cc71e358bd
+  zh: 33367da7d1ed4c24
+/matter-document-controller/table-of-contents:
+  en: fd53a46dc7904677
+  zh: fd53a46dc7904677
+/matter-document-controller/use-this-package:
+  en: ed3ef4653217cba9
+  zh: 02bdf5aaf6850c67
+/matter-document-controller/understand-the-implementation:
+  en: 9adafed5e09a78b1
+  zh: b4ee85a76214166c
+/matter-document-controller/known-limitations-and-deferred-work:
+  en: cb44921576878bca
+  zh: f22d7cde469cb103

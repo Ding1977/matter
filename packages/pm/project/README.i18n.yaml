@@ -1,0 +1,52 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# ⚠️ 本仓暂无 translation-pairing 生成器（verify-package-readme 只判三件套齐全，不判内容）。
+# 重算口径（任何人可复核）：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 改了任一侧的正文，就要同步另一侧并就地重算对应行。
+#
+# ⚠️ 中文标题的 slug 为空串（`slug()` 只留 [a-z0-9]），所以**两侧按节序号配对**，不按标题路径对。
+# 判据是同级节数必须相同 —— 不同即报错退出（错位配对会算出「看着对其实配错」的哈希）。
+#
+# 复算口径自证的证据（ISS-521）：同一脚本对 packages/pm/issue 的中英两份 README 复算，
+# 得到 11 条路径 × 2 侧，与它已提交的 README.i18n.yaml **逐行相同**（含空正文的 e3b0c44298fc1c14）。
+/matter-project:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-project/summary:
+  en: f8d0126a15d49393
+  zh: 8d04fb928806736b
+/matter-project/table-of-contents:
+  en: 216c609ea5eb96a2
+  zh: fd289d93c2702bb6
+/matter-project/use-this-package:
+  en: 4a8afcaa22a43fa2
+  zh: fb73c221d4cf9de6
+/matter-project/use-this-package/what-you-get:
+  en: 78822b7c75d7f768
+  zh: 790b3411887dcda0
+/matter-project/use-this-package/failures-and-recovery:
+  en: 8d37da22b466116a
+  zh: b91788d81aa04b9c
+/matter-project/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-project/understand-the-implementation/design-concept:
+  en: 14d7424f9e8ba44c
+  zh: 30103713fa8ef7b4
+/matter-project/understand-the-implementation/source-map:
+  en: 7e8b01d1312cadc1
+  zh: 8657fda501d442e3
+/matter-project/understand-the-implementation/why-milestones-phases-are-not-in-the-schema:
+  en: e772dd811336292f
+  zh: 2c95817c1fb425eb
+/matter-project/understand-the-implementation/display-field-widget-values:
+  en: ca3ffe70e190e739
+  zh: 6238ac85f04a180b
+/matter-project/understand-the-implementation/why-optional-fields-are-optional-meta-never-meta-optional:
+  en: 9247611913e634c4
+  zh: 4d81594c7512d43e
+/matter-project/known-limitations-and-deferred-work:
+  en: 53f295ca068a8dfe
+  zh: e33fea7a0da06f05

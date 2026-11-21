@@ -1,0 +1,59 @@
+{
+  // tsconfig.base.emit.json —— **新树**（packages/<group>/<pkg>/）专用的 emit 基座（ISS-508）
+  //
+  // 为什么不直接改 tsconfig.base.json：旧树 20 个包级 tsconfig 靠**继承** base 拿 "noEmit": true
+  // （grep 实测：extends base 的 25 份里 20 份自己不写 noEmit）。在 base 上改一行
+  // ⇒ 那 20 个包从「不 emit」变成「emit」，host-typecheck-ratchet 大概率全红。
+  // 故基座另起一份文件，旧 base 一行不动。
+  //
+  // ⚠️ 包级 tsconfig 一律 extends 本文件，**不许**直接 extends tsconfig.base.json：
+  //    直连 base 的形态是 `tsc -p` 退出码 0 但零产出（继承到 noEmit: true），静默失败。
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false,          // ← 覆盖旧 base 的唯一原因：陷阱①的根（否则 exit 0 且零产出）
+    "noEmitOnError": true,    // ⭐ 陷阱④：少它，类型全红时 tsc 仍产出 lib/**，产物判据假绿
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "composite": true,        // ← tsc -b 的硬前提（少它报 TS6306）
+    "incremental": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "types": ["node"],        // 少它报 TS2688（实测）
+    // paths 手写四条：references 只建构建顺序，不建模块解析。
+    // 不写会跨包报 TS2307 Cannot find module '@matter/storage'。P0 只两包，生成器留 P2。
+    // ⚠️ ISS-518：第四条 `storage-journal` 是 P1 交付时漏的 —— 该包当时零跨包消费方，
+    //    所以 TS2307 一直没炸。E-0（@matter/issue）是它的第一个 consumer，不补则第一步就红；
+    //    而 next 档 13 格无一格判 paths 完备性（verify-tsconfig-coverage 只判 references 图）。
+    //    新增 @matter 包时**同批**补这里，别等第一个 consumer 撞上来。
+    "paths": {
+      "@matter/storage": ["./packages/storage/storage/src/index.ts"],
+      "@matter/storage-json": ["./packages/storage/storage-json/src/index.ts"],
+      "@matter/storage-domain": ["./packages/storage/storage-domain/src/index.ts"],
+      "@matter/storage-journal": ["./packages/storage/storage-journal/src/index.ts"],
+      // ISS-519：P2 第一个业务域。**新增 @matter 包时同批补这里**（ISS-518 的教训：
+      // 缺一条则第一个 consumer 撞上 TS2307，而 next 档无一格判 paths 完备性）。
+      "@matter/issue": ["./packages/pm/issue/src/index.ts"],
+      // ISS-521：P2 第二域（E-1）。
+      "@matter/project": ["./packages/pm/project/src/index.ts"],
+      // ISS-526：E-3a 块引擎 schema 骨架。今天 0 个 consumer，但 E-2/E-3b/document
+      // 会 import 它 —— 同批补 paths，别等第一个 consumer 撞上 TS2307（ISS-518 教训）。
+      "@matter/blocks": ["./packages/kb/blocks/src/index.ts"],
+      // ISS-527：E-2 document 实体域。与 E-0/E-1 同批口径，新增 @matter 包必须同批补 paths。
+      "@matter/document": ["./packages/kb/document/src/index.ts"],
+      // ISS-530：P3-U1 第一个 client 包（token 底座）。零跨包消费方也同批补
+      //（ISS-518 教训：paths 完备性由 verify-tsconfig-paths 对账，漏配直接红）。
+      "@matter/client-ui-theme": ["./packages/client/ui-theme/src/index.ts"],
+      // ISS-531：P3-U2a 第二个 client 包（BlockNote 映射底座）。client 半运行时 import
+      // @matter/blocks 的 zod schema，paths 同批补（verify-tsconfig-paths 对账）。
+      "@matter/client-ui-blocks": ["./packages/client/ui-blocks/src/index.ts"],
+      // ISS-533：P3-U3 api 组首包。import @matter/document 的类型（doc 行/记录），paths 同批补。
+      "@matter/document-controller": ["./packages/api/document-controller/src/index.ts"],
+      // ISS-533：P3-U3 第三个 client 包（ui-kb 最小页）。paths 完备性同批补（verify-tsconfig-paths 对账）。
+      "@matter/client-ui-kb": ["./packages/client/ui-kb/src/index.ts"]
+    }
+  }
+  // 故意不写 strict / noUncheckedIndexedAccess / exactOptionalPropertyTypes：
+  //   strict 已由 tsconfig.base.json 继承（那是唯一公共出处，重复写而不一致会造第二份真相）；
+  //   后两个旧 base 没有，P0 不加 —— 等 P0-5/P0-6 真写代码时按需，另开单。
+}

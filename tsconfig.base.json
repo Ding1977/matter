@@ -1,0 +1,24 @@
+{
+  // tsconfig.base.json —— 全仓 TypeScript 编译选项的**唯一公共出处**（PRJ-016 / ISS-705）
+  //
+  // 为什么是"交集"而不是"最高标准"：本单只做**去抄写**，不做提严格度。
+  // base 里每一项都必须是原先所有包**取值完全相同**的选项，否则一次机械搬家
+  // 就会改变编译语义（ISS-680 的等价性口径：结构改动不豁免等价性证明）。
+  // 想收紧（如给全部 host 半开 noUncheckedIndexedAccess）请另开单，带 --compare 与真机验证。
+  //
+  // ⚠️ extends 的相对路径按**本文件所在目录**解析 ⇒ base 里不写 baseUrl/paths/include，
+  //    各包自己的相对路径留在各包配置里。
+  //    实测（2026-11-07 复核）：**`forge-trader` 一个包用 `paths`**（`"@/*": ["./src/*"]`，
+  //    `src/lib/smc.ts` 有真实使用）。TS 5.x 起 `paths` 不依赖 `baseUrl`，按 tsconfig 所在目录解析。
+  //    ⚠️ 原注释写「0 个包用 baseUrl/paths」与事实不符（该包当时两者都用），ISS-504 一并纠正。
+  //    ⛔ `baseUrl` **一律不许加回**：tsgolint（oxlint typeAware 后端）会拒绝整个 tsconfig
+  //    （"Option 'baseUrl' has been removed"）⇒ 该包全部 .ts 类型感知失效，违例一条不报。
+  //    实测代价：forge-trader 加回 baseUrl 后违例 277 → 38，那 239 条欠账凭空消失。
+  "compilerOptions": {
+      "target": "ES2022",
+      "module": "ESNext",
+      "moduleResolution": "bundler",
+      "strict": true,
+      "noEmit": true
+  }
+}

@@ -1,0 +1,55 @@
+{
+  // tsconfig.next.json —— 新树的聚合入口，`tsc -b` 的**唯一**入口（ISS-508）
+  //
+  // 为什么叫 tsconfig.next.json 而不叫 tsconfig.json：本仓根目录有正在运行的服务与旧树，
+  // 新增根 tsconfig.json 会让所有「向上找 tsconfig」的工具（编辑器、tsx）改而命中它。
+  // 用显式文件名，零歧义。
+  // ⚠️ 代价：`tsc -b` 不带参数只找 tsconfig.json ⇒ TS5083 Cannot read file。
+  //    任何调用都必须显式传本文件名（package.json 的 typecheck / build 已是此写法）。
+  "extends": "./tsconfig.base.emit.json",
+  "compilerOptions": { "noEmit": true },   // 聚合层不产文件；被引用项目各用自己的配置
+  "include": [],                           // 本身不编任何文件，只负责编排 references
+  "references": [
+    { "path": "./packages/storage/storage" },
+    { "path": "./packages/storage/storage-json" },
+    { "path": "./packages/storage/storage-domain" },
+    // ISS-525：storage-domain 的 tests/ 以 noEmit composite 形态入图 ⇒ 测试里的
+    // 类型层断言（TableValueOf 派生）被 tsc -b 真检查，堵住「类型断言从不判」的洞。
+    { "path": "./packages/storage/storage-domain/tests" },
+    // ISS-515：活动流 seam。⛔ 本包不 import 任何 @matter/* 包（含 @matter/storage），
+    // 所以它不与上面三个构成先后顺序 —— 但仍然必须登记，否则 `tsc -b` 永远不编它
+    // （verify-tsconfig-coverage 的陷阱③：包在盘上、不在图里 ⇒ 类型错静默跳过且全绿）。
+    { "path": "./packages/storage/storage-journal" },
+    // ISS-519：P2 的第一个业务域。它是 storage-domain 的第一个 consumer，
+    // 也是 storage-journal 的第一次跨包消费 —— 后者的 references 里没有 @matter 包，
+    // 所以两者的先后顺序由这里（以及 issue 自己的包级 references）决定。
+    { "path": "./packages/pm/issue" },
+    // ISS-521：P2 第二域（E-1）。与 issue **平级**：两域互不 import（各自独立演进），
+    // 所以这里不需要排序 —— 它们共同依赖的两个 storage 包已经在上面登记过。
+    { "path": "./packages/pm/project" },
+    // ISS-526：E-3a 块引擎 schema 骨架。纯库（不 import 任何 @matter 包、无 ctx 键），
+    // 只导出 28 类型 union + 容器/引用校验 + V5 + assertNever；块树算法 ctx.blocks 留 E-3b。
+    // 但仍必须登记进图，否则 tsc -b 永不编它（verify-tsconfig-coverage 陷阱③）。
+    { "path": "./packages/kb/blocks" },
+    // ISS-527：E-2 document 实体域。是 @matter/blocks 的第一个 consumer，同时依赖
+    // storage / storage-domain / storage-journal；与 pm/issue、pm/project 平级（互不 import）。
+    { "path": "./packages/kb/document" },
+    // ISS-530：P3-U1 —— 新树第一个 client（前端）包。包根 tsconfig.json 是双面
+    // solution（references → tsconfig.host.json + tsconfig.client.json），这里登记一次，
+    // tsc -b 递归编两侧：host 面（base.emit + node types）与 client 面
+    //（base.client.emit + DOM lib + jsx、独立 tsbuildinfo）。与既有 9 包平级：
+    // 不 import 任何 @matter/* 包（token 底座无跨包依赖）。
+    { "path": "./packages/client/ui-theme" },
+    // ISS-531：P3-U2a —— 第二个 client 包（BlockNote 块编辑器映射底座）。包根 solution 文件
+    // 登记一次，递归编 host 面（空注册入口）与 client 面（映射层 + headless boot，DOM lib + jsx，
+    // reference 到 @matter/blocks 以建 zod 运行时校验的构建顺序）。client-domain-graph 分母 1→2。
+    { "path": "./packages/client/ui-blocks" },
+    // ISS-533：P3-U3 —— api 组首包（document @Remote host Service）。host 半单面包，
+    // reference 到 @matter/document + storage-domain 以建构建顺序。10→11 包。
+    { "path": "./packages/api/document-controller" },
+    // ISS-533：P3-U3 —— 第三个 client 包（ui-kb 最小页，W7 真消费者）。包根 solution 文件
+    // 登记一次，递归编 host 半（空注册入口）与 client 半（contract/list/detail/apply，
+    // DOM lib + jsx，零跨包 import）。client-domain-graph 分母 2→3。10→12 包。
+    { "path": "./packages/client/ui-kb" }
+  ]
+}

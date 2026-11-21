@@ -1,0 +1,14 @@
+{
+  // 新树包级 tsconfig 的标准形态（ISS-508）。两处不可省：
+  //   ① extends 指向 **tsconfig.base.emit.json**（不是 tsconfig.base.json —— 直连 base 会继承
+  //      noEmit: true ⇒ tsc 退出码 0 但零产出，陷阱①）；
+  //   ② composite 由基座给，outDir 指向 lib/types —— 与 DSH 包的产物布局一致
+  //      （tsdown 出 lib/index.js，tsc 出 lib/types/**）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"]
+}

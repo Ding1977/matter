@@ -1,0 +1,19 @@
+{
+  // 包级形态照 @matter/issue / @matter/blocks（E-0 / E-3a）：extends emit 基座。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  // references 建构建顺序：本包 import @matter/blocks（Block schema）、@matter/storage
+  // （结构型域能力）、@matter/storage-domain（defineDomain/domainTable）与 @matter/storage-journal
+  // （AuditFacility）。解析靠基座 paths，references 不建模块解析。
+  "references": [
+    { "path": "../blocks" },
+    { "path": "../../storage/storage" },
+    { "path": "../../storage/storage-domain" },
+    { "path": "../../storage/storage-journal" }
+  ]
+}

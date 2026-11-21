@@ -1,0 +1,46 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# ⚠️ 本仓暂无 translation-pairing 生成器（verify-package-readme 只判三件套齐全，不判内容）。
+# 重算口径（任何人可复核）：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 改了任一侧的正文，就要同步另一侧并就地重算对应行。
+#
+# 复算口径可自证的证据：本文件落地时，同一脚本对 packages/storage/storage-domain 的
+# README 对复算出 12 个节，与它已提交的 README.i18n.yaml **逐行相同**（ISS-515 note）。
+/matter-storage-journal:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-storage-journal/summary:
+  en: ab373d1ac867e7a3
+  zh: da718b8daf3be5f1
+/matter-storage-journal/table-of-contents:
+  en: 216c609ea5eb96a2
+  zh: 16d05cbb0f1f2265
+/matter-storage-journal/use-this-package:
+  en: 7f4ef3054d6afc65
+  zh: 6c2da12f2d56bd45
+/matter-storage-journal/use-this-package/what-you-get:
+  en: 9e9818db544ba2c7
+  zh: 2abbf0aaf001b233
+/matter-storage-journal/use-this-package/failures-and-recovery:
+  en: 703e0a636a1ae07a
+  zh: 0710ce5868a10e40
+/matter-storage-journal/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-storage-journal/understand-the-implementation/design-concept:
+  en: d28496199c4708f1
+  zh: 066bda69511fba94
+/matter-storage-journal/understand-the-implementation/source-map:
+  en: 303dba4f484fe7d9
+  zh: 10c938e023cbf3ef
+/matter-storage-journal/understand-the-implementation/why-trigram-and-why-a-like-fallback:
+  en: b9773bbf39f88c73
+  zh: e111bd0e9f0910d9
+/matter-storage-journal/understand-the-implementation/why-the-uid-algorithm-is-copied-character-for-character:
+  en: 17ff866f0be1b17a
+  zh: 3193ed7c3d93b616
+/matter-storage-journal/known-limitations-and-deferred-work:
+  en: 7c06e24d4a7fee49
+  zh: 30e56537037a525c

@@ -1,0 +1,35 @@
+{
+  "name": "matter",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.9.0"
+  },
+  "packageManager": "pnpm@11.28.5",
+  "scripts": {
+    "typecheck": "tsc -b tsconfig.next.json",
+    "build": "tsc -b tsconfig.next.json && tsdown",
+    "test": "vitest run",
+    "lint": "oxlint"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-client-ui-primitives": "0.2.2-rc.2",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^22.20.1",
+    "@types/react": "^18.3.1",
+    "@vitest/coverage-v8": "4.1.8",
+    "clsx": "^2.1.1",
+    "jsdom": "29.1.1",
+    "oxlint": "1.76.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsdown": "0.22.2",
+    "typescript": "6.0.3",
+    "vitest": "4.1.8"
+  },
+  "overrides": {
+    "@deepseek-ai/cordis": "4.1.0"
+  }
+}

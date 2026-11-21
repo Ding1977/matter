@@ -1,0 +1,13 @@
+{
+  // host 半（ISS-531 / P3-U2a）：node 环境，只编插件入口 src/index.ts。
+  // 形态照 ui-theme 先例：files 显式列入口，不 glob src/**。
+  // 本包 host 半没有任何 @matter/* 值依赖（映射层全在 client 半），故 references 空。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.host.tsbuildinfo"
+  },
+  "files": ["src/index.ts"],
+  "references": []
+}

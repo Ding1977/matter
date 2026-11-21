@@ -1,0 +1,20 @@
+{
+  // 双面包的 solution 文件（ISS-530 / P3-U1，照 DSH client 包形态：包根只含 references）。
+  //
+  // 自己不编任何文件 —— 两个面各由自己的 tsconfig 负责：
+  //   · tsconfig.host.json   host 半（node 环境，入口 src/index.ts）
+  //   · tsconfig.client.json client 半（DOM lib + jsx，只编 src/client/**）
+  // tsc -b 经 references 递归构建两侧；tsconfig.next.json 只登记本目录一次。
+  //
+  // ⚠️ 被聚合（tsconfig.next.json）reference 的项目必须 composite（TS6306），
+  //    故 extends emit 基座（composite 已在）并覆写 noEmit —— 与
+  //    packages/storage/storage-domain/tests/tsconfig.json 的「noEmit + composite
+  //    共存」形态同款（TS 6.0.3 实测可行，见该文件注释）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "files": [],
+  "references": [{ "path": "./tsconfig.host.json" }, { "path": "./tsconfig.client.json" }]
+}

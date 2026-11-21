@@ -1,0 +1,43 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# ⚠️ 本仓暂无 translation-pairing 生成器（verify-package-readme 只判三件套齐全，不判内容）。
+# 重算口径（任何人可复核）：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 改了任一侧的正文，就要同步另一侧并就地重算对应行。
+#
+# 复算口径自证：同一脚本对 packages/pm/issue 的中英 README 复算，与它已提交的
+# README.i18n.yaml 各节哈希逐行相同（ISS-527 复用该口径）。
+/matter-document:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-document/summary:
+  en: aed0defebad072ab
+  zh: 09cfc89406436517
+/matter-document/table-of-contents:
+  en: 216c609ea5eb96a2
+  zh: 216c609ea5eb96a2
+/matter-document/use-this-package:
+  en: ac4966ce521cbb2b
+  zh: 4686dbd91d8db5c6
+/matter-document/use-this-package/what-you-get:
+  en: 89e5340fb60c2a04
+  zh: 2f5ebee49bdd1003
+/matter-document/use-this-package/failures-and-recovery:
+  en: 73173503aaff3aec
+  zh: 80fd210fc72f8fd7
+/matter-document/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-document/understand-the-implementation/design-concept:
+  en: 31a3c41f62bbfa85
+  zh: 80fa2574e24c0081
+/matter-document/understand-the-implementation/source-map:
+  en: 28b6f31ad03c01d7
+  zh: 9c4d10ebc8aa967c
+/matter-document/understand-the-implementation/why-id-is-a-bare-string-key:
+  en: 4172739329a03cdd
+  zh: 196b6c0161563425
+/matter-document/known-limitations-and-deferred-work:
+  en: dc0751672f860719
+  zh: 3a0c32925de04705

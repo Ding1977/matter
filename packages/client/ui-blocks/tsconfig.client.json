@@ -1,0 +1,22 @@
+{
+  // client 半（ISS-531 / P3-U2a）：DOM lib + jsx，编 src/client/**。
+  // 形态照 ui-theme 先例，唯一差异：本半 import 了 @matter/blocks 的运行时 zod schema
+  //（validation.ts 用它做非法 props 校验），故 references 必须登记 ../kb/blocks 以建构建顺序
+  //（解析靠 base.emit paths，references 只管 tsc -b 的先后——与 packages/kb/document 同款）。
+  "extends": "../../../tsconfig.base.client.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.client.tsbuildinfo",
+    // client 面要解析 react / @blocknote/react 的类型。BlockNote 的 .d.ts 引用了一组协作层
+    // peer（@y/y、@y/prosemirror、@y/protocols）与 react/jsx-runtime 声明——这些是它的可选
+    // 协作依赖，本单不用协作、也未安装（U-0 问3：不用协作可不装）。skipLibCheck 让 tsc 不检查
+    // 第三方 .d.ts 内部（它们由 BlockNote 自己发布担保），本包 src/** 仍在 strict 下全量检查；
+    // types:["react"] 让 react 模块声明可见（@types/react 在根 devDeps，U-1 已加）。
+    "skipLibCheck": true,
+    "types": ["react"]
+  },
+  // include 不能以裸 ** 结尾（TS5010，ui-theme 踩过）——按扩展名列。
+  "include": ["src/client/**/*.ts", "src/client/**/*.tsx"],
+  "references": [{ "path": "../../kb/blocks" }]
+}

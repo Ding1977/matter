@@ -1,0 +1,24 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# 复算口径：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 路径取英文侧，中文侧按节序配对；改任一侧正文须同步另一侧并重算该行。
+/matter-client-ui-kb:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-client-ui-kb/summary:
+  en: af191a954f6f6e13
+  zh: 0ed63ea70e04105b
+/matter-client-ui-kb/table-of-contents:
+  en: fd53a46dc7904677
+  zh: fd53a46dc7904677
+/matter-client-ui-kb/use-this-package:
+  en: eee2c81f4c97e68d
+  zh: 74b93ed77ef1732d
+/matter-client-ui-kb/understand-the-implementation:
+  en: 41a8b533ca9c88a1
+  zh: f075a1b43ec01202
+/matter-client-ui-kb/known-limitations-and-deferred-work:
+  en: b3ea3911b81dcddf
+  zh: eb3ac4d59eaa6131

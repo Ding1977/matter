@@ -1,0 +1,25 @@
+{
+  "name": "@matter/issue",
+  "description": "Issue domain (ctx.issues): zod-validated issue records over the storage domain form, with every durable write projected into the activity journal.",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": { "types": "./lib/types/index.d.ts", "default": "./lib/index.js" },
+    "./package.json": "./package.json"
+  },
+  "files": ["lib/index.js", "lib/types/**/*.d.ts", "src"],
+  "dependencies": {
+    "@matter/storage": "workspace:*",
+    "@matter/storage-domain": "workspace:*",
+    "@matter/storage-journal": "workspace:*",
+    "zod": "4.6.6"
+  },
+  "peerDependencies": { "@deepseek-ai/cordis": "^4.1.0" },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0",
+    "@matter/storage-json": "workspace:*"
+  }
+}

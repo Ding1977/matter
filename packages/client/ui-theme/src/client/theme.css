@@ -1,0 +1,45 @@
+/*
+ * @matter/client-ui-theme —— 设计 token 的 CSS 侧（ISS-530 / P3-U1）。
+ *
+ * 两层结构（组件只消费 alias 层，static 层只许被 alias 引用）：
+ *   · --matter-static-*  原子值（色板、圆角）。改名 = 破坏性变更。
+ *   · --matter-alias-*   语义名（表面 / 文字 / 边框 / 强调 / 危险 / 圆角）。
+ *                        数值跟随视觉调整时**只动这里的 var() 指向**，组件不动。
+ *
+ * 数值纪律：P3 第一版最小集，目测定值，不抄 DSH design-platform.css 的量；
+ * 视觉定稿后随视觉走。本文件与 src/tokens.ts 的注册表一一对应
+ * （tests/tokens.test.ts 钉死：任一侧多一条或少一条即红）。
+ *
+ * 由 src/client/styles.ts 的 installThemeStyles 经 `?inline` import 注入
+ * document.head；不作为独立 CSS 文件被任何入口 <link>。
+ */
+:root {
+  /* ── static 层：原子值 ─────────────────────────────────────────── */
+
+  --matter-static-color-white: #ffffff;
+  --matter-static-color-black: #1a1c20;
+  --matter-static-color-gray-40: #c9ccd3;
+  --matter-static-color-gray-60: #9096a0;
+  --matter-static-color-gray-90: #f3f4f6;
+  --matter-static-color-blue-10: #e8effc;
+  --matter-static-color-blue-60: #3d6df2;
+  --matter-static-color-red-60: #d5484f;
+
+  --matter-static-radius-sm: 4px;
+  --matter-static-radius-md: 8px;
+
+  /* ── alias 层：语义名（组件只消费这层）─────────────────────────── */
+
+  --matter-alias-surface: var(--matter-static-color-white);
+  --matter-alias-surface-raised: var(--matter-static-color-gray-90);
+  --matter-alias-surface-selected: var(--matter-static-color-blue-10);
+  --matter-alias-text-primary: var(--matter-static-color-black);
+  --matter-alias-text-muted: var(--matter-static-color-gray-60);
+  --matter-alias-border-subtle: var(--matter-static-color-gray-40);
+  --matter-alias-accent: var(--matter-static-color-blue-60);
+  --matter-alias-accent-contrast: var(--matter-static-color-white);
+  --matter-alias-danger: var(--matter-static-color-red-60);
+
+  --matter-alias-radius-control: var(--matter-static-radius-sm);
+  --matter-alias-radius-panel: var(--matter-static-radius-md);
+}

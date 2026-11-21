@@ -1,0 +1,27 @@
+{
+  // tsconfig.base.client.emit.json —— client（前端）包 client 面的 emit 基座（ISS-530 / P3-U1）
+  //
+  // 为什么另起一份而不是在 base.emit 上加：base.emit 是 9 个后端包的公共基座
+  //（types: ["node"]），在它上面加 DOM lib / jsx 等于把浏览器面塞给所有后端包。
+  // client 面需要的恰是**去掉** node 类型 + 加 DOM —— 与 base.emit 是两套环境，
+  // 各一份基座，包级 tsconfig 按「哪个面」extends 哪份。
+  //
+  // 形态照 DSH tsconfig.base.client.json（U-0 调研问 1 全文实读）：
+  //   · jsx: "react-jsx" —— 客户端 JSX 的官方转换；**不开 experimentalDecorators**
+  //    （DSH client 面不开装饰器，@Remote 一类经 tsdown 插件降级，本仓 P3 无此需求）；
+  //   · lib 加 DOM / DOM.Iterable —— 浏览器全局类型（base.emit 未写 lib，默认按 target
+  //     ES2022 取，无 DOM；此处显式列出全部三件，不靠「target 默认 + 追加」的隐式叠加）；
+  //   · types: [] —— **去掉 node**（覆盖 base.emit 的 ["node"]）。client 面误用 node
+  //     API（node:fs / process）在此面直接类型红，环境分置是把这层防呆做进编译器。
+  //     ⚠️ types 只管 @types 包的自动包含，不影响模块解析：client 半 import cordis
+  //     （自带类型、无 node 内置引用）与后续 import react（@types/react 在根）都正常。
+  //
+  // 共享字段（composite / declaration / allowImportingTsExtensions 等）全部继承
+  // base.emit，不在本文件重复 —— 一个事实只有一个家。
+  "extends": "./tsconfig.base.emit.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": []
+  }
+}

@@ -1,0 +1,19 @@
+{
+  // 同 @matter/issue 的包级形态（ISS-508 / ISS-519 / ISS-521）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  // references 建**构建顺序**：本包 import @matter/storage-domain（defineDomain / domainTable）
+  // 与 @matter/storage-journal（JournalEntry 类型）。
+  // ⚠️ 它不建模块解析 —— 解析靠基座的 paths。
+  // ⚠️ 不 reference @matter/storage：本包**不** import 它（没有 ProjectId 可用，见 src/spec.ts）。
+  //    多一条悬空 reference 会被 verify-tsconfig-coverage 的反向判据当成「图与盘脱节」。
+  "references": [
+    { "path": "../../storage/storage-domain" },
+    { "path": "../../storage/storage-journal" }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  // host 半（ISS-530 / P3-U1）：node 环境，编插件入口 src/index.ts 及其闭包
+  //（当前 = index.ts + tokens.ts —— 纯数据与插件形态，不碰 DOM）。
+  // 形态照 DSH client 包的 tsconfig.host.json：files 只列 host 入口，不 glob src/**，
+  // ⇒ client 半的文件永远不经 host 面编译（它们要 DOM lib 与 CSS 声明，host 面没有）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.host.tsbuildinfo"
+  },
+  // 显式列入口（不是 include src/**）：host 半是闭集，新增 host 文件必须是有意的。
+  // ⚠️ composite 纪律：files 必须列**全** host 半的文件 —— index.ts import 进来的
+  //    tokens.ts 也要列（TS6307：composite 项目不许有 files/include 之外的文件进程序）。
+  //    DSH 的 host 面同形态（files 逐个列出，不 glob）。
+  "files": ["src/index.ts", "src/tokens.ts"],
+  // host 半不 import 任何 @matter/* 包 ⇒ 无 references（与 @matter/blocks 同口径）。
+  "references": []
+}

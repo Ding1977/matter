@@ -1,0 +1,43 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# ⚠️ 本仓暂无 translation-pairing 生成器（verify-package-readme 只判三件套齐全，不判内容）。
+# 重算口径（任何人可复核）：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 改了任一侧的正文，就要同步另一侧并就地重算对应行。
+/matter-storage-json:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-storage-json/summary:
+  en: 1711076dcf12ac24
+  zh: 13d5db3509cc7bd5
+/matter-storage-json/table-of-contents:
+  en: 42e58965ada12cb2
+  zh: 8f85f27384f0331d
+/matter-storage-json/use-this-package:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-storage-json/use-this-package/what-you-get:
+  en: 62e6d57c39b0c104
+  zh: 80b784808b79ae63
+/matter-storage-json/use-this-package/failures-and-recovery:
+  en: 4f4dfc448e84cdc8
+  zh: 1708671a589730bc
+/matter-storage-json/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-storage-json/understand-the-implementation/design-concept:
+  en: 8eb4830ec1b9c043
+  zh: a5f389089bee4e29
+/matter-storage-json/understand-the-implementation/the-atomic-publish-protocol:
+  en: d34f8413e6f2db6c
+  zh: a98e6d2dd633cc09
+/matter-storage-json/understand-the-implementation/batch-delete-stage-then-clean-up:
+  en: 5805e9b37a5cca2f
+  zh: 590268a96624e596
+/matter-storage-json/understand-the-implementation/source-map:
+  en: 8334ba22fc8b86df
+  zh: c9b36e2a986b694d
+/matter-storage-json/known-limitations-and-deferred-work:
+  en: 515fdcf8511dfe0b
+  zh: 37348659e986d9af

@@ -1,0 +1,45 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# 复算口径：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 路径取英文侧，中文侧按节序配对；改任一侧正文须同步另一侧并重算该行。
+/matter-client-ui-blocks:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-client-ui-blocks/summary:
+  en: 766fa01eabec5ef7
+  zh: 98c4d99f8619bcd8
+/matter-client-ui-blocks/table-of-contents:
+  en: 216c609ea5eb96a2
+  zh: 216c609ea5eb96a2
+/matter-client-ui-blocks/use-this-package:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-client-ui-blocks/boot-a-headless-editor-and-round-trip-blocks:
+  en: 275c471c2351b66c
+  zh: dae4829b6ed5b6da
+/matter-client-ui-blocks/validate-a-record-against-the-block-schema:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-client-ui-blocks/build-a-display-view-headless-no-default-ui:
+  en: 8ba7cbaed052d636
+  zh: 8ba7cbaed052d636
+/matter-client-ui-blocks/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-client-ui-blocks/three-layer-client-structure:
+  en: aebe71c60030cd2c
+  zh: 33f9f703626538e5
+/matter-client-ui-blocks/naming-and-granularity-are-explicit-tables:
+  en: 52830ad2220eb4f3
+  zh: b69458bad5e0dd5e
+/matter-client-ui-blocks/why-link-is-inline-content-not-a-style:
+  en: 9f0db99a316ea845
+  zh: 7623a0bb68e9f597
+/matter-client-ui-blocks/headless-form-and-dependency-discipline:
+  en: 02a7f2e6fe433fcd
+  zh: b80753365698b58e
+/matter-client-ui-blocks/known-limitations-and-deferred-work:
+  en: 763e2060991bbd17
+  zh: 0fdbd4c62fd55b15

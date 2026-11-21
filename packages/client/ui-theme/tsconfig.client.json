@@ -1,0 +1,27 @@
+{
+  // client 半（ISS-530 / P3-U1）：DOM lib + jsx，只编 src/client/**。
+  //
+  // 与 DSH tsconfig.client.json 的同构点：
+  //   · extends 客户端 emit 基座（tsconfig.base.client.emit.json：jsx react-jsx +
+  //     DOM/DOM.Iterable lib，types 去掉 node —— client 面不许用 node API；
+  //     不开装饰器，照 DSH）；
+  //   · rootDir src / outDir lib/types（与 host 半同一 outDir，文件面不重叠：
+  //     host 只产 index.d.ts 一族，client 只产 client/** 一族）；
+  //   · 独立 tsBuildInfoFile（lib/tsconfig.client.tsbuildinfo）—— 两侧增量状态分开。
+  //
+  // 与 DSH 的差异（有意，写在 README「Understand」）：DSH 的 client 面 include src/**
+  // 再 exclude src/index.ts + src/host，因为它的 client 代码与 host 半共享 contract 文件；
+  // 本包 client 半不引用 host 半的任何文件 ⇒ 直接 include src/client/** 即为精确闭集，
+  // 不写冗余 exclude（include 已不含 host 半，再 exclude 是死配置）。
+  // U 线后续加共享 contract 时，此 include 随之扩（并解决与 host 面的输出重叠）。
+  "extends": "../../../tsconfig.base.client.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.client.tsbuildinfo"
+  },
+  // ⚠️ include 不能以裸 `**` 结尾（TS5010）——按扩展名列。.d.ts 由 *.ts 覆盖；
+  //    theme.css 不是受支持扩展，天然不进 tsc 程序（由 assets.d.ts 的 ambient 声明接住 import）。
+  "include": ["src/client/**/*.ts", "src/client/**/*.tsx"],
+  "references": []
+}

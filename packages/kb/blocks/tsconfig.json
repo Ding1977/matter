@@ -1,0 +1,13 @@
+{
+  // 同 @matter/issue / @matter/storage-domain 的包级形态（ISS-508 / ISS-519）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  // 本包是纯库：不 import 任何 @matter/* 包 ⇒ 无 references（构建顺序由
+  // tsconfig.next.json 的聚合 references 决定）。依赖只有 zod。
+  "references": []
+}

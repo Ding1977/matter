@@ -1,0 +1,16 @@
+{
+  // document-controller（ISS-533 / api 组首包）：host 半单面包，形态如 @matter/document。
+  // 无 DOM / 无 client 半 —— @Remote host Service 只跑在 Cordis host。
+  // 被 tsconfig.next.json references 一次；composite 由 base.emit 提供。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "files": ["src/index.ts"],
+  "references": [
+    { "path": "../../kb/document" },
+    { "path": "../../storage/storage-domain" }
+  ]
+}

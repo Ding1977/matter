@@ -1,0 +1,12 @@
+{
+  // client 半：DOM lib + jsx，编 src/client/**（contract/list/detail/apply/locale）。
+  // 不 import ui-blocks（零跨包引用）⇒ references 空；react 走 @types/react（根）。
+  "extends": "../../../tsconfig.base.client.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.client.tsbuildinfo"
+  },
+  "include": ["src/client/**/*.ts", "src/client/**/*.tsx"],
+  "references": []
+}

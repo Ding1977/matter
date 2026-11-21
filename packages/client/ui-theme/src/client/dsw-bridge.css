@@ -1,0 +1,185 @@
+/*
+ * DSH 原件 token 桥接层（ISS-534 / P4-0）—— 桥接形态「甲」。
+ *
+ * 本文件把 @deepseek-ai/dsh-client-ui-primitives 的 lib 下全部 .css 实扫到的
+ * var(--) 消费全集（164 个唯一名）在 Matter 侧**直接定义**（与 DSH 命名逐字一致），
+ * 原件零改动即工作。这是「ui-theme 直接定义/透传 --dsw-alias-* 命名」的落地，
+ * 裁决尺 = 老板 2026-11-21「UI 优先对齐 DSH」+「同一概念只在一处表达」。
+ *
+ * 独立成文件（不并入 theme.css）的理由：U-1 的 theme.css/tokens.ts 由
+ * tests/tokens.test.ts 钉死双向一一对应 + 「alias 只引用 static」纪律；桥接是加法，
+ * 独立文件让那套约束与既有 21 个 --matter-* token 一字不改，零破坏。
+ *
+ * 数值来源：Matter 现有调色板（theme.css 的 --matter-static-* 语义值），按 token
+ * 语义归类赋值，**不复制 DSH design-platform.css 的数字**。视觉定稿后随 Matter
+ * 视觉走即可，本层只负责「名字存在且解析得到值」，不是最终视觉。
+ *
+ * 全集由 npm pack 原件 tarball 的 lib 下全部 .css 实扫生成（46 文件 / 164 名），
+ * 由 tests/dsw-bridge.test.ts 反向钉死：原件消费的 var 名 ⊆ 本文件定义集。
+ */
+:root {
+  --ds-ease-in-out: ease-in-out;
+  --ds-font-family-code: ui-monospace, Menlo, monospace;
+  --ds-transition-duration: 150ms;
+  --dsh-button-outline-color: #1a1c20;
+  --dsh-content-font-delta: 0px;
+  --dsh-content-font-delta-secondary: 0px;
+  --dsh-content-font-size: 14px;
+  --dsh-content-font-size-secondary: 14px;
+  --dsh-file-type-default-color: #1a1c20;
+  --dsh-file-type-icon-color: #9096a0;
+  --dsh-file-type-violet: #1a1c20;
+  --dsh-frame-chrome-top: 8px;
+  --dsh-frame-overlay-top: 8px;
+  --dsh-hairline-width: 0.5px;
+  --dsh-hover-preview-fade: #e8effc;
+  --dsh-menu-anchor: none;
+  --dsh-menu-dismiss: 120ms;
+  --dsh-menu-enter: 120ms;
+  --dsh-menu-replace: 120ms;
+  --dsh-menu-wide-align: 0px;
+  --dsh-menu-window-top: 8px;
+  --dsh-scrollbar-width: 8px;
+  --dsh-segment-count: #1a1c20;
+  --dsh-segment-index: #1a1c20;
+  --dsh-submenu-height: 8px;
+  --dsh-submenu-parent: #1a1c20;
+  --dsh-submenu-row-offset: 8px;
+  --dsh-toast-hold: #1a1c20;
+  --dsl-code-block-background: #1a1c20;
+  --dsl-code-block-banner-background-color: #1a1c20;
+  --dsl-code-block-banner-font: #1a1c20;
+  --dsl-code-block-border-radius: 4px;
+  --dsl-code-block-content-font: #1a1c20;
+  --dsl-code-block-line-number-width: 8px;
+  --dsl-code-block-line-white-space: 8px;
+  --dsl-command-whitespace: 8px;
+  --dsl-read-gutter: 8px;
+  --dsl-search-line-height: 8px;
+  --dsl-search-radius: 4px;
+  --dsl-terminal-command-whitespace: 8px;
+  --dsl-terminal-font: #1a1c20;
+  --dsl-terminal-gutter: 8px;
+  --dsl-terminal-line-height: 8px;
+  --dsl-terminal-line-whitespace: 8px;
+  --dsl-terminal-output-max-height: 8px;
+  --dsl-terminal-radius: 4px;
+  --dsl-web-radius: 4px;
+  --dsw-alias-bg-base: #ffffff;
+  --dsw-alias-bg-layer-1: #ffffff;
+  --dsw-alias-bg-layer-2: #ffffff;
+  --dsw-alias-bg-layer-3: #ffffff;
+  --dsw-alias-bg-layer-4: #ffffff;
+  --dsw-alias-bg-mask-1: #ffffff;
+  --dsw-alias-bg-module-platform: #ffffff;
+  --dsw-alias-bg-skeleton: #ffffff;
+  --dsw-alias-border-l1: #c9ccd3;
+  --dsw-alias-border-l2: #c9ccd3;
+  --dsw-alias-border-l2-darkmode-thin: #c9ccd3;
+  --dsw-alias-border-l3: #c9ccd3;
+  --dsw-alias-border-l4: #c9ccd3;
+  --dsw-alias-brand-primary: #3d6df2;
+  --dsw-alias-button-ghost-active-border: #e8effc;
+  --dsw-alias-button-ghost-active-fill: #e8effc;
+  --dsw-alias-button-primary-fill: #3d6df2;
+  --dsw-alias-button-primary-hover: #3d6df2;
+  --dsw-alias-button-tool-bar-fill: #ffffff;
+  --dsw-alias-button-tool-bar-hover: #e8effc;
+  --dsw-alias-code-diff-added: #2f9e6e;
+  --dsw-alias-code-diff-deleted: #d5484f;
+  --dsw-alias-file-diff-added-bg: #ffffff;
+  --dsw-alias-file-diff-added-marker: #2f9e6e;
+  --dsw-alias-file-diff-deleted-bg: #d5484f;
+  --dsw-alias-file-diff-deleted-marker: #d5484f;
+  --dsw-alias-hovercard-bg: #e8effc;
+  --dsw-alias-hovercard-label-primary: #3d6df2;
+  --dsw-alias-interactive-bg-active: #e8effc;
+  --dsw-alias-interactive-bg-hover: #e8effc;
+  --dsw-alias-interactive-bg-hover-danger: #d5484f;
+  --dsw-alias-json-tree-hover: #e8effc;
+  --dsw-alias-json-tree-icon: #9096a0;
+  --dsw-alias-json-tree-keyword: #1a1c20;
+  --dsw-alias-json-tree-number: #1a1c20;
+  --dsw-alias-json-tree-property: #1a1c20;
+  --dsw-alias-json-tree-punctuation: #1a1c20;
+  --dsw-alias-json-tree-string: #1a1c20;
+  --dsw-alias-label-caption: #9096a0;
+  --dsw-alias-label-dimmed: #9096a0;
+  --dsw-alias-label-error: #d5484f;
+  --dsw-alias-label-primary: #3d6df2;
+  --dsw-alias-label-primary-foreground: #3d6df2;
+  --dsw-alias-label-secondary: #9096a0;
+  --dsw-alias-label-shimmer: #9096a0;
+  --dsw-alias-label-tertiary: #9096a0;
+  --dsw-alias-link: #3d6df2;
+  --dsw-alias-markdown-code-block: #1a1c20;
+  --dsw-alias-markdown-code-block-banner: #1a1c20;
+  --dsw-alias-markdown-inline-code: #1a1c20;
+  --dsw-alias-menu-group-header-fill: #ffffff;
+  --dsw-alias-menu-icon: #9096a0;
+  --dsw-alias-scrollbar-bg-l2: #c9ccd3;
+  --dsw-alias-scrollbar-hover-l2: #e8effc;
+  --dsw-alias-state-business-primary: #3d6df2;
+  --dsw-alias-state-error-primary: #d5484f;
+  --dsw-alias-state-idle-primary: #3d6df2;
+  --dsw-alias-state-success-primary: #2f9e6e;
+  --dsw-alias-state-success-tertiary: #2f9e6e;
+  --dsw-alias-state-warn-label: #d5484f;
+  --dsw-alias-state-warn-primary: #d5484f;
+  --dsw-alias-state-warn-tertiary: #d5484f;
+  --dsw-alias-switch-thumb: #1a1c20;
+  --dsw-alias-toast-action: #1a1c20;
+  --dsw-alias-toast-bg: #ffffff;
+  --dsw-alias-toast-label: #9096a0;
+  --dsw-alias-tooltip-bg: #ffffff;
+  --dsw-alias-tooltip-key-bg: #ffffff;
+  --dsw-alias-tooltip-label: #9096a0;
+  --dsw-elevation-panel: 0 4px 16px rgba(0,0,0,0.10);
+  --dsw-elevation-prominent: 0 8px 24px rgba(0,0,0,0.16);
+  --dsw-elevation-soft: 0 1px 2px rgba(0,0,0,0.08);
+  --dsw-focus-ring-color: #1a1c20;
+  --dsw-focus-ring-width: 2px;
+  --dsw-font-family: ui-monospace, Menlo, monospace;
+  --dsw-font-markdown-base: 14px;
+  --dsw-font-markdown-base-strong: 14px;
+  --dsw-font-markdown-code: 14px;
+  --dsw-font-markdown-code-block: 14px;
+  --dsw-font-markdown-code-font-family: ui-monospace, Menlo, monospace;
+  --dsw-font-markdown-h1: 24px;
+  --dsw-font-markdown-h2: 20px;
+  --dsw-font-markdown-h3: 16px;
+  --dsw-font-markdown-h4: 14px;
+  --dsw-font-markdown-table: 14px;
+  --dsw-font-markdown-table-head: 14px;
+  --dsw-font-xs-13: 13px;
+  --dsw-mask-blur: blur(8px);
+  --dsw-menu-backdrop-filter: blur(8px);
+  --dsw-menu-surface-fill: #ffffff;
+  --dsw-radius-lg: 4px;
+  --dsw-radius-md: 4px;
+  --dsw-radius-panel: 4px;
+  --dsw-radius-sm: 4px;
+  --dsw-radius-xl: 4px;
+  --dsw-radius-xs: 4px;
+  --dsw-shadow-lv3: 0 8px 24px rgba(0,0,0,0.12);
+  --dsw-specific-bubble: #1a1c20;
+  --dsw-specific-input-major: #1a1c20;
+  --dsw-specific-menu: #1a1c20;
+  --dsw-static-amber-400: #d99a1c;
+  --dsw-static-amber-500: #d99a1c;
+  --dsw-static-deepseek-450: #3d6df2;
+  --dsw-static-deepseek-500: #3d6df2;
+  --dsw-static-green-500: #2f9e6e;
+  --dsw-static-neutral-bluish-300: #c9ccd3;
+  --dsw-static-red-600: #1a1c20;
+  --json-tree-collapsed-lines: 8px;
+  --json-tree-hover: #e8effc;
+  --json-tree-icon: #9096a0;
+  --json-tree-keyword: #1a1c20;
+  --json-tree-number: #1a1c20;
+  --json-tree-property: #1a1c20;
+  --json-tree-punctuation: #1a1c20;
+  --json-tree-row-height: 8px;
+  --json-tree-string: #1a1c20;
+  --segmented-tabs-inset: 8px;
+}

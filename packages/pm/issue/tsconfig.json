@@ -1,0 +1,18 @@
+{
+  // 同 @matter/storage-domain 的包级形态（ISS-508 / ISS-519）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  // references 建**构建顺序**：本包 import @matter/storage（brand）、@matter/storage-domain
+  // （defineDomain / domainTable）与 @matter/storage-journal（JournalEntry 类型）。
+  // ⚠️ 它不建模块解析 —— 解析靠基座的 paths，四个包都必须在 tsconfig.base.emit.json 里。
+  "references": [
+    { "path": "../../storage/storage" },
+    { "path": "../../storage/storage-domain" },
+    { "path": "../../storage/storage-journal" }
+  ]
+}

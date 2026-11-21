@@ -1,0 +1,19 @@
+{
+  // ISS-525：让 tests/ 进入 tsc -b 的类型检查射程。
+  // 根因：包级 tsconfig 的 include 只有 src/**/*.ts，vitest run 又不带 --typecheck，
+  // ⇒ blocks-schema.test.ts 里的类型层断言（const pv: PV / const bv: BV）从不被判，
+  //   把 TableValueOf 的派生规则改坏也能全绿。本配置以 noEmit 形态把测试文件纳入
+  //   tsconfig.next.json 的 references 图，使类型断言真被检查。
+  // composite 是 tsc -b 引用前提；noEmit 在 TS 6.0.3 下与 composite 共存（实测）。
+  "extends": "../../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": true,
+    "tsBuildInfoFile": "./tsconfig.tsbuildinfo"
+    // 不设 rootDir：测试相对 import ../src/index.ts，src 文件需一并纳入本 project。
+  },
+  "include": ["./**/*.ts", "../src/**/*.ts"],
+  // 测试 import @matter/storage 与 @matter/storage-json，二者经 paths 指到各自 src，
+  // 需登记为 reference 才能重定向到声明产物（与包级 tsconfig 同口径）。
+  "references": [{ "path": "../../storage" }, { "path": "../../storage-json" }]
+}

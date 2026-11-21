@@ -1,0 +1,13 @@
+{
+  // 同 @matter/storage-json 的包级形态（ISS-508 / ISS-514）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  // references 建**构建顺序**：本包 import @matter/storage，所以 storage 先编。
+  // ⚠️ 它不建模块解析 —— 解析靠基座的 paths。
+  "references": [{ "path": "../storage" }]
+}

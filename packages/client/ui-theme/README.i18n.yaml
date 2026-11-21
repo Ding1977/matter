@@ -1,0 +1,43 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# 复算口径：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 路径取英文侧，中文侧按节序配对；改任一侧正文须同步另一侧并重算该行。
+# 自证：同一脚本对 packages/pm/issue 复算与它已提交的 i18n.yaml 逐行相同（ISS-519）。
+/matter-client-ui-theme:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-client-ui-theme/summary:
+  en: 7145ffe6c0ab6adb
+  zh: 38bb86b9d0527855
+/matter-client-ui-theme/table-of-contents:
+  en: 216c609ea5eb96a2
+  zh: 216c609ea5eb96a2
+/matter-client-ui-theme/use-this-package:
+  en: fd23c7a2ad2070cc
+  zh: 8fa2d74cd5d15293
+/matter-client-ui-theme/use-this-package/consume-tokens-in-component-css:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-client-ui-theme/use-this-package/inject-the-stylesheet:
+  en: d8b8b20bf06eda6e
+  zh: 87baff78aa1ed308
+/matter-client-ui-theme/use-this-package/read-the-token-registry:
+  en: 43151ea02dc2b69e
+  zh: cb439f3c2840b43e
+/matter-client-ui-theme/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-client-ui-theme/understand-the-implementation/dual-plane-tsconfig:
+  en: cdf38aff93f1da88
+  zh: c74ddb3cd890b99d
+/matter-client-ui-theme/understand-the-implementation/why-the-registry-lives-in-the-host-half:
+  en: cc5e5a73b837c174
+  zh: f7d1564b4b02c8ed
+/matter-client-ui-theme/understand-the-implementation/test-stack-and-coverage-domain:
+  en: 54b7ab8d98349895
+  zh: 16e2629d84de2f5c
+/matter-client-ui-theme/known-limitations-and-deferred-work:
+  en: 52a04358f9fd247d
+  zh: d8e33bae0e58b667

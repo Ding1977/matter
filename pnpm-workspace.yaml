@@ -1,0 +1,54 @@
+packages:
+  - packages/*/*
+
+# pnpm 11 默认拒绝依赖的 install/build 脚本（strictDepBuilds 默认 true），
+# 未列出的会被判硬失败：ERR_PNPM_IGNORED_BUILDS。
+#
+# ⚠️ 被 gate 的只有 preinstall / install / postinstall 三个键。
+#    `prepare` 不在其中 —— 实证 lightningcss 有 `prepare=patch-package`，
+#    却从不出现在 Ignored build scripts 列表里。
+#    pnpm 源码判据：manifestHasBuildScripts() 只查这三个键
+#    （~/.cache/node/corepack/v1/pnpm/<ver>/dist/pnpm.mjs）。
+#
+# ⚠️ 这条清单不是「绝对规则」的预防。在只声明具体 `@deepseek-ai/dsh-*`
+#    子包、而不声明 umbrella `@deepseek-ai/dsh` 的树里，整树 0 个 gated
+#    依赖，不写本段 `pnpm install` 也 EXIT=0。旧树有多处声明 umbrella
+#    （38 处），umbrella 会带入 koffi / node-pty / protobufjs 等原生依赖，
+#    那时不写才会硬失败。复检：`grep -rn '"@deepseek-ai/dsh":' --include=package.json .`
+#    ⇒ 有命中就要保住本段；全部换成具体子包后本段才可撤。
+#
+# 判据一律走真实路径跑，取退出码用 `>log 2>&1; echo EXIT=$?`，
+# 不要 `... | tail` 后再取 $?（拿到的是 tail 的码）。
+allowBuilds:
+  # ── true：构建期需要跑脚本 ────────────────────────────────────────
+  # node-pty：install 先查 prebuilds，缺失才 node-gyp 编译；postinstall 在
+  # 非 Windows 上唯一动作是跳过 conpty.dll 拷贝。放行是为了走预编译路径。
+  node-pty: true
+  # koffi：install 走 cnoke --prebuild。deny 下 FFI 实测仍可用（真二进制在
+  # optional dep @koromix/koffi-* 里），但官方判 true 且带 GCC13 事故史，
+  # 消费方统一钉 3.1.1 —— 跟官方。
+  koffi: true
+  # 只做 chmod(spawn-helper, 0o755)。这是全清单里唯一「不跑就在运行期静默
+  # 出错」的一条：helper 可执行位被解包剥掉时，PTY 要到 spawn 才失败。
+  '@deepseek-ai/dsh-subprocess-local': true
+  # esbuild：postinstall 只是「平台包解析不到时兜底下载」+ validateBinaryVersion
+  # 版本一致性校验。deny 下 esbuild 实测仍能编译，但仍然放行 ——
+  # 多花约 1s 换二进制与 JS 的版本校验，比版本不一致时的运行期怪错误便宜。
+  esbuild: true
+
+  # ── false：明确不需要（脚本跑与不跑等价，或有副作用我们不想要）──────
+  # lefthook：true 会在仓库根创建 lefthook.yml 并跑 `lefthook install`。
+  # 我们的钩子走 core.hooksPath=scripts/git-hooks（git config --show-scope
+  # => local），lefthook 遇到自定义 hooksPath 会警告
+  # "Custom hooks paths are not supported by default"。两套机制抢同一个
+  # 开关，所以显式写 false 而不是省略 —— 省略等于「一旦它进树就硬失败」。
+  lefthook: false
+  # preinstall 是字面量 `echo 'preinstall: no-op'`，effect 为零。
+  '@google/genai': false
+  # postinstall 只检查依赖方的 versionScheme 是否与自身匹配，不匹配打 WARN。
+  # 没有代码生成、没有二进制下载。
+  protobufjs: false
+  # install 脚本只有一个分支：npm_config_build_from_source === 'true' 时才
+  # node-gyp rebuild，默认什么都不做。真二进制在 @parcel/watcher-<platform>。
+  # 且本包只在装了 @tailwindcss/cli 时才会进树。
+  '@parcel/watcher': false

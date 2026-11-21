@@ -1,0 +1,13 @@
+{
+  // 双面包的 solution 文件（ISS-531 / P3-U2a，照 ui-theme 先例）：包根只含 references。
+  //   · tsconfig.host.json   host 半（node 环境，入口 src/index.ts + 非 DOM 的 contract 数据）
+  //   · tsconfig.client.json client 半（DOM lib + jsx，编 src/client/**）
+  // 被 tsconfig.next.json 登记一次，tsc -b 递归编两侧。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "files": [],
+  "references": [{ "path": "./tsconfig.host.json" }, { "path": "./tsconfig.client.json" }]
+}

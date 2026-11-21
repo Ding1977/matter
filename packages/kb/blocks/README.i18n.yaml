@@ -1,0 +1,46 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# 复算口径：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 路径取英文侧，中文侧按节序配对；改任一侧正文须同步另一侧并重算该行。
+# 自证：同一脚本对 packages/pm/issue 复算与它已提交的 i18n.yaml 逐行相同（ISS-519）。
+/matter-blocks:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-blocks/summary:
+  en: b3bac2acd9cd1d10
+  zh: 20fc73a0d78ff1c7
+/matter-blocks/table-of-contents:
+  en: 216c609ea5eb96a2
+  zh: 216c609ea5eb96a2
+/matter-blocks/use-this-package:
+  en: ecc284bd54949ca7
+  zh: b7335a888240c11d
+/matter-blocks/use-this-package/walk-index-and-extract-references:
+  en: 76d1124ae4872a62
+  zh: 3084be411cff5c35
+/matter-blocks/use-this-package/evaluate-a-view-query:
+  en: f3ba30f979473c55
+  zh: 733a1f6e395bc3fd
+/matter-blocks/use-this-package/what-you-get:
+  en: 37520e1eab9d10c0
+  zh: 6669511c05e64014
+/matter-blocks/use-this-package/failures-and-recovery:
+  en: a40381ce9218ef4b
+  zh: 6fe46b66b6241356
+/matter-blocks/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-blocks/understand-the-implementation/design-concept:
+  en: 64273bc17db3b246
+  zh: 755ddc60a77398ce
+/matter-blocks/understand-the-implementation/source-map:
+  en: 47793aa85b08c024
+  zh: f82e55e414723838
+/matter-blocks/understand-the-implementation/why-still-no-ctx-blocks-service:
+  en: 42651db3a8809910
+  zh: f8bd88bbe9632112
+/matter-blocks/known-limitations-and-deferred-work:
+  en: 41696509e9a4ce86
+  zh: 303591d72fc044b4

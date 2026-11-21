@@ -1,0 +1,47 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside fenced code blocks.
+#
+# ⚠️ 本仓暂无 translation-pairing 生成器（verify-package-readme 只判三件套齐全，不判内容）。
+# 重算口径（任何人可复核）：按标题级别栈建 /-分隔路径；节正文取到下一个任意级标题为止；
+# 去围栏代码块、逐行 trim、丢空行、换行连接；sha256 十六进制前 16 位。
+# 改了任一侧的正文，就要同步另一侧并就地重算对应行。
+#
+# 复算口径自证的证据（ISS-519）：同一脚本对 packages/storage/storage-domain 的中英两份 README
+# 复算，得到 11 条路径 × 2 侧，与它已提交的 README.i18n.yaml **逐行相同**
+# （含 `e3b0c44298fc1c14` = 空正文的 sha256 前 16 位，那一节下方直接跟标题）。
+/matter-issue:
+  en: 035b8c7417bfa2ee
+  zh: 02defbf8367590e7
+/matter-issue/summary:
+  en: 1d7c4003a69ad0c0
+  zh: c11da1170cb47b24
+/matter-issue/table-of-contents:
+  en: 216c609ea5eb96a2
+  zh: fd289d93c2702bb6
+/matter-issue/use-this-package:
+  en: 78d5d159c9e5410f
+  zh: 4ae9eac5b38a4f62
+/matter-issue/use-this-package/what-you-get:
+  en: 0e57104993281f09
+  zh: b626b22729e8d47d
+/matter-issue/use-this-package/failures-and-recovery:
+  en: c83420ba34d07476
+  zh: b8355601d1270faa
+/matter-issue/understand-the-implementation:
+  en: e3b0c44298fc1c14
+  zh: e3b0c44298fc1c14
+/matter-issue/understand-the-implementation/design-concept:
+  en: c3fc934d4bd8aa56
+  zh: 9d5dbfe41aacb5f7
+/matter-issue/understand-the-implementation/source-map:
+  en: d9976c4fac0f4493
+  zh: 2c991284baabf1f6
+/matter-issue/understand-the-implementation/why-optional-fields-are-optional-meta-never-meta-optional:
+  en: a90cbf64e3c6ac28
+  zh: 39c7a112c5d52646
+/matter-issue/understand-the-implementation/why-transform-is-not-used-for-the-id-brand:
+  en: 8cb6b05872674eeb
+  zh: e6386d0dc9dd65a3
+/matter-issue/known-limitations-and-deferred-work:
+  en: 773a6ccbe15e87ae
+  zh: a69ee45028d69fd7
