@@ -92,6 +92,14 @@ export default defineConfig({
     ],
     setupFiles: ["./vitest.setup.ts"],
     testTimeout: 30_000,
+    // ⑨ ISS-538 / P4-S2（Q3 · P3 缺口①销账）：让 BlockNote 的 style.css 在 vitest 下走
+    //    **真 CSS 管线**而非被 `vitest:css-disable` stub 成空串（U-1 实测 css:false 把 .css
+    //    含 ?inline 整类 stub 成空串，见 CSSEnablerPlugin.shouldProcessCSS）。
+    //    ⚠️ 用 `include` 正则**只放行 @blocknote**——`css: true` 全放会让 dsh-client 的
+    //    `.module.css` 类名策略改变、波及一堆既有测试（blast radius 不可控）。其余 CSS
+    //    维持原 stub 行为，ui-theme 既有断言（textContent === themeCss）不受影响。
+    //    放行后 `import css from "@blocknote/core/style.css?inline"` 拿到真 CSS 串，
+    css: { include: [/@blocknote/] },
     // ⑦ coverage（ISS-505）：provider 用 v8，与 vitest 主版本严格同号（4.1.8）。
     //    ⚠️ 只在带 --coverage 时生效；默认跑测试**不**收集覆盖率（那会让每次测试慢一截）。
     //

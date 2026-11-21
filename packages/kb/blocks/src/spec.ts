@@ -149,6 +149,21 @@ export type Block =
   | { id: string; type: "toggle"; title: string; children?: Block[] }
   | { id: string; type: "syncedBlock"; ref: string; children?: Block[] }
 
+/** 具名递归块类型（ISS-539）：children 必填，供 Typert Remote codec 识别递归边。 */
+export type RemoteBlock =
+  | z.infer<typeof Paragraph> | z.infer<typeof Heading> | z.infer<typeof BulletList>
+  | z.infer<typeof OrderedList> | z.infer<typeof Todo> | z.infer<typeof Quote>
+  | z.infer<typeof Divider> | z.infer<typeof Code> | z.infer<typeof Image>
+  | z.infer<typeof IssueRef> | z.infer<typeof DocRef> | z.infer<typeof Mermaid>
+  | z.infer<typeof Callout> | z.infer<typeof Table> | z.infer<typeof View>
+  | z.infer<typeof Video> | z.infer<typeof Audio> | z.infer<typeof Pdf>
+  | z.infer<typeof Bookmark> | z.infer<typeof Attachment> | z.infer<typeof Math>
+  | z.infer<typeof Toc> | z.infer<typeof Breadcrumb> | z.infer<typeof Template>
+  | z.infer<typeof Embed>
+  | { id: string; type: "columns"; children: RemoteBlock[] }
+  | { id: string; type: "toggle"; title: string; children: RemoteBlock[] }
+  | { id: string; type: "syncedBlock"; ref: string; children: RemoteBlock[] }
+
 /** BlockType 判别字面量联合（从 Block 派生，不另立真相源）。 */
 export type BlockType = Block["type"]
 
@@ -156,7 +171,7 @@ export type BlockType = Block["type"]
  * 容器 children 字段。`z.lazy` 的显式 `ZodType<Block>` 标注打破递归推断环；
  * `z.array(...).optional()` 让空容器合法，V5 只管「叶子不许有 children」。
  */
-const blockChildren = z.array(z.lazy((): z.ZodType<Block> => Block)).optional()
+const blockChildren = z.array(z.lazy((): z.ZodType<RemoteBlock> => Block as z.ZodType<RemoteBlock>)).optional()
 
 const Columns = z.strictObject({ ...base("columns"), children: blockChildren })
 const Toggle = z.strictObject({ ...base("toggle"), title: z.string(), children: blockChildren })
@@ -172,3 +187,25 @@ export const Block = z.discriminatedUnion("type", [
   IssueRef, DocRef, Mermaid, Toggle, Callout, Table, View,
   Video, Audio, Pdf, Bookmark, Attachment, Columns, Math, Toc, Breadcrumb, SyncedBlock, Template, Embed,
 ])
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ISS-539 RemoteBlock 漂移闸（编译期）：手写的 3 个容器成员字段一旦与 zod schema
+// 定义漂移（加/删/改字段），tsc 直接红。25 个叶子是 z.infer<typeof LeafSchema>，
+// 天然随 schema 演进，无需闸。children 必填性是 generator 硬契约，不作为漂移。
+// ─────────────────────────────────────────────────────────────────────────────
+type _Eq<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false
+type _Expect<T extends true> = T
+type _Hand<T> = Omit<T, "children">
+type _Zod<T> = Omit<T, "children">
+
+type _Gate_Columns = _Expect<_Eq<_Hand<Extract<RemoteBlock, { type: "columns" }>>, _Zod<z.infer<typeof Columns>>>>
+type _Gate_Toggle = _Expect<_Eq<_Hand<Extract<RemoteBlock, { type: "toggle" }>>, _Zod<z.infer<typeof Toggle>>>>
+type _Gate_SyncedBlock = _Expect<_Eq<_Hand<Extract<RemoteBlock, { type: "syncedBlock" }>>, _Zod<z.infer<typeof SyncedBlock>>>>
+/** 判别标签集合也必须一致。 */
+type _Gate_Types = _Expect<_Eq<RemoteBlock["type"], Block["type"]>>
+
+/**
+ * RemoteBlock 漂移闸的编译期断言元组（ISS-539）：3 容器字段 + 判别标签集与 zod 一致。
+ * @remarks 纯类型守卫，运行时无产物；导出仅为让 tsc 求值上面四个 `_Gate_*` 断言。
+ */
+export type RemoteBlockDriftGate = [_Gate_Columns, _Gate_Toggle, _Gate_SyncedBlock, _Gate_Types]

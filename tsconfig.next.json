@@ -50,6 +50,15 @@
     // ISS-533：P3-U3 —— 第三个 client 包（ui-kb 最小页，W7 真消费者）。包根 solution 文件
     // 登记一次，递归编 host 半（空注册入口）与 client 半（contract/list/detail/apply，
     // DOM lib + jsx，零跨包 import）。client-domain-graph 分母 2→3。10→12 包。
-    { "path": "./packages/client/ui-kb" }
+    { "path": "./packages/client/ui-kb" },
+    // ISS-540：P4-V2 —— 第四个 client 包（ui-pm 列表骨架，ViewConfigStore 真消费者）。包根
+    // solution 登记一次，递归编 host 半（空注册入口）与 client 半（contract/list/detail/apply，
+    // DOM lib + jsx，消费 @matter/issue 的 ViewConfig 类型）。client-domain-graph 分母 3→4。
+    { "path": "./packages/client/ui-pm" },
+    // ISS-543：P4-M1 —— 第五个 client 包（ui-model 最小座席，两级面板 + 搜索键盘导航 +
+    // provider 分组，ctx 注入 stub 目录；P4 最后一张、client 第 5 包收官）。包根 solution
+    // 登记一次，递归编 host 半（空注册入口）与 client 半（contract/panel/apply，DOM lib + jsx，
+    // 零跨包 import）。client-domain-graph 分母 4→5。
+    { "path": "./packages/client/ui-model" }
   ]
 }

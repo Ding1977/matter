@@ -1,0 +1,11 @@
+{
+  // host 半：node 环境，编插件入口 src/index.ts（空注册）。无 DOM、无跨包依赖。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.host.tsbuildinfo"
+  },
+  "files": ["src/index.ts"],
+  "references": []
+}

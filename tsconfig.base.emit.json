@@ -50,7 +50,11 @@
       // ISS-533：P3-U3 api 组首包。import @matter/document 的类型（doc 行/记录），paths 同批补。
       "@matter/document-controller": ["./packages/api/document-controller/src/index.ts"],
       // ISS-533：P3-U3 第三个 client 包（ui-kb 最小页）。paths 完备性同批补（verify-tsconfig-paths 对账）。
-      "@matter/client-ui-kb": ["./packages/client/ui-kb/src/index.ts"]
+      "@matter/client-ui-kb": ["./packages/client/ui-kb/src/index.ts"],
+      // ISS-540：P4-V2 第四个 client 包（ui-pm 列表骨架）。paths 完备性同批补（verify-tsconfig-paths 对账）。
+      "@matter/client-ui-pm": ["./packages/client/ui-pm/src/index.ts"],
+      // ISS-543：P4-M1 第五个 client 包（ui-model 最小座席）。paths 完备性同批补（verify-tsconfig-paths 对账）。
+      "@matter/client-ui-model": ["./packages/client/ui-model/src/index.ts"]
     }
   }
   // 故意不写 strict / noUncheckedIndexedAccess / exactOptionalPropertyTypes：

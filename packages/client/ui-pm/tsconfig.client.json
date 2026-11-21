@@ -1,0 +1,16 @@
+{
+  // client 半：DOM lib + jsx，编 src/client/**（contract/list/detail/apply/locale）。
+  // 消费 @matter/issue 的 ViewConfig 类型 ⇒ references 登记 pm/issue 以建构建顺序
+  //（解析靠 base.emit paths，references 只管 tsc -b 的先后——与 ui-blocks 同款）。
+  "extends": "../../../tsconfig.base.client.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.client.tsbuildinfo",
+    // @matter/issue → storage-journal 的声明里 import type "node:sqlite"（@types/node 提供），
+    // 故 types 必须同时含 node 与 react（少 node 则那条传递声明 TS2591 红）。
+    "types": ["node", "react"]
+  },
+  "include": ["src/client/**/*.ts", "src/client/**/*.tsx"],
+  "references": [{ "path": "../../pm/issue" }]
+}

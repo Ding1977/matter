@@ -1,0 +1,25 @@
+{
+  "name": "@matter/client-ui-pm",
+  "description": "Issue list skeleton for Matter's client (ISS-540): renders injected issue rows driven by a ViewConfig read from @matter/issue's ViewConfigStore. Fourth client package; zero imports of sibling UI packages.",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": { "types": "./lib/types/index.d.ts", "default": "./lib/index.js" },
+    "./client": { "types": "./lib/types/client/index.d.ts", "default": "./lib/types/client/index.js" },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["lib/index.js", "lib/types/**/*.d.ts", "lib/types/client/*.js", "src"],
+  "dependencies": {},
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0",
+    "@deepseek-ai/dsh-client-ui-primitives": "0.2.2-rc.2",
+    "@matter/issue": "workspace:*"
+  }
+}

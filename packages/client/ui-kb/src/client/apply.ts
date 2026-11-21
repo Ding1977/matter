@@ -25,3 +25,7 @@ export type { DocDetailProps } from "./detail/detail.tsx"
 
 export { resolveMessages, identityTranslator } from "./locale.ts"
 export type { Messages, Translator } from "./locale.ts"
+
+// documents-port seam（ISS-542 / P4-N2）：transport 切换的 consumer 投影。
+export { createRemoteDocumentsPort } from "./port/documents.ts"
+export type { DocumentsPort, DocumentsListRequest } from "./port/documents.ts"

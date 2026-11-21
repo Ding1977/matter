@@ -1,0 +1,14 @@
+{
+  // client 半：DOM lib + jsx，编 src/client/**（contract/panel/detail/apply/locale）。
+  // 本包不 import 兄弟 @matter 包（ctx 注入 stub 目录），references 空。
+  "extends": "../../../tsconfig.base.client.emit.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib/types",
+    "tsBuildInfoFile": "./lib/tsconfig.client.tsbuildinfo",
+    // 原件 Button 的 src 子路径依赖 JSX + node 环境声明（照 ui-pm 同款）。
+    "types": ["node", "react"]
+  },
+  "include": ["src/client/**/*.ts", "src/client/**/*.tsx"],
+  "references": []
+}

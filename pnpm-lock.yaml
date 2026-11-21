@@ -11,6 +11,9 @@ importers:
       '@deepseek-ai/dsh-client-ui-primitives':
         specifier: 0.2.2-rc.2
         version: 0.2.2-rc.2(@deepseek-ai/cordis@4.1.0)
+      '@deepseek-ai/dsh-typert-generator':
+        specifier: 0.2.2-rc.2
+        version: 0.2.2-rc.2(@deepseek-ai/cordis@4.1.0)
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.2
@@ -109,6 +112,27 @@ importers:
       '@matter/document-controller':
         specifier: workspace:*
         version: link:../../api/document-controller
+
+  packages/client/ui-model:
+    devDependencies:
+      '@deepseek-ai/cordis':
+        specifier: ^4.1.0
+        version: 4.1.0
+      '@deepseek-ai/dsh-client-ui-primitives':
+        specifier: 0.2.2-rc.2
+        version: 0.2.2-rc.2(@deepseek-ai/cordis@4.1.0)
+
+  packages/client/ui-pm:
+    devDependencies:
+      '@deepseek-ai/cordis':
+        specifier: ^4.1.0
+        version: 4.1.0
+      '@deepseek-ai/dsh-client-ui-primitives':
+        specifier: 0.2.2-rc.2
+        version: 0.2.2-rc.2(@deepseek-ai/cordis@4.1.0)
+      '@matter/issue':
+        specifier: workspace:*
+        version: link:../../pm/issue
 
   packages/client/ui-theme:
     devDependencies:
@@ -419,6 +443,11 @@ packages:
 
   '@deepseek-ai/dsh-client-ui-slots@0.2.2-rc.2':
     resolution: {integrity: sha512-uOiuDbP8p4qmrACNBvvZqB5Dzhuh3ybpaRN3vUi/cMhdO5ibXyR0vBiv+Cu9RzcCHOv0Kn+PQjO7wCW2hKkiqg==}
+    peerDependencies:
+      '@deepseek-ai/cordis': ~4.1.0
+
+  '@deepseek-ai/dsh-typert-generator@0.2.2-rc.2':
+    resolution: {integrity: sha512-YZ/5bS+rG+hgc3KfEPYmlFdMWR1d7Hmym6hcRJtcBiw8jIgcrW3t31nhIWPVVbXfSYV2J0tgsbYScUTaFAR89Q==}
     peerDependencies:
       '@deepseek-ai/cordis': ~4.1.0
 
@@ -1927,6 +1956,12 @@ snapshots:
   '@deepseek-ai/dsh-client-ui-slots@0.2.2-rc.2(@deepseek-ai/cordis@4.1.0)':
     dependencies:
       '@deepseek-ai/cordis': 4.1.0
+
+  '@deepseek-ai/dsh-typert-generator@0.2.2-rc.2(@deepseek-ai/cordis@4.1.0)':
+    dependencies:
+      '@deepseek-ai/cordis': 4.1.0
+      '@jridgewell/gen-mapping': 0.3.13
+      typescript: 6.0.3
 
   '@deepseek-ai/dsh-typert-protocol@0.2.2-rc.2(@deepseek-ai/cordis@4.1.0)':
     dependencies:

@@ -1,0 +1,10 @@
+{
+  // 双面包的 solution 文件（照 ui-kb / ui-theme，ISS-533/2315）。
+  "extends": "../../../tsconfig.base.emit.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
+  },
+  "files": [],
+  "references": [{ "path": "./tsconfig.host.json" }, { "path": "./tsconfig.client.json" }]
+}

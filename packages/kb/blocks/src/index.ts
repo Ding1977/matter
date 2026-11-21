@@ -31,6 +31,10 @@ export {
   A_BASIC_TYPES, B_BUSINESS_TYPES, C_NOTION_TYPES, BLOCK_TYPES,
   CONTAINER_TYPES, REFERENCE_TYPES, Rich, Block,
 } from "./spec.ts"
+// ISS-539 / P4-N1：RemoteBlock 是 Block 的具名递归 DTO（children 必填），供 Typert
+// generator 识别 Remote codec 递归边。从包根导出，使下游 .d.ts 以包名引用它而非
+// 内部 src 路径（后者在 NodeNext 外部消费者下会变成无扩展名相对 import 而判红）。
+export type { RemoteBlock, RemoteBlockDriftGate } from "./spec.ts"
 export type { BlockType } from "./spec.ts"
 // P3-B1（ISS-529）块树三算法。walk.ts 反向 import 本文件的 blockChildren：ESM live
 // binding + walk 顶层零调用 ⇒ 循环无害（测试 import 顺序打乱也盖住）。

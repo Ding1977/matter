@@ -20,46 +20,22 @@
  */
 
 import type { Domain } from "@matter/storage-domain"
-import { DocumentDomain, type DocPatch, type DocRecord } from "@matter/document"
+import { DocumentDomain } from "@matter/document"
 import { Remote, RemoteError, TypertRemoteService } from "@deepseek-ai/dsh-typert-protocol"
 import type { Context } from "@deepseek-ai/cordis"
+import type {
+  DocGetRequest,
+  DocGetValue,
+  DocListRequest,
+  DocListValue,
+  DocRow,
+  DocUpdateRequest,
+  DocUpdateValue,
+} from "./types.ts"
 
-/** list 请求：可选 id 前缀过滤（空 = 全部）。 */
-export interface DocListRequest {
-  readonly prefix?: string
-}
-
-/** 一条文档行（列表面，不携带正文 blocks）。 */
-export interface DocRow {
-  readonly id: string
-  readonly title: string
-}
-
-/** list 返回值。 */
-export interface DocListValue {
-  readonly items: readonly DocRow[]
-}
-
-/** get 请求：文档 id。 */
-export interface DocGetRequest {
-  readonly id: string
-}
-
-/** get 返回值：整条 `{props, blocks}` 记录。 */
-export interface DocGetValue {
-  readonly record: DocRecord
-}
-
-/** update 请求：文档 id + PATCH（props / blocks 各自整体替换）。 */
-export interface DocUpdateRequest {
-  readonly id: string
-  readonly patch: DocPatch
-}
-
-/** update 返回值：更新后的整条记录。 */
-export interface DocUpdateValue {
-  readonly record: DocRecord
-}
+// Remote boundary 类型归 ./types 子路径（generator 的 publicRemoteType 要求非根导出）；
+// 这里 re-export 保持既有消费者从根 `.` import 的写法零破坏（ISS-539 / P4-N1）。
+export type * from "./types.ts"
 
 declare module "@deepseek-ai/cordis" {
   interface Context {
@@ -95,10 +71,11 @@ export class DocumentController extends TypertRemoteService {
    * @returns 可见文档行数组。
    */
   @Remote("list")
-  list(request: DocListRequest = {}): DocListValue {
+  list(request?: DocListRequest): DocListValue {
+    const filter = request ?? {}
     const items: DocRow[] = []
     for (const [id, record] of this.ctx.documents.entries()) {
-      if (request.prefix !== undefined && !id.startsWith(request.prefix)) continue
+      if (filter.prefix !== undefined && !id.startsWith(filter.prefix)) continue
       items.push({ id, title: record.props.title })
     }
     return { items }

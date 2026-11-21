@@ -8,7 +8,7 @@
     "outDir": "./lib/types",
     "tsBuildInfoFile": "./lib/tsconfig.tsbuildinfo"
   },
-  "files": ["src/index.ts"],
+  "files": ["src/index.ts", "src/types.ts"],
   "references": [
     { "path": "../../kb/document" },
     { "path": "../../storage/storage-domain" }

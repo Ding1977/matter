@@ -1,5 +1,6 @@
 import { globSync } from 'node:fs'
 import { defineConfig } from 'tsdown'
+import { decoratorPlugin } from '@deepseek-ai/dsh-typert-generator/tsdown'
 
 /**
  * 新树两段式构建的第二段（ISS-508 · P0-2 · 补 ISS-511 的缺口）。
@@ -37,4 +38,9 @@ export default defineConfig(() => ({
   //   clean: true 会在 tsdown 启动时先清空 outDir ⇒ 删掉 tsc 刚产的 `lib/types`
   //   ⇒ 构建链自己打自己（第二段吃掉第一段的产物）。
   clean: false,
+
+  // ISS-539 / P4-N1：host pass 挂 decoratorPlugin（从 generator 的 ./tsdown 导入）。
+  //   artifact 已由第一段的 scripts/generate-typert.ts 源-only 预生成，本插件只降装饰器、
+  //   不读写 metadata（DSH 根 tsdown.config.ts:34 同款）。本仓单 config = host pass，无 client pass。
+  plugins: [decoratorPlugin()],
 }))

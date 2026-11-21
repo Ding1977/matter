@@ -1,0 +1,24 @@
+{
+  "name": "@matter/client-ui-model",
+  "description": "Minimal model selector seat for Matter's client (ISS-543): two-level panel (model list + detail), search keyboard navigation, and provider grouping over a ctx-injected stub directory. Fifth and final client package of P4; zero sibling UI imports, no backend.",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": { "types": "./lib/types/index.d.ts", "default": "./lib/index.js" },
+    "./client": { "types": "./lib/types/client/index.d.ts", "default": "./lib/types/client/index.js" },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["lib/index.js", "lib/types/**/*.d.ts", "lib/types/client/*.js", "src"],
+  "dependencies": {},
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0",
+    "@deepseek-ai/dsh-client-ui-primitives": "0.2.2-rc.2"
+  }
+}
