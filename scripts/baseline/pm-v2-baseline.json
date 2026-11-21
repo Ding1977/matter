@@ -1,0 +1,618 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "rerecordLog 以 why 记录基线重录欠账，列入 grandfathered，属存量豁免。"
+  },
+  "meta": {
+    "note": "PM v2 (DOC-258) 开工前基准 · ISS-583 · 交付时用 --check 对照；口径见 scripts/pm-v2-baseline.mjs 头注",
+    "generatedAt": "2026-11-10T00:55:48.886Z",
+    "head": "74ffe20d",
+    "branch": "ISS-785"
+  },
+  "rerecordLog": [
+    {
+      "at": "2026-11-10T00:53:20.872Z",
+      "issue": "ISS-785",
+      "why": "基线断在 2026-10-24（34d05fcd），此后四个包退役、两条新功能线上线，都没复录 ⇒ 同一份清单同时报「缺失 4」与「新增 4」。",
+      "removed": {
+        "plugins": {
+          "forge-pm-notify": "32b1ac53 refactor(forge-pm-notify): 整个退役 —— 3,825 行完整死环，界面槽已零声明（ISS-703）",
+          "forge-teammate-model": "21b4bd5b refactor(forge-teammate-model): 整个退役（ISS-704）",
+          "forge-archive": "ba290316 refactor(forge-archive): 整个退役 —— 571 行 5 个工具从没挂载（ISS-706）",
+          "forge-impact": "a7b91730 ISS-684 七个工具合并成一个 code_query（7→1），forge-impact 退役"
+        },
+        "routes": "10 条 /forge-pm-notify/* 随 forge-pm-notify 整体消失（同 32b1ac53）",
+        "surfaces": "forge.footer.left / forge.notify.bell 随 forge-pm-notify 退役（同 32b1ac53）"
+      },
+      "added": {
+        "plugins": {
+          "forge-plugin-status": "插件状态面板（新功能线）",
+          "forge-router-direct": "router 直连（新功能线）"
+        },
+        "routes": "auth 五条（approve/request/revoke/channels/deny/poll）+ inbox 三条（inbox/ack/send）+ whoami = 10 条（auth 线与 ISS-776 收件箱身份闸）",
+        "tools": "matter_auth（与 auth 五端点同批）",
+        "surfaces": "forge.repowiki"
+      },
+      "rootFix": "同批修根：DSH_HOME 改为认 FORGE_PM_ROOT 的父目录。run-gates 只注入 FORGE_PM_ROOT 不注入 DSH_HOME ⇒ 过去 pm 根对、forge-agents 根回落到 ~/.dsh ⇒ .data.agentRuns 分母 0 ⇒ 整格 exit 3「判不了」。修完 agent 运行根 = ~/.dsh-matter/forge-agents，两项数据面恢复真实值。"
+    }
+  ],
+  "metrics": {
+    "plugins": [
+      "electron-shell",
+      "forge-agent-protocol",
+      "forge-agents",
+      "forge-browser",
+      "forge-cad",
+      "forge-canvas",
+      "forge-cli-provider",
+      "forge-design",
+      "forge-mermaid",
+      "forge-messenger",
+      "forge-model",
+      "forge-model-limits",
+      "forge-model-protocol",
+      "forge-plugin-status",
+      "forge-pm",
+      "forge-qoder-direct",
+      "forge-repowiki",
+      "forge-router-direct",
+      "forge-service-kit",
+      "forge-tailwind",
+      "forge-trader",
+      "forge-trae-direct",
+      "forge-ui",
+      "forge-widgets",
+      "forge-window-chrome",
+      "forge-workbuddy-direct",
+      "vscode-dsh-models"
+    ],
+    "code": {
+      "perPlugin": {
+        "electron-shell": {
+          "jsLoc": 3293,
+          "tsLoc": 0,
+          "jsFiles": 17,
+          "tsFiles": 0,
+          "testFiles": 6,
+          "testCases": 106
+        },
+        "forge-agent-protocol": {
+          "jsLoc": 694,
+          "tsLoc": 384,
+          "jsFiles": 2,
+          "tsFiles": 1,
+          "testFiles": 3,
+          "testCases": 80
+        },
+        "forge-agents": {
+          "jsLoc": 10449,
+          "tsLoc": 2938,
+          "jsFiles": 49,
+          "tsFiles": 22,
+          "testFiles": 70,
+          "testCases": 705
+        },
+        "forge-browser": {
+          "jsLoc": 393,
+          "tsLoc": 1990,
+          "jsFiles": 2,
+          "tsFiles": 10,
+          "testFiles": 4,
+          "testCases": 30
+        },
+        "forge-cad": {
+          "jsLoc": 1365,
+          "tsLoc": 4425,
+          "jsFiles": 4,
+          "tsFiles": 8,
+          "testFiles": 2,
+          "testCases": 16
+        },
+        "forge-canvas": {
+          "jsLoc": 9904,
+          "tsLoc": 17978,
+          "jsFiles": 16,
+          "tsFiles": 57,
+          "testFiles": 52,
+          "testCases": 672
+        },
+        "forge-cli-provider": {
+          "jsLoc": 2730,
+          "tsLoc": 0,
+          "jsFiles": 11,
+          "tsFiles": 0,
+          "testFiles": 11,
+          "testCases": 283
+        },
+        "forge-design": {
+          "jsLoc": 243,
+          "tsLoc": 9145,
+          "jsFiles": 2,
+          "tsFiles": 67,
+          "testFiles": 12,
+          "testCases": 100
+        },
+        "forge-mermaid": {
+          "jsLoc": 254,
+          "tsLoc": 1579,
+          "jsFiles": 2,
+          "tsFiles": 4,
+          "testFiles": 5,
+          "testCases": 41
+        },
+        "forge-messenger": {
+          "jsLoc": 12309,
+          "tsLoc": 71,
+          "jsFiles": 28,
+          "tsFiles": 1,
+          "testFiles": 28,
+          "testCases": 939
+        },
+        "forge-model": {
+          "jsLoc": 15492,
+          "tsLoc": 10967,
+          "jsFiles": 52,
+          "tsFiles": 41,
+          "testFiles": 78,
+          "testCases": 1246
+        },
+        "forge-model-limits": {
+          "jsLoc": 220,
+          "tsLoc": 1468,
+          "jsFiles": 2,
+          "tsFiles": 13,
+          "testFiles": 4,
+          "testCases": 54
+        },
+        "forge-model-protocol": {
+          "jsLoc": 2024,
+          "tsLoc": 390,
+          "jsFiles": 10,
+          "tsFiles": 1,
+          "testFiles": 9,
+          "testCases": 140
+        },
+        "forge-plugin-status": {
+          "jsLoc": 70,
+          "tsLoc": 404,
+          "jsFiles": 2,
+          "tsFiles": 3,
+          "testFiles": 2,
+          "testCases": 13
+        },
+        "forge-pm": {
+          "jsLoc": 25608,
+          "tsLoc": 30446,
+          "jsFiles": 82,
+          "tsFiles": 122,
+          "testFiles": 164,
+          "testCases": 2169
+        },
+        "forge-qoder-direct": {
+          "jsLoc": 1800,
+          "tsLoc": 0,
+          "jsFiles": 3,
+          "tsFiles": 0,
+          "testFiles": 3,
+          "testCases": 117
+        },
+        "forge-repowiki": {
+          "jsLoc": 8800,
+          "tsLoc": 1248,
+          "jsFiles": 33,
+          "tsFiles": 5,
+          "testFiles": 0,
+          "testCases": 0
+        },
+        "forge-router-direct": {
+          "jsLoc": 836,
+          "tsLoc": 0,
+          "jsFiles": 3,
+          "tsFiles": 0,
+          "testFiles": 3,
+          "testCases": 56
+        },
+        "forge-service-kit": {
+          "jsLoc": 2344,
+          "tsLoc": 396,
+          "jsFiles": 15,
+          "tsFiles": 2,
+          "testFiles": 10,
+          "testCases": 184
+        },
+        "forge-tailwind": {
+          "jsLoc": 103,
+          "tsLoc": 45,
+          "jsFiles": 2,
+          "tsFiles": 2,
+          "testFiles": 1,
+          "testCases": 0
+        },
+        "forge-trader": {
+          "jsLoc": 3589,
+          "tsLoc": 7746,
+          "jsFiles": 5,
+          "tsFiles": 46,
+          "testFiles": 31,
+          "testCases": 416
+        },
+        "forge-trae-direct": {
+          "jsLoc": 2519,
+          "tsLoc": 0,
+          "jsFiles": 6,
+          "tsFiles": 0,
+          "testFiles": 3,
+          "testCases": 130
+        },
+        "forge-ui": {
+          "jsLoc": 394,
+          "tsLoc": 3057,
+          "jsFiles": 3,
+          "tsFiles": 15,
+          "testFiles": 9,
+          "testCases": 98
+        },
+        "forge-widgets": {
+          "jsLoc": 0,
+          "tsLoc": 0,
+          "jsFiles": 0,
+          "tsFiles": 0,
+          "testFiles": 0,
+          "testCases": 0
+        },
+        "forge-window-chrome": {
+          "jsLoc": 69,
+          "tsLoc": 164,
+          "jsFiles": 2,
+          "tsFiles": 2,
+          "testFiles": 2,
+          "testCases": 11
+        },
+        "forge-workbuddy-direct": {
+          "jsLoc": 2102,
+          "tsLoc": 0,
+          "jsFiles": 4,
+          "tsFiles": 0,
+          "testFiles": 3,
+          "testCases": 110
+        },
+        "vscode-dsh-models": {
+          "jsLoc": 27,
+          "tsLoc": 291,
+          "jsFiles": 1,
+          "tsFiles": 3,
+          "testFiles": 0,
+          "testCases": 0
+        }
+      },
+      "totals": {
+        "jsLoc": 107631,
+        "tsLoc": 95132,
+        "jsFiles": 358,
+        "tsFiles": 425,
+        "testFiles": 515,
+        "testCases": 7716
+      },
+      "bigFiles": {
+        "electron-shell/browser-panel.js": 915,
+        "forge-agents/lib/dispatch.js": 1064,
+        "forge-agents/lib/zcode-stdio.js": 1081,
+        "forge-browser/src/index.tsx": 850,
+        "forge-cad/src/cad/ribbon.tsx": 1773,
+        "forge-canvas/lib/canvas-core.js": 6640,
+        "forge-canvas/src/canvas/code-sidebar.tsx": 1078,
+        "forge-canvas/src/canvas/rightsidebar.tsx": 1393,
+        "forge-canvas/src/engine.ts": 1884,
+        "forge-mermaid/src/mermaid/chat-enhance.ts": 887,
+        "forge-messenger/lib/dispatch-loop.js": 884,
+        "forge-messenger/lib/filter.js": 1073,
+        "forge-messenger/lib/index.js": 2060,
+        "forge-messenger/lib/inflight.js": 932,
+        "forge-messenger/lib/restart-resume.js": 1223,
+        "forge-model/lib/model/discovery.js": 1042,
+        "forge-model/lib/model/settings-projection.js": 938,
+        "forge-model/lib/plans/providers.js": 2358,
+        "forge-model/src/surfaces/plans/agent-center.tsx": 1069,
+        "forge-model/src/surfaces/plans/card-kit.tsx": 904,
+        "forge-model/src/surfaces/plans/dashboard.tsx": 1151,
+        "forge-model/src/surfaces/plans/provider-detail-dialog.tsx": 1573,
+        "forge-pm/lib/agent-tools.js": 1416,
+        "forge-pm/lib/domain.js": 1186,
+        "forge-pm/lib/done-gate.js": 1157,
+        "forge-pm/lib/entity-ops.js": 914,
+        "forge-pm/lib/index.js": 1544,
+        "forge-pm/lib/md-store.js": 1929,
+        "forge-pm/lib/member-registry.js": 873,
+        "forge-pm/src/pm/api.ts": 1400,
+        "forge-pm/src/pm/docs-linear.tsx": 1011,
+        "forge-pm/src/pm/linear-demo.tsx": 924,
+        "forge-pm/src/pm/linear-issue-detail.tsx": 2102,
+        "forge-pm/src/pm/members-settings.tsx": 879,
+        "forge-pm/src/pm/project-linear.tsx": 1466,
+        "forge-pm/src/pm/shared/property-fields.tsx": 1049,
+        "forge-qoder-direct/lib/adapter.js": 1459,
+        "forge-repowiki/lib/wiki-query.js": 877,
+        "forge-repowiki/src/wiki-view.tsx": 927,
+        "forge-repowiki/test/wiki-query.test.mjs": 1237,
+        "forge-trader/lib/tools.js": 2051,
+        "forge-trader/src/components/charts/KLineChartComponent.tsx": 1304,
+        "forge-trae-direct/lib/adapter.js": 1122,
+        "forge-trae-direct/lib/protocol.js": 845,
+        "forge-workbuddy-direct/lib/adapter.js": 881,
+        "forge-workbuddy-direct/lib/protocol.js": 872
+      },
+      "excludedVendored": {
+        "files": 6,
+        "loc": 8429
+      }
+    },
+    "routes": {
+      "total": 118,
+      "byPrefix": {
+        "api": 3,
+        "forge-agents": 14,
+        "forge-cad": 7,
+        "forge-canvas": 8,
+        "forge-cli-provider": 2,
+        "forge-legacy": 1,
+        "forge-pm": 82,
+        "forge-pm-assets": 1
+      },
+      "paths": [
+        "/api/trand",
+        "/api/trand/health",
+        "/api/trand/restart",
+        "/forge-agents",
+        "/forge-agents/agent-ask/reply",
+        "/forge-agents/agent-commands",
+        "/forge-agents/agent-models",
+        "/forge-agents/agent-sessions",
+        "/forge-agents/agent-usage",
+        "/forge-agents/agent/run/archive",
+        "/forge-agents/agent/run/cancel",
+        "/forge-agents/agent/run/changes",
+        "/forge-agents/agent/run/events",
+        "/forge-agents/agent/runs",
+        "/forge-agents/agent/steer",
+        "/forge-agents/agents",
+        "/forge-agents/resources",
+        "/forge-cad/commit",
+        "/forge-cad/dxf",
+        "/forge-cad/new",
+        "/forge-cad/state",
+        "/forge-cad/upload",
+        "/forge-cad/vendor",
+        "/forge-cad/wait",
+        "/forge-canvas/apply",
+        "/forge-canvas/baselines",
+        "/forge-canvas/doc",
+        "/forge-canvas/export-project",
+        "/forge-canvas/exports",
+        "/forge-canvas/imports",
+        "/forge-canvas/revision",
+        "/forge-canvas/theme-tokens",
+        "/forge-cli-provider/config",
+        "/forge-cli-provider/model-channels",
+        "/forge-legacy/agent/session/create",
+        "/forge-pm",
+        "/forge-pm-assets",
+        "/forge-pm/activity",
+        "/forge-pm/activity-log",
+        "/forge-pm/agent-models",
+        "/forge-pm/agent/dispatch",
+        "/forge-pm/agent/runs",
+        "/forge-pm/agent/session/create",
+        "/forge-pm/agents/profile",
+        "/forge-pm/asset",
+        "/forge-pm/attachment",
+        "/forge-pm/auth/approve",
+        "/forge-pm/auth/channels",
+        "/forge-pm/auth/deny",
+        "/forge-pm/auth/poll",
+        "/forge-pm/auth/request",
+        "/forge-pm/auth/revoke",
+        "/forge-pm/comment",
+        "/forge-pm/comment-delete",
+        "/forge-pm/comment-update",
+        "/forge-pm/create",
+        "/forge-pm/db-health",
+        "/forge-pm/delegation",
+        "/forge-pm/delete",
+        "/forge-pm/dispatch-cancel",
+        "/forge-pm/dispatch-links",
+        "/forge-pm/doc-approval",
+        "/forge-pm/doc-delete",
+        "/forge-pm/doc-file",
+        "/forge-pm/doc-import",
+        "/forge-pm/doc-meta",
+        "/forge-pm/doc-read",
+        "/forge-pm/documents",
+        "/forge-pm/draft-delete",
+        "/forge-pm/draft-save",
+        "/forge-pm/drafts",
+        "/forge-pm/events",
+        "/forge-pm/favorites",
+        "/forge-pm/field",
+        "/forge-pm/field-many",
+        "/forge-pm/inbox",
+        "/forge-pm/inbox/ack",
+        "/forge-pm/inbox/send",
+        "/forge-pm/issue-changes",
+        "/forge-pm/issue-sessions",
+        "/forge-pm/list",
+        "/forge-pm/logs",
+        "/forge-pm/members",
+        "/forge-pm/members/create",
+        "/forge-pm/members/detail",
+        "/forge-pm/members/status",
+        "/forge-pm/members/update",
+        "/forge-pm/memo-create",
+        "/forge-pm/memo-delete",
+        "/forge-pm/memo-write",
+        "/forge-pm/memos",
+        "/forge-pm/note",
+        "/forge-pm/project-detail",
+        "/forge-pm/purge",
+        "/forge-pm/queue",
+        "/forge-pm/read",
+        "/forge-pm/record",
+        "/forge-pm/repo-roots",
+        "/forge-pm/restore",
+        "/forge-pm/review/merge",
+        "/forge-pm/review/run",
+        "/forge-pm/reviews-for-issue",
+        "/forge-pm/schema",
+        "/forge-pm/search",
+        "/forge-pm/search-rebuild",
+        "/forge-pm/settings",
+        "/forge-pm/status",
+        "/forge-pm/tag-delete",
+        "/forge-pm/tag-rename",
+        "/forge-pm/tag-save",
+        "/forge-pm/tags",
+        "/forge-pm/teams",
+        "/forge-pm/update-delete",
+        "/forge-pm/update-write",
+        "/forge-pm/version",
+        "/forge-pm/views",
+        "/forge-pm/whoami",
+        "/forge-pm/write"
+      ],
+      "missingPath": 20
+    },
+    "tools": {
+      "agentTools": [
+        "agent_dispatch",
+        "agent_list",
+        "agent_run_events",
+        "agent_run_status"
+      ],
+      "mcpTools": [
+        "matter_auth",
+        "matter_doc",
+        "matter_issue",
+        "matter_project"
+      ]
+    },
+    "surfaces": [
+      "forge.browser",
+      "forge.cad",
+      "forge.canvas",
+      "forge.pm.linear",
+      "forge.pm.runs",
+      "forge.repowiki",
+      "forge.surfaces",
+      "forge.trand"
+    ],
+    "data": {
+      "pm": {
+        "issues": {
+          "entries": 2042,
+          "activity": 2072,
+          "comments": 205,
+          "bytes": 20653323
+        },
+        "projects": {
+          "entries": 26,
+          "activity": 26,
+          "comments": 3,
+          "bytes": 301471
+        },
+        "reviews": {
+          "entries": 120,
+          "activity": 120,
+          "comments": 2,
+          "bytes": 776927
+        },
+        "initiatives": {
+          "entries": 2,
+          "activity": 2,
+          "comments": 0,
+          "bytes": 2816
+        },
+        "documents": {
+          "entries": 484,
+          "activity": 246,
+          "comments": 10,
+          "bytes": 8379482
+        },
+        "memos": {
+          "entries": 9,
+          "activity": 0,
+          "comments": 0,
+          "bytes": 57378
+        },
+        "drafts": {
+          "entries": 21,
+          "activity": 0,
+          "comments": 0,
+          "bytes": 27597
+        },
+        "tasks": {
+          "entries": 0,
+          "activity": 0,
+          "comments": 0,
+          "bytes": 0
+        },
+        "teams": {
+          "entries": 1,
+          "activity": 0,
+          "comments": 0,
+          "bytes": 242
+        }
+      },
+      "pmSidecarFiles": [
+        "documents-meta.json",
+        "favorites.json",
+        "inbox-cursors.json",
+        "members.json",
+        "pm-settings.json",
+        "repos.json",
+        "tags.yaml",
+        "views.yaml"
+      ],
+      "pmBytes": 51406276,
+      "agentRuns": 374,
+      "agentRunsBytes": 21365881,
+      "agentsRootBytes": 27136708,
+      "agentsRootSource": "runtime",
+      "agentsRoot": "<home>/.dsh-matter/forge-agents",
+      "agentsRootIsPmRoot": false,
+      "agentsRootEqualsCopy": false,
+      "agentRunsCopy": 0,
+      "queueBytes": 922018,
+      "sqliteInDshHome": {
+        "forge-model.db": 1482752,
+        "forge-pm.db": 185909248,
+        "pm.db": 0
+      }
+    },
+    "naming": {
+      "linearLines": 440,
+      "linmoLines": 34,
+      "forgeLinearRootHits": 64,
+      "linearNamedFiles": [
+        "forge-pm/src/pm/docs-linear.module.css",
+        "forge-pm/src/pm/docs-linear.tsx",
+        "forge-pm/src/pm/drafts-linear.module.css",
+        "forge-pm/src/pm/drafts-linear.tsx",
+        "forge-pm/src/pm/linear-demo.frame-top-pad.test.tsx",
+        "forge-pm/src/pm/linear-demo.module.css",
+        "forge-pm/src/pm/linear-demo.tsx",
+        "forge-pm/src/pm/linear-issue-detail.module.css",
+        "forge-pm/src/pm/linear-issue-detail.tsx",
+        "forge-pm/src/pm/linear-sidebar.module.css",
+        "forge-pm/src/pm/linear-sidebar.tsx",
+        "forge-pm/src/pm/linear-status.tsx",
+        "forge-pm/src/pm/memo-linear.module.css",
+        "forge-pm/src/pm/memo-linear.tsx",
+        "forge-pm/src/pm/project-linear.module.css",
+        "forge-pm/src/pm/project-linear.tsx",
+        "forge-pm/src/pm/settings-linear.module.css",
+        "forge-pm/src/pm/settings-linear.tsx",
+        "forge-pm/src/pm/tags-linear.module.css",
+        "forge-pm/src/pm/tags-linear.tsx"
+      ]
+    }
+  }
+}

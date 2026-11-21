@@ -1,0 +1,29 @@
+{
+  "recordedAt": "2026-11-10",
+  "tool": "host-typecheck-ratchet.mjs --write（ISS-792：仅补录 forge-router-direct / forge-plugin-status 两个已纳管但缺记录的包，实测各 0 错）",
+  "ceilings": {
+    "forge-agent-protocol": 1,
+    "forge-agents": 101,
+    "forge-cli-provider": 73,
+    "forge-browser": 0,
+    "forge-ui": 0,
+    "forge-pm": 200,
+    "forge-canvas": 43,
+    "forge-trader": 13,
+    "forge-cad": 5,
+    "forge-model": 0,
+    "forge-service-kit": 8,
+    "forge-mermaid": 0,
+    "forge-messenger": 0,
+    "forge-model-limits": 0,
+    "forge-window-chrome": 0,
+    "forge-trae-direct": 0,
+    "forge-tailwind": 0,
+    "forge-qoder-direct": 0,
+    "forge-workbuddy-direct": 0,
+    "forge-repowiki": 0,
+    "forge-model-protocol": 4,
+    "forge-router-direct": 0,
+    "forge-plugin-status": 0
+  }
+}

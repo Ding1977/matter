@@ -1,0 +1,48 @@
+{
+  "_note": "装配白名单：由老板裁定「生产保持精简」⇒ 生产侧为白名单，开发侧可多挂但每项须在 dev_extra 里写明「未进生产」。由 --write-baseline 生成，禁止手改。登记单位 = insert 出来的行 id（自有件 = `^forge-`，来自 dsh.profile.bundles 各包自带 patch + profile 覆盖层，解析见 scripts/assembly-mounts-lib.mjs）。",
+  "prod": [
+    "forge-cli-provider",
+    "forge-mermaid",
+    "forge-model",
+    "forge-model-limits",
+    "forge-pm",
+    "forge-qoder-direct",
+    "forge-tailwind",
+    "forge-trader",
+    "forge-trae-direct",
+    "forge-ui"
+  ],
+  "dev": [
+    "forge-agents",
+    "forge-browser",
+    "forge-cad",
+    "forge-canvas",
+    "forge-cli-provider",
+    "forge-mermaid",
+    "forge-model",
+    "forge-model-limits",
+    "forge-pm",
+    "forge-qoder-direct",
+    "forge-repowiki",
+    "forge-tailwind",
+    "forge-trader",
+    "forge-trae-direct",
+    "forge-ui",
+    "forge-window-chrome",
+    "forge-workbuddy-direct"
+  ],
+  "dev_extra": {
+    "forge-agents": "agents 格界面件生产侧未上电；等 B3 直挂迁移（ISS-580）一并决定落点，先留开发盘 · DOC-379 §5-B3",
+    "forge-window-chrome": "Electron 壳窗口适配（ISS-918：左栏顶部与 macOS 红绿灯重叠 ⇒ 给 logoRow 加 margin-top）。只在 Electron 宿主生效、须 CDP 实测量测决定加不加 ⇒ 先留开发盘，不进生产",
+    "forge-cad": "同上：图纸工作台暂不上生产 · DOC-379 §6.3-②",
+    "forge-canvas": "老板 2026-10-03 裁：专业应用界面暂不上生产（主力界面，数据仍在写）⇒ 留开发盘验证，进生产需逐次点头 · DOC-379 §6.3-②",
+    "forge-browser": "内置浏览器与官方沙箱浏览器的取舍未裁（DOC-379 §6.2 待决项 2）⇒ 暂只留开发盘，不进生产",
+    "forge-workbuddy-direct": "WorkBuddy 直连 provider（ISS-643，零子进程）。生产侧不需要本包：desktop 的 cordis.patch.yml 已在 llm-pi-ai 里直配 workbuddy-direct 这一家（同一上游、同一凭据）",
+    "forge-repowiki": "ISS-648 新包（forge-repowiki 数据层，三 reader + 页↔文件倒排 + 锚点补 symbol），2026-10-24 合入 main 并在 dev(3210) 挂载；尚未进 App 生产盘 —— 生产装配按「验证过的产物才上」的规矩走下一个窗口。凭什么只留在开发盘：新包还在 P1 阶段（数据层先上、UI 未接），生产侧没有消费方。",
+    "forge-messenger": "Matter → 会话信使（ISS-996，生产侧未上电）。凭什么只留开发盘：它订阅 Matter SSE 并把新单/指派推给目标会话，而 bind.json 指向的是**开发盘 3210 的会话**；生产 App 的会话 id 不同，直接用会推错窗口。要进生产须先重置 bind 并实测一遍自通知守卫（ISS-692）。",
+    "forge-router-direct": "DSH 内部路由层虚拟 provider（ISS-679 二期）。凭什么只留开发盘：它按额度推荐序自动降级，但目前降级链的健康判据依赖 3210 的开发配置；生产盘先保持单一 provider，避免「自动切到没验证过的一家」。进生产需先跑一轮真机首包失败演练。",
+    "forge-plugin-status": "插件装载状态页（ISS-682，挂官方设置→内置插件的兄弟 tab）。凭什么只留开发盘：这是**诊断界面**，开发期用来看 fiberPhase；生产盘不需要多一个诊断入口，等稳定后再议。"
+  },
+  "commit": "68f8641a",
+  "generatedAt": "2026-10-24T07:44:14.764Z"
+}

@@ -1,0 +1,4193 @@
+{
+ "tool": "k6a-screen.mjs",
+ "source": "scripts/baseline/dup-detail.json（= 度量 D2 的同一份数组）",
+ "note": "K6a 还账点名清单。**组数恒等于 D2**（--check 核这条）：本文件只加\"动得了动不了\"的第二层判断。mergeable = 存在 ≥2 份逐字节同体、这些同体都不引用本文件的模块级绑定、且**都在同一半区**；cross-half = 有同体但分属 host(`lib/`) 与 client(`src/`) 两半 —— 两半各自打包、不共享运行时 ⇒ 并不成一份（要么先解决共享层的构建布局，那是 ISS-715 甲案的对象）；closure-bound = 有同体但被本模块单例/表/helper 绑住（blockers 点名是谁）；no-identical = 无同体（走 K6b：下沉内核 / 并入既有件 / 留一行\"为什么不并\"）；ui = 该组含 src/**/ui/ 或 .tsx 站点，**归 ISS-694 老板目测批**，不算\"我能自己并\"的那批。⚠️ mergeable 只等于\"技术上无阻塞\"，并到哪一包仍按 docs/code.md §5 与架构基准「新代码该放哪」定；本表不判该不该并。",
+ "totals": {
+  "groups": 270,
+  "mergeable": 16,
+  "mergeableSites": 55,
+  "mergeableNonUi": 10,
+  "mergeableNonUiSites": 35,
+  "mergeableSamePkg": 8,
+  "crossHalf": 9,
+  "crossHalfSites": 21,
+  "closureBound": 13,
+  "closureSites": 38,
+  "noIdentical": 232,
+  "noIdenticalSites": 532,
+  "uiGroups": 44,
+  "uiSites": 125,
+  "locateMisses": 0
+ },
+ "groups": [
+  {
+   "name": "App",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/scripts/live-css-isolation/harness.tsx:82",
+    "forge-canvas/scripts/live-harness/harness.tsx:141"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "Card",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-design/src/components.tsx:168",
+    "forge-design/src/ui/card.tsx:6",
+    "forge-pm/src/pm/members-settings.tsx:90"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "Field",
+   "verdict": "closure-bound",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/live-inspect-panel.tsx:280",
+    "forge-canvas/src/canvas/rightsidebar.tsx:554"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/src/canvas/live-inspect-panel.tsx:280",
+      "forge-canvas/src/canvas/rightsidebar.tsx:554"
+     ],
+     "hash": "{ return ( <div className=\"rs-field\"> <l",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-canvas/src/canvas/live-inspect-panel.tsx:280": [
+     "label"
+    ],
+    "forge-canvas/src/canvas/rightsidebar.tsx:554": [
+     "label"
+    ]
+   }
+  },
+  {
+   "name": "HealthBadge",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-pm/src/pm/members-settings.tsx:51",
+    "forge-pm/src/pm/project-updates.tsx:30"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "MiniBar",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-model-limits/src/dsh/mini-bar.tsx:37",
+    "forge-model/src/surfaces/plans/card-kit.tsx:515"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "NumberInput",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/live-inspect-panel.tsx:293",
+    "forge-canvas/src/canvas/rightsidebar.tsx:565"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "PagerDot",
+   "verdict": "mergeable",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/layers.tsx:17",
+    "forge-canvas/src/canvas/sidebar.tsx:117"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/src/canvas/layers.tsx:17",
+      "forge-canvas/src/canvas/sidebar.tsx:117"
+     ],
+     "hash": "{ return ( <button type=\"button\" title={",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "Section",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 4,
+   "sites": [
+    "forge-canvas/src/canvas/code-sidebar.tsx:110",
+    "forge-canvas/src/canvas/rightsidebar.tsx:529",
+    "forge-model/src/surfaces/plans/card-kit.tsx:257",
+    "forge-pm/src/pm/shared/blocks/section.tsx:37"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "WidthHandle",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-pm/src/pm/shared/width-handles.tsx:105",
+    "forge-ui/src/dsh/doc-width.tsx:146"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "actorsFilePath",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-messenger/lib/actors-store.js:59",
+    "forge-pm/lib/agent-identity.js:66"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-messenger/lib/actors-store.js:59",
+      "forge-pm/lib/agent-identity.js:66"
+     ],
+     "hash": "{ const explicit = typeof env?.[ACTORS_F",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-messenger",
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-messenger/lib/actors-store.js:59": [
+     "ACTORS_FILE_ENV"
+    ],
+    "forge-pm/lib/agent-identity.js:66": [
+     "ACTORS_FILE_ENV"
+    ]
+   }
+  },
+  {
+   "name": "applyOperation",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4960",
+    "forge-canvas/src/operation-reducer.ts:22"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "applyOperations",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5002",
+    "forge-canvas/src/operation-reducer.ts:60"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "arg",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 5,
+   "sites": [
+    "scripts/assembly-realize-check.mjs:50",
+    "scripts/guard-mutate.mjs:48",
+    "scripts/headless-ui.mjs:42",
+    "scripts/lint-writer-uniqueness.mjs:233",
+    "scripts/ui-load-contract.mjs:18"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "scripts/guard-mutate.mjs:48",
+      "scripts/headless-ui.mjs:42"
+     ],
+     "hash": "{ const i = process.argv.indexOf(`--${na",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "scripts"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "argOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-agents/scripts/migrate-agents-root.mjs:26",
+    "forge-pm/scripts/tag-migration/migrate-tags.mjs:26",
+    "scripts/gateway-smoke.mjs:32"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "borderClasses",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6045",
+    "forge-canvas/src/codegen.ts:87"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "bridgeToken",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/plans/providers.js:1523",
+    "forge-ui/lib/browser-bridge.js:33"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "build",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/lint-log-outlet.mjs:119",
+    "scripts/migration-baseline.mjs:411"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "buildChatPayload",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1307",
+    "forge-trae-direct/lib/protocol.js:724"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "buildColorTokenIndex",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6328",
+    "forge-canvas/src/codegen-project.ts:54"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "buildEnv",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/acp-client.js:28",
+    "forge-agents/lib/qoder-model-list.js:32"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "buildLint",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/lint-layer.mjs:315",
+    "scripts/lint-writer-uniqueness.mjs:69"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "buildRows",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-design/src/lib/load-state.ts:143",
+    "forge-pm/src/pm/project-progress.tsx:115"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "bump",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/scripts/tag-migration/migrate-tags.mjs:71",
+    "forge-pm/scripts/tag-migration/validate.mjs:12"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "byExact",
+   "verdict": "cross-half",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6274",
+    "forge-canvas/src/component-map.ts:52"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:6274",
+      "forge-canvas/src/component-map.ts:52"
+     ],
+     "hash": "table.清单.find((e) => e.名 === name)",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "byLower",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6275",
+    "forge-canvas/src/component-map.ts:55"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "cachePathFor",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-repowiki/lib/symbols.js:59",
+    "scripts/gate-base-tree.mjs:63"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "call",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-workbuddy-direct/scripts/verify-live.mjs:60",
+    "scripts/auth-e2e-verify.mjs:181"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "canonColor",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5597",
+    "forge-canvas/src/design-diff.ts:74"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "canonFill",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5600",
+    "forge-canvas/src/design-diff.ts:79"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "canonFills",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5607",
+    "forge-canvas/src/design-diff.ts:90"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "canonLayout",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5617",
+    "forge-canvas/src/design-diff.ts:102"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "canonStrokes",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5612",
+    "forge-canvas/src/design-diff.ts:95"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "canonical",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/prism-lang-guard.mjs:91",
+    "scripts/watch-home-links.mjs:54"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "changeSetToCssPatch",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5782",
+    "forge-canvas/src/design-diff.ts:274"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "changeSetToMarkdown",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5883",
+    "forge-canvas/src/design-diff.ts:350"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "changeSetToOperations",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5838",
+    "forge-canvas/src/design-diff.ts:315"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "changeToCssDecl",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5757",
+    "forge-canvas/src/design-diff.ts:253"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "channelOf",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-agent-protocol/lib/identity.js:64",
+    "forge-agents/src/agent-stream/interactive/question-card.tsx:30"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "checkCanvasLayout",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5418",
+    "forge-canvas/src/layout-check.ts:450"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "checkDesignNode",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4360",
+    "forge-canvas/src/migrate.ts:175"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "clampIndex",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5053",
+    "forge-canvas/src/operation-reducer.ts:128"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "classify",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-design/src/lib/load-state.ts:100",
+    "scripts/wt-scan.mjs:293"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "clip",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 4,
+   "sites": [
+    "forge-messenger/lib/session-route.js:122",
+    "forge-pm/lib/context-brief.js:24",
+    "forge-pm/src/pm/activity-stream/events.ts:70",
+    "scripts/distill-material.mjs:103"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-messenger/lib/session-route.js:122",
+      "forge-pm/lib/context-brief.js:24"
+     ],
+     "hash": "{ const t = String(s || \"\").replace(/\\s+",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-messenger",
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "cmdCompare",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/gate-health.mjs:578",
+    "scripts/pm-v2-baseline.mjs:566"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "cn",
+   "verdict": "cross-half",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-design/src/ui/cn.ts:5",
+    "forge-model-limits/src/dsh/cn.ts:14",
+    "forge-trader/src/lib/utils.ts:5"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-design/src/ui/cn.ts:5",
+      "forge-trader/src/lib/utils.ts:5"
+     ],
+     "hash": "{ return twMerge(clsx(inputs)) }",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-design",
+      "forge-trader"
+     ],
+     "crossHalf": true,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "collect",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-trae-direct/scripts/verify-live.mjs:59",
+    "scripts/gate-health.mjs:265",
+    "scripts/pm-v2-baseline.mjs:391"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "collectUnknownKeys",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4393",
+    "forge-canvas/src/migrate.ts:232"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "collectVarHexDeclarations",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6551",
+    "forge-canvas/src/codegen-project.ts:318"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "colorTokenIndexFromTheme",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4738",
+    "forge-canvas/src/theme-tokens.ts:168"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "compactFm",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/run-manager.js:69",
+    "forge-pm/lib/member-registry.js:265"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "cssColor",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6351",
+    "forge-canvas/src/codegen-project.ts:106"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "cssStep",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6367",
+    "forge-canvas/src/codegen-project.ts:134"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "curDb",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-cad/src/cad/layer-panel.tsx:70",
+    "forge-cad/src/cad/status-bar.tsx:60"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "dayKey",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/gateway/usage.js:41",
+    "forge-model/src/surfaces/plans/usage-range.ts:59"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "daysUntil",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-model-limits/src/dsh/format.ts:36",
+    "forge-model/src/surfaces/plans/plans-shared.tsx:191"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "decodeCredit",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/src/model-select/flash.ts:142",
+    "forge-model/src/model-select/info.ts:46"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "decodeDocument",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4231",
+    "forge-canvas/src/schema.ts:515"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "decodeOperation",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4563",
+    "forge-canvas/src/operation.ts:117"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "decodePromotion",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/src/model-select/flash.ts:160",
+    "forge-model/src/model-select/info.ts:64"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "defaultRoot",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/fix-frontmatter-quoting.mjs:48",
+    "scripts/pm-stale-report.mjs:91"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "deriveComponentName",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6160",
+    "forge-canvas/src/codegen.ts:195"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "describe",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6305",
+    "forge-canvas/src/component-map.ts:89"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "describeError",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-plugin-status/src/inventory.ts:100",
+    "forge-service-kit/lib/log.js:48"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "describeHttp",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1450",
+    "forge-trae-direct/lib/adapter.js:1100"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "diagnosePairing",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5925",
+    "forge-canvas/src/design-diff.ts:416"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "die",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-canvas/scripts/live-css-isolation/run.mjs:29",
+    "scripts/cdp-driver.mjs:61",
+    "scripts/headless-ui.mjs:62"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/scripts/live-css-isolation/run.mjs:29",
+      "scripts/headless-ui.mjs:62"
+     ],
+     "hash": "{ console.error(`✗ ${msg}`) process.exit",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "forge-canvas",
+      "scripts"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "diffDesign",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5653",
+    "forge-canvas/src/design-diff.ts:137"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "diffDoc",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/audit-doc-sync.mjs:60",
+    "scripts/audit-freshness.mjs:53"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "dispatch",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/mcp/matter-mcp.mjs:55",
+    "forge-repowiki/lib/code-query.js:415"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "dumpFrames",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-trae-direct/lib/adapter.js:75",
+    "forge-workbuddy-direct/lib/adapter.js:76"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "duplicateLabelsOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:357",
+    "forge-trae-direct/lib/adapter.js:927",
+    "forge-workbuddy-direct/lib/adapter.js:248"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "durationTable",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5135",
+    "forge-canvas/src/token-map.ts:130"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "emit",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-agents/lib/run-manager.js:128",
+    "forge-pm/src/pm/favorites.tsx:26",
+    "forge-pm/src/pm/pm-shell-store.ts:81"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "emptyDocument",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4234",
+    "forge-canvas/src/schema.ts:520"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "ensurePele",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-mermaid/src/mermaid/chat-enhance.ts:214",
+    "forge-mermaid/src/mermaid/mermaid-block.tsx:49"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "esc",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "scripts/gate-health.mjs:590",
+    "scripts/migrate-milestones.mjs:26",
+    "scripts/tw-dead-classes.mjs:87"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "escapeHtml",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6203",
+    "forge-canvas/src/codegen.ts:239"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "evaluate",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/lint-code.mjs:420",
+    "scripts/lint-cross-pkg-events.mjs:240"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "excerptOf",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-messenger/lib/deliver.js:346",
+    "forge-messenger/lib/report.js:36",
+    "forge-pm/src/pm/activity-stream/items.tsx:165"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "expandHome",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-agents/lib/agent-registry.js:26",
+    "forge-repowiki/lib/page-body.js:28",
+    "scripts/build-index-repowiki.mjs:103"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fail",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 5,
+   "sites": [
+    "forge-agent-protocol/lib/index.js:495",
+    "forge-mermaid/src/mermaid/chat-enhance.ts:627",
+    "forge-pm/lib/delegation.js:46",
+    "forge-pm/lib/judgment.js:50",
+    "scripts/auth-e2e-verify.mjs:24"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "failureOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1409",
+    "forge-trae-direct/lib/protocol.js:792",
+    "forge-workbuddy-direct/lib/protocol.js:828"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fillBgClass",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6019",
+    "forge-canvas/src/codegen.ts:66"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fillCssValue",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5729",
+    "forge-canvas/src/design-diff.ts:228"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "find",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/scripts/demo-layers.ts:70",
+    "forge-canvas/scripts/demo.ts:70"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/scripts/demo-layers.ts:70",
+      "forge-canvas/scripts/demo.ts:70"
+     ],
+     "hash": "{ const walk = (n: IUI): IUI | undefined",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-canvas/scripts/demo-layers.ts:70": [
+     "internals"
+    ],
+    "forge-canvas/scripts/demo.ts:70": [
+     "internals"
+    ]
+   }
+  },
+  {
+   "name": "findContainer",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5037",
+    "forge-canvas/src/operation-reducer.ts:106"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "findNode",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5015",
+    "forge-canvas/src/operation-reducer.ts:82"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fireResync",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/src/agent-stream/run-changes.ts:110",
+    "forge-pm/src/pm/events.ts:62"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fixture",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/gate-health.mjs:799",
+    "scripts/ui-load-contract.mjs:130"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "flag",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/git-health-check.mjs:34",
+    "scripts/run-gates.mjs:73"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "flatten",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5583",
+    "forge-canvas/src/design-diff.ts:54"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "flattenNodes",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5181",
+    "forge-canvas/src/layout-check.ts:26"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fmBlock",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/run-manager.js:84",
+    "forge-pm/lib/member-registry.js:281"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-agents/lib/run-manager.js:84",
+      "forge-pm/lib/member-registry.js:281"
+     ],
+     "hash": "{ const clean = compactFm(fm) return Obj",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-agents",
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-agents/lib/run-manager.js:84": [
+     "compactFm"
+    ],
+    "forge-pm/lib/member-registry.js:281": [
+     "compactFm"
+    ]
+   }
+  },
+  {
+   "name": "fmt",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 7,
+   "sites": [
+    "forge-cad/src/cad/props-panel.tsx:79",
+    "forge-pm/src/pm/activity-stream/events.ts:61",
+    "scripts/check-host-dist-fresh.mjs:55",
+    "scripts/check-pm-suite-twice.mjs:191",
+    "scripts/distill-material.mjs:102",
+    "scripts/gen-lead-state.mjs:101",
+    "scripts/k6a-screen.mjs:248"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fmtBytes",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/import-dialog.tsx:37",
+    "forge-pm/src/pm/docs-linear.tsx:56"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fmtNumber",
+   "verdict": "mergeable",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-model-limits/src/dsh/format.ts:11",
+    "forge-model/src/surfaces/plans/plans-shared.tsx:176"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-model-limits/src/dsh/format.ts:11",
+      "forge-model/src/surfaces/plans/plans-shared.tsx:176"
+     ],
+     "hash": "{ if (Math.abs(n) >= 1e9) return `${(n /",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-model",
+      "forge-model-limits"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "fmtTime",
+   "verdict": "mergeable",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-model-limits/src/dsh/format.ts:23",
+    "forge-model/src/surfaces/plans/plans-shared.tsx:183"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-model-limits/src/dsh/format.ts:23",
+      "forge-model/src/surfaces/plans/plans-shared.tsx:183"
+     ],
+     "hash": "{ if (!ts) return \"—\" const t = new Date",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-model",
+      "forge-model-limits"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "fmtTokens",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-agents/src/agent-stream/message-row.tsx:26",
+    "forge-model/lib/plans/flash-recommend.js:203"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "fmtVal",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5876",
+    "forge-canvas/src/design-diff.ts:344",
+    "scripts/gate-health.mjs:536"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "frameDumpEnabled",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-trae-direct/lib/adapter.js:98",
+    "forge-workbuddy-direct/lib/adapter.js:90"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "generateComponent",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6232",
+    "forge-canvas/src/codegen.ts:271"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "generateProjectComponent",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6503",
+    "forge-canvas/src/codegen-project.ts:280"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "getJson",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-repowiki/src/wiki-api.ts:121",
+    "forge-trader/src/store/account.ts:95"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "git",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 5,
+   "sites": [
+    "scripts/gate-base-tree.mjs:38",
+    "scripts/git-health-check.mjs:50",
+    "scripts/install-hooks.mjs:77",
+    "scripts/review-range.mjs:21",
+    "scripts/wt-scan.mjs:87"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "gradientCss",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5571",
+    "forge-canvas/src/gradient.ts:151"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "handleOverview",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model-limits/lib/index.js:69",
+    "forge-model/lib/routes/overview.routes.js:12"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "has",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 7,
+   "sites": [
+    "forge-model/lib/store/registry-ops.js:126",
+    "scripts/fix-frontmatter-quoting.mjs:219",
+    "scripts/git-health-check.mjs:38",
+    "scripts/impact-of-diff.mjs:30",
+    "scripts/md-corpus-guard.mjs:94",
+    "scripts/pm-v2-migrate.mjs:33",
+    "scripts/wt-scan.mjs:64"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "scripts/md-corpus-guard.mjs:94",
+      "scripts/wt-scan.mjs:64"
+     ],
+     "hash": "args.includes(f)",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "scripts"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "scripts/md-corpus-guard.mjs:94": [
+     "args"
+    ],
+    "scripts/wt-scan.mjs:64": [
+     "args"
+    ]
+   }
+  },
+  {
+   "name": "hasRadiusDecls",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4744",
+    "forge-canvas/src/theme-tokens.ts:188"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:4744",
+      "forge-canvas/src/theme-tokens.ts:188"
+     ],
+     "hash": "new RegExp(`${RADIUS_VAR_PREFIX}[A-Za-z0",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-canvas/lib/canvas-core.js:4744": [
+     "RADIUS_VAR_PREFIX"
+    ],
+    "forge-canvas/src/theme-tokens.ts:188": [
+     "RADIUS_VAR_PREFIX"
+    ]
+   }
+  },
+  {
+   "name": "hexToRgb",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-canvas/src/adapter.ts:64",
+    "forge-canvas/src/canvas/color-popover.tsx:19",
+    "forge-canvas/src/palette.ts:22"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "hexToRgb01",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4588",
+    "forge-canvas/src/color.ts:21"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "hexToRgbaCss",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5739",
+    "forge-canvas/src/design-diff.ts:238"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "http",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-model/src/surfaces/plans/agent-center.tsx:167",
+    "forge-pm/src/pm/api.ts:231"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "human",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/change-scope.mjs:56",
+    "scripts/run-gates.mjs:75"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "importSpecifierFor",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6308",
+    "forge-canvas/src/component-map.ts:99"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "insert",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5048",
+    "forge-canvas/src/operation-reducer.ts:122"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "internals",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/scripts/demo-layers.ts:69",
+    "forge-canvas/scripts/demo.ts:69"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/scripts/demo-layers.ts:69",
+      "forge-canvas/scripts/demo.ts:69"
+     ],
+     "hash": "(engine as unknown as Internals).app",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-canvas/scripts/demo-layers.ts:69": [
+     "engine"
+    ],
+    "forge-canvas/scripts/demo.ts:69": [
+     "engine"
+    ]
+   }
+  },
+  {
+   "name": "isBackupDir",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/fix-frontmatter-quoting.mjs:56",
+    "scripts/md-corpus-guard.mjs:166"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "scripts/fix-frontmatter-quoting.mjs:56",
+      "scripts/md-corpus-guard.mjs:166"
+     ],
+     "hash": "/(^|[.\\-_])bak([.\\-_\\d]|$)/i.test(name)",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "scripts"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "isFiniteNumber",
+   "verdict": "cross-half",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5066",
+    "forge-canvas/src/token-map.ts:54"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:5066",
+      "forge-canvas/src/token-map.ts:54"
+     ],
+     "hash": "typeof v === \"number\" && Number.isFinite",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "isKnownProvider",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model-protocol/lib/identity.js:128",
+    "forge-model/lib/provider/actions.js:67"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "isModelVisible",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model-protocol/lib/visibility.js:91",
+    "forge-model/lib/model/visibility-store.js:198"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "isNoteEvent",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-messenger/lib/filter.js:90",
+    "forge-pm/src/pm/activity-stream/items.tsx:143"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "isObj",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/src/model-select/flash.ts:109",
+    "forge-model/src/model-select/info.ts:33"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-model/src/model-select/flash.ts:109",
+      "forge-model/src/model-select/info.ts:33"
+     ],
+     "hash": "{ return typeof v === \"object\" && v !== ",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-model"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "isProviderDisabled",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/gateway/engine.js:262",
+    "forge-model/lib/shared/provider-gate.js:65"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "judge",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "scripts/gate-health.mjs:58",
+    "scripts/lint-layer.mjs:206",
+    "scripts/preset-var-check.mjs:291"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "judgeLanding",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-messenger/lib/dispatch-loop.js:231",
+    "forge-messenger/lib/judge.js:69"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "kindError",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 7,
+   "sites": [
+    "forge-messenger/lib/dispatch-loop.js:64",
+    "forge-messenger/lib/index.js:63",
+    "forge-pm/lib/auth-flow.js:25",
+    "forge-pm/lib/block-locator.js:41",
+    "forge-pm/lib/doc-pins.js:57",
+    "forge-pm/lib/entity-store.js:42",
+    "forge-pm/lib/routes/auth.routes.js:32"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-messenger/lib/dispatch-loop.js:64",
+      "forge-messenger/lib/index.js:63",
+      "forge-pm/lib/auth-flow.js:25",
+      "forge-pm/lib/routes/auth.routes.js:32"
+     ],
+     "hash": "Object.assign(new Error(message), { kind",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-messenger",
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    },
+    {
+     "sites": [
+      "forge-pm/lib/block-locator.js:41",
+      "forge-pm/lib/doc-pins.js:57"
+     ],
+     "hash": "Object.assign(new Base(message), { kind ",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "labOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/palette.ts:30",
+    "forge-model-protocol/lib/model-lab.js:157"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "label",
+   "verdict": "cross-half",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5180",
+    "forge-canvas/src/layout-check.ts:24"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:5180",
+      "forge-canvas/src/layout-check.ts:24"
+     ],
+     "hash": "`${node.name ?? node.type}(${node.id})`",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "levelOfPct",
+   "verdict": "mergeable",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-model-limits/src/dsh/mini-bar.tsx:22",
+    "forge-model/src/surfaces/plans/card-kit.tsx:503"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-model-limits/src/dsh/mini-bar.tsx:22",
+      "forge-model/src/surfaces/plans/card-kit.tsx:503"
+     ],
+     "hash": "{ if (pct <= 0) return 0 if (pct <= 25) ",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-model",
+      "forge-model-limits"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "line",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/scripts/l0-create-concurrency.mjs:228",
+    "scripts/assembly-realize-check.mjs:62"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "loadIndex",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-agents/lib/plans-usage.js:126",
+    "forge-repowiki/lib/wiki-query.js:57",
+    "scripts/impact-of-diff.mjs:239"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "loadSqlite",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-agents/lib/registry-store.js:26",
+    "forge-pm/lib/pm-store.js:128",
+    "scripts/search-index-reconcile.mjs:80"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "loadTs",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 6,
+   "sites": [
+    "scripts/code-inventory.mjs:65",
+    "scripts/impact-of-diff.mjs:142",
+    "scripts/lint-cross-pkg-events.mjs:79",
+    "scripts/lint-layer.mjs:85",
+    "scripts/migration-baseline.mjs:56",
+    "scripts/probe-criteria.mjs:33"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "log",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/scripts/demo-harness.ts:17",
+    "scripts/install-hooks.mjs:60"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "lookup",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5067",
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts:244",
+    "forge-canvas/src/token-map.ts:56"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "mapLeading",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5143",
+    "forge-canvas/src/token-map.ts:146"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "mapNode",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5025",
+    "forge-canvas/src/operation-reducer.ts:91"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "mapStep",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5139",
+    "forge-canvas/src/token-map.ts:137"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "maxContextOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1063",
+    "forge-trae-direct/lib/adapter.js:976"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "migrate",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4266",
+    "forge-canvas/src/migrate.ts:63",
+    "forge-pm/lib/pm-store.js:203"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "migratePageV2",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4313",
+    "forge-canvas/src/migrate.ts:119"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "nextSeq",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/mock-runtime.js:25",
+    "forge-agents/lib/run-manager.js:326"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "nodeClasses",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6055",
+    "forge-canvas/src/codegen.ts:105"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "nodeRules",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6392",
+    "forge-canvas/src/codegen-project.ts:169"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "norm",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/palette.ts:50",
+    "scripts/migration-baseline.mjs:436"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "normalizeForDiff",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5628",
+    "forge-canvas/src/design-diff.ts:111"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "normalizeGridSpec",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4439",
+    "forge-canvas/src/migrate.ts:302"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "normalizeLayerName",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6271",
+    "forge-canvas/src/component-map.ts:48"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "normalizeStrokeEnums",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4425",
+    "forge-canvas/src/migrate.ts:262"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "nowIso",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/lib/domain.js:1178",
+    "forge-service-kit/lib/time.js:14"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "num",
+   "verdict": "mergeable",
+   "ui": true,
+   "n": 10,
+   "sites": [
+    "forge-canvas/src/canvas/rightsidebar.tsx:1317",
+    "forge-model-limits/src/dsh/limits-source.ts:96",
+    "forge-model/lib/plans/flash-recommend.js:84",
+    "forge-model/src/dsh/catalog-meta.ts:30",
+    "forge-model/src/model-select/flash.ts:114",
+    "forge-model/src/model-select/info.ts:38",
+    "forge-model/src/model-select/labels.ts:54",
+    "forge-trae-direct/lib/adapter.js:116",
+    "scripts/pm-stale-report.mjs:84",
+    "scripts/wt-scan.mjs:88"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-model/lib/plans/flash-recommend.js:84",
+      "forge-model/src/dsh/catalog-meta.ts:30",
+      "forge-model/src/model-select/flash.ts:114"
+     ],
+     "hash": "{ return typeof v === \"number\" && Number",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-model"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    },
+    {
+     "sites": [
+      "forge-model-limits/src/dsh/limits-source.ts:96",
+      "forge-model/src/model-select/info.ts:38"
+     ],
+     "hash": "{ return typeof v === \"number\" && Number",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-model",
+      "forge-model-limits"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "numOr",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model-protocol/lib/credit.js:156",
+    "forge-model-protocol/lib/promotion.js:259"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-model-protocol/lib/credit.js:156",
+      "forge-model-protocol/lib/promotion.js:259"
+     ],
+     "hash": "{ if (v === null || v === undefined || v",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-model-protocol"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "ok",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/scripts/probe-abort-on-close.mjs:107",
+    "scripts/auth-e2e-verify.mjs:30"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "opacityClass",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6030",
+    "forge-canvas/src/codegen.ts:75"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "optOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/fix-frontmatter-quoting.mjs:220",
+    "scripts/md-corpus-guard.mjs:95"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "overlaps",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5187",
+    "forge-canvas/src/layout-check.ts:32"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parse",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/agent-channel.mjs:33",
+    "scripts/probe-criteria.mjs:43"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parseArgs",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 5,
+   "sites": [
+    "forge-messenger/lib/inflight-cli.mjs:43",
+    "forge-messenger/lib/resume-cli.mjs:33",
+    "forge-pm/scripts/l0-create-concurrency.mjs:53",
+    "forge-pm/src/pm/doc-card.tsx:73",
+    "scripts/pm-stale-report.mjs:46"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parseHm",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model-protocol/lib/promotion.js:100",
+    "forge-model/lib/plans/equiv-cost.js:117"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parsePx",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/live-inspect.ts:324",
+    "forge-canvas/src/html-import.ts:53"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parseRadiusTokens",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4745",
+    "forge-canvas/src/theme-tokens.ts:194"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parseSessionText",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/plans-usage.js:80",
+    "forge-messenger/lib/inflight.js:634"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parseSseLine",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-trae-direct/lib/protocol.js:767",
+    "forge-workbuddy-direct/lib/protocol.js:806"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "parseThemeColors",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4626",
+    "forge-canvas/src/theme-tokens.ts:57"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "pick",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 5,
+   "sites": [
+    "electron-shell/scripts/cdp-target-eval.mjs:18",
+    "forge-trader/src/pages/LimitUpPage.tsx:18",
+    "scripts/audit-doc-sync.mjs:119",
+    "scripts/design-component-inventory.mjs:53",
+    "scripts/probe-bare-border-color.mjs:56"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "pickFields",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/lib/agent-tools-project.js:39",
+    "forge-pm/lib/agent-tools.js:200"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-pm/lib/agent-tools-project.js:39",
+      "forge-pm/lib/agent-tools.js:200"
+     ],
+     "hash": "{ const out = {} for (const k of allow) ",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "pickHeaders",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-trader/lib/index.js:368",
+    "forge-trader/preview/server.mjs:19"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "pickKey",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts:233",
+    "forge-trader/src/components/trader/SearchModal.tsx:89"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "pickSessionLog",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-agents/lib/plans-usage.js:162",
+    "scripts/distill-material.mjs:20",
+    "scripts/scan-sessions-health.mjs:22"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "scripts/distill-material.mjs:20",
+      "scripts/scan-sessions-health.mjs:22"
+     ],
+     "hash": "{ let best = null let newer = 0 for (con",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "scripts"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "scripts/distill-material.mjs:20": [
+     "SESSION_LOG_RE"
+    ],
+    "scripts/scan-sessions-health.mjs:22": [
+     "SESSION_LOG_RE"
+    ]
+   }
+  },
+  {
+   "name": "pickThemeText",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4713",
+    "forge-canvas/src/theme-tokens.ts:142"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "pidAlive",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/child-lease.js:51",
+    "forge-service-kit/lib/fs.js:161"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "pkgOf",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 5,
+   "sites": [
+    "scripts/code-inventory.mjs:82",
+    "scripts/design-component-inventory.mjs:32",
+    "scripts/impact-of-diff.mjs:75",
+    "scripts/lint-channel-contract.mjs:115",
+    "scripts/lint-log-outlet.mjs:87"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "scripts/code-inventory.mjs:82",
+      "scripts/design-component-inventory.mjs:32"
+     ],
+     "hash": "rel(p).split('/')[0]",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "scripts"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "scripts/code-inventory.mjs:82": [
+     "rel"
+    ],
+    "scripts/design-component-inventory.mjs:32": [
+     "rel"
+    ]
+   }
+  },
+  {
+   "name": "planResume",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-messenger/lib/pause.js:169",
+    "forge-messenger/lib/restart-resume.js:698"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "probe",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/scripts/live-css-isolation/harness.tsx:417",
+    "forge-model/scripts/probe-abort-on-close.mjs:78"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "pushBlocker",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6348",
+    "forge-canvas/src/codegen-project.ts:101"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "radiusStepsFromTheme",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4766",
+    "forge-canvas/src/theme-tokens.ts:223"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "radiusTable",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5131",
+    "forge-canvas/src/token-map.ts:124"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "radiusVarName",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4742",
+    "forge-canvas/src/theme-tokens.ts:182"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:4742",
+      "forge-canvas/src/theme-tokens.ts:182"
+     ],
+     "hash": "`${RADIUS_VAR_PREFIX}${name}`",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-canvas/lib/canvas-core.js:4742": [
+     "RADIUS_VAR_PREFIX"
+    ],
+    "forge-canvas/src/theme-tokens.ts:182": [
+     "RADIUS_VAR_PREFIX"
+    ]
+   }
+  },
+  {
+   "name": "rank",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4606",
+    "forge-canvas/src/theme-tokens.ts:35"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "read",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-repowiki/lib/wiki-query.js:519",
+    "scripts/lint-scripts.mjs:221"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "readAudit",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/store/registry-ops.js:598",
+    "forge-pm/lib/pm-store.js:293"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "readFrontmatter",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/lib/md-store.js:1779",
+    "scripts/pm-stale-report.mjs:101"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "readKey",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/shared/creds.js:115",
+    "scripts/gateway-smoke.mjs:47"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "readModelCatalog",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/shared/catalog-io.js:135",
+    "forge-model/lib/store/registry-ops.js:235"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "reasoningOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-trae-direct/lib/adapter.js:1050",
+    "forge-workbuddy-direct/lib/protocol.js:603"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "record",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-trae-direct/scripts/verify-live.mjs:54",
+    "forge-workbuddy-direct/scripts/verify-live.mjs:128"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "red",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/assembly-realize-check.mjs:66",
+    "scripts/check-matter-plugin-port.mjs:39"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "registerAgentTools",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/tools.js:35",
+    "forge-pm/lib/agent-tools.js:1223"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "registerKeyed",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-browser/src/dsh/client-entry.tsx:134",
+    "forge-ui/src/dsh/session-rail-host.tsx:221"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "rel",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "scripts/code-inventory.mjs:81",
+    "scripts/design-component-inventory.mjs:31",
+    "scripts/pm-v2-baseline.mjs:149"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "relOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 4,
+   "sites": [
+    "forge-pm/lib/migrate-pm.js:28",
+    "scripts/data-root-check.mjs:47",
+    "scripts/lint-channel-contract.mjs:61",
+    "scripts/lint-tool-contract.mjs:26"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "remainText",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-model/src/surfaces/plans/card-kit.tsx:542",
+    "forge-pm/src/pm/members-settings.tsx:490"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "removeNode",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5034",
+    "forge-canvas/src/operation-reducer.ts:99"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "render",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 4,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6455",
+    "forge-canvas/src/codegen-project.ts:231",
+    "forge-pm/scripts/spike-mdt.tsx:27",
+    "scripts/impact-of-diff.mjs:720"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "renderHtml",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6206",
+    "forge-canvas/src/codegen.ts:243"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "renderTsx",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6174",
+    "forge-canvas/src/codegen.ts:210"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "replaceContainer",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5043",
+    "forge-canvas/src/operation-reducer.ts:117"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "reply",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts:271",
+    "forge-pm/mcp/matter-mcp.mjs:377"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "report",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/lint-cross-pkg-events.mjs:430",
+    "scripts/lint-scripts.mjs:458"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "resolveComponent",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6279",
+    "forge-canvas/src/component-map.ts:61"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "resolveContentWidth",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-pm/src/pm/shared/width-handles.tsx:37",
+    "forge-ui/src/dsh/doc-width.tsx:90"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "resolveProxyBase",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/routes/proxy.js:51",
+    "forge-pm/lib/proxy.js:19"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "resolveSpec",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/code-inventory.mjs:1310",
+    "scripts/impact-of-diff.mjs:176"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "rgbKey",
+   "verdict": "cross-half",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6327",
+    "forge-canvas/src/codegen-project.ts:50"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:6327",
+      "forge-canvas/src/codegen-project.ts:50"
+     ],
+     "hash": "\"#\" + [r, g, b].map((v) => Math.round(Ma",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "rgbToHex",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 4,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4582",
+    "forge-canvas/src/canvas/color-popover.tsx:28",
+    "forge-canvas/src/codegen.ts:28",
+    "forge-canvas/src/color.ts:12"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "rgbToHsl",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-canvas/src/canvas/code-sidebar.tsx:584",
+    "forge-canvas/src/canvas/color-popover.tsx:57"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "rgbaCss",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5975",
+    "forge-canvas/src/codegen.ts:32"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "round1",
+   "verdict": "cross-half",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5596",
+    "forge-canvas/src/design-diff.ts:72"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:5596",
+      "forge-canvas/src/design-diff.ts:72"
+     ],
+     "hash": "Math.round(n * 10) / 10",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "round2",
+   "verdict": "cross-half",
+   "ui": true,
+   "n": 4,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5595",
+    "forge-canvas/src/design-diff.ts:71",
+    "forge-model/lib/plans/providers.js:652",
+    "forge-model/src/surfaces/plans/model-source.tsx:190"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:5595",
+      "forge-canvas/src/design-diff.ts:71"
+     ],
+     "hash": "Math.round(n * 100) / 100",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "roundedClass",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6011",
+    "forge-canvas/src/codegen.ts:59"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "run",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 4,
+   "sites": [
+    "scripts/lint-scripts.mjs:400",
+    "scripts/md-mermaid-lint.mjs:128",
+    "scripts/selfcheck.mjs:27",
+    "scripts/wt-scan.mjs:78"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "runCli",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-messenger/lib/inflight-cli.mjs:161",
+    "forge-messenger/lib/resume-cli.mjs:67",
+    "scripts/lint-common.mjs:133"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "runGate",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-messenger/lib/gate-route.js:60",
+    "forge-pm/scripts/lex-build-gate-entry.ts:25"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "runSelftest",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/build-index-repowiki.mjs:113",
+    "scripts/format-debt.mjs:343"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "runSessionDispatch",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-messenger/lib/session-route.js:471",
+    "forge-pm/lib/dispatch-session.js:78"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "safeJson",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-cli-provider/lib/tool-frames.js:159",
+    "forge-model/lib/store/export.js:168"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "safeParse",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-model/lib/store/bridge.js:289",
+    "forge-model/lib/store/registry-ops.js:585"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "saveIndex",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-agents/lib/plans-usage.js:138",
+    "scripts/impact-of-diff.mjs:263"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "scan",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-pm/lib/md-store.js:1615",
+    "forge-ui/src/dsh/doc-width.tsx:322",
+    "scripts/no-new-tailwind.mjs:283"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "scanFiles",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/impact-of-diff.mjs:164",
+    "scripts/lint-log-outlet.mjs:32"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "search",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/lib/search-index.js:388",
+    "forge-repowiki/lib/wiki-query.js:368"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "send",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "electron-shell/scripts/cdp-console.mjs:10",
+    "scripts/cdp-clip.mjs:11",
+    "scripts/cdp-driver.mjs:81"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "scripts/cdp-clip.mjs:11",
+      "scripts/cdp-driver.mjs:81"
+     ],
+     "hash": "new Promise((resolve) => { const mid = +",
+     "halves": [
+      "other"
+     ],
+     "pkgs": [
+      "scripts"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "scripts/cdp-clip.mjs:11": [
+     "msgId",
+     "pending",
+     "ws"
+    ],
+    "scripts/cdp-driver.mjs:81": [
+     "msgId",
+     "pending",
+     "ws"
+    ]
+   }
+  },
+  {
+   "name": "serialize",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/component-map.mjs:82",
+    "scripts/gate-health.mjs:330"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "sessionOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-cad/lib/tools.js:33",
+    "forge-messenger/lib/filter.js:178"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "shadowClass",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6037",
+    "forge-canvas/src/codegen.ts:80"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "shortIds",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5921",
+    "forge-canvas/src/design-diff.ts:411"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "sizeClasses",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6008",
+    "forge-canvas/src/codegen.ts:56"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "skip",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/pm-v2-verify.mjs:24",
+    "scripts/preset-var-check.mjs:454"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "sleep",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 5,
+   "sites": [
+    "forge-pm/src/pm/spec-approval-autopilot.ts:108",
+    "forge-service-kit/lib/time.js:23",
+    "forge-trader/lib/index.js:314",
+    "scripts/assembly-realize-check.mjs:61",
+    "scripts/watch-home-links.mjs:109"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-pm/src/pm/spec-approval-autopilot.ts:108",
+      "scripts/assembly-realize-check.mjs:61",
+      "scripts/watch-home-links.mjs:109"
+     ],
+     "hash": "new Promise((r) => setTimeout(r, ms))",
+     "halves": [
+      "client",
+      "other"
+     ],
+     "pkgs": [
+      "forge-pm",
+      "scripts"
+     ],
+     "crossHalf": true,
+     "samePkg": false,
+     "blocked": false
+    },
+    {
+     "sites": [
+      "forge-service-kit/lib/time.js:23",
+      "forge-trader/lib/index.js:314"
+     ],
+     "hash": "{ return new Promise((r) => setTimeout(r",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-service-kit",
+      "forge-trader"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "slug",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6337",
+    "forge-canvas/src/codegen-project.ts:63",
+    "forge-canvas/src/html-import.ts:80"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "slugify",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/lib/md-store.js:1830",
+    "forge-pm/lib/member-registry.js:291"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "sortEfforts",
+   "verdict": "closure-bound",
+   "ui": false,
+   "n": 4,
+   "sites": [
+    "forge-agents/lib/model-catalog.js:14",
+    "forge-agents/src/agent-stream/effort-scale.ts:28",
+    "forge-cli-provider/lib/wiring.js:34",
+    "forge-pm/lib/index.js:273"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-agents/lib/model-catalog.js:14",
+      "forge-pm/lib/index.js:273"
+     ],
+     "hash": "{ return [...list].sort((a, b) => { cons",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-agents",
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-agents/lib/model-catalog.js:14": [
+     "EFFORT_ORDER"
+    ],
+    "forge-pm/lib/index.js:273": [
+     "EFFORT_ORDER"
+    ]
+   }
+  },
+  {
+   "name": "spaceTable",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5127",
+    "forge-canvas/src/token-map.ts:102"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "spacingClass",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5995",
+    "forge-canvas/src/codegen.ts:46"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "stepValues",
+   "verdict": "cross-half",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5121",
+    "forge-canvas/src/token-map.ts:92"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:5121",
+      "forge-canvas/src/token-map.ts:92"
+     ],
+     "hash": "table.entries.map((e) => e.value)",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas"
+     ],
+     "crossHalf": true,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "str",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 4,
+   "sites": [
+    "forge-model-limits/src/dsh/limits-source.ts:100",
+    "forge-model/src/surfaces/plans/provider-detail-dialog.tsx:1293",
+    "forge-pm/lib/delegation.js:37",
+    "forge-pm/lib/judgment.js:45"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "stripComments",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-pm/src/pm/blocks/class-contract.ts:26",
+    "scripts/canvas-style-check.mjs:147",
+    "scripts/ui-load-contract.mjs:26"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "subscribe",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-agents/lib/run-manager.js:119",
+    "forge-pm/src/pm/favorites.tsx:30",
+    "forge-trader/src/hooks/useDarkMode.ts:5"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "summarize",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-tools.js:73",
+    "scripts/run-gates.mjs:1249"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "summarizeResolution",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6315",
+    "forge-canvas/src/component-map.ts:107"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "text",
+   "verdict": "mergeable",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-agent-protocol/lib/identity.js:39",
+    "forge-pm/lib/message/rules.js:23",
+    "scripts/dup-shape-lib.mjs:8"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-agent-protocol/lib/identity.js:39",
+      "forge-pm/lib/message/rules.js:23"
+     ],
+     "hash": "{ return typeof v === \"string\" && v.trim",
+     "halves": [
+      "host"
+     ],
+     "pkgs": [
+      "forge-agent-protocol",
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "textLiteral",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6171",
+    "forge-canvas/src/codegen.ts:206"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "textOf",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 5,
+   "sites": [
+    "forge-agents/lib/run-events.js:15",
+    "forge-qoder-direct/lib/adapter.js:1260",
+    "forge-trae-direct/lib/protocol.js:802",
+    "forge-workbuddy-direct/lib/protocol.js:634",
+    "scripts/distill-material.mjs:51"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "themeCandidatePaths",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4702",
+    "forge-canvas/src/theme-tokens.ts:125"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "themeTextFrom",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4727",
+    "forge-canvas/src/theme-tokens.ts:159"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "to255",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5968",
+    "forge-canvas/src/codegen.ts:25"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "toHex",
+   "verdict": "no-identical",
+   "ui": true,
+   "n": 3,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4610",
+    "forge-canvas/src/canvas/rightsidebar.tsx:1390",
+    "forge-canvas/src/theme-tokens.ts:41"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "toModelInfo",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 4,
+   "sites": [
+    "forge-cli-provider/lib/wiring.js:616",
+    "forge-qoder-direct/lib/adapter.js:421",
+    "forge-trae-direct/lib/adapter.js:864",
+    "forge-workbuddy-direct/lib/adapter.js:277"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "toMs",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-agents/lib/registry-store.js:413",
+    "forge-model/lib/store/registry-ops.js:290",
+    "forge-pm/lib/queue-store.js:52"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "toRow",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-model/lib/routes/flash.routes.js:79",
+    "forge-pm/lib/queue-store.js:59",
+    "forge-pm/src/pm/member-assembly.ts:120"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "toTokenUsage",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-cli-provider/lib/chunks.js:31",
+    "forge-workbuddy-direct/lib/protocol.js:850"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "toYmd",
+   "verdict": "mergeable",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-pm/src/pm/project-line.tsx:257",
+    "forge-pm/src/pm/shared/date-picker.tsx:31"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-pm/src/pm/project-line.tsx:257",
+      "forge-pm/src/pm/shared/date-picker.tsx:31"
+     ],
+     "hash": "{ return `${d.getFullYear()}-${String(d.",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": true,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "today",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-pm/lib/md-store.js:1839",
+    "forge-pm/lib/member-registry.js:287"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "tokenVarNames",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5175",
+    "forge-canvas/src/token-map.ts:182"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "traeHome",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-trae-direct/lib/protocol.js:114",
+    "forge-trae-direct/trae-extension/extension.js:54"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "typeCssVars",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4791",
+    "forge-design/src/type.ts:64"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "typeTable",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5122",
+    "forge-canvas/src/token-map.ts:95"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "typeVar",
+   "verdict": "cross-half",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4790",
+    "forge-design/src/type.ts:60"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-canvas/lib/canvas-core.js:4790",
+      "forge-design/src/type.ts:60"
+     ],
+     "hash": "`--forge-type-${role}-${part}`",
+     "halves": [
+      "client",
+      "host"
+     ],
+     "pkgs": [
+      "forge-canvas",
+      "forge-design"
+     ],
+     "crossHalf": true,
+     "samePkg": false,
+     "blocked": false
+    }
+   ],
+   "blockers": {}
+  },
+  {
+   "name": "uniqueCls",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6343",
+    "forge-canvas/src/codegen-project.ts:77"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "useIsMobile",
+   "verdict": "closure-bound",
+   "ui": true,
+   "n": 2,
+   "sites": [
+    "forge-design/src/hooks/use-mobile.tsx:5",
+    "forge-pm/src/hooks/use-mobile.ts:6"
+   ],
+   "subsets": [
+    {
+     "sites": [
+      "forge-design/src/hooks/use-mobile.tsx:5",
+      "forge-pm/src/hooks/use-mobile.ts:6"
+     ],
+     "hash": "{ const [isMobile, setIsMobile] = React.",
+     "halves": [
+      "client"
+     ],
+     "pkgs": [
+      "forge-design",
+      "forge-pm"
+     ],
+     "crossHalf": false,
+     "samePkg": false,
+     "blocked": true
+    }
+   ],
+   "blockers": {
+    "forge-design/src/hooks/use-mobile.tsx:5": [
+     "MOBILE_BREAKPOINT"
+    ],
+    "forge-pm/src/hooks/use-mobile.ts:6": [
+     "MOBILE_BREAKPOINT"
+    ]
+   }
+  },
+  {
+   "name": "validate",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4331",
+    "forge-canvas/src/migrate.ts:151"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "walk",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 5,
+   "sites": [
+    "scripts/code-inventory.mjs:106",
+    "scripts/design-component-inventory.mjs:34",
+    "scripts/impact-of-diff.mjs:157",
+    "scripts/pm-v2-baseline.mjs:127",
+    "scripts/tw-to-module.mjs:16"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "walkDesignKeys",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4414",
+    "forge-canvas/src/migrate.ts:250"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "walkStrokeNormalize",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4472",
+    "forge-canvas/src/migrate.ts:344"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "withChildren",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5058",
+    "forge-canvas/src/operation-reducer.ts:133"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "write",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/p3-shadow-read.mjs:19",
+    "scripts/plugin-fiber-phase-probe.mjs:90"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "writeCreditCache",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:377",
+    "forge-trae-direct/lib/adapter.js:816",
+    "forge-workbuddy-direct/lib/adapter.js:812"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "writeFileAtomic",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 3,
+   "sites": [
+    "forge-model/lib/store/atomic-write.js:56",
+    "forge-pm/lib/atomic.js:29",
+    "forge-service-kit/lib/fs.js:51"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "扫文件",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/data-root-check.mjs:101",
+    "scripts/runtime-secret-check.mjs:94"
+   ],
+   "subsets": [],
+   "blockers": {}
+  },
+  {
+   "name": "键",
+   "verdict": "no-identical",
+   "ui": false,
+   "n": 2,
+   "sites": [
+    "scripts/data-root-check.mjs:119",
+    "scripts/runtime-secret-check.mjs:141"
+   ],
+   "subsets": [],
+   "blockers": {}
+  }
+ ],
+ "misses": []
+}

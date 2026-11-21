@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+
+  // ── 新树（S3）专用的复杂度门禁配置（ISS-841 / W0-GATE-G5）───────────────────
+  // ⛔ 本文件**不是**旧树的配置：旧树是 `.oxlintrc.json`（ISS-713，81 条 typeAware 规则、
+  //    射程 `forge-*/src/**`、按棘轮判总数）。两份配置并存是**有意的**：
+  //    旧树判「代码质量存量」，新树判「函数复杂度红线」，判据不同、射程不同、红的意义也不同。
+  //    把复杂度规则塞进根配置会让旧树 3728 条存量违例的账本里混进一类全新口径 —— 那一格
+  //    从此说不清「涨了 3 条」是新写的复杂函数还是老代码挪了位置。
+  //
+  // 由 `scripts/gates/lint-complexity.ts` 调用（`-c .oxlintrc.next.json`）。
+  // ⚠️ 阈值在这里是**执行真相**；`lint-complexity.ts` 的 `THRESHOLDS` 是同一口径的第二份，
+  //    两者不一致时该判据**红**（`configDrift()`）。改阈值两处一起改，漏一处当场被抓。
+  //
+  // 三条规则一句话（都是 eslint 原生规则，oxlint 1.76.0 实测支持，见工单 note 的实测输出）：
+  //   · max-depth                嵌套层数 —— 老板点名「不要过分嵌套」
+  //   · complexity               圈复杂度 —— 与嵌套正交（一条长 if-else-if 链不深但很复杂）
+  //   · max-lines-per-function   函数行数 —— 与上两条正交（平铺 500 行赋值既不深也不复杂）
+  //   ⛔ 文件级 `max-lines` **不在这里**：那是 ISS-842（G6 `verify-file-size-new`）的活。
+  //     两格都判文件行数 = 同一个缺陷红两次，且两处阈值迟早漂移。
+  "plugins": [],
+
+  // 与旧配置同口径：不靠默认类别兜底。每一条报出来的错都是本文件点名要的。
+  // 实测代价为零：关掉 correctness 后**语法错误照样报**（见工单 note 的 parse-error 探针），
+  // 所以这里不会漏掉「文件根本解析不了」这一类。
+  "categories": {
+    "correctness": "off"
+  },
+
+  "env": {
+    "builtin": true
+  },
+
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    // in-repo 工作树与官方工作树池（`ws.sh`）：同旧配置的理由 —— 不排除会把同一份代码
+    // 按「每棵在途工作树各一遍」重复判，违例数直接翻 N 倍，那是假数字。
+    ".wt/**",
+    "**/.wt/**",
+    ".agents/worktrees/**",
+    "**/.agents/worktrees/**"
+  ],
+
+  "rules": {
+    // 嵌套层数 ≤4。依据：自补 + DSH 分布支撑——每函数最大嵌套 p99=4 / p99.9=5 / max=8
+    //（oxlint max-depth 同口径实测，docs/memory/dsh-complexity-distribution-2026-11-18.md）⇒ 4 = p99 自然边界。
+    "max-depth": ["error", 4],
+
+    // 圈复杂度 ≤15。依据：自补 + DSH 分布支撑——p99=12 / p99.5=17 / max=219、>15 仅 0.62%
+    //（oxlint complexity 同口径实测）⇒ 15 在 p99 与 p99.5 之间。
+    "complexity": ["error", 15],
+
+    // 函数行数 ≤100。依据：DSH 36,504 个函数实测 —— 中位 4 行、p90 23、**p99 = 94**、
+    // >100 行仅 0.93%。⇒ 100 是这个生态的自然边界，不是外来标准。
+    "max-lines-per-function": ["error", 100]
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "路由别名契约台账（ISS-715），逐条 reason + 收口动作、只许降不许升，属存量豁免。"
+  },
+  "tool": "手写登记表（**不是**度量产物；判据 = scripts/route-alias-check.mjs --check，已接进 guard-baselines.sh）",
+  "note": "别名不登记就是渗漏，登记了就是契约（ISS-715 完成判据的原话）。每条写清四样：正源是谁 / 形态是什么 / **计量出来的消费方**（按来源分档，与 route-literals.json 逐条对齐）/ 凭什么留着 + 收口动作归谁。改这里的唯一理由 = 源码那边真的变了，且判据会先红。",
+  "scope": "**C9 / C9b 全部登记**（2026-09-23 第二批把 C9b 补上；C9 从 10 降到 9 是 09-24 ISS-793 换口径，摘出的那条改成了下面的 cross-bundle-pair）。⚠️ **条数以判据现算为准**：`bun scripts/route-alias-check.mjs` 的绿行会打「sameHalf N 条 + crossPkg M 条」，别在这里写死 —— 2026-11-10（ISS-780）现算是 **7 + 17**，此前文案里的「9 条 / 18 条」是过期快照。另有三类显式条目：迁移期双前缀、/forge-plans 外部契约（不按 C9/C9b 口径计量 ⇒ 用 evidencePrefix 证明它还在）、**跨 bundle 成对 `kind=cross-bundle-pair`（这一类不是说明，它就是 C9 的豁免名单）**。判据对本表做四条校验：化石 / 漏登 / 消费方漂移 / 形状。",
+  "sources": {
+    "sameHalf": "route-literals.json 的 sameHalf[].halves（同半区抄写的半区与处数，如 client:3）",
+    "crossPkg": "route-literals.json 的 crossPkg[].pkgs（跨包抄写涉及的包，**含正源自己**）",
+    "crossBundle": "route-literals.json 的 crossBundleAssets[].files。**这条来源是双向的**：`code-inventory` 的 `loadCrossBundleBaseline` 直接读本表，把 `kind=cross-bundle-pair` 的条目当 C9 豁免名单 ⇒ **改这一条=改判据**（恰好匹配：登记的文件集合必须与源码实际集合完全相同才免计，对不上就掉进 staleCrossBundle，本表随之报「化石」）"
+  },
+  "entries": [
+    {
+      "id": "alias-forge-pm-prefix",
+      "kind": "cross-pkg",
+      "path": "/forge-pm",
+      "owner": "forge-pm",
+      "measured": {
+        "sameHalf": [
+          "host:2",
+          "scripts:5"
+        ],
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "PM 前缀的**工具面契约**（ISS-573 复录后改写；原「迁移期双前缀」形态已被 ISS-562 W3-3 收口——forge-agents/lib/routes.js 的 ROUTE_BASES 现为单前缀 '/forge-agents'）。现状：/forge-pm 字面量在 forge-pm/lib/index.js（本包注册点）与 forge-pm/lib/proxy.js（全量转发的目标前缀，ISS-788 拆出）与 scripts 五件（extract-agent-routes / agent-route-parity / lint-channel-contract / plugin-load-scout / migration-baseline——都是读 PM 路由面的对账/摘出/门禁工具，按设计引用，合一不现实：工具与被量物是两个交付单元）。",
+      "retire": "scripts 五件改读常量表（endpoints 单源）后本条目随之删；PM 侧路由增减不触发本条"
+    },
+    {
+      "id": "alias-forge-agents-prefix",
+      "kind": "cross-pkg",
+      "path": "/forge-agents",
+      "owner": "forge-agents",
+      "measured": {
+        "sameHalf": [
+          "client:3",
+          "host:5",
+          "scripts:2"
+        ],
+        "crossPkg": [
+          "forge-agent-protocol",
+          "forge-agents",
+          "forge-model",
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "agent 域的**前缀契约**：forge-agent-protocol 的 index.d.ts/index.js 把前缀本身当契约常量；forge-agents 自己的两个 host 文件是注册方 + forge-pm/lib/index.js 一处 host 转发（ISS-573 复录实测 +1）；别包（forge-model / forge-pm）的客户端要调它 ⇒ 跨包消费者；scripts 的对账/摘出工具按设计读写（2 个文件：agent-route-parity.mjs:38 与 extract-agent-routes.mjs:78/:266 —— 后者同文件两处只算 **1**，`halves` 与 C9 判据口径都是文件数，ISS-649 改前误按处数写成 3）。合一不现实（client/host/scripts 三个交付单元不共享运行时常量）。",
+      "retire": "不删；若将来前缀收进契约常量，本条目改成「引用方式变了」而不是消失"
+    },
+    {
+      "id": "plans-external-contract",
+      "kind": "external-contract",
+      "path": "/forge-plans",
+      "owner": "forge-model",
+      "measured": {},
+      "evidencePrefix": "/forge-plans",
+      "reason": "**外部契约，逐字段不变**：forge-model/lib/index.js:4-6 头注释写明 —— ISS-507 把 plans 域并入 model 时承诺端点路径与响应形状一个字不改，因为仓外的 VS Code 扩展、网关冒烟脚本与下游 agent 都在用（3300 侧不存在这些路由）。消费者：vscode-dsh-models 三条（/v1/models · /v1/chat/completions · /gateway/keys）+ scripts/gateway-smoke.mjs 两条（含鉴权 401 与流式逐块断言）+ 下游 agent。",
+      "retire": "不删。要动必须走外部消费者同步改造（先改 vscode-dsh-models 与冒烟脚本，再改这里）"
+    },
+    {
+      "id": "c9-forge-pm-agents-profile",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/agents/profile",
+      "owner": "forge-pm",
+      "measured": {
+        "sameHalf": [
+          "client:2",
+          "host:1"
+        ],
+        "crossPkg": [
+          "forge-model",
+          "forge-pm"
+        ]
+      },
+      "reason": "跨包消费者的样板：宿主（forge-pm）注册，**别包客户端**（forge-model/src/endpoints.ts）与 PM 自己的客户端各写一次去调它。两侧都是调用方，无法也不需要合并。",
+      "retire": "不删；真正的收口是「调用方各引本包常量」（已由 endpoints.ts 模式承担）"
+    },
+    {
+      "id": "c9-forge-pm-members",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/members",
+      "owner": "forge-pm",
+      "measured": {
+        "sameHalf": [
+          "client:2",
+          "host:1"
+        ],
+        "crossPkg": [
+          "forge-model",
+          "forge-pm"
+        ]
+      },
+      "reason": "与 /forge-pm/agents/profile 同型：PM 宿主注册 + 两个客户端（forge-model/src/endpoints.ts 与 PM 自己的 endpoints.ts）各写一次。",
+      "retire": "不删"
+    },
+    {
+      "id": "alias-forge-pm-members-status",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/members/status",
+      "owner": "forge-pm",
+      "measured": {
+        "sameHalf": [
+          "client:2",
+          "host:1"
+        ],
+        "crossPkg": [
+          "forge-canvas",
+          "forge-pm"
+        ]
+      },
+      "reason": "成员状态写回：宿主路由（lib/routes/members.routes.js）+ 客户端（src/pm/api.ts:1123 pmMemberStatus）+ canvas live 预览的 fetch 垫片（src/canvas/live-fixtures/live-fetch-mock.ts）。垫片那条**不是抄写**：它按真实路径命中，真组件发的就是 /forge-pm/members/status，改垫片路径等于让 live 预览静默失效（ISS-689 的注入点）。三条腿分属调用关系 + 一个测试注入点。",
+      "retire": "不删。收口方向：等 forge-pm 出端点常量单源（src/pm/endpoints.ts 已有一半），canvas 垫片改为从常量 import，量具就看不到字面量，届时本条改成只留 host/client 两腿（或整条删）"
+    },
+    {
+      "id": "alias-forge-pm-members-update",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/members/update",
+      "owner": "forge-pm",
+      "measured": {
+        "sameHalf": [
+          "client:2",
+          "host:1"
+        ],
+        "crossPkg": [
+          "forge-canvas",
+          "forge-pm"
+        ]
+      },
+      "reason": "成员资料写回，与 /members/status 同型同出处（api.ts:1147 pmMemberUpdate 用裸 fetch + canvas live 垫片拦该路径做写回隔离）。垫片必须写真实路径才能按 identity 拦到写回请求。",
+      "retire": "不删。收口方向同 /members/status：端点常量单源落地后垫片改 import"
+    },
+    {
+      "id": "alias-forge-pm-members-detail",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/members/detail",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-canvas",
+          "forge-pm"
+        ]
+      },
+      "reason": "成员详情取数：宿主路由（members.routes.js）+ 真客户端（api.ts:1165 pmMemberDetail，**模板串** `/forge-pm/members/detail?id=${id}` ⇒ 量具只看到 canvas 那条字面量，pm 侧算给了正源自己）+ canvas live 垫片的取数拦截点。live 帧按 query 的 memberId 查表，路径必须与真客户端逐字一致。",
+      "retire": "不删。同 /members/status 的收口方向"
+    },
+    {
+      "id": "cross-cli-provider-config",
+      "kind": "cross-pkg",
+      "path": "/forge-cli-provider/config",
+      "owner": "forge-cli-provider",
+      "measured": {
+        "crossPkg": [
+          "forge-cli-provider",
+          "forge-model"
+        ]
+      },
+      "reason": "CLI 供应商配置：forge-cli-provider 注册，forge-model 的客户端（套餐页要显示/改它）引用。两条腿分属两个包是调用关系，不是抄写。",
+      "retire": "不删"
+    },
+    {
+      "id": "cross-cli-provider-model-channels",
+      "kind": "cross-pkg",
+      "path": "/forge-cli-provider/model-channels",
+      "owner": "forge-cli-provider",
+      "measured": {
+        "crossPkg": [
+          "forge-cli-provider",
+          "forge-model"
+        ]
+      },
+      "reason": "同上：模型通道清单（forge-model 侧展示）。",
+      "retire": "不删"
+    },
+    {
+      "id": "cross-forge-pm-db-health",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/db-health",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "PM 的库健康端点：宿主注册，**dev 工具**（scripts 下的体检/验证脚本）按设计各写一次去探它。工具与插件分属不同交付单元。",
+      "retire": "不删"
+    },
+    {
+      "id": "cross-forge-pm-list",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/list",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "全量列表端点：宿主注册 + dev 工具（scripts 的盘点/验证脚本）各写一次。工具侧那份正是「K11b 同域重拉口」的实践者之一。",
+      "retire": "不删"
+    },
+    {
+      "id": "cross-forge-pm-note",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/note",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "note 写入口：宿主注册 + dev 工具按设计各写一次（本会话的发送脚本就是其中一处）。",
+      "retire": "不删"
+    },
+    {
+      "id": "cross-forge-pm-version",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/version",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "版本端点：宿主注册 + dev 工具（体检脚本核对版本）各写一次。",
+      "retire": "不删"
+    },
+    {
+      "id": "c9-forge-mermaid-asset-base",
+      "kind": "copied-path",
+      "path": "/forge-mermaid",
+      "owner": "forge-mermaid",
+      "measured": {
+        "sameHalf": [
+          "client:2",
+          "host:1"
+        ]
+      },
+      "reason": "mermaid 资产基址：host 挂载（lib/index.js）与 client 加载（client-entry / mermaid-block）写同一字面量。两个半区不共享运行时模块（client bundle ≠ host lib）⇒ 各写一份是交付形态的必然，不是抄写事故；曾用基址 /forge-files/mermaid/* 已随 forge-files 整包退役（ISS-560）迁入本前缀。",
+      "retire": "归 PM 线下一批（R1 low-4 指派）：forge-mermaid 加 endpoints 常量单源（照 forge-pm/src/pm/endpoints.ts 的做法，client 两处收成一处）后本条目改写或删；顺手收 forge-pm/src/pm/api.ts:702 的 /forge-pm/documents 裸模板字面量（同款收口，量具盲区）"
+    },
+    {
+      "id": "alias-forge-pm-auth-approve",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/auth/approve",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "授权审批端点：宿主路由（lib/routes/auth.routes.js）+ PM 自己的客户端两条腿（src/pm/api.ts / mcp/matter-mcp.mjs）+ **scripts/auth-e2e-verify.mjs 真打这个端点**做端到端验证。E2E 必须走真实路径 —— 它验的就是线上契约本身，换成假路径等于不验。故这条是「量具读被量物」的合法跨包，不是抄写。",
+      "retire": "不删。收口方向：auth-e2e-verify 改为读共享端点表（或从 forge-pm 导出的常量拼路径）后，本条改成只留宿主侧声明"
+    },
+    {
+      "id": "alias-forge-pm-auth-request",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/auth/request",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "授权申请端点，与 /auth/approve 同型同出处：宿主路由 + mcp/matter-mcp.mjs 客户端 + scripts/auth-e2e-verify.mjs 真打（E2E 三端点成对验，缺一条就验不全）。",
+      "retire": "不删。同 /auth/approve 的收口方向"
+    },
+    {
+      "id": "alias-forge-pm-auth-revoke",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/auth/revoke",
+      "owner": "forge-pm",
+      "measured": {
+        "crossPkg": [
+          "forge-pm",
+          "scripts"
+        ]
+      },
+      "reason": "授权吊销端点，与 /auth/approve 同型：宿主路由 + src/pm/api.ts 与 mcp/matter-mcp.mjs 两个客户端 + scripts/auth-e2e-verify.mjs 真打。三条端点构成完整的 申请→审批→吊销 链路，E2E 必须逐条真调。",
+      "retire": "不删。同 /auth/approve 的收口方向"
+    },
+    {
+      "id": "c9-forge-pm-inbox-ack",
+      "kind": "cross-pkg",
+      "path": "/forge-pm/inbox/ack",
+      "owner": "forge-pm",
+      "measured": {
+        "sameHalf": [
+          "host:2"
+        ],
+        "crossPkg": [
+          "forge-messenger",
+          "forge-pm"
+        ]
+      },
+      "reason": "收件箱游标推进端点：PM 侧注册（forge-pm/lib/routes/inbox.routes.js）与消费端调用（forge-messenger/lib/deliver/inbox-consumer-http.js 的 ack()）各写一份字面量。两半区不共享运行时模块的常量（messenger 是独立包）⇒ 现状是交付形态的必然，不是抄写事故；但它确实是**契约**：改 PM 侧的 path 而忘改 messenger 侧，ack 会静默打到 404。",
+      "retire": "两包共用一个端点常量（forge-service-kit 或 agent-protocol 层的 endpoints 表）后本条目随之删；在那之前每次改 path 必须同时改这两处。"
+    }
+  ]
+}

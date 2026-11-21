@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- 浏览器壳骨架（ISS-537 / P4-S1）：#root + module script。砍九件后无 PWA manifest / favicon / apple-touch-icon。 -->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <!-- ISS-538：BlockNote 官方建议 interactive-widget=resizes-content（移动/真机软键盘弹起不遮编辑器，IME 夹具所需）。 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content" />
+    <title>Matter Web</title>
+    <!-- ISS-544 审查必修二：页壳 height:100% 需要根链，裸 vite 预览才铺满视口（逐页点头凭证）。 -->
+    <style>
+      html, body, #root { height: 100%; margin: 0; }
+      [data-shell="app"] { height: 100%; display: flex; flex-direction: column; }
+      [data-shell="app"] [data-shell="page"] { flex: 1 1 auto; min-height: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "_readme": "口径指纹。code-inventory.mjs 里这 8 个常量决定度量口径；任何一个变了，本文件的 fingerprint 就会变，此时必须同批更新 scripts/baseline/code-gates.json 的 ceiling，并在其 ratchetNotes 写明为什么（否则「上限按旧口径、实测新口径」，读数没有可比性 —— ISS-777 的原形）。改完跑 node scripts/gates/lint-caliber-drift.mjs --write 承认新口径。",
+  "fingerprint": "sha256:942e8716bdbbc095bf80cac21ada6d804d09117772be6473d167f70486155592",
+  "constants": {
+    "SHINGLE": "Number(flagVal('--shingle', 12)) || 12",
+    "JAC": "Number(flagVal('--jac', 0.6)) || 0.6",
+    "SKIP_DIR": "new Set(['node_modules', 'dist', 'out', 'build', '.git', ...WORKTREE_DIR_NAMES, '.tmp', '.bun-tmp', 'static', 'mockups', 'vendor', 'coverage', '.next', '.dsh'])",
+    "FILE_RE": "/\\.(ts|tsx|js|jsx|mjs|cjs)$/",
+    "VENDOR_NAME": "/(standalone|tsWorker|monaco|pdfjs|mermaid|bundle|vendor)\\.[cm]?[jt]sx?$/",
+    "isTestFile": "(p) => /\\.(test|spec)\\.(ts|tsx|js|jsx|mjs)$/.test(p) || /(^|\\/)test-[a-z0-9-]+\\.(ts|tsx|js|jsx|mjs)$/.test(p)",
+    "D2_EXEMPT": "new Set(['apply', 'selftest', 'check', 'main'])",
+    "D2_KERNEL_OWNED": "new Set(['json', 'readBody', 'parseQuery'])"
+  }
+}

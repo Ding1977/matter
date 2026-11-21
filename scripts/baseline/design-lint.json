@@ -1,0 +1,59 @@
+{
+ "recordedAt": "2026-11-10",
+ "tool": "ISS-786：排除 gitignore 的生成物后按实测收线（**只降不升**）。ceilings 6 条 + 各包账全量对照现值。",
+ "ceilings": {
+  "R1b": 307,
+  "R2a": 535,
+  "R3a": 2,
+  "R4a": 60,
+  "R5a": 11,
+  "R7b": 24
+ },
+ "包上限": {
+  "R1b": {
+   "forge-browser": 1,
+   "forge-cad": 25,
+   "forge-canvas": 102,
+   "forge-design": 7,
+   "forge-model": 27,
+   "forge-pm": 99,
+   "forge-trader": 46
+  },
+  "R2a": {
+   "forge-agents": 40,
+   "forge-browser": 15,
+   "forge-cad": 57,
+   "forge-canvas": 114,
+   "forge-design": 29,
+   "forge-mermaid": 1,
+   "forge-model": 125,
+   "forge-model-limits": 4,
+   "forge-pm": 97,
+   "forge-tailwind": 1,
+   "forge-trader": 50,
+   "forge-ui": 2
+  },
+  "R3a": {
+   "forge-design": 2
+  },
+  "R4a": {
+   "forge-browser": 1,
+   "forge-cad": 15,
+   "forge-canvas": 18,
+   "forge-design": 23,
+   "forge-model-limits": 1,
+   "forge-pm": 2
+  },
+  "R5a": {
+   "forge-canvas": 2,
+   "forge-design": 3,
+   "forge-pm": 3,
+   "forge-trader": 3
+  },
+  "R7b": {
+   "forge-canvas": 9,
+   "forge-mermaid": 1,
+   "forge-pm": 14
+  }
+ }
+}

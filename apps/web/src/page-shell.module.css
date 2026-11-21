@@ -1,0 +1,85 @@
+/*
+ * 页壳三件套 CSS Module（ISS-544 / P5-D1）。
+ *
+ * 纪律（dsh-design-survey 收尾判词 4/7/9）：
+ *   · camelCase 单语义类；变体走 css[variant]，状态走 data-*；
+ *   · 颜色/圆角只消费 alias token，无 hex、无颜色函数；
+ *   · hover 一律进 @media (hover: hover)；
+ *   · 不建全局 spacing token —— gap/宽度轴走壳上发布的局部自定义属性。
+ */
+
+/*
+ * 宽度轴（ISS-544 审查必修）：三个宽度全部由 page-shell.tsx 的 resolveShellLayout 现算后
+ * **内联发布**，本文件只消费、不用类规则覆写。旧版 `--page-shell-sidebar-w:280px` 内联
+ * 默认值 + `[data-side=collapsed]{56px}` 类规则互相打架，内联永远赢 ⇒ 收起态恒 280。
+ * 现在 grid 直接用现算的 sidebar/center/props 三宽，右栏收缩先于中栏破 400 由 columns.ts 保证。
+ */
+.root {
+  display: grid;
+  grid-template-columns: var(--page-shell-sidebar-w) var(--page-shell-center-w) var(--page-shell-props-w);
+  grid-template-rows: minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 三栏之和 = 视口宽，杜绝横向溢出；审查截图 09 的 scrollW>viewport 由此消除。 */
+  background: var(--matter-alias-surface);
+  color: var(--matter-alias-text-primary);
+  --page-shell-grab: 4px;
+}
+
+/* 属性栏缺席：内联已把 props-w 发布为 0，这里只隐藏 DOM、不改轴。 */
+.root[data-properties='off'] .properties {
+  display: none;
+}
+
+.sidebar,
+.content,
+.properties {
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: auto;
+}
+
+.sidebar {
+  border-right: 0.5px solid var(--matter-alias-border-subtle);
+  background: var(--matter-alias-surface-raised);
+}
+
+.properties {
+  border-left: 0.5px solid var(--matter-alias-border-subtle);
+  background: var(--matter-alias-surface-raised);
+}
+
+.content {
+  background: var(--matter-alias-surface);
+}
+
+/* slot 注入位：占位提示（空槽时给一个弱化的说明，走字典文案由调用方提供）。 */
+.slot {
+  min-height: 0;
+}
+
+.slotEmpty {
+  color: var(--matter-alias-text-muted);
+  font-size: var(--matter-alias-font-size-caption);
+  line-height: var(--matter-alias-line-height-caption);
+}
+
+/* 宽度把手：仅指针设备给出悬浮反馈（判词 4：hover 进 @media）。 */
+.grip {
+  border: 0;
+  background: transparent;
+  cursor: col-resize;
+}
+
+@media (hover: hover) {
+  .grip:hover {
+    background: var(--matter-alias-surface-selected);
+  }
+}
+
+/* 焦点态用 focus-visible，键盘目标可辨（判词 11 的焦点组合）。 */
+.grip:focus-visible {
+  outline: var(--matter-alias-focus-ring-width) solid var(--matter-alias-focus-ring-color);
+  outline-offset: -1px;
+}

@@ -1,0 +1,55 @@
+{
+  "cwd": "forge-pm",
+  "test": "bun test lib/agent-identity.test.js",
+  "_comment": "ISS-666：署名推导守卫的牙。基线 = 16 pass / 0 fail；每处注入都必须让守卫变红，否则该判据是恒绿的。",
+  "mutations": [
+    {
+      "name": "M1 推导退回进程常量（本单要修的那个病的原样）",
+      "file": "lib/agent-identity.js",
+      "from": "export function actorOf(agent) {\n  const id = presetIdOf(agent)\n  return id !== undefined && Object.hasOwn(PRESET_ACTORS, id) ? PRESET_ACTORS[id] : AGENT_ACTOR\n}",
+      "to": "export function actorOf(agent) {\n  return AGENT_ACTOR // 注入：退回进程常量\n}"
+    },
+    {
+      "name": "M2 映射表丢了 trader（身份丢失的原样）",
+      "file": "lib/agent-identity.js",
+      "from": "export const PRESET_ACTORS = Object.freeze({ trader: \"trader\", matter: \"linmo\" })",
+      "to": "export const PRESET_ACTORS = Object.freeze({ matter: \"linmo\" }) // 注入：trader 不映射"
+    },
+    {
+      "name": "M3 原型链判定退化成真值判断（toString 会冒充表内预设）",
+      "file": "lib/agent-identity.js",
+      "from": "return id !== undefined && Object.hasOwn(PRESET_ACTORS, id) ? PRESET_ACTORS[id] : AGENT_ACTOR",
+      "to": "return id !== undefined && PRESET_ACTORS[id] ? PRESET_ACTORS[id] : AGENT_ACTOR // 注入：不判 own"
+    },
+    {
+      "name": "M4 回落路径抛错（catch 改成重抛 ⇒ 取不到 preset 时所有写入动作一起挂）",
+      "file": "lib/agent-identity.js",
+      "from": "  } catch {\n    // 引擎实现变更 / 上下文已销毁 / 服务未激活 —— 一律按「取不到」处理（约束 ①）\n    return undefined\n  }",
+      "to": "  } catch (e) {\n    throw e // 注入：回落改抛错\n  }"
+    },
+    {
+      "name": "M5 issue 域 execute 不传 actor（推导接了但不生效）",
+      "file": "lib/agent-tools.js",
+      "from": "        case \"note\": return issueAppend(a, \"note\", actor)",
+      "to": "        case \"note\": return issueAppend(a, \"note\") // 注入：丢掉 actor"
+    },
+    {
+      "name": "M6 doc import 的 author 退回硬编码（验收④的原样）",
+      "file": "lib/agent-tools.js",
+      "from": "  const author = a.author && typeof a.author === \"string\" && a.author.trim() ? a.author.trim() : actor",
+      "to": "  const author = a.author && typeof a.author === \"string\" && a.author.trim() ? a.author.trim() : \"linmo\" // 注入：硬编码"
+    },
+    {
+      "name": "M7 project 域 execute 不传 actor",
+      "file": "lib/agent-tools-project.js",
+      "from": "        case \"create\": return projectCreate(a, actor)",
+      "to": "        case \"create\": return projectCreate(a) // 注入：丢掉 actor"
+    },
+    {
+      "name": "M8 doc approval 的 by 退回硬编码（同一次写入两个署名）",
+      "file": "lib/agent-tools.js",
+      "from": "  const by = a.by && typeof a.by === \"string\" && a.by.trim() ? a.by.trim() : actor",
+      "to": "  const by = a.by && typeof a.by === \"string\" && a.by.trim() ? a.by.trim() : \"linmo\" // 注入：硬编码"
+    }
+  ]
+}

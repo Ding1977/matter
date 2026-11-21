@@ -9,7 +9,7 @@
   "packageManager": "pnpm@11.28.5",
   "scripts": {
     "typecheck": "tsc -b tsconfig.next.json",
-    "build": "tsc -b tsconfig.next.json && tsdown",
+    "build": "node --strip-types scripts/generate-typert.ts && tsc -b tsconfig.next.json && tsdown",
     "test": "vitest run",
     "lint": "oxlint"
   },

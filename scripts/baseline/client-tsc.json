@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-09-26",
+  "tool": "host-typecheck-ratchet.mjs --write（client 半） ｜ ISS-560（10-01）：删文件中心插件的上限位（整包退役 ⇒ 名册不再收它，留着会报「名册里消失了」；未走全量 --write 以免吸收无关漂移） ｜ ISS-591（2026-10-05）：清 4 项化石（forge-monitor 删 / forge-native→forge-window-chrome / forge-notify→forge-pm-notify / forge-db 并入 forge-design）+ 补登记两个新名。同批：forge-model 预存 1 错（TS2345 conversation.input.model，非本批引入，main 上已在）已单独登记。 ｜ ISS-591（2026-10-05）：补登记 forge-tailwind（有 src/+tsconfig.json ⇒ 在 client 族纳管面，此前漏登 ⇒ 恒判「无上限记录」；实测 0 错）。 ｜ ISS-591 第三轮复审 low-d：与 forge-tailwind 同批补登记 forge-model-limits（同样有 src/+tsconfig.json ⇒ 在 client 族纳管面，此前漏登 ⇒ 严格档恒判「无上限记录」；实测 0 错；预存债，main 同缺）。",
+  "ceilings": {
+    "forge-agents": 0,
+    "forge-browser": 0,
+    "forge-ui": 0,
+    "forge-pm": 0,
+    "forge-canvas": 0,
+    "forge-trader": 0,
+    "forge-cad": 0,
+    "forge-design": 0,
+    "forge-model": 0,
+    "forge-mermaid": 0,
+    "forge-window-chrome": 0,
+    "forge-tailwind": 0,
+    "forge-model-limits": 0,
+    "forge-repowiki": 0,
+    "forge-plugin-status": 0
+  }
+}

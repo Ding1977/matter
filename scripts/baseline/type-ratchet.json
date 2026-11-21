@@ -1,0 +1,53 @@
+{
+  "recordedAt": "2026-11-10",
+  "families": {
+    "host": {
+      "logic": {
+        "forge-agent-protocol": 1,
+        "forge-agents": 95,
+        "forge-cli-provider": 14,
+        "forge-browser": 0,
+        "forge-ui": 0,
+        "forge-pm": 165,
+        "forge-canvas": 43,
+        "forge-trader": 3,
+        "forge-repowiki": 0,
+        "forge-cad": 4,
+        "forge-model": 0,
+        "forge-model-protocol": 4,
+        "forge-service-kit": 6,
+        "forge-mermaid": 0,
+        "forge-messenger": 0,
+        "forge-model-limits": 0,
+        "forge-qoder-direct": 0,
+        "forge-router-direct": 0,
+        "forge-workbuddy-direct": 0,
+        "forge-trae-direct": 0,
+        "forge-window-chrome": 0,
+        "forge-plugin-status": 0,
+        "forge-tailwind": 0
+      },
+      "env": {}
+    },
+    "client": {
+      "logic": {
+        "forge-agents": 0,
+        "forge-browser": 0,
+        "forge-ui": 0,
+        "forge-pm": 0,
+        "forge-canvas": 0,
+        "forge-trader": 0,
+        "forge-repowiki": 0,
+        "forge-cad": 0,
+        "forge-design": 0,
+        "forge-model": 0,
+        "forge-mermaid": 0,
+        "forge-model-limits": 0,
+        "forge-window-chrome": 0,
+        "forge-plugin-status": 0,
+        "forge-tailwind": 0
+      },
+      "env": {}
+    }
+  }
+}

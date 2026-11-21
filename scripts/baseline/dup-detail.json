@@ -1,0 +1,4867 @@
+{
+ "tool": "code-inventory.mjs --write-dup-detail（组装在 dup-detail-lib.mjs）",
+ "note": "ISS-739 三格的\"点名清单\"：⑴ sameNameImpl = 同名多份实现（成员 = 度量 D2 的同一份数组，条数恒等于 D2 第一段）；⑵ dupClusters = 跨文件复制粘贴函数簇（成员 = 度量 D3 的同一份数组，条数恒等于 D3）；⑶ hoistingOnly = 未声明但靠 root 提升侥幸可解析的 import（条数恒等于 H5b）。members 每簇最多列 60 个（截断处标 truncated）。**只报在哪里，不判该不该动** —— 同名可能有两种语义、簇要人看是不是真复制、hoisting 要么补声明要么改依赖方向，判断归人，动手归老板点头之后的批次。",
+ "totals": {
+  "sameNameImpl": 270,
+  "sameNameCrossPkg": 108,
+  "implSites": 646,
+  "dupClusters": 103,
+  "clusterFns": 476,
+  "hoistingOnly": 0,
+  "hoistingPairs": 0
+ },
+ "sameNameImpl": [
+  {
+   "name": "num",
+   "n": 10,
+   "pkgs": [
+    "forge-canvas",
+    "forge-model",
+    "forge-model-limits",
+    "forge-trae-direct",
+    "scripts"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/rightsidebar.tsx:1317",
+    "forge-model-limits/src/dsh/limits-source.ts:96",
+    "forge-model/lib/plans/flash-recommend.js:84",
+    "forge-model/src/dsh/catalog-meta.ts:30",
+    "forge-model/src/model-select/flash.ts:114",
+    "forge-model/src/model-select/info.ts:38",
+    "forge-model/src/model-select/labels.ts:54",
+    "forge-trae-direct/lib/adapter.js:116",
+    "scripts/pm-stale-report.mjs:84",
+    "scripts/wt-scan.mjs:88"
+   ]
+  },
+  {
+   "name": "fmt",
+   "n": 7,
+   "pkgs": [
+    "forge-cad",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-cad/src/cad/props-panel.tsx:79",
+    "forge-pm/src/pm/activity-stream/events.ts:61",
+    "scripts/check-host-dist-fresh.mjs:55",
+    "scripts/check-pm-suite-twice.mjs:191",
+    "scripts/distill-material.mjs:102",
+    "scripts/gen-lead-state.mjs:101",
+    "scripts/k6a-screen.mjs:248"
+   ]
+  },
+  {
+   "name": "has",
+   "n": 7,
+   "pkgs": [
+    "forge-model",
+    "scripts"
+   ],
+   "sites": [
+    "forge-model/lib/store/registry-ops.js:126",
+    "scripts/fix-frontmatter-quoting.mjs:219",
+    "scripts/git-health-check.mjs:38",
+    "scripts/impact-of-diff.mjs:30",
+    "scripts/md-corpus-guard.mjs:94",
+    "scripts/pm-v2-migrate.mjs:33",
+    "scripts/wt-scan.mjs:64"
+   ]
+  },
+  {
+   "name": "kindError",
+   "n": 7,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-messenger/lib/dispatch-loop.js:64",
+    "forge-messenger/lib/index.js:63",
+    "forge-pm/lib/auth-flow.js:25",
+    "forge-pm/lib/block-locator.js:41",
+    "forge-pm/lib/doc-pins.js:57",
+    "forge-pm/lib/entity-store.js:42",
+    "forge-pm/lib/routes/auth.routes.js:32"
+   ]
+  },
+  {
+   "name": "walk",
+   "n": 5,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/code-inventory.mjs:106",
+    "scripts/design-component-inventory.mjs:34",
+    "scripts/impact-of-diff.mjs:157",
+    "scripts/pm-v2-baseline.mjs:127",
+    "scripts/tw-to-module.mjs:16"
+   ]
+  },
+  {
+   "name": "loadTs",
+   "n": 6,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/code-inventory.mjs:65",
+    "scripts/impact-of-diff.mjs:142",
+    "scripts/lint-cross-pkg-events.mjs:79",
+    "scripts/lint-layer.mjs:85",
+    "scripts/migration-baseline.mjs:56",
+    "scripts/probe-criteria.mjs:33"
+   ]
+  },
+  {
+   "name": "pkgOf",
+   "n": 5,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/code-inventory.mjs:82",
+    "scripts/design-component-inventory.mjs:32",
+    "scripts/impact-of-diff.mjs:75",
+    "scripts/lint-channel-contract.mjs:115",
+    "scripts/lint-log-outlet.mjs:87"
+   ]
+  },
+  {
+   "name": "arg",
+   "n": 5,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/assembly-realize-check.mjs:50",
+    "scripts/guard-mutate.mjs:48",
+    "scripts/headless-ui.mjs:42",
+    "scripts/lint-writer-uniqueness.mjs:233",
+    "scripts/ui-load-contract.mjs:18"
+   ]
+  },
+  {
+   "name": "fail",
+   "n": 5,
+   "pkgs": [
+    "forge-agent-protocol",
+    "forge-mermaid",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agent-protocol/lib/index.js:495",
+    "forge-mermaid/src/mermaid/chat-enhance.ts:627",
+    "forge-pm/lib/delegation.js:46",
+    "forge-pm/lib/judgment.js:50",
+    "scripts/auth-e2e-verify.mjs:24"
+   ]
+  },
+  {
+   "name": "git",
+   "n": 5,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/gate-base-tree.mjs:38",
+    "scripts/git-health-check.mjs:50",
+    "scripts/install-hooks.mjs:77",
+    "scripts/review-range.mjs:21",
+    "scripts/wt-scan.mjs:87"
+   ]
+  },
+  {
+   "name": "parseArgs",
+   "n": 5,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-messenger/lib/inflight-cli.mjs:43",
+    "forge-messenger/lib/resume-cli.mjs:33",
+    "forge-pm/scripts/l0-create-concurrency.mjs:53",
+    "forge-pm/src/pm/doc-card.tsx:73",
+    "scripts/pm-stale-report.mjs:46"
+   ]
+  },
+  {
+   "name": "pick",
+   "n": 5,
+   "pkgs": [
+    "electron-shell",
+    "forge-trader",
+    "scripts"
+   ],
+   "sites": [
+    "electron-shell/scripts/cdp-target-eval.mjs:18",
+    "forge-trader/src/pages/LimitUpPage.tsx:18",
+    "scripts/audit-doc-sync.mjs:119",
+    "scripts/design-component-inventory.mjs:53",
+    "scripts/probe-bare-border-color.mjs:56"
+   ]
+  },
+  {
+   "name": "relOf",
+   "n": 4,
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-pm/lib/migrate-pm.js:28",
+    "scripts/data-root-check.mjs:47",
+    "scripts/lint-channel-contract.mjs:61",
+    "scripts/lint-tool-contract.mjs:26"
+   ]
+  },
+  {
+   "name": "sleep",
+   "n": 5,
+   "pkgs": [
+    "forge-pm",
+    "forge-service-kit",
+    "forge-trader",
+    "scripts"
+   ],
+   "sites": [
+    "forge-pm/src/pm/spec-approval-autopilot.ts:108",
+    "forge-service-kit/lib/time.js:23",
+    "forge-trader/lib/index.js:314",
+    "scripts/assembly-realize-check.mjs:61",
+    "scripts/watch-home-links.mjs:109"
+   ]
+  },
+  {
+   "name": "textOf",
+   "n": 5,
+   "pkgs": [
+    "forge-agents",
+    "forge-qoder-direct",
+    "forge-trae-direct",
+    "forge-workbuddy-direct",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agents/lib/run-events.js:15",
+    "forge-qoder-direct/lib/adapter.js:1260",
+    "forge-trae-direct/lib/protocol.js:802",
+    "forge-workbuddy-direct/lib/protocol.js:634",
+    "scripts/distill-material.mjs:51"
+   ]
+  },
+  {
+   "name": "clip",
+   "n": 4,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-messenger/lib/session-route.js:122",
+    "forge-pm/lib/context-brief.js:24",
+    "forge-pm/src/pm/activity-stream/events.ts:70",
+    "scripts/distill-material.mjs:103"
+   ]
+  },
+  {
+   "name": "render",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6455",
+    "forge-canvas/src/codegen-project.ts:231",
+    "forge-pm/scripts/spike-mdt.tsx:27",
+    "scripts/impact-of-diff.mjs:720"
+   ]
+  },
+  {
+   "name": "rgbToHex",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4582",
+    "forge-canvas/src/canvas/color-popover.tsx:28",
+    "forge-canvas/src/codegen.ts:28",
+    "forge-canvas/src/color.ts:12"
+   ]
+  },
+  {
+   "name": "round2",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas",
+    "forge-model"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5595",
+    "forge-canvas/src/design-diff.ts:71",
+    "forge-model/lib/plans/providers.js:652",
+    "forge-model/src/surfaces/plans/model-source.tsx:190"
+   ]
+  },
+  {
+   "name": "run",
+   "n": 4,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/lint-scripts.mjs:400",
+    "scripts/md-mermaid-lint.mjs:128",
+    "scripts/selfcheck.mjs:27",
+    "scripts/wt-scan.mjs:78"
+   ]
+  },
+  {
+   "name": "Section",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas",
+    "forge-model",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/code-sidebar.tsx:110",
+    "forge-canvas/src/canvas/rightsidebar.tsx:529",
+    "forge-model/src/surfaces/plans/card-kit.tsx:257",
+    "forge-pm/src/pm/shared/blocks/section.tsx:37"
+   ]
+  },
+  {
+   "name": "sortEfforts",
+   "n": 4,
+   "pkgs": [
+    "forge-agents",
+    "forge-cli-provider",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-agents/lib/model-catalog.js:14",
+    "forge-agents/src/agent-stream/effort-scale.ts:28",
+    "forge-cli-provider/lib/wiring.js:34",
+    "forge-pm/lib/index.js:273"
+   ]
+  },
+  {
+   "name": "str",
+   "n": 4,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-model-limits/src/dsh/limits-source.ts:100",
+    "forge-model/src/surfaces/plans/provider-detail-dialog.tsx:1293",
+    "forge-pm/lib/delegation.js:37",
+    "forge-pm/lib/judgment.js:45"
+   ]
+  },
+  {
+   "name": "toModelInfo",
+   "n": 4,
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-qoder-direct",
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-cli-provider/lib/wiring.js:616",
+    "forge-qoder-direct/lib/adapter.js:421",
+    "forge-trae-direct/lib/adapter.js:864",
+    "forge-workbuddy-direct/lib/adapter.js:277"
+   ]
+  },
+  {
+   "name": "argOf",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agents/scripts/migrate-agents-root.mjs:26",
+    "forge-pm/scripts/tag-migration/migrate-tags.mjs:26",
+    "scripts/gateway-smoke.mjs:32"
+   ]
+  },
+  {
+   "name": "buildLint",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/lint-layer.mjs:315",
+    "scripts/lint-writer-uniqueness.mjs:69"
+   ]
+  },
+  {
+   "name": "Card",
+   "n": 3,
+   "pkgs": [
+    "forge-design",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-design/src/components.tsx:168",
+    "forge-design/src/ui/card.tsx:6",
+    "forge-pm/src/pm/members-settings.tsx:90"
+   ]
+  },
+  {
+   "name": "cn",
+   "n": 3,
+   "pkgs": [
+    "forge-design",
+    "forge-model-limits",
+    "forge-trader"
+   ],
+   "sites": [
+    "forge-design/src/ui/cn.ts:5",
+    "forge-model-limits/src/dsh/cn.ts:14",
+    "forge-trader/src/lib/utils.ts:5"
+   ]
+  },
+  {
+   "name": "collect",
+   "n": 3,
+   "pkgs": [
+    "forge-trae-direct",
+    "scripts"
+   ],
+   "sites": [
+    "forge-trae-direct/scripts/verify-live.mjs:59",
+    "scripts/gate-health.mjs:265",
+    "scripts/pm-v2-baseline.mjs:391"
+   ]
+  },
+  {
+   "name": "die",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas",
+    "scripts"
+   ],
+   "sites": [
+    "forge-canvas/scripts/live-css-isolation/run.mjs:29",
+    "scripts/cdp-driver.mjs:61",
+    "scripts/headless-ui.mjs:62"
+   ]
+  },
+  {
+   "name": "duplicateLabelsOf",
+   "n": 3,
+   "pkgs": [
+    "forge-qoder-direct",
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:357",
+    "forge-trae-direct/lib/adapter.js:927",
+    "forge-workbuddy-direct/lib/adapter.js:248"
+   ]
+  },
+  {
+   "name": "emit",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-agents/lib/run-manager.js:128",
+    "forge-pm/src/pm/favorites.tsx:26",
+    "forge-pm/src/pm/pm-shell-store.ts:81"
+   ]
+  },
+  {
+   "name": "esc",
+   "n": 3,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/gate-health.mjs:590",
+    "scripts/migrate-milestones.mjs:26",
+    "scripts/tw-dead-classes.mjs:87"
+   ]
+  },
+  {
+   "name": "excerptOf",
+   "n": 3,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-messenger/lib/deliver.js:346",
+    "forge-messenger/lib/report.js:36",
+    "forge-pm/src/pm/activity-stream/items.tsx:165"
+   ]
+  },
+  {
+   "name": "expandHome",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "forge-repowiki",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agents/lib/agent-registry.js:26",
+    "forge-repowiki/lib/page-body.js:28",
+    "scripts/build-index-repowiki.mjs:103"
+   ]
+  },
+  {
+   "name": "failureOf",
+   "n": 3,
+   "pkgs": [
+    "forge-qoder-direct",
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1409",
+    "forge-trae-direct/lib/protocol.js:792",
+    "forge-workbuddy-direct/lib/protocol.js:828"
+   ]
+  },
+  {
+   "name": "fmtVal",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas",
+    "scripts"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5876",
+    "forge-canvas/src/design-diff.ts:344",
+    "scripts/gate-health.mjs:536"
+   ]
+  },
+  {
+   "name": "hexToRgb",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/src/adapter.ts:64",
+    "forge-canvas/src/canvas/color-popover.tsx:19",
+    "forge-canvas/src/palette.ts:22"
+   ]
+  },
+  {
+   "name": "judge",
+   "n": 3,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/gate-health.mjs:58",
+    "scripts/lint-layer.mjs:206",
+    "scripts/preset-var-check.mjs:291"
+   ]
+  },
+  {
+   "name": "loadIndex",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "forge-repowiki",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agents/lib/plans-usage.js:126",
+    "forge-repowiki/lib/wiki-query.js:57",
+    "scripts/impact-of-diff.mjs:239"
+   ]
+  },
+  {
+   "name": "loadSqlite",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agents/lib/registry-store.js:26",
+    "forge-pm/lib/pm-store.js:128",
+    "scripts/search-index-reconcile.mjs:80"
+   ]
+  },
+  {
+   "name": "lookup",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5067",
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts:244",
+    "forge-canvas/src/token-map.ts:56"
+   ]
+  },
+  {
+   "name": "migrate",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4266",
+    "forge-canvas/src/migrate.ts:63",
+    "forge-pm/lib/pm-store.js:203"
+   ]
+  },
+  {
+   "name": "pickSessionLog",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agents/lib/plans-usage.js:162",
+    "scripts/distill-material.mjs:20",
+    "scripts/scan-sessions-health.mjs:22"
+   ]
+  },
+  {
+   "name": "read",
+   "n": 2,
+   "pkgs": [
+    "forge-repowiki",
+    "scripts"
+   ],
+   "sites": [
+    "forge-repowiki/lib/wiki-query.js:519",
+    "scripts/lint-scripts.mjs:221"
+   ]
+  },
+  {
+   "name": "rel",
+   "n": 3,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/code-inventory.mjs:81",
+    "scripts/design-component-inventory.mjs:31",
+    "scripts/pm-v2-baseline.mjs:149"
+   ]
+  },
+  {
+   "name": "runCli",
+   "n": 3,
+   "pkgs": [
+    "forge-messenger",
+    "scripts"
+   ],
+   "sites": [
+    "forge-messenger/lib/inflight-cli.mjs:161",
+    "forge-messenger/lib/resume-cli.mjs:67",
+    "scripts/lint-common.mjs:133"
+   ]
+  },
+  {
+   "name": "scan",
+   "n": 3,
+   "pkgs": [
+    "forge-pm",
+    "forge-ui",
+    "scripts"
+   ],
+   "sites": [
+    "forge-pm/lib/md-store.js:1615",
+    "forge-ui/src/dsh/doc-width.tsx:322",
+    "scripts/no-new-tailwind.mjs:283"
+   ]
+  },
+  {
+   "name": "send",
+   "n": 3,
+   "pkgs": [
+    "electron-shell",
+    "scripts"
+   ],
+   "sites": [
+    "electron-shell/scripts/cdp-console.mjs:10",
+    "scripts/cdp-clip.mjs:11",
+    "scripts/cdp-driver.mjs:81"
+   ]
+  },
+  {
+   "name": "slug",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6337",
+    "forge-canvas/src/codegen-project.ts:63",
+    "forge-canvas/src/html-import.ts:80"
+   ]
+  },
+  {
+   "name": "stripComments",
+   "n": 3,
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-pm/src/pm/blocks/class-contract.ts:26",
+    "scripts/canvas-style-check.mjs:147",
+    "scripts/ui-load-contract.mjs:26"
+   ]
+  },
+  {
+   "name": "subscribe",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm",
+    "forge-trader"
+   ],
+   "sites": [
+    "forge-agents/lib/run-manager.js:119",
+    "forge-pm/src/pm/favorites.tsx:30",
+    "forge-trader/src/hooks/useDarkMode.ts:5"
+   ]
+  },
+  {
+   "name": "text",
+   "n": 3,
+   "pkgs": [
+    "forge-agent-protocol",
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agent-protocol/lib/identity.js:39",
+    "forge-pm/lib/message/rules.js:23",
+    "scripts/dup-shape-lib.mjs:8"
+   ]
+  },
+  {
+   "name": "toHex",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4610",
+    "forge-canvas/src/canvas/rightsidebar.tsx:1390",
+    "forge-canvas/src/theme-tokens.ts:41"
+   ]
+  },
+  {
+   "name": "toMs",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "forge-model",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-agents/lib/registry-store.js:413",
+    "forge-model/lib/store/registry-ops.js:290",
+    "forge-pm/lib/queue-store.js:52"
+   ]
+  },
+  {
+   "name": "toRow",
+   "n": 3,
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-model/lib/routes/flash.routes.js:79",
+    "forge-pm/lib/queue-store.js:59",
+    "forge-pm/src/pm/member-assembly.ts:120"
+   ]
+  },
+  {
+   "name": "writeCreditCache",
+   "n": 3,
+   "pkgs": [
+    "forge-qoder-direct",
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:377",
+    "forge-trae-direct/lib/adapter.js:816",
+    "forge-workbuddy-direct/lib/adapter.js:812"
+   ]
+  },
+  {
+   "name": "writeFileAtomic",
+   "n": 3,
+   "pkgs": [
+    "forge-model",
+    "forge-pm",
+    "forge-service-kit"
+   ],
+   "sites": [
+    "forge-model/lib/store/atomic-write.js:56",
+    "forge-pm/lib/atomic.js:29",
+    "forge-service-kit/lib/fs.js:51"
+   ]
+  },
+  {
+   "name": "actorsFilePath",
+   "n": 2,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-messenger/lib/actors-store.js:59",
+    "forge-pm/lib/agent-identity.js:66"
+   ]
+  },
+  {
+   "name": "App",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/scripts/live-css-isolation/harness.tsx:82",
+    "forge-canvas/scripts/live-harness/harness.tsx:141"
+   ]
+  },
+  {
+   "name": "applyOperation",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4960",
+    "forge-canvas/src/operation-reducer.ts:22"
+   ]
+  },
+  {
+   "name": "applyOperations",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5002",
+    "forge-canvas/src/operation-reducer.ts:60"
+   ]
+  },
+  {
+   "name": "borderClasses",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6045",
+    "forge-canvas/src/codegen.ts:87"
+   ]
+  },
+  {
+   "name": "bridgeToken",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-ui"
+   ],
+   "sites": [
+    "forge-model/lib/plans/providers.js:1523",
+    "forge-ui/lib/browser-bridge.js:33"
+   ]
+  },
+  {
+   "name": "build",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/lint-log-outlet.mjs:119",
+    "scripts/migration-baseline.mjs:411"
+   ]
+  },
+  {
+   "name": "buildChatPayload",
+   "n": 2,
+   "pkgs": [
+    "forge-qoder-direct",
+    "forge-trae-direct"
+   ],
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1307",
+    "forge-trae-direct/lib/protocol.js:724"
+   ]
+  },
+  {
+   "name": "buildColorTokenIndex",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6328",
+    "forge-canvas/src/codegen-project.ts:54"
+   ]
+  },
+  {
+   "name": "buildEnv",
+   "n": 2,
+   "pkgs": [
+    "forge-agents"
+   ],
+   "sites": [
+    "forge-agents/lib/acp-client.js:28",
+    "forge-agents/lib/qoder-model-list.js:32"
+   ]
+  },
+  {
+   "name": "buildRows",
+   "n": 2,
+   "pkgs": [
+    "forge-design",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-design/src/lib/load-state.ts:143",
+    "forge-pm/src/pm/project-progress.tsx:115"
+   ]
+  },
+  {
+   "name": "bump",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-pm/scripts/tag-migration/migrate-tags.mjs:71",
+    "forge-pm/scripts/tag-migration/validate.mjs:12"
+   ]
+  },
+  {
+   "name": "byExact",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6274",
+    "forge-canvas/src/component-map.ts:52"
+   ]
+  },
+  {
+   "name": "byLower",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6275",
+    "forge-canvas/src/component-map.ts:55"
+   ]
+  },
+  {
+   "name": "cachePathFor",
+   "n": 2,
+   "pkgs": [
+    "forge-repowiki",
+    "scripts"
+   ],
+   "sites": [
+    "forge-repowiki/lib/symbols.js:59",
+    "scripts/gate-base-tree.mjs:63"
+   ]
+  },
+  {
+   "name": "call",
+   "n": 2,
+   "pkgs": [
+    "forge-workbuddy-direct",
+    "scripts"
+   ],
+   "sites": [
+    "forge-workbuddy-direct/scripts/verify-live.mjs:60",
+    "scripts/auth-e2e-verify.mjs:181"
+   ]
+  },
+  {
+   "name": "canonColor",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5597",
+    "forge-canvas/src/design-diff.ts:74"
+   ]
+  },
+  {
+   "name": "canonFill",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5600",
+    "forge-canvas/src/design-diff.ts:79"
+   ]
+  },
+  {
+   "name": "canonFills",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5607",
+    "forge-canvas/src/design-diff.ts:90"
+   ]
+  },
+  {
+   "name": "canonical",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/prism-lang-guard.mjs:91",
+    "scripts/watch-home-links.mjs:54"
+   ]
+  },
+  {
+   "name": "canonLayout",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5617",
+    "forge-canvas/src/design-diff.ts:102"
+   ]
+  },
+  {
+   "name": "canonStrokes",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5612",
+    "forge-canvas/src/design-diff.ts:95"
+   ]
+  },
+  {
+   "name": "changeSetToCssPatch",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5782",
+    "forge-canvas/src/design-diff.ts:274"
+   ]
+  },
+  {
+   "name": "changeSetToMarkdown",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5883",
+    "forge-canvas/src/design-diff.ts:350"
+   ]
+  },
+  {
+   "name": "changeSetToOperations",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5838",
+    "forge-canvas/src/design-diff.ts:315"
+   ]
+  },
+  {
+   "name": "changeToCssDecl",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5757",
+    "forge-canvas/src/design-diff.ts:253"
+   ]
+  },
+  {
+   "name": "channelOf",
+   "n": 2,
+   "pkgs": [
+    "forge-agent-protocol",
+    "forge-agents"
+   ],
+   "sites": [
+    "forge-agent-protocol/lib/identity.js:64",
+    "forge-agents/src/agent-stream/interactive/question-card.tsx:30"
+   ]
+  },
+  {
+   "name": "checkCanvasLayout",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5418",
+    "forge-canvas/src/layout-check.ts:450"
+   ]
+  },
+  {
+   "name": "checkDesignNode",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4360",
+    "forge-canvas/src/migrate.ts:175"
+   ]
+  },
+  {
+   "name": "clampIndex",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5053",
+    "forge-canvas/src/operation-reducer.ts:128"
+   ]
+  },
+  {
+   "name": "classify",
+   "n": 2,
+   "pkgs": [
+    "forge-design",
+    "scripts"
+   ],
+   "sites": [
+    "forge-design/src/lib/load-state.ts:100",
+    "scripts/wt-scan.mjs:293"
+   ]
+  },
+  {
+   "name": "cmdCompare",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/gate-health.mjs:578",
+    "scripts/pm-v2-baseline.mjs:566"
+   ]
+  },
+  {
+   "name": "collectUnknownKeys",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4393",
+    "forge-canvas/src/migrate.ts:232"
+   ]
+  },
+  {
+   "name": "collectVarHexDeclarations",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6551",
+    "forge-canvas/src/codegen-project.ts:318"
+   ]
+  },
+  {
+   "name": "colorTokenIndexFromTheme",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4738",
+    "forge-canvas/src/theme-tokens.ts:168"
+   ]
+  },
+  {
+   "name": "compactFm",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-agents/lib/run-manager.js:69",
+    "forge-pm/lib/member-registry.js:265"
+   ]
+  },
+  {
+   "name": "cssColor",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6351",
+    "forge-canvas/src/codegen-project.ts:106"
+   ]
+  },
+  {
+   "name": "cssStep",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6367",
+    "forge-canvas/src/codegen-project.ts:134"
+   ]
+  },
+  {
+   "name": "curDb",
+   "n": 2,
+   "pkgs": [
+    "forge-cad"
+   ],
+   "sites": [
+    "forge-cad/src/cad/layer-panel.tsx:70",
+    "forge-cad/src/cad/status-bar.tsx:60"
+   ]
+  },
+  {
+   "name": "dayKey",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "sites": [
+    "forge-model/lib/gateway/usage.js:41",
+    "forge-model/src/surfaces/plans/usage-range.ts:59"
+   ]
+  },
+  {
+   "name": "daysUntil",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits"
+   ],
+   "sites": [
+    "forge-model-limits/src/dsh/format.ts:36",
+    "forge-model/src/surfaces/plans/plans-shared.tsx:191"
+   ]
+  },
+  {
+   "name": "decodeCredit",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "sites": [
+    "forge-model/src/model-select/flash.ts:142",
+    "forge-model/src/model-select/info.ts:46"
+   ]
+  },
+  {
+   "name": "decodeDocument",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4231",
+    "forge-canvas/src/schema.ts:515"
+   ]
+  },
+  {
+   "name": "decodeOperation",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4563",
+    "forge-canvas/src/operation.ts:117"
+   ]
+  },
+  {
+   "name": "decodePromotion",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "sites": [
+    "forge-model/src/model-select/flash.ts:160",
+    "forge-model/src/model-select/info.ts:64"
+   ]
+  },
+  {
+   "name": "defaultRoot",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/fix-frontmatter-quoting.mjs:48",
+    "scripts/pm-stale-report.mjs:91"
+   ]
+  },
+  {
+   "name": "deriveComponentName",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6160",
+    "forge-canvas/src/codegen.ts:195"
+   ]
+  },
+  {
+   "name": "describe",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6305",
+    "forge-canvas/src/component-map.ts:89"
+   ]
+  },
+  {
+   "name": "describeError",
+   "n": 2,
+   "pkgs": [
+    "forge-plugin-status",
+    "forge-service-kit"
+   ],
+   "sites": [
+    "forge-plugin-status/src/inventory.ts:100",
+    "forge-service-kit/lib/log.js:48"
+   ]
+  },
+  {
+   "name": "describeHttp",
+   "n": 2,
+   "pkgs": [
+    "forge-qoder-direct",
+    "forge-trae-direct"
+   ],
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1450",
+    "forge-trae-direct/lib/adapter.js:1100"
+   ]
+  },
+  {
+   "name": "diagnosePairing",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5925",
+    "forge-canvas/src/design-diff.ts:416"
+   ]
+  },
+  {
+   "name": "diffDesign",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5653",
+    "forge-canvas/src/design-diff.ts:137"
+   ]
+  },
+  {
+   "name": "diffDoc",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/audit-doc-sync.mjs:60",
+    "scripts/audit-freshness.mjs:53"
+   ]
+  },
+  {
+   "name": "dispatch",
+   "n": 2,
+   "pkgs": [
+    "forge-pm",
+    "forge-repowiki"
+   ],
+   "sites": [
+    "forge-pm/mcp/matter-mcp.mjs:55",
+    "forge-repowiki/lib/code-query.js:415"
+   ]
+  },
+  {
+   "name": "dumpFrames",
+   "n": 2,
+   "pkgs": [
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-trae-direct/lib/adapter.js:75",
+    "forge-workbuddy-direct/lib/adapter.js:76"
+   ]
+  },
+  {
+   "name": "durationTable",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5135",
+    "forge-canvas/src/token-map.ts:130"
+   ]
+  },
+  {
+   "name": "emptyDocument",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4234",
+    "forge-canvas/src/schema.ts:520"
+   ]
+  },
+  {
+   "name": "ensurePele",
+   "n": 2,
+   "pkgs": [
+    "forge-mermaid"
+   ],
+   "sites": [
+    "forge-mermaid/src/mermaid/chat-enhance.ts:214",
+    "forge-mermaid/src/mermaid/mermaid-block.tsx:49"
+   ]
+  },
+  {
+   "name": "escapeHtml",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6203",
+    "forge-canvas/src/codegen.ts:239"
+   ]
+  },
+  {
+   "name": "evaluate",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/lint-code.mjs:420",
+    "scripts/lint-cross-pkg-events.mjs:240"
+   ]
+  },
+  {
+   "name": "Field",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/live-inspect-panel.tsx:280",
+    "forge-canvas/src/canvas/rightsidebar.tsx:554"
+   ]
+  },
+  {
+   "name": "fillBgClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6019",
+    "forge-canvas/src/codegen.ts:66"
+   ]
+  },
+  {
+   "name": "fillCssValue",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5729",
+    "forge-canvas/src/design-diff.ts:228"
+   ]
+  },
+  {
+   "name": "find",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/scripts/demo-layers.ts:70",
+    "forge-canvas/scripts/demo.ts:70"
+   ]
+  },
+  {
+   "name": "findContainer",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5037",
+    "forge-canvas/src/operation-reducer.ts:106"
+   ]
+  },
+  {
+   "name": "findNode",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5015",
+    "forge-canvas/src/operation-reducer.ts:82"
+   ]
+  },
+  {
+   "name": "fireResync",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-agents/src/agent-stream/run-changes.ts:110",
+    "forge-pm/src/pm/events.ts:62"
+   ]
+  },
+  {
+   "name": "fixture",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/gate-health.mjs:799",
+    "scripts/ui-load-contract.mjs:130"
+   ]
+  },
+  {
+   "name": "flag",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/git-health-check.mjs:34",
+    "scripts/run-gates.mjs:73"
+   ]
+  },
+  {
+   "name": "flatten",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5583",
+    "forge-canvas/src/design-diff.ts:54"
+   ]
+  },
+  {
+   "name": "flattenNodes",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5181",
+    "forge-canvas/src/layout-check.ts:26"
+   ]
+  },
+  {
+   "name": "fmBlock",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-agents/lib/run-manager.js:84",
+    "forge-pm/lib/member-registry.js:281"
+   ]
+  },
+  {
+   "name": "fmtBytes",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/import-dialog.tsx:37",
+    "forge-pm/src/pm/docs-linear.tsx:56"
+   ]
+  },
+  {
+   "name": "fmtNumber",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits"
+   ],
+   "sites": [
+    "forge-model-limits/src/dsh/format.ts:11",
+    "forge-model/src/surfaces/plans/plans-shared.tsx:176"
+   ]
+  },
+  {
+   "name": "fmtTime",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits"
+   ],
+   "sites": [
+    "forge-model-limits/src/dsh/format.ts:23",
+    "forge-model/src/surfaces/plans/plans-shared.tsx:183"
+   ]
+  },
+  {
+   "name": "fmtTokens",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-model"
+   ],
+   "sites": [
+    "forge-agents/src/agent-stream/message-row.tsx:26",
+    "forge-model/lib/plans/flash-recommend.js:203"
+   ]
+  },
+  {
+   "name": "frameDumpEnabled",
+   "n": 2,
+   "pkgs": [
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-trae-direct/lib/adapter.js:98",
+    "forge-workbuddy-direct/lib/adapter.js:90"
+   ]
+  },
+  {
+   "name": "generateComponent",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6232",
+    "forge-canvas/src/codegen.ts:271"
+   ]
+  },
+  {
+   "name": "generateProjectComponent",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6503",
+    "forge-canvas/src/codegen-project.ts:280"
+   ]
+  },
+  {
+   "name": "getJson",
+   "n": 2,
+   "pkgs": [
+    "forge-repowiki",
+    "forge-trader"
+   ],
+   "sites": [
+    "forge-repowiki/src/wiki-api.ts:121",
+    "forge-trader/src/store/account.ts:95"
+   ]
+  },
+  {
+   "name": "gradientCss",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5571",
+    "forge-canvas/src/gradient.ts:151"
+   ]
+  },
+  {
+   "name": "handleOverview",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits"
+   ],
+   "sites": [
+    "forge-model-limits/lib/index.js:69",
+    "forge-model/lib/routes/overview.routes.js:12"
+   ]
+  },
+  {
+   "name": "hasRadiusDecls",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4744",
+    "forge-canvas/src/theme-tokens.ts:188"
+   ]
+  },
+  {
+   "name": "HealthBadge",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-pm/src/pm/members-settings.tsx:51",
+    "forge-pm/src/pm/project-updates.tsx:30"
+   ]
+  },
+  {
+   "name": "hexToRgb01",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4588",
+    "forge-canvas/src/color.ts:21"
+   ]
+  },
+  {
+   "name": "hexToRgbaCss",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5739",
+    "forge-canvas/src/design-diff.ts:238"
+   ]
+  },
+  {
+   "name": "http",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-model/src/surfaces/plans/agent-center.tsx:167",
+    "forge-pm/src/pm/api.ts:231"
+   ]
+  },
+  {
+   "name": "human",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/change-scope.mjs:56",
+    "scripts/run-gates.mjs:75"
+   ]
+  },
+  {
+   "name": "importSpecifierFor",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6308",
+    "forge-canvas/src/component-map.ts:99"
+   ]
+  },
+  {
+   "name": "insert",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5048",
+    "forge-canvas/src/operation-reducer.ts:122"
+   ]
+  },
+  {
+   "name": "internals",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/scripts/demo-layers.ts:69",
+    "forge-canvas/scripts/demo.ts:69"
+   ]
+  },
+  {
+   "name": "isBackupDir",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/fix-frontmatter-quoting.mjs:56",
+    "scripts/md-corpus-guard.mjs:166"
+   ]
+  },
+  {
+   "name": "isFiniteNumber",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5066",
+    "forge-canvas/src/token-map.ts:54"
+   ]
+  },
+  {
+   "name": "isKnownProvider",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-protocol"
+   ],
+   "sites": [
+    "forge-model-protocol/lib/identity.js:128",
+    "forge-model/lib/provider/actions.js:67"
+   ]
+  },
+  {
+   "name": "isModelVisible",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-protocol"
+   ],
+   "sites": [
+    "forge-model-protocol/lib/visibility.js:91",
+    "forge-model/lib/model/visibility-store.js:198"
+   ]
+  },
+  {
+   "name": "isNoteEvent",
+   "n": 2,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-messenger/lib/filter.js:90",
+    "forge-pm/src/pm/activity-stream/items.tsx:143"
+   ]
+  },
+  {
+   "name": "isObj",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "sites": [
+    "forge-model/src/model-select/flash.ts:109",
+    "forge-model/src/model-select/info.ts:33"
+   ]
+  },
+  {
+   "name": "isProviderDisabled",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "sites": [
+    "forge-model/lib/gateway/engine.js:262",
+    "forge-model/lib/shared/provider-gate.js:65"
+   ]
+  },
+  {
+   "name": "judgeLanding",
+   "n": 2,
+   "pkgs": [
+    "forge-messenger"
+   ],
+   "sites": [
+    "forge-messenger/lib/dispatch-loop.js:231",
+    "forge-messenger/lib/judge.js:69"
+   ]
+  },
+  {
+   "name": "label",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5180",
+    "forge-canvas/src/layout-check.ts:24"
+   ]
+  },
+  {
+   "name": "labOf",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-model-protocol"
+   ],
+   "sites": [
+    "forge-canvas/src/palette.ts:30",
+    "forge-model-protocol/lib/model-lab.js:157"
+   ]
+  },
+  {
+   "name": "levelOfPct",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits"
+   ],
+   "sites": [
+    "forge-model-limits/src/dsh/mini-bar.tsx:22",
+    "forge-model/src/surfaces/plans/card-kit.tsx:503"
+   ]
+  },
+  {
+   "name": "line",
+   "n": 2,
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-pm/scripts/l0-create-concurrency.mjs:228",
+    "scripts/assembly-realize-check.mjs:62"
+   ]
+  },
+  {
+   "name": "log",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "scripts"
+   ],
+   "sites": [
+    "forge-canvas/scripts/demo-harness.ts:17",
+    "scripts/install-hooks.mjs:60"
+   ]
+  },
+  {
+   "name": "mapLeading",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5143",
+    "forge-canvas/src/token-map.ts:146"
+   ]
+  },
+  {
+   "name": "mapNode",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5025",
+    "forge-canvas/src/operation-reducer.ts:91"
+   ]
+  },
+  {
+   "name": "mapStep",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5139",
+    "forge-canvas/src/token-map.ts:137"
+   ]
+  },
+  {
+   "name": "maxContextOf",
+   "n": 2,
+   "pkgs": [
+    "forge-qoder-direct",
+    "forge-trae-direct"
+   ],
+   "sites": [
+    "forge-qoder-direct/lib/adapter.js:1063",
+    "forge-trae-direct/lib/adapter.js:976"
+   ]
+  },
+  {
+   "name": "migratePageV2",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4313",
+    "forge-canvas/src/migrate.ts:119"
+   ]
+  },
+  {
+   "name": "MiniBar",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits"
+   ],
+   "sites": [
+    "forge-model-limits/src/dsh/mini-bar.tsx:37",
+    "forge-model/src/surfaces/plans/card-kit.tsx:515"
+   ]
+  },
+  {
+   "name": "nextSeq",
+   "n": 2,
+   "pkgs": [
+    "forge-agents"
+   ],
+   "sites": [
+    "forge-agents/lib/mock-runtime.js:25",
+    "forge-agents/lib/run-manager.js:326"
+   ]
+  },
+  {
+   "name": "nodeClasses",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6055",
+    "forge-canvas/src/codegen.ts:105"
+   ]
+  },
+  {
+   "name": "nodeRules",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6392",
+    "forge-canvas/src/codegen-project.ts:169"
+   ]
+  },
+  {
+   "name": "norm",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "scripts"
+   ],
+   "sites": [
+    "forge-canvas/src/palette.ts:50",
+    "scripts/migration-baseline.mjs:436"
+   ]
+  },
+  {
+   "name": "normalizeForDiff",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5628",
+    "forge-canvas/src/design-diff.ts:111"
+   ]
+  },
+  {
+   "name": "normalizeGridSpec",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4439",
+    "forge-canvas/src/migrate.ts:302"
+   ]
+  },
+  {
+   "name": "normalizeLayerName",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6271",
+    "forge-canvas/src/component-map.ts:48"
+   ]
+  },
+  {
+   "name": "normalizeStrokeEnums",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4425",
+    "forge-canvas/src/migrate.ts:262"
+   ]
+  },
+  {
+   "name": "nowIso",
+   "n": 2,
+   "pkgs": [
+    "forge-pm",
+    "forge-service-kit"
+   ],
+   "sites": [
+    "forge-pm/lib/domain.js:1178",
+    "forge-service-kit/lib/time.js:14"
+   ]
+  },
+  {
+   "name": "NumberInput",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/live-inspect-panel.tsx:293",
+    "forge-canvas/src/canvas/rightsidebar.tsx:565"
+   ]
+  },
+  {
+   "name": "numOr",
+   "n": 2,
+   "pkgs": [
+    "forge-model-protocol"
+   ],
+   "sites": [
+    "forge-model-protocol/lib/credit.js:156",
+    "forge-model-protocol/lib/promotion.js:259"
+   ]
+  },
+  {
+   "name": "ok",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "scripts"
+   ],
+   "sites": [
+    "forge-model/scripts/probe-abort-on-close.mjs:107",
+    "scripts/auth-e2e-verify.mjs:30"
+   ]
+  },
+  {
+   "name": "opacityClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6030",
+    "forge-canvas/src/codegen.ts:75"
+   ]
+  },
+  {
+   "name": "optOf",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/fix-frontmatter-quoting.mjs:220",
+    "scripts/md-corpus-guard.mjs:95"
+   ]
+  },
+  {
+   "name": "overlaps",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5187",
+    "forge-canvas/src/layout-check.ts:32"
+   ]
+  },
+  {
+   "name": "PagerDot",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/layers.tsx:17",
+    "forge-canvas/src/canvas/sidebar.tsx:117"
+   ]
+  },
+  {
+   "name": "parse",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/agent-channel.mjs:33",
+    "scripts/probe-criteria.mjs:43"
+   ]
+  },
+  {
+   "name": "parseHm",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-protocol"
+   ],
+   "sites": [
+    "forge-model-protocol/lib/promotion.js:100",
+    "forge-model/lib/plans/equiv-cost.js:117"
+   ]
+  },
+  {
+   "name": "parsePx",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/live-inspect.ts:324",
+    "forge-canvas/src/html-import.ts:53"
+   ]
+  },
+  {
+   "name": "parseRadiusTokens",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4745",
+    "forge-canvas/src/theme-tokens.ts:194"
+   ]
+  },
+  {
+   "name": "parseSessionText",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-messenger"
+   ],
+   "sites": [
+    "forge-agents/lib/plans-usage.js:80",
+    "forge-messenger/lib/inflight.js:634"
+   ]
+  },
+  {
+   "name": "parseSseLine",
+   "n": 2,
+   "pkgs": [
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-trae-direct/lib/protocol.js:767",
+    "forge-workbuddy-direct/lib/protocol.js:806"
+   ]
+  },
+  {
+   "name": "parseThemeColors",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4626",
+    "forge-canvas/src/theme-tokens.ts:57"
+   ]
+  },
+  {
+   "name": "pickFields",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-pm/lib/agent-tools-project.js:39",
+    "forge-pm/lib/agent-tools.js:200"
+   ]
+  },
+  {
+   "name": "pickHeaders",
+   "n": 2,
+   "pkgs": [
+    "forge-trader"
+   ],
+   "sites": [
+    "forge-trader/lib/index.js:368",
+    "forge-trader/preview/server.mjs:19"
+   ]
+  },
+  {
+   "name": "pickKey",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-trader"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts:233",
+    "forge-trader/src/components/trader/SearchModal.tsx:89"
+   ]
+  },
+  {
+   "name": "pickThemeText",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4713",
+    "forge-canvas/src/theme-tokens.ts:142"
+   ]
+  },
+  {
+   "name": "pidAlive",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-service-kit"
+   ],
+   "sites": [
+    "forge-agents/lib/child-lease.js:51",
+    "forge-service-kit/lib/fs.js:161"
+   ]
+  },
+  {
+   "name": "planResume",
+   "n": 2,
+   "pkgs": [
+    "forge-messenger"
+   ],
+   "sites": [
+    "forge-messenger/lib/pause.js:169",
+    "forge-messenger/lib/restart-resume.js:698"
+   ]
+  },
+  {
+   "name": "probe",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-model"
+   ],
+   "sites": [
+    "forge-canvas/scripts/live-css-isolation/harness.tsx:417",
+    "forge-model/scripts/probe-abort-on-close.mjs:78"
+   ]
+  },
+  {
+   "name": "pushBlocker",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6348",
+    "forge-canvas/src/codegen-project.ts:101"
+   ]
+  },
+  {
+   "name": "radiusStepsFromTheme",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4766",
+    "forge-canvas/src/theme-tokens.ts:223"
+   ]
+  },
+  {
+   "name": "radiusTable",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5131",
+    "forge-canvas/src/token-map.ts:124"
+   ]
+  },
+  {
+   "name": "radiusVarName",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4742",
+    "forge-canvas/src/theme-tokens.ts:182"
+   ]
+  },
+  {
+   "name": "rank",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4606",
+    "forge-canvas/src/theme-tokens.ts:35"
+   ]
+  },
+  {
+   "name": "readAudit",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-model/lib/store/registry-ops.js:598",
+    "forge-pm/lib/pm-store.js:293"
+   ]
+  },
+  {
+   "name": "readFrontmatter",
+   "n": 2,
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "sites": [
+    "forge-pm/lib/md-store.js:1779",
+    "scripts/pm-stale-report.mjs:101"
+   ]
+  },
+  {
+   "name": "readKey",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "scripts"
+   ],
+   "sites": [
+    "forge-model/lib/shared/creds.js:115",
+    "scripts/gateway-smoke.mjs:47"
+   ]
+  },
+  {
+   "name": "readModelCatalog",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "sites": [
+    "forge-model/lib/shared/catalog-io.js:135",
+    "forge-model/lib/store/registry-ops.js:235"
+   ]
+  },
+  {
+   "name": "reasoningOf",
+   "n": 2,
+   "pkgs": [
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-trae-direct/lib/adapter.js:1050",
+    "forge-workbuddy-direct/lib/protocol.js:603"
+   ]
+  },
+  {
+   "name": "record",
+   "n": 2,
+   "pkgs": [
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-trae-direct/scripts/verify-live.mjs:54",
+    "forge-workbuddy-direct/scripts/verify-live.mjs:128"
+   ]
+  },
+  {
+   "name": "red",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/assembly-realize-check.mjs:66",
+    "scripts/check-matter-plugin-port.mjs:39"
+   ]
+  },
+  {
+   "name": "registerAgentTools",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-agents/lib/tools.js:35",
+    "forge-pm/lib/agent-tools.js:1223"
+   ]
+  },
+  {
+   "name": "registerKeyed",
+   "n": 2,
+   "pkgs": [
+    "forge-browser",
+    "forge-ui"
+   ],
+   "sites": [
+    "forge-browser/src/dsh/client-entry.tsx:134",
+    "forge-ui/src/dsh/session-rail-host.tsx:221"
+   ]
+  },
+  {
+   "name": "remainText",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-model/src/surfaces/plans/card-kit.tsx:542",
+    "forge-pm/src/pm/members-settings.tsx:490"
+   ]
+  },
+  {
+   "name": "removeNode",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5034",
+    "forge-canvas/src/operation-reducer.ts:99"
+   ]
+  },
+  {
+   "name": "renderHtml",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6206",
+    "forge-canvas/src/codegen.ts:243"
+   ]
+  },
+  {
+   "name": "renderTsx",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6174",
+    "forge-canvas/src/codegen.ts:210"
+   ]
+  },
+  {
+   "name": "replaceContainer",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5043",
+    "forge-canvas/src/operation-reducer.ts:117"
+   ]
+  },
+  {
+   "name": "reply",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts:271",
+    "forge-pm/mcp/matter-mcp.mjs:377"
+   ]
+  },
+  {
+   "name": "report",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/lint-cross-pkg-events.mjs:430",
+    "scripts/lint-scripts.mjs:458"
+   ]
+  },
+  {
+   "name": "resolveComponent",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6279",
+    "forge-canvas/src/component-map.ts:61"
+   ]
+  },
+  {
+   "name": "resolveContentWidth",
+   "n": 2,
+   "pkgs": [
+    "forge-pm",
+    "forge-ui"
+   ],
+   "sites": [
+    "forge-pm/src/pm/shared/width-handles.tsx:37",
+    "forge-ui/src/dsh/doc-width.tsx:90"
+   ]
+  },
+  {
+   "name": "resolveProxyBase",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-model/lib/routes/proxy.js:51",
+    "forge-pm/lib/proxy.js:19"
+   ]
+  },
+  {
+   "name": "resolveSpec",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/code-inventory.mjs:1310",
+    "scripts/impact-of-diff.mjs:176"
+   ]
+  },
+  {
+   "name": "rgbaCss",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5975",
+    "forge-canvas/src/codegen.ts:32"
+   ]
+  },
+  {
+   "name": "rgbKey",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6327",
+    "forge-canvas/src/codegen-project.ts:50"
+   ]
+  },
+  {
+   "name": "rgbToHsl",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/src/canvas/code-sidebar.tsx:584",
+    "forge-canvas/src/canvas/color-popover.tsx:57"
+   ]
+  },
+  {
+   "name": "round1",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5596",
+    "forge-canvas/src/design-diff.ts:72"
+   ]
+  },
+  {
+   "name": "roundedClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6011",
+    "forge-canvas/src/codegen.ts:59"
+   ]
+  },
+  {
+   "name": "runGate",
+   "n": 2,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-messenger/lib/gate-route.js:60",
+    "forge-pm/scripts/lex-build-gate-entry.ts:25"
+   ]
+  },
+  {
+   "name": "runSelftest",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/build-index-repowiki.mjs:113",
+    "scripts/format-debt.mjs:343"
+   ]
+  },
+  {
+   "name": "runSessionDispatch",
+   "n": 2,
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-messenger/lib/session-route.js:471",
+    "forge-pm/lib/dispatch-session.js:78"
+   ]
+  },
+  {
+   "name": "safeJson",
+   "n": 2,
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-model"
+   ],
+   "sites": [
+    "forge-cli-provider/lib/tool-frames.js:159",
+    "forge-model/lib/store/export.js:168"
+   ]
+  },
+  {
+   "name": "safeParse",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "sites": [
+    "forge-model/lib/store/bridge.js:289",
+    "forge-model/lib/store/registry-ops.js:585"
+   ]
+  },
+  {
+   "name": "saveIndex",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "scripts"
+   ],
+   "sites": [
+    "forge-agents/lib/plans-usage.js:138",
+    "scripts/impact-of-diff.mjs:263"
+   ]
+  },
+  {
+   "name": "scanFiles",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/impact-of-diff.mjs:164",
+    "scripts/lint-log-outlet.mjs:32"
+   ]
+  },
+  {
+   "name": "search",
+   "n": 2,
+   "pkgs": [
+    "forge-pm",
+    "forge-repowiki"
+   ],
+   "sites": [
+    "forge-pm/lib/search-index.js:388",
+    "forge-repowiki/lib/wiki-query.js:368"
+   ]
+  },
+  {
+   "name": "serialize",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/component-map.mjs:82",
+    "scripts/gate-health.mjs:330"
+   ]
+  },
+  {
+   "name": "sessionOf",
+   "n": 2,
+   "pkgs": [
+    "forge-cad",
+    "forge-messenger"
+   ],
+   "sites": [
+    "forge-cad/lib/tools.js:33",
+    "forge-messenger/lib/filter.js:178"
+   ]
+  },
+  {
+   "name": "shadowClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6037",
+    "forge-canvas/src/codegen.ts:80"
+   ]
+  },
+  {
+   "name": "shortIds",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5921",
+    "forge-canvas/src/design-diff.ts:411"
+   ]
+  },
+  {
+   "name": "sizeClasses",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6008",
+    "forge-canvas/src/codegen.ts:56"
+   ]
+  },
+  {
+   "name": "skip",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/pm-v2-verify.mjs:24",
+    "scripts/preset-var-check.mjs:454"
+   ]
+  },
+  {
+   "name": "slugify",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-pm/lib/md-store.js:1830",
+    "forge-pm/lib/member-registry.js:291"
+   ]
+  },
+  {
+   "name": "spaceTable",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5127",
+    "forge-canvas/src/token-map.ts:102"
+   ]
+  },
+  {
+   "name": "spacingClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5995",
+    "forge-canvas/src/codegen.ts:46"
+   ]
+  },
+  {
+   "name": "stepValues",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5121",
+    "forge-canvas/src/token-map.ts:92"
+   ]
+  },
+  {
+   "name": "summarize",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "scripts"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-tools.js:73",
+    "scripts/run-gates.mjs:1249"
+   ]
+  },
+  {
+   "name": "summarizeResolution",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6315",
+    "forge-canvas/src/component-map.ts:107"
+   ]
+  },
+  {
+   "name": "textLiteral",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6171",
+    "forge-canvas/src/codegen.ts:206"
+   ]
+  },
+  {
+   "name": "themeCandidatePaths",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4702",
+    "forge-canvas/src/theme-tokens.ts:125"
+   ]
+  },
+  {
+   "name": "themeTextFrom",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4727",
+    "forge-canvas/src/theme-tokens.ts:159"
+   ]
+  },
+  {
+   "name": "to255",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5968",
+    "forge-canvas/src/codegen.ts:25"
+   ]
+  },
+  {
+   "name": "today",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-pm/lib/md-store.js:1839",
+    "forge-pm/lib/member-registry.js:287"
+   ]
+  },
+  {
+   "name": "tokenVarNames",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5175",
+    "forge-canvas/src/token-map.ts:182"
+   ]
+  },
+  {
+   "name": "toTokenUsage",
+   "n": 2,
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-workbuddy-direct"
+   ],
+   "sites": [
+    "forge-cli-provider/lib/chunks.js:31",
+    "forge-workbuddy-direct/lib/protocol.js:850"
+   ]
+  },
+  {
+   "name": "toYmd",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-pm/src/pm/project-line.tsx:257",
+    "forge-pm/src/pm/shared/date-picker.tsx:31"
+   ]
+  },
+  {
+   "name": "traeHome",
+   "n": 2,
+   "pkgs": [
+    "forge-trae-direct"
+   ],
+   "sites": [
+    "forge-trae-direct/lib/protocol.js:114",
+    "forge-trae-direct/trae-extension/extension.js:54"
+   ]
+  },
+  {
+   "name": "typeCssVars",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-design"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4791",
+    "forge-design/src/type.ts:64"
+   ]
+  },
+  {
+   "name": "typeTable",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5122",
+    "forge-canvas/src/token-map.ts:95"
+   ]
+  },
+  {
+   "name": "typeVar",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-design"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4790",
+    "forge-design/src/type.ts:60"
+   ]
+  },
+  {
+   "name": "uniqueCls",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:6343",
+    "forge-canvas/src/codegen-project.ts:77"
+   ]
+  },
+  {
+   "name": "useIsMobile",
+   "n": 2,
+   "pkgs": [
+    "forge-design",
+    "forge-pm"
+   ],
+   "sites": [
+    "forge-design/src/hooks/use-mobile.tsx:5",
+    "forge-pm/src/hooks/use-mobile.ts:6"
+   ]
+  },
+  {
+   "name": "validate",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4331",
+    "forge-canvas/src/migrate.ts:151"
+   ]
+  },
+  {
+   "name": "walkDesignKeys",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4414",
+    "forge-canvas/src/migrate.ts:250"
+   ]
+  },
+  {
+   "name": "walkStrokeNormalize",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:4472",
+    "forge-canvas/src/migrate.ts:344"
+   ]
+  },
+  {
+   "name": "WidthHandle",
+   "n": 2,
+   "pkgs": [
+    "forge-pm",
+    "forge-ui"
+   ],
+   "sites": [
+    "forge-pm/src/pm/shared/width-handles.tsx:105",
+    "forge-ui/src/dsh/doc-width.tsx:146"
+   ]
+  },
+  {
+   "name": "withChildren",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "sites": [
+    "forge-canvas/lib/canvas-core.js:5058",
+    "forge-canvas/src/operation-reducer.ts:133"
+   ]
+  },
+  {
+   "name": "write",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/p3-shadow-read.mjs:19",
+    "scripts/plugin-fiber-phase-probe.mjs:90"
+   ]
+  },
+  {
+   "name": "扫文件",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/data-root-check.mjs:101",
+    "scripts/runtime-secret-check.mjs:94"
+   ]
+  },
+  {
+   "name": "键",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "sites": [
+    "scripts/data-root-check.mjs:119",
+    "scripts/runtime-secret-check.mjs:141"
+   ]
+  }
+ ],
+ "dupClusters": [
+  {
+   "root": "fail",
+   "n": 49,
+   "pkgs": [
+    "forge-agent-protocol",
+    "forge-agents",
+    "forge-canvas",
+    "forge-model",
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-agent-protocol/lib/index.js:495",
+    "forge-agents/lib/registry-store.js:416",
+    "forge-agents/lib/registry-store.js:464",
+    "forge-canvas/src/engine.ts:1039",
+    "forge-canvas/src/engine.ts:1063",
+    "forge-canvas/src/engine.ts:1073",
+    "forge-canvas/src/engine.ts:1110",
+    "forge-canvas/src/engine.ts:1205",
+    "forge-canvas/src/engine.ts:1279",
+    "forge-canvas/src/engine.ts:1302",
+    "forge-canvas/src/engine.ts:1353",
+    "forge-canvas/src/engine.ts:1415",
+    "forge-canvas/src/engine.ts:145",
+    "forge-canvas/src/engine.ts:1472",
+    "forge-canvas/src/engine.ts:1505",
+    "forge-canvas/src/engine.ts:1562",
+    "forge-canvas/src/engine.ts:1580",
+    "forge-canvas/src/engine.ts:1632",
+    "forge-canvas/src/engine.ts:1645",
+    "forge-canvas/src/engine.ts:1683",
+    "forge-canvas/src/engine.ts:1708",
+    "forge-canvas/src/engine.ts:183",
+    "forge-canvas/src/engine.ts:206",
+    "forge-canvas/src/engine.ts:221",
+    "forge-canvas/src/engine.ts:257",
+    "forge-canvas/src/engine.ts:282",
+    "forge-canvas/src/engine.ts:354",
+    "forge-canvas/src/engine.ts:379",
+    "forge-canvas/src/engine.ts:459",
+    "forge-canvas/src/engine.ts:531",
+    "forge-canvas/src/engine.ts:598",
+    "forge-canvas/src/engine.ts:601",
+    "forge-canvas/src/engine.ts:641",
+    "forge-canvas/src/engine.ts:659",
+    "forge-canvas/src/engine.ts:685",
+    "forge-canvas/src/engine.ts:702",
+    "forge-canvas/src/engine.ts:746",
+    "forge-canvas/src/engine.ts:784",
+    "forge-canvas/src/engine.ts:809",
+    "forge-canvas/src/engine.ts:840",
+    "forge-canvas/src/engine.ts:871",
+    "forge-canvas/src/engine.ts:914",
+    "forge-canvas/src/engine.ts:932",
+    "forge-canvas/src/engine.ts:973",
+    "forge-canvas/src/engine.ts:979",
+    "forge-canvas/src/engine.ts:999",
+    "forge-model/lib/store/registry-ops.js:93",
+    "forge-model/lib/store/registry-ops.js:98",
+    "forge-pm/lib/message/address.js:15"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "docImportAction",
+   "n": 32,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/lib/agent-tools.js:857",
+    "forge-pm/lib/agent-tools.js:882",
+    "forge-pm/lib/routes/documents.routes.js:184",
+    "forge-pm/lib/routes/documents.routes.js:248",
+    "forge-pm/lib/routes/documents.routes.js:25",
+    "forge-pm/lib/routes/documents.routes.js:323",
+    "forge-pm/lib/routes/documents.routes.js:34",
+    "forge-pm/lib/routes/documents.routes.js:362",
+    "forge-pm/lib/routes/documents.routes.js:386",
+    "forge-pm/lib/routes/documents.routes.js:417",
+    "forge-pm/lib/routes/documents.routes.js:443",
+    "forge-pm/lib/routes/documents.routes.js:586",
+    "forge-pm/lib/routes/documents.routes.js:86",
+    "forge-pm/lib/routes/issues.routes.js:228",
+    "forge-pm/lib/routes/issues.routes.js:281",
+    "forge-pm/lib/routes/issues.routes.js:30",
+    "forge-pm/lib/routes/issues.routes.js:329",
+    "forge-pm/lib/routes/issues.routes.js:369",
+    "forge-pm/lib/routes/issues.routes.js:429",
+    "forge-pm/lib/routes/issues.routes.js:472",
+    "forge-pm/lib/routes/issues.routes.js:513",
+    "forge-pm/lib/routes/issues.routes.js:52",
+    "forge-pm/lib/routes/issues.routes.js:585",
+    "forge-pm/lib/routes/issues.routes.js:85",
+    "forge-pm/lib/routes/memos.routes.js:135",
+    "forge-pm/lib/routes/memos.routes.js:16",
+    "forge-pm/lib/routes/memos.routes.js:167",
+    "forge-pm/lib/routes/memos.routes.js:181",
+    "forge-pm/lib/routes/memos.routes.js:200",
+    "forge-pm/lib/routes/memos.routes.js:231",
+    "forge-pm/lib/routes/memos.routes.js:24",
+    "forge-pm/lib/routes/memos.routes.js:88"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "LinearIssueDetail",
+   "n": 30,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/linear-issue-detail.tsx:1011",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1035",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1067",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1135",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1186",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1430",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1502",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1666",
+    "forge-pm/src/pm/linear-issue-detail.tsx:176",
+    "forge-pm/src/pm/linear-issue-detail.tsx:1865",
+    "forge-pm/src/pm/linear-issue-detail.tsx:231",
+    "forge-pm/src/pm/linear-issue-detail.tsx:241",
+    "forge-pm/src/pm/linear-issue-detail.tsx:311",
+    "forge-pm/src/pm/linear-issue-detail.tsx:354",
+    "forge-pm/src/pm/linear-issue-detail.tsx:467",
+    "forge-pm/src/pm/linear-issue-detail.tsx:516",
+    "forge-pm/src/pm/linear-issue-detail.tsx:625",
+    "forge-pm/src/pm/linear-issue-detail.tsx:637",
+    "forge-pm/src/pm/linear-issue-detail.tsx:723",
+    "forge-pm/src/pm/linear-issue-detail.tsx:746",
+    "forge-pm/src/pm/linear-issue-detail.tsx:783",
+    "forge-pm/src/pm/linear-issue-detail.tsx:798",
+    "forge-pm/src/pm/linear-issue-detail.tsx:830",
+    "forge-pm/src/pm/linear-issue-detail.tsx:843",
+    "forge-pm/src/pm/linear-issue-detail.tsx:848",
+    "forge-pm/src/pm/linear-issue-detail.tsx:861",
+    "forge-pm/src/pm/linear-issue-detail.tsx:944",
+    "forge-pm/src/pm/linear-issue-detail.tsx:998",
+    "forge-pm/src/pm/session-input.ts:150",
+    "forge-pm/src/pm/session-input.ts:38"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "_parse",
+   "n": 23,
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:2874",
+    "forge-pm/lib/index.js:1010",
+    "forge-pm/lib/index.js:1068",
+    "forge-pm/lib/index.js:1113",
+    "forge-pm/lib/index.js:1116",
+    "forge-pm/lib/index.js:1185",
+    "forge-pm/lib/index.js:1186",
+    "forge-pm/lib/index.js:1320",
+    "forge-pm/lib/index.js:487",
+    "forge-pm/lib/index.js:499",
+    "forge-pm/lib/index.js:605",
+    "forge-pm/lib/index.js:632",
+    "forge-pm/lib/index.js:695",
+    "forge-pm/lib/index.js:696",
+    "forge-pm/lib/index.js:724",
+    "forge-pm/lib/index.js:856",
+    "forge-pm/lib/index.js:859",
+    "forge-pm/lib/index.js:921",
+    "forge-pm/lib/index.js:923",
+    "forge-pm/lib/index.js:966",
+    "forge-pm/lib/routes/platform.routes.js:341",
+    "forge-pm/lib/routes/platform.routes.js:350",
+    "forge-pm/lib/routes/platform.routes.js:401"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "resolveZcodeAsk",
+   "n": 19,
+   "pkgs": [
+    "forge-agents",
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-agents/lib/zcode-stdio.js:492",
+    "forge-agents/src/agent-stream/chat-parts.tsx:42",
+    "forge-pm/lib/agent-tools-project.js:148",
+    "forge-pm/lib/agent-tools-project.js:155",
+    "forge-pm/lib/agent-tools-project.js:50",
+    "forge-pm/lib/agent-tools.js:1085",
+    "forge-pm/lib/agent-tools.js:1106",
+    "forge-pm/lib/agent-tools.js:1113",
+    "forge-pm/lib/agent-tools.js:1130",
+    "forge-pm/lib/agent-tools.js:1149",
+    "forge-pm/lib/agent-tools.js:1188",
+    "forge-pm/lib/agent-tools.js:340",
+    "forge-pm/lib/agent-tools.js:363",
+    "forge-pm/lib/agent-tools.js:471",
+    "forge-pm/src/pm/issue-context-menu.tsx:269",
+    "forge-pm/src/pm/issue-context-menu.tsx:51",
+    "forge-pm/src/pm/issue-context-menu.tsx:98",
+    "forge-pm/src/pm/project-context-menu.tsx:145",
+    "forge-pm/src/pm/project-context-menu.tsx:51"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "createBrowserPanel",
+   "n": 16,
+   "pkgs": [
+    "electron-shell",
+    "forge-canvas",
+    "forge-model-protocol",
+    "forge-trader"
+   ],
+   "minToks": null,
+   "members": [
+    "electron-shell/browser-panel.js:136",
+    "electron-shell/browser-panel.js:234",
+    "electron-shell/browser-panel.js:267",
+    "electron-shell/browser-panel.js:301",
+    "electron-shell/browser-panel.js:317",
+    "electron-shell/browser-panel.js:453",
+    "electron-shell/browser-panel.js:464",
+    "electron-shell/browser-panel.js:605",
+    "electron-shell/browser-panel.js:642",
+    "electron-shell/browser-panel.js:708",
+    "electron-shell/browser-panel.js:748",
+    "electron-shell/browser-panel.js:762",
+    "electron-shell/browser-panel.js:78",
+    "forge-canvas/lib/canvas-core.js:2811",
+    "forge-model-protocol/lib/visibility.js:129",
+    "forge-trader/src/components/charts/drawing/useDrawingTools.ts:141"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "DocsLinearPage",
+   "n": 16,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/docs-linear.tsx:775",
+    "forge-pm/src/pm/docs-linear.tsx:827",
+    "forge-pm/src/pm/docs-linear.tsx:830",
+    "forge-pm/src/pm/docs-linear.tsx:896",
+    "forge-pm/src/pm/docs-linear.tsx:968",
+    "forge-pm/src/pm/linear-demo.tsx:256",
+    "forge-pm/src/pm/linear-demo.tsx:409",
+    "forge-pm/src/pm/linear-demo.tsx:419",
+    "forge-pm/src/pm/linear-demo.tsx:428",
+    "forge-pm/src/pm/linear-demo.tsx:481",
+    "forge-pm/src/pm/linear-demo.tsx:501",
+    "forge-pm/src/pm/linear-demo.tsx:504",
+    "forge-pm/src/pm/linear-demo.tsx:633",
+    "forge-pm/src/pm/linear-demo.tsx:634",
+    "forge-pm/src/pm/project-linear.tsx:1116",
+    "forge-pm/src/pm/project-linear.tsx:1119"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "createCadSession",
+   "n": 14,
+   "pkgs": [
+    "forge-cad",
+    "scripts"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-cad/lib/cad-session.js:130",
+    "forge-cad/lib/cad-session.js:132",
+    "forge-cad/lib/cad-session.js:234",
+    "forge-cad/lib/cad-session.js:303",
+    "forge-cad/lib/cad-session.js:343",
+    "forge-cad/lib/cad-session.js:391",
+    "forge-cad/lib/cad-session.js:402",
+    "forge-cad/lib/cad-session.js:446",
+    "forge-cad/lib/cad-session.js:458",
+    "forge-cad/lib/cad-session.js:474",
+    "forge-cad/lib/cad-session.js:53",
+    "forge-cad/lib/cad-session.js:62",
+    "forge-cad/lib/cad-session.js:91",
+    "scripts/runtime-secret-check.mjs:144"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "PlansDashboard",
+   "n": 13,
+   "pkgs": [
+    "forge-model"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-model/src/surfaces/plans/dashboard.tsx:211",
+    "forge-model/src/surfaces/plans/dashboard.tsx:276",
+    "forge-model/src/surfaces/plans/dashboard.tsx:324",
+    "forge-model/src/surfaces/plans/dashboard.tsx:342",
+    "forge-model/src/surfaces/plans/dashboard.tsx:392",
+    "forge-model/src/surfaces/plans/dashboard.tsx:420",
+    "forge-model/src/surfaces/plans/dashboard.tsx:443",
+    "forge-model/src/surfaces/plans/dashboard.tsx:722",
+    "forge-model/src/surfaces/plans/gateway.tsx:103",
+    "forge-model/src/surfaces/plans/gateway.tsx:112",
+    "forge-model/src/surfaces/plans/gateway.tsx:222",
+    "forge-model/src/surfaces/plans/gateway.tsx:54",
+    "forge-model/src/surfaces/plans/gateway.tsx:86"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "registerAgentRoutes",
+   "n": 12,
+   "pkgs": [
+    "forge-agents"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-agents/lib/routes.js:131",
+    "forge-agents/lib/routes.js:149",
+    "forge-agents/lib/routes.js:187",
+    "forge-agents/lib/routes.js:222",
+    "forge-agents/lib/routes.js:267",
+    "forge-agents/lib/routes.js:44",
+    "forge-agents/lib/routes.js:464",
+    "forge-agents/lib/routes.js:52",
+    "forge-agents/lib/routes.js:78",
+    "forge-agents/lib/routes.js:94",
+    "forge-agents/lib/steer-route.js:19",
+    "forge-agents/lib/steer-route.js:25"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "CreateIssueModal",
+   "n": 11,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/create-issue-modal.tsx:118",
+    "forge-pm/src/pm/create-issue-modal.tsx:198",
+    "forge-pm/src/pm/create-issue-modal.tsx:204",
+    "forge-pm/src/pm/create-issue-modal.tsx:226",
+    "forge-pm/src/pm/create-issue-modal.tsx:271",
+    "forge-pm/src/pm/create-issue-modal.tsx:293",
+    "forge-pm/src/pm/create-issue-modal.tsx:42",
+    "forge-pm/src/pm/create-issue-modal.tsx:454",
+    "forge-pm/src/pm/create-issue-modal.tsx:460",
+    "forge-pm/src/pm/create-project-modal.tsx:56",
+    "forge-pm/src/pm/create-project-modal.tsx:94"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "LayerPanel",
+   "n": 9,
+   "pkgs": [
+    "forge-cad",
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-cad/src/cad/layer-panel.tsx:137",
+    "forge-cad/src/cad/layer-panel.tsx:156",
+    "forge-cad/src/cad/ribbon.tsx:151",
+    "forge-cad/src/cad/ribbon.tsx:644",
+    "forge-cad/src/cad/ribbon.tsx:863",
+    "forge-cad/src/cad/ribbon.tsx:865",
+    "forge-canvas/src/canvas/color-popover.tsx:314",
+    "forge-canvas/src/canvas/toolbar.tsx:114",
+    "forge-canvas/src/canvas/toolbar.tsx:218"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "DocOutlineTab",
+   "n": 6,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/docs-linear.tsx:166",
+    "forge-pm/src/pm/docs-linear.tsx:170",
+    "forge-pm/src/pm/docs-linear.tsx:185",
+    "forge-pm/src/pm/docs-linear.tsx:188",
+    "forge-pm/src/pm/shared/heading-navigator.tsx:23",
+    "forge-pm/src/pm/shared/heading-navigator.tsx:25"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "ensureLongPositionRegistered",
+   "n": 6,
+   "pkgs": [
+    "forge-trader"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-trader/src/components/charts/overlays/long-position-overlay.ts:149",
+    "forge-trader/src/components/charts/overlays/long-position-overlay.ts:22",
+    "forge-trader/src/components/charts/overlays/long-position-overlay.ts:32",
+    "forge-trader/src/components/charts/overlays/short-position-overlay.ts:149",
+    "forge-trader/src/components/charts/overlays/short-position-overlay.ts:22",
+    "forge-trader/src/components/charts/overlays/short-position-overlay.ts:32"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "TagEditor",
+   "n": 6,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/shared/property-fields.tsx:697",
+    "forge-pm/src/pm/shared/property-fields.tsx:721",
+    "forge-pm/src/pm/shared/property-fields.tsx:814",
+    "forge-pm/src/pm/tags-linear.tsx:116",
+    "forge-pm/src/pm/tags-linear.tsx:17",
+    "forge-pm/src/pm/tags-linear.tsx:39"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "吸_2",
+   "n": 6,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5312",
+    "forge-canvas/lib/canvas-core.js:5327",
+    "forge-canvas/lib/canvas-core.js:5341",
+    "forge-canvas/src/layout-check.ts:315",
+    "forge-canvas/src/layout-check.ts:345",
+    "forge-canvas/src/layout-check.ts:360"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "PanelPopover",
+   "n": 5,
+   "pkgs": [
+    "forge-design"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-design/src/panel-popover.tsx:114",
+    "forge-design/src/panel-popover.tsx:64",
+    "forge-design/src/panel-popover.tsx:89",
+    "forge-design/src/sql/view/components/portal-popover.tsx:32",
+    "forge-design/src/sql/view/components/portal-popover.tsx:45"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "registerProjectTool",
+   "n": 5,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/lib/agent-tools-project.js:261",
+    "forge-pm/lib/agent-tools-project.js:290",
+    "forge-pm/lib/agent-tools.js:1223",
+    "forge-pm/lib/agent-tools.js:1339",
+    "forge-pm/lib/agent-tools.js:1391"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "AttachmentsSection",
+   "n": 4,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/shared/blocks/attachments-section.tsx:12",
+    "forge-pm/src/pm/shared/blocks/attachments-section.tsx:27",
+    "forge-pm/src/pm/shared/blocks/cover-image.tsx:12",
+    "forge-pm/src/pm/shared/blocks/cover-image.tsx:31"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "checkCanvasLayout",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5418",
+    "forge-canvas/lib/canvas-core.js:5512",
+    "forge-canvas/src/layout-check.ts:450",
+    "forge-canvas/src/layout-check.ts:557"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "CommentComposer",
+   "n": 4,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/shared/comment-composer.tsx:15",
+    "forge-pm/src/pm/shared/comment-composer.tsx:41",
+    "forge-pm/src/pm/shared/note-composer.tsx:21",
+    "forge-pm/src/pm/shared/note-composer.tsx:71"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "diagnosePairing",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5925",
+    "forge-canvas/lib/canvas-core.js:5941",
+    "forge-canvas/src/design-diff.ts:416",
+    "forge-canvas/src/design-diff.ts:442"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "gradientCss",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5571",
+    "forge-canvas/lib/canvas-core.js:5572",
+    "forge-canvas/src/gradient.ts:151",
+    "forge-canvas/src/gradient.ts:155"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "hexToRgb01",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4588",
+    "forge-canvas/src/canvas/code-sidebar.tsx:577",
+    "forge-canvas/src/color.ts:21",
+    "forge-canvas/src/html-import.ts:60"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "NumberInput",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/src/canvas/live-inspect-panel.tsx:293",
+    "forge-canvas/src/canvas/live-inspect-panel.tsx:321",
+    "forge-canvas/src/canvas/rightsidebar.tsx:565",
+    "forge-canvas/src/canvas/rightsidebar.tsx:602"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "parseThemeColors",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4626",
+    "forge-canvas/lib/canvas-core.js:4648",
+    "forge-canvas/src/theme-tokens.ts:57",
+    "forge-canvas/src/theme-tokens.ts:73"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "readBody",
+   "n": 4,
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-service-kit"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-cli-provider/lib/http.js:24",
+    "forge-cli-provider/lib/http.js:25",
+    "forge-service-kit/lib/net.js:68",
+    "forge-service-kit/lib/net.js:80"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "renderTsx",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6174",
+    "forge-canvas/lib/canvas-core.js:6206",
+    "forge-canvas/src/codegen.ts:210",
+    "forge-canvas/src/codegen.ts:243"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "startRun",
+   "n": 4,
+   "pkgs": [
+    "forge-agents"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-agents/lib/dispatch.js:552",
+    "forge-agents/lib/dispatch.js:600",
+    "forge-agents/lib/dispatch.js:649",
+    "forge-agents/lib/run-manager.js:506"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "补_",
+   "n": 4,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4876",
+    "forge-canvas/lib/canvas-core.js:4881",
+    "forge-canvas/src/token-identity.ts:134",
+    "forge-canvas/src/token-identity.ts:139"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "collectTagUsage",
+   "n": 3,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/lib/routes/tags.routes.js:182",
+    "forge-pm/lib/routes/tags.routes.js:186",
+    "forge-pm/scripts/tag-migration/validate.mjs:23"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "duplicateLabelsOf",
+   "n": 3,
+   "pkgs": [
+    "forge-qoder-direct",
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-qoder-direct/lib/adapter.js:357",
+    "forge-trae-direct/lib/adapter.js:927",
+    "forge-workbuddy-direct/lib/adapter.js:248"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "pickSessionLog",
+   "n": 3,
+   "pkgs": [
+    "forge-agents",
+    "scripts"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-agents/lib/plans-usage.js:162",
+    "scripts/distill-material.mjs:20",
+    "scripts/scan-sessions-health.mjs:22"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "检_",
+   "n": 3,
+   "pkgs": [
+    "forge-canvas",
+    "scripts"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4384",
+    "forge-canvas/src/migrate.ts:224",
+    "scripts/assembly-diff-check.mjs:55"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "<anon>",
+   "n": 2,
+   "pkgs": [
+    "electron-shell"
+   ],
+   "minToks": null,
+   "members": [
+    "electron-shell/scripts/cdp-eval.mjs:23",
+    "electron-shell/scripts/cdp-target-eval.mjs:29"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "<anon>",
+   "n": 2,
+   "pkgs": [
+    "electron-shell"
+   ],
+   "minToks": null,
+   "members": [
+    "electron-shell/scripts/cdp-shot-wv.mjs:16",
+    "electron-shell/scripts/cdp-shot.mjs:15"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "applyOperation",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4960",
+    "forge-canvas/src/operation-reducer.ts:22"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "borderClasses",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6045",
+    "forge-canvas/src/codegen.ts:87"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "canonFill",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5600",
+    "forge-canvas/src/design-diff.ts:79"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "canonLayout",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5617",
+    "forge-canvas/src/design-diff.ts:102"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "changeSetToCssPatch",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5782",
+    "forge-canvas/src/design-diff.ts:274"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "changeSetToMarkdown",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5883",
+    "forge-canvas/src/design-diff.ts:350"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "changeSetToOperations",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5838",
+    "forge-canvas/src/design-diff.ts:315"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "changeToCssDecl",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5757",
+    "forge-canvas/src/design-diff.ts:253"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "checkDesignNode",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4360",
+    "forge-canvas/src/migrate.ts:175"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "collectVarHexDeclarations",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6551",
+    "forge-canvas/src/codegen-project.ts:318"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "cssColor",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6351",
+    "forge-canvas/src/codegen-project.ts:106"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "cssStep",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6367",
+    "forge-canvas/src/codegen-project.ts:134"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "declaredByProfile",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "minToks": null,
+   "members": [
+    "scripts/assembly-check.mjs:79",
+    "scripts/migrate-subtask-parents.mjs:43"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "defaultIssuesView",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/db-adapter.ts:48",
+    "forge-pm/src/pm/docs-db.ts:82"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "describe",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6305",
+    "forge-canvas/src/component-map.ts:89"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "diffDesign",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5653",
+    "forge-canvas/src/design-diff.ts:137"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "fillBgClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6019",
+    "forge-canvas/src/codegen.ts:66"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "flatten",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5583",
+    "forge-canvas/src/design-diff.ts:54"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "fmtNum",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-model/lib/plans/table.js:336",
+    "forge-model/src/surfaces/plans/dashboard.tsx:99"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "fmtNumber",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-limits"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-model-limits/src/dsh/format.ts:11",
+    "forge-model/src/surfaces/plans/plans-shared.tsx:176"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "fromDoc",
+   "n": 2,
+   "pkgs": [
+    "scripts"
+   ],
+   "minToks": null,
+   "members": [
+    "scripts/audit-doc-sync.mjs:42",
+    "scripts/audit-freshness.mjs:39"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "generateComponent",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6232",
+    "forge-canvas/src/codegen.ts:271"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "generateProjectComponent",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6503",
+    "forge-canvas/src/codegen-project.ts:280"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "gradientFirstHex",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/src/canvas/rightsidebar.tsx:1050",
+    "forge-canvas/src/gradient.ts:91"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "loadInventory",
+   "n": 2,
+   "pkgs": [
+    "forge-plugin-status",
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-plugin-status/src/inventory.ts:62",
+    "forge-pm/src/pm/api.ts:1198"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "lookup",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5067",
+    "forge-canvas/src/token-map.ts:56"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "mapLeading",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5143",
+    "forge-canvas/src/token-map.ts:146"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "migrate",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4266",
+    "forge-canvas/src/migrate.ts:63"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "migratePageV2",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4313",
+    "forge-canvas/src/migrate.ts:119"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "nodeClasses",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6055",
+    "forge-canvas/src/codegen.ts:105"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "nodeRules",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6392",
+    "forge-canvas/src/codegen-project.ts:169"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "normalizeForDiff",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5628",
+    "forge-canvas/src/design-diff.ts:111"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "normalizeGridSpec",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4439",
+    "forge-canvas/src/migrate.ts:302"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "opacityClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6030",
+    "forge-canvas/src/codegen.ts:75"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "overlaps",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5187",
+    "forge-canvas/src/layout-check.ts:32"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "PagerDot",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/src/canvas/layers.tsx:17",
+    "forge-canvas/src/canvas/sidebar.tsx:117"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "parseArgs",
+   "n": 2,
+   "pkgs": [
+    "forge-messenger"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-messenger/lib/inflight-cli.mjs:43",
+    "forge-messenger/lib/resume-cli.mjs:33"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "parseHm",
+   "n": 2,
+   "pkgs": [
+    "forge-model",
+    "forge-model-protocol"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-model-protocol/lib/promotion.js:100",
+    "forge-model/lib/plans/equiv-cost.js:117"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "parseRadiusTokens",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4745",
+    "forge-canvas/src/theme-tokens.ts:194"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "projectCreate",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/lib/agent-tools-project.js:173",
+    "forge-pm/lib/agent-tools.js:391"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "projectList",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/lib/agent-tools-project.js:116",
+    "forge-pm/lib/agent-tools.js:276"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "projectStatus",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/lib/agent-tools-project.js:198",
+    "forge-pm/lib/agent-tools.js:445"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "projectUpdate",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/lib/agent-tools-project.js:183",
+    "forge-pm/lib/agent-tools.js:415"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "promotionLabel",
+   "n": 2,
+   "pkgs": [
+    "forge-model"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-model/src/model-select/labels.ts:118",
+    "forge-model/src/surfaces/plans/model-source.tsx:176"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "radiusStepsFromTheme",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4766",
+    "forge-canvas/src/theme-tokens.ts:223"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "render",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6455",
+    "forge-canvas/src/codegen-project.ts:231"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "resolveComponent",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6279",
+    "forge-canvas/src/component-map.ts:61"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "rgbToHex",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4582",
+    "forge-canvas/src/color.ts:12"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "runImpactCli",
+   "n": 2,
+   "pkgs": [
+    "forge-repowiki"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-repowiki/lib/code-query.js:127",
+    "forge-repowiki/lib/wiki-query.js:727"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "scanCatalogDir",
+   "n": 2,
+   "pkgs": [
+    "forge-agents",
+    "forge-workbuddy-direct"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-agents/lib/workbuddy-model-list.js:180",
+    "forge-workbuddy-direct/lib/protocol.js:253"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "shadowClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6037",
+    "forge-canvas/src/codegen.ts:80"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "spacingClass",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5995",
+    "forge-canvas/src/codegen.ts:46"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "StatusChip",
+   "n": 2,
+   "pkgs": [
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-pm/src/pm/member-detail.tsx:220",
+    "forge-pm/src/pm/members-settings.tsx:26"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "summarizeResolution",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:6315",
+    "forge-canvas/src/component-map.ts:107"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "toHex",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4610",
+    "forge-canvas/src/theme-tokens.ts:41"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "typeCssVars",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas",
+    "forge-design"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4791",
+    "forge-design/src/type.ts:64"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "useIsMobile",
+   "n": 2,
+   "pkgs": [
+    "forge-design",
+    "forge-pm"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-design/src/hooks/use-mobile.tsx:5",
+    "forge-pm/src/hooks/use-mobile.ts:6"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "validate",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4331",
+    "forge-canvas/src/migrate.ts:151"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "writeCreditCache",
+   "n": 2,
+   "pkgs": [
+    "forge-trae-direct",
+    "forge-workbuddy-direct"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-trae-direct/lib/adapter.js:816",
+    "forge-workbuddy-direct/lib/adapter.js:812"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "兄_",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5228",
+    "forge-canvas/src/layout-check.ts:165"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "判_",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4862",
+    "forge-canvas/src/token-identity.ts:113"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "判_2",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4934",
+    "forge-canvas/src/token-identity.ts:228"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "归_",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5265",
+    "forge-canvas/src/layout-check.ts:210"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "栅_",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5244",
+    "forge-canvas/src/layout-check.ts:178"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "生_",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:5197",
+    "forge-canvas/src/layout-check.ts:66"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "解_",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4066",
+    "forge-canvas/src/schema.ts:183"
+   ],
+   "truncated": false
+  },
+  {
+   "root": "读_",
+   "n": 2,
+   "pkgs": [
+    "forge-canvas"
+   ],
+   "minToks": null,
+   "members": [
+    "forge-canvas/lib/canvas-core.js:4835",
+    "forge-canvas/src/token-identity.ts:65"
+   ],
+   "truncated": false
+  }
+ ],
+ "hoistingOnly": []
+}

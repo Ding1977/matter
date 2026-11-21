@@ -1,0 +1,92 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "PM 三包 K12 白名单，逐条 reason、只许减不许增，属存量豁免。"
+  },
+  "meta": {
+    "generator": "scripts/pm-structure-baseline.mjs（--check 按此台账对照 K12 事实）",
+    "note": "PM 格三包 K12 白名单台账（ISS-576 · DOC-380 PM-S0）。判据 = docs/code.md §13（K12a~K12j + 审计项 audit-types-src）；⚠️ §13 目前在 ISS-575 在途分支、main 尚无 —— 引用暂悬空是有意的，彼处落地后 id 以其为准迁移（audit-types-src ↔ K12k 同义，二合一）。纪律：每条 = 为什么允许 + 收口动作 + 归批（缺 reason/action/batch 由脚本判红）；欠账还清不删条目也算红；新偏离未登记 = 红。本台账是数据侧工件，ISS-575 S0 的 manifest 门禁落地后若格式冲突，以彼处为准迁移。",
+    "created": "2026-10-03",
+    "runtimeGeneration": "0.2.0-rc.2"
+  },
+  "packages": {
+    "forge-pm": [
+      {
+        "check": "K12f-src-star",
+        "reason": "缺 ./src/* 只影响官方 verify-export-jsdoc 严格度，零运行影响（DOC-376 §2.2）",
+        "action": "补 exports[\"./src/*\"].default 指向 src 源码树",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "audit-types-src",
+        "reason": "types 指向 src/dsh/client-entry.ts：运行时只读 default 故零运行影响，但产物路径不统一是 S4 构建链主项（🔴 档，逐包过 + 双引擎回归）",
+        "action": "类型产物化：types 改指 lib/types 产物",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "K12h-readme",
+        "reason": "纯文档缺失",
+        "action": "补 README.md（四段契约照官方 B35）",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "K12c-inject",
+        "reason": "inject 写了服务名（inputTriggers / forge.surfaces）——K12c 要求包名；已有统一收口单 ISS-574（12 包一并改，含装配卫生 4 项），PM 不单独动以免两套口径",
+        "action": "随 ISS-574 改为包名声明",
+        "batch": "ISS-574（在途）"
+      },
+      {
+        "check": "K12i-schema",
+        "reason": "配置面（proxyBase / 输入源等）无 Schemastery schema：无校验无默认值无文档（DOC-376 §2.2：0/16 共性）；加 schema 动装配行为面，须连双引擎回归",
+        "action": "host 半 export const Config（Schemastery），字段取官方 basic/config 范式",
+        "batch": "PM-S4"
+      }
+    ],
+    "forge-messenger": [
+      {
+        "check": "K12f-src-star",
+        "reason": "缺 ./src/*（零运行影响）",
+        "action": "补子入口",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "K12h-readme",
+        "reason": "纯文档缺失",
+        "action": "补 README.md",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "K12i-schema",
+        "reason": "配置（me 等）无 schema 声明（0/16 共性）",
+        "action": "export const Config（Schemastery）",
+        "batch": "PM-S4"
+      }
+    ],
+    "forge-teammate-model": [
+      {
+        "check": "K12f-src-star",
+        "reason": "缺 ./src/*（零运行影响）",
+        "action": "补子入口",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "K12h-readme",
+        "reason": "纯文档缺失",
+        "action": "补 README.md",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "K12i-schema",
+        "reason": "配置（switchRoot/rootSessionId/providers 等）无 schema 声明（0/16 共性）",
+        "action": "export const Config（Schemastery）",
+        "batch": "PM-S4"
+      },
+      {
+        "check": "K12f-pkgjson",
+        "reason": "exports 缺 ./package.json（L2 惯例）",
+        "action": "补 exports[\"./package.json\"]",
+        "batch": "PM-S4"
+      }
+    ]
+  }
+}

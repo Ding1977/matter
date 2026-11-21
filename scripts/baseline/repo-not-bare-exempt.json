@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "有意删除入库文件的 B2 豁免登记（文件名即 exempt），逐条 why，属豁免。",
+    "gate": "verify-repo-not-bare",
+    "rule": "B2",
+    "why": "有意删除入库文件必须在此登记，否则 B2 判误删",
+    "issue": "ISS-809"
+  },
+  "deleted": [
+    {
+      "path": "scripts/ci-observe.mjs",
+      "issue": "ISS-809",
+      "why": "退役：无调用方，被 run-gates --tier ci 的 46 格逐包判据取代"
+    },
+    {
+      "path": "scripts/ci-dryrun.sh",
+      "issue": "ISS-809",
+      "why": "退役：无调用方；老板裁「远程只做仓库不做检查」，无需复现远程环境"
+    },
+    {
+      "path": "scripts/ci-local.mjs",
+      "issue": "ISS-809",
+      "why": "退役：无调用方，被 run-gates --tier ci 取代"
+    }
+  ]
+}

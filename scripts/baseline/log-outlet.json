@@ -1,0 +1,54 @@
+{
+ "recordedAt": "2026-10-24",
+ "tool": "lint-log-outlet.mjs --write",
+ "scope": "forge-*/lib 下非测试 .js/.mjs 的手写文件（GENERATED 名单内的生成物不计）；只数代码行（注释不计）",
+ "ceilings": {
+  "G1": {
+   "forge-agents": 36,
+   "forge-browser": 1,
+   "forge-cad": 5,
+   "forge-canvas": 2,
+   "forge-cli-provider": 13,
+   "forge-mermaid": 3,
+   "forge-messenger": 3,
+   "forge-model": 76,
+   "forge-model-limits": 2,
+   "forge-pm": 68,
+   "forge-qoder-direct": 2,
+   "forge-service-kit": 1,
+   "forge-trader": 5,
+   "forge-trae-direct": 3,
+   "forge-ui": 1,
+   "forge-window-chrome": 1,
+   "forge-workbuddy-direct": 3,
+   "forge-router-direct": 3
+  },
+  "G2": {
+   "forge-agent-protocol": 2,
+   "forge-agents": 15,
+   "forge-browser": 2,
+   "forge-cad": 21,
+   "forge-cli-provider": 5,
+   "forge-messenger": 1,
+   "forge-model": 35,
+   "forge-pm": 7,
+   "forge-qoder-direct": 1,
+   "forge-repowiki": 2,
+   "forge-service-kit": 7,
+   "forge-trader": 3,
+   "forge-trae-direct": 1,
+   "forge-ui": 1,
+   "forge-workbuddy-direct": 1,
+   "forge-router-direct": 7
+  },
+  "G3": {
+   "forge-agents": 1,
+   "forge-messenger": 2,
+   "forge-pm": 1
+  }
+ },
+ "ledgerNotes": [
+  "2026-11-09 · ISS-765：只做两笔账务，未重记任何上限 —— ① forge-router-direct 建账（G1=3 / G2=7，ISS-679r 新增包从未入账 ⇒ 原先它的命中被 compareCeilings 静默忽略）；② forge-impact 清账（G3 上限 2，包已整包退役）。同日另有 5 项超限是通过**改代码**消掉的，不是抬上限：G1/agents 37→34 · G1/pm 73→67 · G1/trader 6→5 · G2/messenger 5→1 · G2/pm 19→7（各自回到 2026-10-24 的原上限内）。",
+  "2026-11-09 · ISS-765 建账：forge-trader 的 G2（裸 throw）从未入账 —— 这 3 处在 2026-10-24 那次全量重记时就已存在（不是新增），但 compareCeilings() 只遍历 ceilings ⇒ 一直被静默忽略。本笔只补账位（= 现值 3），不新增豁免、不改任何上限。"
+ ]
+}

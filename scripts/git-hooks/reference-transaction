@@ -1,0 +1,56 @@
+#!/bin/sh
+# ISS-550 · 主检出 HEAD 守卫（git reference-transaction 钩子）
+#
+# 拦什么：**主检出**的 HEAD 被切到非 main 分支。这正是 2026-09-30 那起事故的动作 ——
+#   派单链路在主检出上跑 `git checkout -b`，把正在跑服务的那份检出切走两次
+#   （17:58 → ISS-548、18:37 → ISS-549）；19:01 的 `merge ISS-996` 因此落在 ISS-549
+#   分支上，四个提交从未进 main。
+#
+# 为什么在 git 这一层还留一道闸（生成端已经修好了）：
+#   宿主代码修好只覆盖"新代码"；**旧 lib 还在内存里的宿主、别的会话、Orca、以及任何照着
+#   旧提示词执行 `git checkout` 的 agent** 都不受它约束。钩子按调用方生效，是本仓唯一一个
+#   「谁来都拦」的位置 —— 守卫要有牙，牙就长在这儿。
+#
+# 判据（只做这一件事，别的全放行）：
+#   · 只拦**主检出**（git-dir == git-common-dir）；工作树里本来就该切分支，一概不管。
+#   · 只拦 HEAD 指向非 `refs/heads/main` 的变更；**切回 main 放行**（收口要用）。
+#   · `git worktree add` 写的是**新工作树**的 HEAD，不是在切主检出 ⇒ 放行
+#     （判据：新值出现在 `<common>/worktrees/*/HEAD` 里，含 `--detach` 的裸 sha）。
+#   · 认不出来就放行（fail-open）：守卫只拦它认得的那个动作，绝不因为看不懂就挡人干活。
+#
+# 放行清单（都实测过）：git branch <name> <base> · commit · merge · checkout main ·
+#   worktree add（含 --detach）· 所有工作树内的操作。
+# 应急放行：FORGE_ALLOW_MAIN_CHECKOUT_SWITCH=1
+[ "$1" = "prepared" ] || exit 0
+[ "$FORGE_ALLOW_MAIN_CHECKOUT_SWITCH" = "1" ] && exit 0
+
+gd=$(git rev-parse --git-dir 2>/dev/null) || exit 0
+gc=$(git rev-parse --git-common-dir 2>/dev/null) || exit 0
+[ -n "$gd" ] && [ "$gd" = "$gc" ] || exit 0   # 工作树/裸仓：不是主检出，放行
+
+while read -r _old new ref; do
+  [ "$ref" = "HEAD" ] || continue
+  target=${new#ref:}
+  [ "$target" = "refs/heads/main" ] && continue
+  if [ -n "$gc" ] && [ -d "$gc/worktrees" ] \
+     && grep -rqsxF -e "ref: $target" -e "$target" "$gc/worktrees"; then
+    continue                                   # git worktree add：新树自己的 HEAD
+  fi
+  # ⚠️ 已知边界（审查轮 R1 实测，按 fail-open 认下，不假装它拦得住）：
+  #   ① `git checkout --ignore-other-worktrees <branch>` 能绕过本闸切走主检出；
+  #   ② 任何工作树的 HEAD 恰好等于某 sha 时，在主检出 `git checkout <sha>` 会变 detached 而不被拦。
+  #   但上面这条 grep 是**承重的**：删掉它 `git worktree add` 会 rc=128（`ws.sh new` 直接坏），
+  #   在"精确区分动作"做不到的前提下，宁可留这两条已知绕过 —— 闸的价值是让**默认路径**（`checkout -b`）
+  #   不可能复发，不是充当安全边界。
+  cat >&2 <<EOF
+
+✗ 拒绝：主检出 HEAD 被切到 ${target#refs/heads/}（ISS-550 守卫）
+  主 checkout 只跑服务与收口合并（AGENTS.md §4.7）—— 它一被切走，别人的未提交改动就跟着
+  换分支，服务加载的代码也变成别的分支的。
+  要开发请用独立工作树（在任意目录执行都行）：
+      bash scripts/ws.sh new <ISS-NNN>        # 落点 ~/wt/dsh-forge/<ISS-NNN>
+  把主检出切回 main 不受本闸限制；确要绕过：FORGE_ALLOW_MAIN_CHECKOUT_SWITCH=1
+EOF
+  exit 1
+done
+exit 0

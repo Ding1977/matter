@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "purpose": "pin oxlint 规则集的语义指纹：任何一条规则的存在性 / 严重级 / 参数变化都会让 sha256 变（ISS-840 / W0-GATE-G4）。归一化逐字照抄 DSH 官方 lint-rule-fingerprint.spec.ts:44-62。",
+    "how": "profiles 的键是**生效射程**，不是配置组号：root:src = 顶层 rules + override #0 + #1（src 非测试文件）；root:test = 顶层 rules + override #0 + #2（src 里的 *.test/*.spec）。members[].index 是 override 在配置里的下标，members[].files/excludeFiles 是射程签名（登记口径为排序后的数组）。改射程或插组 ⇒ 报「射程签名不符」，不会算出一个看似正常的错数。",
+    "recompute": "node scripts/gates/lint-rule-fingerprint.ts --check 报红时会印出实际 sha256 与条数；确认改动是有意的之后，把新值抄回本文件对应 profile 的 count / sha256。"
+  },
+  "profiles": {
+    "root:src": {
+      "config": ".oxlintrc.json",
+      "count": 71,
+      "sha256": "178003a0b9d464d21719194bc175aef0851dfdc3b4dab323d676663e6d10bb14",
+      "members": [
+        {
+          "index": 0,
+          "files": ["forge-*/src/**/*.{ts,tsx}"],
+          "excludeFiles": null
+        },
+        {
+          "index": 1,
+          "files": ["forge-*/src/**/*.{ts,tsx}"],
+          "excludeFiles": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.test.ts", "**/*.test.tsx"]
+        }
+      ]
+    },
+    "root:test": {
+      "config": ".oxlintrc.json",
+      "count": 66,
+      "sha256": "8fed5e3febf4c1e90255c0012534734c09e77495fdf07c566beb8ba236ad6e6a",
+      "members": [
+        {
+          "index": 0,
+          "files": ["forge-*/src/**/*.{ts,tsx}"],
+          "excludeFiles": null
+        },
+        {
+          "index": 2,
+          "files": ["forge-*/src/**/*.spec.ts", "forge-*/src/**/*.spec.tsx", "forge-*/src/**/*.test.ts", "forge-*/src/**/*.test.tsx"],
+          "excludeFiles": null
+        }
+      ]
+    },
+    "next": {
+      "config": ".oxlintrc.next.json",
+      "count": 3,
+      "sha256": "158d60dbbc201eae5a91cc5eb2a66947d87074c7a618bd235836d5817ac3bc35",
+      "members": []
+    }
+  }
+}

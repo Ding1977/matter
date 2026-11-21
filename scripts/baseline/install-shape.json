@@ -1,0 +1,39 @@
+{
+  "recordedAt": "2026-09-24T08:12:50Z",
+  "counts": {
+    "pkgs": 23,
+    "entries": 330,
+    "links": 330,
+    "realDirs": 0,
+    "broken": 0,
+    "outside": 0,
+    "versionDrift": 0
+  },
+  "perPkg": {
+    "forge-shell": 9,
+    "forge-agent-protocol": 1,
+    "forge-agents": 14,
+    "forge-cli-provider": 4,
+    "forge-terminal": 10,
+    "forge-browser": 14,
+    "forge-monitor": 12,
+    "forge-native": 12,
+    "forge-ui": 22,
+    "forge-notify-bridge": 3,
+    "forge-notify": 11,
+    "forge-codeguide": 12,
+    "forge-pm": 61,
+    "forge-files": 21,
+    "forge-canvas": 20,
+    "forge-trader": 18,
+    "forge-cad": 17,
+    "forge-design": 27,
+    "forge-archive": 3,
+    "forge-db": 12,
+    "forge-model": 22,
+    "forge-service-kit": 3,
+    "forge-services": 2
+  },
+  "findings": [],
+  "note": "上限=形状基线：干净安装（bun install --frozen-lockfile）后录。真目录/断链/指向仓外/版本漂 都是 ISS-791 那一族的形状。只报不红；要升红由老板定（--strict）。"
+}

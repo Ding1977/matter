@@ -1,0 +1,255 @@
+#!/usr/bin/env bash
+# pre-push —— 本地快闸（ISS-909 · ISS-715 改调 run-gates）
+#
+# 为什么装在这里：仓里 52 项体检判据 46 项能判红，但落在合入路径上的是 0/52 ——
+# CI 的 repo gates 排在 test 之后，test 一红它就 skipped；而 GitHub 免费私有仓开不了分支保护
+# （gh api …/protection → 403），**远端拦不住任何一次 push**。所以真闸只能做在本地这一头。
+#
+# ## ISS-715：从「4 格」换成「85 格」
+#
+# 修前：本钩子调 `scripts/gate-fast.mjs` —— 那是**另一台机器**（4 格棘轮：设计 R / 代码 K /
+#   依赖 / 能力契约）。`scripts/run-gates.mjs`（85 格 fast 档，实测 3~9s）合入 main 后
+#   **零调用方**，等于一台放着没人按开关的机器。「lint-oxlint 判据做得再好，红不红只看
+#   有没有人手动想起去跑它」—— 这就是本钩子改调它的全部理由。
+#
+# ## 存量红怎么办：只拦**新增**（乙案），不拦存量
+#
+# 实测（main@7ff0dee4）：fast 档 70~71 绿 / 12 红 / 2~3 判不了。**12 红全是存量**，
+# 与本单无关。若直接切全拦（丙案），任何人 push 都会被这 12 格拦死 —— 那不是「闸严」，
+# 是把闸变成「必须 --no-verify」的开关，长红的门禁等于没有门禁（gate-fast.mjs 头注同理）。
+#
+# 「哪个是存量」的判法（乙案唯一的难点）：**现算，不抄快照**。
+#   `run-gates --diff-baseline` 会 `git worktree add --detach` 出一棵基线树，跑**同一把尺子**
+#   量基线树与当前树，只把「当前树红、基线树不红」的格判红。
+#   基线 = `merge-base(HEAD, origin/main)`（分支起点）；远端同名分支的 sha 只在它是该起点的
+#   **后代**时才上收（那时才能把「本次新增」精确到真新增的那几个提交）。
+#   ⛔ 不能「远端 sha 优先」（ISS-804 事故：main 退役门禁格后，旧远端 sha 带旧格集合
+#   ⇒ 两棵树格数不等 ⇒ 拦死所有落后于该改动的分支）。
+#   为什么不用 gate-debt.json 那种静态快照：main 前进后没人复录，快照必然腐坏 ——
+#   `gate-fast.mjs` 自己就在头注里记着这个坑（09-29 实测：登记 112，现值 481）。
+#
+# ## 配比与代价（实测，本机 M 系列）
+#   85 格 fast 档                    3.5~8.7s（并发 10）
+#   + 基线树一次（首次建树 ~0.2s）   与当前树同一把尺子再跑一遍 ⇒ 合计 3.5~8.8s
+#   合计 ≈ 8.8s。低于「慢到没人用的闸等于没有闸」那条线。重的那一档归 CI 与收工体检。
+#
+# ## 绕过口（有意只留 git 自带那一个，不设私有旗标）
+#   git push --no-verify   ⇒ 能绕，但绕不过"要留痕"：请在本轮 issue note 里写明为什么绕。
+#   不设 MATTER_GATE_SKIP 之类的后门：静默可绕的闸没有信息价值。
+#
+# ## ISS-808：格集合合法地变了，不再只能 --no-verify
+#   原行为：两棵树格数不等 ⇒ run-gates 直接 exit 2 ⇒ 改登记表的提交**永远推不上去**。
+#   实测两次（同一天）：ISS-805 fast 94→99 格、ISS-806 fast 92→42 格，都只能 --no-verify。
+#   现在：run-gates 自己判「决定格集合的文件（registry / gate-tables / inline-gates）在
+#   基线..HEAD 之间动过没有」——
+#     · 动过 ⇒ 合法换尺子，接着判，但**逐 id 印出增删**，红绿只按交集+新增格算；
+#     · 没动 ⇒ 照旧 exit 2（这正是本闸要拦的「收窄/缓存算歪了」）。
+#   自动判据只看得见**已提交**的改动。要在提交前推、或确信合法而它认不出来时：
+#     GATE_EXPECT_BATCH_CHANGE=1 git push   （仍会印增删清单，不是静默放行）
+# ## ISS-802：禁止直推 main（本钩子的**第二条**判据）
+#   修前本钩子读 stdin 的 ref 行**只为算基线**，从不判断「这次 push 该不该发生」——
+#   实测 2026-11-12 有成员直推 origin/main（797115cc..2c901cde）而钩子放行，PR 审查被整段绕过。
+#   逃逸口 FORGE_ALLOW_MAIN_PUSH=1（与 reference-transaction 的
+#   FORGE_ALLOW_MAIN_CHECKOUT_SWITCH 同一风格：变量名说明放行的是什么，放行必留痕）。
+set -uo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT" || exit 2
+
+# stdin 是 `<local_ref> <local_oid> <remote_ref> <remote_oid>` 每行一条。
+# **先整段读进来**：这个流只能读一次，而下面要过两遍（① 有没有东西要推 ② 取远端基线）。
+PUSH_LINES="$(cat)"
+
+# ── ISS-802 判据①：禁止直推 main ─────────────────────────────────────────────
+# 为什么放在「有没有东西要推」之前：删远端 main（`git push origin :main` / `--delete main`）
+#   那行 local_oid 全 0，会被下面 pushing_something 判成「没东西要推」而直接 exit 0 ——
+#   删 main 比推 main 更狠，不该是唯一漏网的那个动作。
+# 为什么比对远端 ref 全名而不是命令行里的 `main` 字样：git 会把两条写法都规范化成
+#   remote_ref=refs/heads/main（实测 git 2.54）——
+#     git push origin main              → refs/heads/main refs/heads/main
+#     git push origin HEAD:refs/heads/main → HEAD refs/heads/main
+#   故拿 stdin 的 **远端侧** 比对即可覆盖同名简写、显式 refspec、以及任意远端名。
+while read -r _local_ref _local_oid remote_ref _remote_oid; do
+  [[ "${remote_ref:-}" == "refs/heads/main" ]] || continue
+  if [[ "${FORGE_ALLOW_MAIN_PUSH:-}" == "1" ]]; then
+    # 放行必须留痕：说不出「为什么放行」的闸等于没有闸。
+    echo "⚠️ FORGE_ALLOW_MAIN_PUSH=1 ⇒ 放行直推 main（绕过 PR 审查，ISS-802 判据①）" >&2
+    continue
+  fi
+  cat >&2 <<EOF
+
+✗ 拒绝：这次 push 的目标是 refs/heads/main（ISS-802 守卫）
+  main 只能经 PR 合入 —— 直推会整段绕过 PR 审查（2026-11-12 实测发生过一次：
+  builder-a 直推 origin/main 797115cc..2c901cde，钩子当时放行）。
+  GitHub 免费私有仓开不了分支保护（gh api .../protection → 403），所以这道闸只能长在这里。
+
+  要走 PR：把当前分支推上去，再开 PR
+      git push origin HEAD:refs/heads/<你的分支名>
+  合并 PR 后同步本地 main（只 fetch + update-ref，永不推 main）
+      bash scripts/sync-main.sh
+
+  确有必要直推（应急修复等）：FORGE_ALLOW_MAIN_PUSH=1 git push ...
+  并在本轮 issue note 里写明为什么直推（这一行会打在终端上留痕）。
+EOF
+  exit 1
+done <<< "$PUSH_LINES"
+
+# 有没有东西要推？（删除远端分支时 local_oid 全 0，不该拦）
+pushing_something=0
+while read -r _local_ref local_oid _remote_ref _remote_oid; do
+  [[ -z "${local_oid:-}" ]] && continue
+  [[ "$local_oid" =~ ^0+$ ]] || pushing_something=1
+done <<< "$PUSH_LINES"
+[[ "$pushing_something" == "1" ]] || exit 0
+
+# ── 闸不在 ⇒ fail closed ──────────────────────────────────────────────────────
+# 新克隆/新工作树里 run-gates.mjs 缺席时**不许放行**：静默地「没跑」= 假绿。
+if [[ ! -f scripts/run-gates.mjs ]]; then
+  echo "✗ scripts/run-gates.mjs 不见了 —— 闸无法判定，fail closed。"
+  echo "  如果是新克隆/新工作树：确认 core.hooksPath 指向 scripts/git-hooks 且该文件已入库。"
+  exit 1
+fi
+
+# ── 基线：分支起点优先，远端只在其为起点后代时才上收（ISS-804 修）────────────
+# 判的是「这次 push 往远端添没添新红」，但基线必须是**被推那棵树从哪儿长出来**：
+#   ① `merge-base(<被推提交>, origin/main)` = 分支起点。它对「格集合」恒成立：基线树的格子
+#      清单由该 sha 的登记表决定，而它一定是被推提交的**祖先**。
+#   ② 远端同名分支的 sha 只在它是 ① **的后代**时才上收：说明分支是从远端继续长出来的，
+#      「本次新增」可精确到那 N 个提交（验收 5 的「不退化」）。另加一条：它必须也是被推
+#      提交的祖先 —— 远端有本地没有的提交时，拿它量基线会把「我们没那段代码」算成新增。
+#      ⛔ 不能无条件优先 —— 旧远端 sha 是**分叉**的另一条线（ISS-804 事故：PR #6 的远端
+#      是 97 格的旧提交，当前 94 格，格集合天然不等 ⇒ 拦死所有落后于该改动的分支）。
+#   ③ ① 取不到（无 origin/main / 浅克隆）⇒ 退本地 main；仍取不到 ⇒ fail closed。
+# 每一级都打印用了哪一级 —— 「基线到底拿谁量的」必须看得见，否则「没有新增红」不可核。
+baseline=""
+baselabel=""
+
+# 被推的提交：多 ref 同推时取第一条非删除行（与上面 pushing_something 同源）。
+# 不能用 HEAD —— `git push origin 别的分支` 时 HEAD 不是被推的那棵树。
+push_oid=""
+while read -r _local_ref local_oid _remote_ref _remote_oid; do
+  [[ -z "${local_oid:-}" ]] && continue
+  [[ "$local_oid" =~ ^0+$ ]] && continue
+  push_oid="$local_oid"
+  break
+done <<< "$PUSH_LINES"
+[[ -n "$push_oid" ]] || push_oid="$(git rev-parse HEAD)"
+
+# ① 分支起点
+if git rev-parse --verify --quiet origin/main >/dev/null; then
+  baseline="$(git merge-base "$push_oid" origin/main 2>/dev/null || true)"
+  if [[ -n "$baseline" ]]; then
+    if [[ "$baseline" == "$(git rev-parse origin/main)" ]]; then
+      baselabel="origin/main（${baseline:0:8}）—— 分支起点就是主干（含「远端还没有本分支」的首次推送）"
+    else
+      baselabel="merge-base(${push_oid:0:8}, origin/main) = ${baseline:0:8} —— 分支起点"
+    fi
+  fi
+fi
+
+# ② 远端同名分支：仅当它是起点的后代才算「从远端继续长出来」
+while read -r _local_ref local_oid remote_ref remote_oid; do
+  [[ "$local_oid" =~ ^0+$ ]] && continue
+  # remote_oid 全 0 = 远端还没有这个分支（新建分支）⇒ 保持 ① 的起点
+  [[ "$remote_oid" =~ ^0+$ ]] && continue
+  git cat-file -e "${remote_oid}^{commit}" 2>/dev/null || continue
+  if [[ -z "$baseline" ]]; then
+    baseline="$remote_oid"
+    baselabel="远端分支 ${remote_ref} 的当前 sha（${remote_oid:0:8}）—— 取不到主干，退回远端兜底"
+  elif git merge-base --is-ancestor "$baseline" "$remote_oid" 2>/dev/null \
+    && git merge-base --is-ancestor "$remote_oid" "$push_oid" 2>/dev/null; then
+    baseline="$remote_oid"
+    baselabel="远端分支 ${remote_ref} 的当前 sha（${remote_oid:0:8}）—— 它是分支起点的后代，故只判这之后的新增"
+  fi
+  break
+done <<< "$PUSH_LINES"
+
+# ③ ① 取不到 ⇒ 本地 main 兜底
+if [[ -z "$baseline" ]] && git rev-parse --verify --quiet main >/dev/null; then
+  baseline="$(git rev-parse main)"
+  baselabel="本地 main（${baseline:0:8}）—— 取不到 origin/main，按本地主干兜底"
+fi
+
+if [[ -n "$baseline" ]]; then
+  BASE_ARGS=(--baseline "$baseline")
+  # ⚠️ `${baselabel}` 的花括号不能省：全角 `）` 的首字节 0xEF 会被 bash 当成变量名的一部分
+  # ⇒ `set -u` 下 `baselabel\xEF: unbound variable`，UTF-8 locale 下整行退出、钩子根本跑不到 run-gates
+  # （ISS-655 的同一形态，本行是既有代码；ISS-804 验 UTF-8 locale 时撞见，顺手按判据修正）。
+  echo "▶ pre-push 快闸 · run-gates --tier fast · 只拦新增（基线 = ${baselabel}）"
+else
+  # ── 三级全失败 ⇒ fail closed（ISS-715 Lead 裁决：不许「回退到不判」）─────────────
+  # 为什么不许退回 `run-gates` 自己的 baseSha()：它最后一环是 `HEAD~1` —— 那会把「上一个
+  # 提交」当基线，于是存量红统统被算成本次新增。方向偏严，但它**同时**让「没有新增红」
+  # 这句话失去意义：判据在拿一棵随时会变的树当对手，红绿取决于你 rebase 到哪。
+  # 三级都拿不到基线的真实场景：无 origin 远端、且无本地 main。
+  # 那时诚实的答案是「**算不出存量 ⇒ 不判 = 红**」，不是「换一把尺子接着判」。
+  echo "✗ pre-push 无法判定：三级基线全取不到（① merge-base(被推提交, origin/main) ② 远端同名分支 ③ 本地 main）。"
+  echo "  为什么这不是放行而是拦住：拿不到分支起点 ⇒ 「本次新增红」这个判据不成立。"
+  echo "  修法（任选）：① git fetch origin 后重试（最常见）；② 若无远端，先 git remote add origin <url> && git fetch。"
+  echo "  确实要绕过用 --no-verify，并把原因写进本轮 issue note。"
+  exit 1
+fi
+
+# ── 跑 ────────────────────────────────────────────────────────────────────────
+# ISS-808：格集合**合法**变了（改了 registry/登记表）时，run-gates 会自己认出来接着判；
+# 它只认得出**已提交**的改动。要在提交前就推，或确信合法但自动判据认不出来时，才显式声明：
+#   GATE_EXPECT_BATCH_CHANGE=1 git push
+# 不做成静默可绕的开关（本文件 §绕过口 的老规矩）：给了它，run-gates 仍会逐 id 印出增删清单。
+EXTRA_ARGS=()
+if [[ -n "${GATE_EXPECT_BATCH_CHANGE:-}" ]]; then
+  echo "⚠️ GATE_EXPECT_BATCH_CHANGE 已设 ⇒ 告知 run-gates：本次格集合变化是预期的（增删仍会逐 id 印出）"
+  EXTRA_ARGS=(--expect-batch-change)
+fi
+
+# ── ISS-817：把逐包格（ci-typecheck-* / ci-test-*）按改动面带进这道闸 ──────────
+# 修前：46 格 ci-* 本地**零入口**（CI 只做密钥扫描、fast 档不含它们、package.json 的 "ci"
+# 全仓零调用方）⇒ 23 个包的 typecheck 与 test 只在人手动想起时才跑。
+#
+# ⚠️ 为什么不直接 `--tier ci` 全塞：实测（本机 10 并发，`--only ci-` 47 格）**94s**，
+#    而 fast 档单独 42s ⇒ 合成一档 ≈ 157s。pre-push 从 42s 变 157s，人一定 --no-verify 绕过。
+#    「慢到没人用的闸等于没有闸」——本仓反复踩过这一条。
+#
+# ⚠️ 为什么不用 `--only-changed`：它与 `--diff-baseline` 正交且**刻意不叠加**
+#    （两棵树必须同一把尺子，否则基线红在当前树"不存在"= 凭空修好）。而 pre-push 必须
+#    走 `--diff-baseline`（存量红不能算成新增红）。本钩子两条都不能丢。
+#    `--with-ci` 走的是第三条路：名单由**父进程算一次**，以 --include-cells 原样下发给两棵树
+#    ⇒ 格集合逐 id 相同，assertSameBatch 照旧通过，"新增红"判据一点没松。
+#
+# 关掉的办法（真嫌慢时）：FORGE_PREPUSH_CI=0 git push —— 出声，不静默（见 §绕过口 的老规矩）。
+# ⚠️ 只带 **typecheck**，不带 test —— 实测（本机 10 并发）：
+#   · typecheck 侧 23 格读面**全部可证明** ⇒ 改一包只跑 4 格 · **+5s**
+#   · test 侧 23 格里只有 5 格能证明、**18 格恒跑**（`bun test` 全包的读根是运行期算的）
+#     ⇒ 改一包要跑 22~25 格 · **+84s**（37s → 121s，3.2 倍）
+# push 是高频动作，+84s 那条线就是「慢到没人用」。test 侧的温度交给 `ws.sh guard`
+# 的收工全量（--with-ci=all）—— 那里慢几分钟不改变使用意愿。
+# 值：all / typecheck / test（见 run-gates 的 --with-ci）。
+CI_ARGS=()
+case "${FORGE_PREPUSH_CI:-typecheck}" in
+  0|"") echo "⚠️ FORGE_PREPUSH_CI=${FORGE_PREPUSH_CI} ⇒ 本次**不跑**逐包格（23 包的 typecheck 与 test 都没有证据）。"
+         echo "   这属于「没验就推」，请在本轮 issue note 里写明原因。" ;;
+  all|typecheck|test) CI_ARGS=(--with-ci "${FORGE_PREPUSH_CI:-typecheck}") ;;
+  *) echo "✗ FORGE_PREPUSH_CI=${FORGE_PREPUSH_CI} 不认识（要 all / typecheck / test / 0）—— 猜一个值是假绿，故拦住。" >&2; exit 2 ;;
+esac
+
+# ⚠️ `${EXTRA_ARGS[@]+...}` 的花括号不能省：bash 3.2（macOS 自带）在 `set -u` 下对**空数组**展开
+# `${EXTRA_ARGS[@]}` 直接报 "unbound variable" ⇒ 钩子在没设这个变量时反而崩掉（与上面 baselabel 同一形态）。
+node scripts/run-gates.mjs --tier fast --diff-baseline "${BASE_ARGS[@]}" ${CI_ARGS[@]+"${CI_ARGS[@]}"} ${EXTRA_ARGS[@]+"${EXTRA_ARGS[@]}"}
+rc=$?
+
+if [[ "$rc" -eq 1 ]]; then
+  echo "✗ pre-push 拦住（run-gates fast 档有新增红；存量红不算你的）。"
+  echo "  修到绿再推；确实要绕过用 --no-verify，并把原因写进本轮 issue note。"
+  echo "  只想看某一格：node scripts/run-gates.mjs --tier fast --only <格名>（--list 列全部）"
+  exit 1
+elif [[ "$rc" -eq 2 ]]; then
+  echo "✗ pre-push 拦住（run-gates 判不了，不是「有新增红」）。"
+  echo "  去看上面 run-gates 输出的判不了原因：模块缺失 / 格集合变了 / 基线树没建起来。"
+  echo "  ⚠️ 判不了 ≠ 有红：不要去找「哪格红了」，先解决「为什么判不了」。"
+  exit 2
+elif [[ "$rc" -ne 0 ]]; then
+  echo "✗ pre-push 拦住（run-gates 退出码 $rc —— 异常退出，先看上面的报错）。"
+  echo "  这不是判据判红，是判据自己没跑成。"
+  exit 2
+fi
+
+echo "✓ pre-push 放行"

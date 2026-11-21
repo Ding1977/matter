@@ -1,0 +1,5821 @@
+{
+ "header": {
+  "tool": "component-map.mjs",
+  "派生自": "design-component-inventory.mjs --json（组件盘点唯一口径）",
+  "生成时间": "2026-11-09T22:07:45.482Z",
+  "扫描文件数": 394,
+  "组件实现总数": 418,
+  "规则": "一名一实现 = mapped；一名多实现 = ambiguous（出码必须停下等人工定档，不猜）；清单里没有 = unmapped"
+ },
+ "统计": {
+  "组件名": 412,
+  "mapped": 408,
+  "ambiguous": 4
+ },
+ "清单": [
+  {
+   "名": "AbsorbMark",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/model-source.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/model-source.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AccountPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/pages/AccountPage.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/pages/AccountPage.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ActivityStream",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/activity-stream/stream.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-pm/src/pm/activity-stream/stream.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AddressBar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-browser/src/address-bar.tsx",
+     "包": "forge-browser",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-browser/src/address-bar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AdoptDialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/adopt-form.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/adopt-form.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AdoptForm",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/adopt-form.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/adopt-form.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AgentCenterTab",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/agent-center.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/agent-center.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AgentMessageStream",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/message-stream.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/message-stream.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AgentRunCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/agent-run.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/agent-run.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AlertRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "AssigneePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "AttachmentsSection",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/blocks/attachments-section.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/blocks/attachments-section.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Avatar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 5
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Badge",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/badge.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/badge.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BoardView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/views/board-view.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/sql/view/views/board-view.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "BookmarkSidebar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-browser/src/bookmark-sidebar.tsx",
+     "包": "forge-browser",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-browser/src/bookmark-sidebar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "BottomBar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "Breadcrumb",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/breadcrumb.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/breadcrumb.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BreadcrumbEllipsis",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/breadcrumb.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/breadcrumb.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BreadcrumbItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/breadcrumb.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/breadcrumb.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BreadcrumbLink",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/breadcrumb.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/breadcrumb.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BreadcrumbList",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/breadcrumb.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/breadcrumb.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BreadcrumbPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/breadcrumb.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/breadcrumb.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BreadcrumbSeparator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/breadcrumb.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/breadcrumb.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "BurnUpChart",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-progress.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-progress.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Button",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/button.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 30
+    }
+   ],
+   "建议": "forge-design/src/ui/button.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CadErrorBoundary",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-cad/src/cad/cad-view.tsx",
+     "包": "forge-cad",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-cad/src/cad/cad-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CadGate",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-cad/src/cad/cad-engine-gate.tsx",
+     "包": "forge-cad",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-cad/src/cad/cad-engine-gate.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CadView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-cad/src/cad/cad-view.tsx",
+     "包": "forge-cad",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-cad/src/cad/cad-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Calendar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/calendar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/calendar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CalendarView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/calendar-view.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/calendar-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CanvasContentPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/layers.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/layers.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CanvasRightSidebar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/rightsidebar.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/rightsidebar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CanvasSidebar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/sidebar.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/sidebar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CanvasToolbar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/toolbar.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/toolbar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CanvasView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/canvas-view.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/canvas-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CanvasZoomPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/toolbar.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/toolbar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CapacityRing",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/components/progress.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/sql/view/components/progress.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "Card",
+   "状态": "ambiguous",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/card.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    },
+    {
+     "文件": "forge-design/src/components.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": null,
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CardContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/card.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/card.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CardDescription",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/card.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/card.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CardFooter",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/card.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/card.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CardHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/card.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/card.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CardTitle",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/card.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/card.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CardView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/views/card-view.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/sql/view/views/card-view.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "Checkbox",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/checkbox.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/checkbox.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CheckMark",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/model-select/parts.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/model-select/parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ChevronDown",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/model-select/parts.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/model-select/parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CodeSidebar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/code-sidebar.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/code-sidebar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Collapsible",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/collapsible.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/collapsible.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CollapsibleContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/collapsible.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/collapsible.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CollapsiblePanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/components/motion/primitives.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/components/motion/primitives.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CollapsibleTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/collapsible.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/collapsible.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ColorPicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/selectors/color-picker.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/selectors/color-picker.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ColorPopover",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/color-popover.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/color-popover.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ColorStepSelect",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/step-controls.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/step-controls.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Command",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/command.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/command.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CommandEmpty",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/command.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/command.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CommandGroup",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/command.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/command.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CommandInput",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/command.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/command.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CommandItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/command.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/command.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CommandList",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/command.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/command.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "CommentComposer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/comment-composer.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/comment-composer.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CommentNoteCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/bubble-toolbar.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/bubble-toolbar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CompactCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "ComposerChipPassive",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/composer-chip.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/composer-chip.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ComposerLimitChip",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model-limits/src/dsh/composer-limit-chip.tsx",
+     "包": "forge-model-limits",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model-limits/src/dsh/composer-limit-chip.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ComposerSelect",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/composer-chip.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/composer-chip.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ComposerTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/composer-chip.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/composer-chip.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ContextMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuCheckboxItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuGroup",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuLabel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuPortal",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuRadioGroup",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuRadioItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuSeparator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuShortcut",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuSub",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuSubContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuSubTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContextMenuTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/context-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/context-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ContributionGraph",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/kibo/contribution-graph.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/kibo/contribution-graph.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "ContributionGraphBlock",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/kibo/contribution-graph.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/kibo/contribution-graph.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "ContributionGraphCalendar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/kibo/contribution-graph.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/kibo/contribution-graph.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "ContributionGraphFooter",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/kibo/contribution-graph.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/kibo/contribution-graph.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "ContributionGraphLegend",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/kibo/contribution-graph.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/kibo/contribution-graph.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "Conversation",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/components/ai-elements/conversation.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/components/ai-elements/conversation.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ConversationContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/components/ai-elements/conversation.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/components/ai-elements/conversation.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ConversationEmptyState",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/components/ai-elements/conversation.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/components/ai-elements/conversation.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ConversationScrollButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/components/ai-elements/conversation.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/components/ai-elements/conversation.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CoverImage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/blocks/cover-image.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/blocks/cover-image.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CreateDialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/provider-create-dialog.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/provider-create-dialog.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CreateIssueModal",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/create-issue-modal.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/create-issue-modal.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "CreateProjectModal",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/create-project-modal.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/create-project-modal.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Database",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/database.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/sql/view/database.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "DatePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/date-picker.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/date-picker.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DefaultCell",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/views/table-view.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/sql/view/views/table-view.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "DeleteDialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/provider-delete-dialog.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/provider-delete-dialog.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DetailBlock",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/blocks/detail-block.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-pm/src/pm/blocks/detail-block.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DetailTopBar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/detail-top-bar.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/detail-top-bar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Dialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogClose",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogDescription",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 5
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogFooter",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 5
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogOverlay",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogPortal",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogTitle",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DialogTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dialog.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/dialog.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DIRS",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/api.ts",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/api.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DisplayMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/components/display-menu.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/sql/view/components/display-menu.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "DisplayPopover",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/display-popover.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/display-popover.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "DocCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/doc-card.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/doc-card.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocCardSlot",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/doc-card.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/doc-card.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocNode",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocReviewTab",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/docs-review-tab.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/docs-review-tab.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocsLinearPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/docs-linear.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/docs-linear.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocSource",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/docs-db.ts",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/docs-db.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocStatusBadge",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/docs-review-tab.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/docs-review-tab.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocTransformer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DocumentOutline",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/document-outline.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/document-outline.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DonutChart",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "DraftsLinearPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/drafts-linear.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/drafts-linear.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "DropdownMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DropdownMenuContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DropdownMenuGroup",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DropdownMenuItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DropdownMenuLabel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DropdownMenuPortal",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DropdownMenuSeparator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "DropdownMenuTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/dropdown-menu.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/dropdown-menu.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "EditableMilestoneLabel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/milestone/milestone-label.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/milestone/milestone-label.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "EffectSchema",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/schema.ts",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/schema.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "EffortSignalBars",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/dsh/effort-signal.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/dsh/effort-signal.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "EffortSlider",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/effort-slider.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/effort-slider.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "EmptyTag",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/empty-tag.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/empty-tag.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "EnabledSwitch",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/model-source.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/model-source.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "EP",
+   "状态": "ambiguous",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/endpoints.ts",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 5
+    },
+    {
+     "文件": "forge-model/src/endpoints.ts",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 11
+    },
+    {
+     "文件": "forge-pm/src/pm/endpoints.ts",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 4
+    },
+    {
+     "文件": "forge-repowiki/src/endpoints.ts",
+     "包": "forge-repowiki",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": null,
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ErrorBoundary",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/error-boundary.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/error-boundary.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "EstimatePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ExportsPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/exports-tree.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/exports-tree.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "FadeIn",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/components/motion/primitives.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/components/motion/primitives.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "FavoriteButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/favorites.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/favorites.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "FillSchema",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/schema.ts",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/schema.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "FilterMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/components/filter-menu.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/sql/view/components/filter-menu.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "FixedChatView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-ui/src/dsh/session-occurrence.tsx",
+     "包": "forge-ui",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-ui/src/dsh/session-occurrence.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ForgeModelSelect",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/model-select/select.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/model-select/select.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "GatewayTab",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/gateway.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/gateway.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "GlobalNav",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/global-nav.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/global-nav.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "GroupHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/components.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/components.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "HeadingNavigator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/heading-navigator.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/heading-navigator.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "HealthIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/linear-status.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/linear-status.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "HorizontalRuleNode",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "HorizontalRuleTransformer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "IconPicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/icon-picker.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/icon-picker.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ImageNode",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ImageTransformer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ImportDialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/import-dialog.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/import-dialog.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "INDICATORS",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/charts/chart-options.ts",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/charts/chart-options.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Input",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/input.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 16
+    }
+   ],
+   "建议": "forge-design/src/ui/input.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "InsetBox",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "InventoryUnavailableError",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-plugin-status/src/inventory.ts",
+     "包": "forge-plugin-status",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-plugin-status/src/inventory.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "IssueContextMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/issue-context-menu.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/issue-context-menu.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "IssueLine",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/issue-line.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/issue-line.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "IssueNode",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "IssuePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "IssueTransformer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Kbd",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/kbd.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/kbd.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "KLineChartComponent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/charts/KLineChartComponent.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/charts/KLineChartComponent.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "KVCluster",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "KVRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "Label",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/label.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/label.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "LayerPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-cad/src/cad/layer-panel.tsx",
+     "包": "forge-cad",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-cad/src/cad/layer-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LazyMdEditor",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lazy-editor.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 9
+    }
+   ],
+   "建议": "forge-pm/src/pm/lazy-editor.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LedgerSection",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model-limits/src/dsh/ledger-section.tsx",
+     "包": "forge-model-limits",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model-limits/src/dsh/ledger-section.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LexBlockHandlePlugin",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/block-handle.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/block-handle.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LexBubbleToolbarPlugin",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/bubble.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/bubble.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LexEditor",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/editor.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/editor.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LexSlashMenuPlugin",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/slash-menu.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/slash-menu.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LimitUpPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/pages/LimitUpPage.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-trader/src/pages/LimitUpPage.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LinearIssueDetail",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/linear-issue-detail.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/linear-issue-detail.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LinearPmPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/linear-demo.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/linear-demo.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LinearSidebar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/linear-sidebar.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/linear-sidebar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LinearStatusIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/linear-status.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 15
+    }
+   ],
+   "建议": "forge-pm/src/pm/linear-status.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ListBlock",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/blocks/list-block.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-pm/src/pm/blocks/list-block.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ListRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/list-row.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 5
+    }
+   ],
+   "建议": "forge-design/src/list-row.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "ListToolbar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/list-toolbar.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/list-toolbar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ListView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/views/list-view.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/sql/view/views/list-view.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "LiveCanvasOverlay",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/live-mount.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/live-mount.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LiveInspectPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/live-inspect-panel.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/live-inspect-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LiveMemberDetail",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/live-fixtures/member-detail-live.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/live-fixtures/member-detail-live.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "LiveMemberDetailComponent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/live-fixtures/member-detail-live.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/live-fixtures/member-detail-live.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MdEditor",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/md-editor.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/md-editor.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MdText",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/md-text.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/md-text.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MemberAvatar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/member-avatar.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/member-avatar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MemberDetailPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/member-detail.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/member-detail.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MembersSettingsPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/members-settings.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/members-settings.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MemoLinearPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/memo-linear.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/memo-linear.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MentionNode",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MentionTransformer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MermaidBlock",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-mermaid/src/mermaid/mermaid-block.tsx",
+     "包": "forge-mermaid",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-mermaid/src/mermaid/mermaid-block.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MermaidNode",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MermaidTransformer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MessageResponse",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/components/ai-elements/message.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/components/ai-elements/message.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MessageRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/message-row.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/message-row.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MetaRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model-limits/src/dsh/limit-rows.tsx",
+     "包": "forge-model-limits",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model-limits/src/dsh/limit-rows.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MetricAnchor",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "MilestoneDatePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/milestone/milestone-date-picker.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/milestone/milestone-date-picker.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MilestoneDiamond",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/milestone/milestone-icon.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/milestone/milestone-icon.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MilestonePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MilestoneSortable",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/milestone/milestone-sortable.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/milestone/milestone-sortable.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MilestonesPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/milestone/milestone-panel.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/milestone/milestone-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MilestonesSection",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/milestone/milestone-section.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/milestone/milestone-section.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "MiniBar",
+   "状态": "ambiguous",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 0
+    },
+    {
+     "文件": "forge-model-limits/src/dsh/mini-bar.tsx",
+     "包": "forge-model-limits",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": null,
+   "建议分层": "KIT"
+  },
+  {
+   "名": "ModelEffortSelect",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/model-effort-select.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/model-effort-select.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ModelTableTab",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/model-table.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/model-table.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "NoteComposer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/note-composer.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/note-composer.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "NumCell",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/model-source.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/model-source.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "OperationError",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/operation-reducer.ts",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/operation-reducer.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "OrderBookDrawer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/trader/OrderBookDrawer.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/trader/OrderBookDrawer.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ORIGIN",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/charts/rollingReel.ts",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/charts/rollingReel.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageBody",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-repowiki/src/wiki-view.tsx",
+     "包": "forge-repowiki",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-repowiki/src/wiki-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageShell",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/page-shell.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageShellBody",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/page-shell.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageShellCell",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/page-shell.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageShellCompound",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/page-shell.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageShellHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/page-shell.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageShellNav",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/page-shell.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PageShellSectionHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/page-shell.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PanelCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "PanelCardBody",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "PanelCardDashed",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "PanelCardHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "PanelDialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/panel-dialog.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/panel-dialog.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "PanelExpandButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/properties-panel.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/properties-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PanelPopover",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/panel-popover.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 12
+    }
+   ],
+   "建议": "forge-design/src/panel-popover.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "PanelSection",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/properties-panel.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 5
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/properties-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PanelShell",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/trader/PanelShell.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/trader/PanelShell.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PermissionCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/interactive/permission-card.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/interactive/permission-card.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PhasePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Pill",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/pill.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/pill.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PluginStatusPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-plugin-status/src/plugin-status-panel.tsx",
+     "包": "forge-plugin-status",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-plugin-status/src/plugin-status-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PmAutoCollapseScope",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/surface-width.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/surface-width.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PmSource",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/db-adapter.ts",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/db-adapter.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PmSurfaceActiveContext",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/surface-active.ts",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/surface-active.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PointSchema",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/schema.ts",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/schema.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PopIn",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/components/motion/primitives.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/components/motion/primitives.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Popover",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/popover.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/popover.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "PopoverAnchor",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/popover.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/popover.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "PopoverContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/popover.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/popover.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "PopoverTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/popover.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/popover.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "PortalPopover",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/components/portal-popover.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/sql/view/components/portal-popover.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "PreviewWidthControls",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-ui/src/dsh/doc-width.tsx",
+     "包": "forge-ui",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-ui/src/dsh/doc-width.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PriorityIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/linear-status.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 10
+    }
+   ],
+   "建议": "forge-pm/src/pm/linear-status.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PriorityInlinePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/inline-pickers.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/inline-pickers.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PriorityPicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProgressBar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/components/progress.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/sql/view/components/progress.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "ProjectContextMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-context-menu.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-context-menu.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/icon-picker.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/icon-picker.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectLine",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-line.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-line.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectLineHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-line.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-line.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectPicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectProgressPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-progress.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-progress.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectsLinearPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-linear.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-linear.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectSource",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/db-adapter.ts",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/db-adapter.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProjectStatusIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/linear-status.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-pm/src/pm/linear-status.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PropertiesPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/properties-panel.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/properties-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "PropRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/prop-row.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/prop-row.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "PropsPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-cad/src/cad/props-panel.tsx",
+     "包": "forge-cad",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-cad/src/cad/props-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProviderDetailDialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/provider-detail-dialog.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/provider-detail-dialog.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ProviderIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/provider-icon.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/provider-icon.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ProviderMiniCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/provider-mini-card.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/provider-mini-card.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "QuestionCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/interactive/question-card.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/interactive/question-card.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "QuotaBarRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "RadialContextMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/charts/RadialContextMenu.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/charts/RadialContextMenu.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "RadiusSteps",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/step-controls.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/step-controls.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "RecycleView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/recycle-view.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/recycle-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "REEL",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/charts/rollingReel.ts",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/charts/rollingReel.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ResourceGroups",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/resource-row.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/resource-row.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Ribbon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-cad/src/cad/ribbon.tsx",
+     "包": "forge-cad",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-cad/src/cad/ribbon.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "RollingDigits",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/charts/RollingDigits.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/charts/RollingDigits.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "RowContextMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/components/row-context-menu.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/sql/view/components/row-context-menu.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "RowFavorite",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/favorites.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/favorites.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "RunCardJumpBar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/run-card/jump-bar.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/run-card/jump-bar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "RunStatusButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/run-card/status-button.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/run-card/status-button.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SamplePage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/live-fixtures/sample-page.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/live-fixtures/sample-page.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SearchModal",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/trader/SearchModal.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/trader/SearchModal.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Section",
+   "状态": "ambiguous",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 3
+    },
+    {
+     "文件": "forge-pm/src/pm/shared/blocks/section.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": null,
+   "建议分层": "KIT"
+  },
+  {
+   "名": "SectionBlock",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "Select",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectGroup",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectLabel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectScrollDownButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectScrollUpButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectSeparator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SelectValue",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/select.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/select.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "Separator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/separator.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/separator.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SessionCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/session-card.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/session-card.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SessionPicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SessionRailBody",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-ui/src/dsh/session-rail-host.tsx",
+     "包": "forge-ui",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-ui/src/dsh/session-rail-host.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SettingsLinearPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/settings-linear.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/settings-linear.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SettingsPopover",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/blocks/settings-popover.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/blocks/settings-popover.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Sheet",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SheetClose",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SheetContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SheetDescription",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SheetFooter",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SheetHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SheetTitle",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SheetTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sheet.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sheet.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "Sidebar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarFooter",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarGroup",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarGroupAction",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarGroupContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarGroupLabel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarInput",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarInset",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenu",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuAction",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuBadge",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuSkeleton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuSub",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuSubButton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarMenuSubItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarProvider",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarRail",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarSeparator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "SidebarTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/sidebar.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/sidebar.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "Skeleton",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/skeleton.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 4
+    }
+   ],
+   "建议": "forge-design/src/ui/skeleton.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "Slider",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/slider.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/slider.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "StatCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "StatStrip",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "StatsView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/blocks/stats-view.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/blocks/stats-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "StatusBar",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-cad/src/cad/status-bar.tsx",
+     "包": "forge-cad",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-cad/src/cad/status-bar.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "StatusDot",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "StatusIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/status-icon.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/status-icon.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "StatusInlinePicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/inline-pickers.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/inline-pickers.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "StatusPicker",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "StockDetailPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/pages/StockDetailPage.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/pages/StockDetailPage.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "StoppedTag",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/chat-parts.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/chat-parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "StrokeSchema",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/schema.ts",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/schema.ts",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SubtaskProgressChip",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/subtask-progress-chip.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/subtask-progress-chip.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "SubtitleInput",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/blocks/subtitle-input.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/blocks/subtitle-input.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Switch",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/switch.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/switch.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "Tab",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/components.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/components.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "Table",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/table.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/table.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TableBody",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/table.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/table.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TableCell",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/table.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/table.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TableHead",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/table.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/table.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TableHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/table.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/table.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TableRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/table.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/table.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TableTransformer",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/lexical/nodes.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/lexical/nodes.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TableView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/views/table-view.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/sql/view/views/table-view.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "Tabs",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tabs.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/tabs.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TabsContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tabs.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-design/src/ui/tabs.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TabsList",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tabs.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/tabs.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TabsTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tabs.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/tabs.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "Tag",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/tag.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/tag.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "TagChip",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/tag-chip.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 8
+    }
+   ],
+   "建议": "forge-pm/src/pm/tag-chip.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TagEditDialog",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/tag-dialog.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/tag-dialog.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TagEditor",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/property-fields.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/property-fields.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TagsLinearPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/tags-linear.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/tags-linear.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TeamsSettingsPage",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/members-settings.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/members-settings.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Textarea",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/textarea.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/textarea.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "ThinkRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/chat-parts.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/chat-parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Timeline",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineDate",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineHeader",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineIcon",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineIndicator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineItem",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineSeparator",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineTitle",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/timeline.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-design/src/ui/timeline.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TimelineView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/sql/view/views/timeline-view.tsx",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/sql/view/views/timeline-view.tsx",
+   "建议分层": "L2"
+  },
+  {
+   "名": "TodoPanel",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/interactive/todo-panel.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/interactive/todo-panel.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TonePill",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "ToolGlyph",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/charts/drawing/tool-glyph.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-trader/src/components/charts/drawing/tool-glyph.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "ToolPairRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/chat-parts.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/chat-parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "Tooltip",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tooltip.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/tooltip.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TooltipContent",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tooltip.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/tooltip.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TooltipProvider",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tooltip.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/ui/tooltip.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TooltipTrigger",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/tooltip.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 6
+    }
+   ],
+   "建议": "forge-design/src/ui/tooltip.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "TraderStatusPill",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-trader/src/components/trader/TraderStatusPill.tsx",
+     "包": "forge-trader",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-trader/src/components/trader/TraderStatusPill.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TurnErrorRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/chat-parts.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/chat-parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TurnUsageRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/chat-parts.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/chat-parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "TYPE",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/type.ts",
+     "包": "forge-design",
+     "分层": "L2",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-design/src/type.ts",
+   "建议分层": "L2"
+  },
+  {
+   "名": "TypeStepSelect",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-canvas/src/canvas/step-controls.tsx",
+     "包": "forge-canvas",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-canvas/src/canvas/step-controls.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "UnderlineNav",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-design/src/ui/underline-nav.tsx",
+     "包": "forge-design",
+     "分层": "BASE",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-design/src/ui/underline-nav.tsx",
+   "建议分层": "BASE"
+  },
+  {
+   "名": "UnknownEntryKindError",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/activity-stream/items.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 0
+    }
+   ],
+   "建议": "forge-pm/src/pm/activity-stream/items.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "UpdateCard",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-updates.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-updates.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "UpdateOverdueSignal",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-updates.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-updates.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "UpdatesSection",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/project-updates.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-pm/src/pm/project-updates.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "UsageDatabase",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/usage-database.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/usage-database.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "UsageDetail",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/usage-detail.tsx",
+     "包": "forge-model",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/usage-detail.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "UserBubble",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-agents/src/agent-stream/chat-parts.tsx",
+     "包": "forge-agents",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-agents/src/agent-stream/chat-parts.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "WidthHandle",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-pm/src/pm/shared/width-handles.tsx",
+     "包": "forge-pm",
+     "分层": "BIZ",
+     "使用者": 3
+    }
+   ],
+   "建议": "forge-pm/src/pm/shared/width-handles.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "WikiView",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-repowiki/src/wiki-view.tsx",
+     "包": "forge-repowiki",
+     "分层": "BIZ",
+     "使用者": 1
+    }
+   ],
+   "建议": "forge-repowiki/src/wiki-view.tsx",
+   "建议分层": "BIZ"
+  },
+  {
+   "名": "WindowList",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model/src/surfaces/plans/card-kit.tsx",
+     "包": "forge-model",
+     "分层": "KIT",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "建议分层": "KIT"
+  },
+  {
+   "名": "WindowRow",
+   "状态": "mapped",
+   "候选": [
+    {
+     "文件": "forge-model-limits/src/dsh/limit-rows.tsx",
+     "包": "forge-model-limits",
+     "分层": "BIZ",
+     "使用者": 2
+    }
+   ],
+   "建议": "forge-model-limits/src/dsh/limit-rows.tsx",
+   "建议分层": "BIZ"
+  }
+ ]
+}

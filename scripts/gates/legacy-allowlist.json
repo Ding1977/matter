@@ -1,0 +1,479 @@
+{
+  "$why": "丙规则（docs/architecture-overview.md §3.6.4）的存量豁免清单。只登记 2026-11-07 之前就在 scripts/ 根、且带判据形态（--selftest / rule: / {rule,metric,mode}）的 .mjs。判据：scripts/gates/verify-gates-registry.mjs 判据 B。",
+  "$rules": [
+    "每条必须有非空 reason —— 空理由判红（理由是这个机制唯一的可审计面）。",
+    "条目指向的文件必须真实存在 —— 文件没了判红，否则豁免会变成永久免死金牌。",
+    "条目指向的文件必须仍带判据形态 —— 形态没了判红，债务消灭后条目该删。",
+    "entries.length <= maxEntries —— 只减不增。要加豁免必须同时调高 maxEntries，那在 git diff 里是一行看得见的账。",
+    "存量按丙规则一律不搬（搬迁会打断 91 条 guard-baselines 登记路径），所以这张清单的射程是「封住新增」，不是「清空存量」。"
+  ],
+  "maxEntries": 65,
+  "baseline": {
+    "measuredAt": "2026-11-07",
+    "method": "stripComments 后结构匹配三条特征，扫描 scripts/ 根 123 个 .mjs，命中 63 个",
+    "ticket": "ISS-712"
+  },
+  "entries": [
+    {
+      "file": "scripts/assembly-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/assembly-diff-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/assembly-mounts-lib.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 3
+    },
+    {
+      "file": "scripts/assembly-realize-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：带判据形态但三个调度器均未登记（guard/gate-fast/ci-local 命中 0），是已知缺口；存量不搬，待调度侧处置",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/audit-doc-sync.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/audit-freshness.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/build-index-repowiki.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 ci-local.mjs 1 处，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/caliber-lib.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/canvas-style-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/code-inventory.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 3 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 20
+    },
+    {
+      "file": "scripts/component-map.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/data-root-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/dead-code-ledger.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/dead-exports-lib.mjs",
+      "reason": "共用库：被 3 个脚本 import，只导出函数、不产出独立结论；无 undefined 登记格（登记它是错的——它没有独立判定入口）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 3
+    },
+    {
+      "file": "scripts/delivery-integrity.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/deps-hygiene.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格 · gate-fast.mjs 2 处，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/design-component-inventory.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 4
+    },
+    {
+      "file": "scripts/dup-detail-lib.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/fix-frontmatter-quoting.mjs",
+      "reason": "存量判据（丙规则前已存在）：带判据形态但三个调度器均未登记（guard/gate-fast/ci-local 命中 0），是已知缺口；存量不搬，待调度侧处置",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/format-debt.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/gate-health.mjs",
+      "reason": "存量判据（丙规则前已存在）：带判据形态但三个调度器均未登记（guard/gate-fast/ci-local 命中 0），是已知缺口；存量不搬，待调度侧处置",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/host-typecheck-ratchet.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/install-shape.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/k6a-screen.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/lint-boot-log.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/lint-capability-contract.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格 · gate-fast.mjs 2 处，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest",
+        "rule:"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/lint-capability-contract.test.mjs",
+      "reason": "单测文件：由测试运行器发现，不是调度格子；丙规则管判据脚本，不管其单测",
+      "features": [
+        "rule:"
+      ]
+    },
+    {
+      "file": "scripts/lint-channel-contract.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/lint-code.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格 · gate-fast.mjs 3 处，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest",
+        "rule:",
+        "{rule,metric,mode}"
+      ],
+      "importedBy": 3
+    },
+    {
+      "file": "scripts/lint-common.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 5
+    },
+    {
+      "file": "scripts/lint-cross-pkg-events.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/lint-layer.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/lint-layer.test.mjs",
+      "reason": "单测文件：由测试运行器发现，不是调度格子；丙规则管判据脚本，不管其单测",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/lint-log-outlet.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/lint-scripts.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest",
+        "rule:"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/lint-tool-contract.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/lint-writer-uniqueness.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/lint-writer-uniqueness.test.mjs",
+      "reason": "单测文件：由测试运行器发现，不是调度格子；丙规则管判据脚本，不管其单测",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/md-corpus-guard.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/md-mermaid-lint.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/migration-baseline.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/no-new-tailwind.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/plugin-load-scout.mjs",
+      "reason": "存量判据（丙规则前已存在）：带判据形态但三个调度器均未登记（guard/gate-fast/ci-local 命中 0），是已知缺口；存量不搬，待调度侧处置",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/pm-v2-baseline.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/preset-parity-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：带判据形态但三个调度器均未登记（guard/gate-fast/ci-local 命中 0），是已知缺口；存量不搬，待调度侧处置",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/preset-var-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/prism-lang-guard.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/review-range.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/route-alias-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/runtime-secret-check.mjs",
+      "reason": "存量判据（丙规则前已存在）：带判据形态但三个调度器均未登记（guard/gate-fast/ci-local 命中 0），是已知缺口；存量不搬，待调度侧处置",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/scan-input.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/search-index-reconcile.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/secret-scan.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/stale-client-bundle.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ]
+    },
+    {
+      "file": "scripts/test-env-restore-guard.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/ui-load-contract.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 2 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 2
+    },
+    {
+      "file": "scripts/watch-home-links.mjs",
+      "reason": "存量判据（丙规则前已存在）：已登记 guard-baselines.sh 1 格，调度中；搬迁会打断登记路径（§3.6.4 明令存量不搬）",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/watch-home-links.test.mjs",
+      "reason": "单测文件：由测试运行器发现，不是调度格子；丙规则管判据脚本，不管其单测",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 1
+    },
+    {
+      "file": "scripts/run-gates.mjs",
+      "reason": "L3 调度器，不是判据 —— 架构 §3.6.1 明定调度器落 scripts/ 根（run-gates.mjs 是唯一调度器）。它的 --selftest 是「调度器自检」（:1233），验的是并发/依赖/退出码，不是某条规则的红绿。判据 B 的形态特征把「带 --selftest」当判据特征，对调度器是假阳性。",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 0
+    },
+    {
+      "file": "scripts/change-scope.mjs",
+      "reason": "L1 编排层工具，不是判据 —— 文件头 \\:5 自称「只回答这一坨改动落在哪些文件/包/面。它不做取舍、不跑门禁、不下判定」。它的 --selftest 验的是「读改动面读得对不对」（merge-base 唯一性 / 三点 diff / -z 切分），不产出红绿门禁结论。按 §3.6.1 归 L1，落 scripts/ 根。",
+      "features": [
+        "--selftest"
+      ],
+      "importedBy": 0
+    }
+  ]
+}

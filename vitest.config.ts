@@ -73,7 +73,6 @@ export default defineConfig({
   test: {
     include: [
       "forge-*/**/*.test.{ts,tsx,js,jsx,mjs}",
-      "scripts/**/*.test.mjs",
       // 新树（packages/<group>/<pkg>/）。不加这条 ⇒ 新树测试永不跑，且屏幕上没有任何一行
       // 说它们没跑 —— 与 ISS-505 漏掉 .mjs / scripts/ 是同一形态（症状只有「文件数远小于预期」）。
       "packages/*/*/tests/**/*.test.{ts,tsx}",

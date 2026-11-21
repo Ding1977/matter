@@ -1,0 +1,25 @@
+{
+  "cwd": "forge-messenger",
+  "test": "bun test lib/messenger.test.js",
+  "_comment": "ISS-690：K9h 行为档的**示范 spec**（ISS-691 规范）。为什么这条单配 spec：本单的病是「epoch 校验删掉后 103 pass / 0 fail」——判据存在但无牙。CI 与 lint 都看不见它（静态形状完全合规），只有变异能证明它有牙。基线必须绿，每条注入必须红。",
+  "mutations": [
+    {
+      "name": "M1 epoch 判据被短路（独立审查 finding C1 的原样：删掉核心判断，测试全绿）",
+      "file": "lib/state.js",
+      "from": "  if (epoch !== CURSOR_EPOCH) {",
+      "to": "  if (false && epoch !== CURSOR_EPOCH) { // 注入：短路"
+    },
+    {
+      "name": "M2 epoch 判据恒真（把「不是本进程」判成「是本进程」——最危险的静默形态）",
+      "file": "lib/state.js",
+      "from": "  if (epoch !== CURSOR_EPOCH) {\n    return { fresh: false, cursor, why: `游标属于上一个进程（epoch ${epoch} ≠ ${CURSOR_EPOCH}）` }\n  }",
+      "to": "  if (false) {\n    return { fresh: false, cursor, why: `游标属于上一个进程（epoch ${epoch} ≠ ${CURSOR_EPOCH}）` }\n  } // 注入：永不作废"
+    },
+    {
+      "name": "M3 前进游标时不写 epoch（只写游标 ⇒ 下次判不出归属，重启后旧游标被当本进程的）",
+      "file": "lib/state.js",
+      "from": "  const next = advanceCursor(state, base, cursor)",
+      "to": "  const next = advanceCursor(state, base, cursor)\n  if (next) return next // 注入：不盖 epoch"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "cwd": "forge-pm",
+  "test": "bun test src/pm/doc-card.test.tsx",
+  "mutations": [
+    {
+      "name": "B1 复发：注册传 thunk（返回组件而非组件本身）",
+      "file": "src/dsh/client-entry.tsx",
+      "from": "    dispose = slots.register({ name: \"tool.call.toolview\", key: \"doc_present\" }, DocCardSlot)",
+      "to": "    dispose = slots.register({ name: \"tool.call.toolview\", key: \"doc_present\" }, () => DocCardSlot)"
+    },
+    {
+      "name": "B2 复发：status 冻结首帧（不跟随 props）",
+      "file": "src/pm/doc-card.tsx",
+      "from": "  const status = override ?? result.status",
+      "to": "  const firstFrame = useState(result.status)[0]\n  const status = override ?? firstFrame"
+    },
+    {
+      "name": "DocCardSlot 改回「只在缺 rel 时查」（原缺陷）",
+      "file": "src/pm/doc-card.tsx",
+      "from": "    const key = asRel || args?.id\n    if (!key) return undefined",
+      "to": "    const key = asRel || args?.id\n    if (!key) return undefined\n    if (!asRel && args?.id) return undefined"
+    },
+    {
+      "name": "DocCardSlot 永不传 status",
+      "file": "src/pm/doc-card.tsx",
+      "from": "        status: resolved?.status,",
+      "to": "        status: undefined,"
+    },
+    {
+      "name": "注册 key 写错（卡片静默消失 · 审查缺口①）",
+      "file": "src/dsh/client-entry.tsx",
+      "from": "key: \"doc_present\" }, DocCardSlot)",
+      "to": "key: \"doc_present_v2\" }, DocCardSlot)"
+    },
+    {
+      "name": "摘掉 apply 接线（审查缺口②）",
+      "file": "src/dsh/client-entry.tsx",
+      "from": "    return registerDocCardSlot(slots)",
+      "to": "    void registerDocCardSlot; return () => undefined"
+    },
+    {
+      "name": "canAct 丢掉 revising（审查缺口③）",
+      "file": "src/pm/doc-card.tsx",
+      "from": "const canAct = status === \"draft\" || status === \"revising\"",
+      "to": "const canAct = status === \"draft\""
+    }
+  ]
+}

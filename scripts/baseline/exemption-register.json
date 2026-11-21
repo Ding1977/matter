@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "note": "存量豁免待补 expires；本清单只许减不许增（判据：scripts/gates/verify-exemption-register.ts，ISS-814）；gate-coverage-allowlist.json 是**允许清单**（_meta.kind=allowlist）不是豁免，登记它只是为了不阻塞合并，ISS-818 修口径后应从中移除。⚠️ ISS-820 把该文件上限从 66 降到 46（20 格硬编码迁进 registry），本条同步下调 —— 留着 66 会让上限虚高，把真实增长藏在上限之下。",
+    "measuredAt": "2026-11-14"
+  },
+  "grandfathered": {
+    "gate-coverage-allowlist.json": 46,
+    "frozen-paths.json": 46,
+    "spec-lint.json": 42,
+    "route-aliases.json": 20,
+    "criteria-teeth.json": 19,
+    "layer-contract.json": 14,
+    "pm-k12-whitelist.json": 12,
+    "jscpd.json": 4,
+    "repo-not-bare-exempt.json": 4,
+    "capability-contract.json": 1,
+    "file-size.json": 1,
+    "memory-index.json": 1,
+    "oxlint.json": 1,
+    "pm-v2-baseline.json": 1,
+    "rule-cards.json": 1,
+    "secret-scan-exempt.json": 1,
+    "type-ratchet-files.json": 1
+  }
+}

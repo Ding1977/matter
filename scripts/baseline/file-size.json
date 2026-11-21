@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "lastWrite.reason 记录抬线依据，文件行数上限只许降不许升，属存量豁免记账。"
+  },
+  "recordedAt": "2026-11-09",
+  "unit": "lines-per-file",
+  "ceiling": {
+    "forge-agents/lib/dispatch.js": 1063,
+    "forge-agents/lib/zcode-stdio.js": 1080,
+    "forge-cad/src/cad/ribbon.tsx": 1772,
+    "forge-canvas/lib/canvas-core.js": 6639,
+    "forge-canvas/src/canvas/code-sidebar.tsx": 1077,
+    "forge-canvas/src/canvas/rightsidebar.tsx": 1392,
+    "forge-canvas/src/engine.ts": 1883,
+    "forge-messenger/lib/filter.js": 1074,
+    "forge-messenger/lib/index.js": 2059,
+    "forge-messenger/lib/restart-resume.js": 1222,
+    "forge-model/lib/model/discovery.js": 1041,
+    "forge-model/lib/plans/providers.js": 2357,
+    "forge-model/src/surfaces/plans/agent-center.tsx": 1068,
+    "forge-model/src/surfaces/plans/dashboard.tsx": 1150,
+    "forge-model/src/surfaces/plans/provider-detail-dialog.tsx": 1572,
+    "forge-pm/lib/agent-tools.js": 1415,
+    "forge-pm/lib/domain.js": 1185,
+    "forge-pm/lib/done-gate.js": 1156,
+    "forge-pm/lib/index.js": 1543,
+    "forge-pm/lib/md-store.js": 1928,
+    "forge-pm/src/pm/api.ts": 1399,
+    "forge-pm/src/pm/docs-linear.tsx": 1010,
+    "forge-pm/src/pm/linear-issue-detail.tsx": 2101,
+    "forge-pm/src/pm/project-linear.tsx": 1465,
+    "forge-pm/src/pm/shared/property-fields.tsx": 1048,
+    "forge-qoder-direct/lib/adapter.js": 1458,
+    "forge-trader/lib/tools.js": 2050,
+    "forge-trader/src/components/charts/KLineChartComponent.tsx": 1303,
+    "forge-trae-direct/lib/adapter.js": 1121,
+    "scripts/canvas-style-check.mjs": 1071,
+    "scripts/code-inventory.mjs": 1667,
+    "scripts/run-gates.mjs": 2065
+  },
+  "exempt": {},
+  "lastWrite": {
+    "at": "2026-11-16T08:58:55.529Z",
+    "reason": "ISS-859：本轮新增触达 5% 容差内抬线。来源 = ISS-857 自检派生（+14）与 ISS-858 flow-metrics 探针（+14），去重后合计 +23；origin/main 现 2056，ISS-858 合入实测 merge-tree 2065（超限 0.44%，<5%）。老板 2026-11-16 拍「乙档 / B：本轮新增留 5% 余量，按 DSH 模式在 lastWrite 留实测」。抽回余量的抽法见 ISS-859。",
+    "from": 32,
+    "to": 32
+  }
+}

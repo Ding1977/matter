@@ -1,0 +1,258 @@
+{
+  "_meta": {
+    "kind": "allowlist",
+    "note": "这是「硬编码格必须登记」的**允许清单**，不是「暂时放宽判据」的豁免。ISS-818 会修 verify-exemption-register 的口径，届时本文件不应被计入豁免。判据可据 _meta.kind 区分，不要猜。",
+    "judge": "scripts/gates/verify-gate-coverage.ts",
+    "ticket": "ISS-812"
+  },
+  "$why": "ISS-812：`--list` 里**不来自 registry** 的格。设计是「硬编码必须登记」，不是「禁止硬编码」—— 收拢 ISS-B 时每迁一格就从这里删一条，迁完清单为空 = 登记唯一化收口。判据 scripts/gates/verify-gate-coverage.ts 双向对账：缺条目 ⇒ 红（实际有但无归属），条目不存在 ⇒ 红（基线自身说谎）。",
+  "$rules": [
+    "每条必须有非空 why —— 空理由判红（理由是这个机制唯一的可审计面）。",
+    "条目对应的格必须真实存在于 --list —— 格迁走/改名了判红，否则清单会变成永久免死金牌。",
+    "条目的 source 必须与 --list 当前来源一致 —— 换族了判红，那说明这格迁走了，旧条目该删。",
+    "entries.length <= maxEntries —— 只减不增。收拢 ISS-B 时每迁一格删一条，目标是清零。要加一条必须同时调高 maxEntries，那在 git diff 里是一行看得见的账。"
+  ],
+  "maxEntries": 48,
+  "entries": [
+    {
+      "id": "ci-test-agent-protocol",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-agents",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-browser",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-canvas",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-cli-provider",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-design",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-mermaid",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-messenger",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-model",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-model-limits",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-model-protocol",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-plugin-status",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-pm",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-qoder-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-repowiki",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-router-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-service-kit",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-tailwind",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-trader",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-trae-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-ui",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-window-chrome",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-workbuddy-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-agent-protocol",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-agents",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-browser",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-cad",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-canvas",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-design",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-mermaid",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-messenger",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-model",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-model-limits",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-model-protocol",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-plugin-status",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-pm",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-qoder-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-repowiki",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-router-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-service-kit",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-tailwind",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-trader",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-trae-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-ui",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-window-chrome",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-typecheck-workbuddy-direct",
+      "source": "ci-packages",
+      "why": "由 scripts/run-gates.mjs 的 deriveCiPackageGates() 逐包派生（package.json 有该 script 才派生），--list 的 source 为 null。随包增减自动变化，不是硬编码债。"
+    },
+    {
+      "id": "ci-test-memory",
+      "source": "ci-packages",
+      "why": "forge-memory 包的 test script 派生（ISS-861）；新包首次登记，包删除时随删"
+    },
+    {
+      "id": "ci-typecheck-memory",
+      "source": "ci-packages",
+      "why": "forge-memory 包的 typecheck script 派生（ISS-861）；新包首次登记，包删除时随删"
+    }
+  ]
+}

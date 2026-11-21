@@ -1,0 +1,4753 @@
+{
+ "tool": "code-inventory.mjs --write-dead-exports",
+ "note": "零引用清单（ISS-732 符号级 + ISS-723 文件级，死码账本的输入）。items 成员 = 度量 Z2 的 zeroExport、files 成员 = 度量 Z1 的 zeroFile，两处都一字不改；flags 只是降噪提示（declFile / entryFile / stringRef / builtArtifactSource / testPinnedBySourceText），既不是活证据也不是死证据 —— 删之前逐条人工过。不含 default export（Z2 对其无判据）。testWashed = **只因测试文件把模块整体吃进而被算成\"有人用\"**的导出（ISS-765 的可伪造面，Z2 的数按现行口径不含它们，所以这个数不是违例、是\"还能再降多少的真相\"）。",
+ "totals": {
+  "exports": 3699,
+  "zeroRef": 425,
+  "zeroRefBadness": 355,
+  "zeroFiles": 13
+ },
+ "flags": {
+  "declFile": 0,
+  "entryFile": 208,
+  "stringRef": 146,
+  "builtArtifactSource": 0,
+  "testPinnedBySourceText": 15,
+  "none": 168
+ },
+ "testWashed": {
+  "count": 290,
+  "files": [
+   "forge-agent-protocol/lib/index.js",
+   "forge-agents/lib/__fixtures__/legacy-ddl.js",
+   "forge-agents/lib/commands-cache.js",
+   "forge-agents/lib/domain.js",
+   "forge-agents/lib/index.js",
+   "forge-agents/lib/registry-store.js",
+   "forge-agents/lib/run-manager.js",
+   "forge-agents/lib/session-dispatch.js",
+   "forge-agents/lib/zcode-stdio.js",
+   "forge-cad/lib/tools.js",
+   "forge-canvas/lib/tools.js",
+   "forge-canvas/src/canvas/live-fixtures/index.ts",
+   "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+   "forge-canvas/src/canvas/live-fixtures/member-detail-live.tsx",
+   "forge-canvas/src/canvas/live-inspect.ts",
+   "forge-canvas/src/canvas/live-registry.ts",
+   "forge-canvas/src/page-roundtrip.ts",
+   "forge-cli-provider/lib/wiring.js",
+   "forge-messenger/lib/inflight-cli.mjs",
+   "forge-messenger/lib/pause.js",
+   "forge-messenger/lib/resume-cli.mjs",
+   "forge-model/lib/index.js",
+   "forge-model/lib/model/catalog-state.js",
+   "forge-model/lib/model/context-window-store.js",
+   "forge-model/lib/plans/live.js",
+   "forge-model/lib/store/bridge.js",
+   "forge-plugin-status/src/inventory.ts",
+   "forge-plugin-status/src/plugin-status-panel.tsx",
+   "forge-pm/lib/agent-tools.js",
+   "forge-pm/lib/context-brief.js",
+   "forge-pm/lib/dispatch-link.js",
+   "forge-pm/lib/domain.js",
+   "forge-pm/lib/inbox-store.js",
+   "forge-pm/lib/index.js",
+   "forge-pm/lib/member-registry.js",
+   "forge-pm/lib/pm-store.js",
+   "forge-pm/lib/roles.js",
+   "forge-pm/lib/routes/drafts-favorites.routes.js",
+   "forge-pm/lib/routes/issues.routes.js",
+   "forge-pm/lib/routes/tags.routes.js",
+   "forge-pm/lib/sidecar.js",
+   "forge-pm/lib/tag-format.js",
+   "forge-pm/src/dsh/client-entry.tsx",
+   "forge-pm/src/pm/doc-card.tsx",
+   "forge-pm/src/pm/linear-demo.tsx",
+   "forge-qoder-direct/lib/adapter.js",
+   "forge-qoder-direct/lib/protocol.js",
+   "forge-repowiki/lib/index.js",
+   "forge-repowiki/lib/wiki-query.js",
+   "forge-repowiki/src/wiki-view.tsx",
+   "forge-router-direct/lib/adapter.js",
+   "forge-tailwind/src/dsh/client-entry.ts",
+   "forge-trader/lib/tools.js",
+   "forge-trader/src/components/trader/SearchModal.tsx",
+   "forge-trader/src/store/search-history.ts"
+  ],
+  "byFile": [
+   {
+    "file": "forge-agent-protocol/lib/index.js",
+    "names": [
+     "PROTOCOL_VERSION",
+     "MSG_KINDS",
+     "RUN_KINDS",
+     "ASK_KINDS",
+     "TODO_KINDS",
+     "ASK_DECISIONS",
+     "ERROR_SOURCES",
+     "ERROR_CODES",
+     "ERROR_CODE_QUOTA_EXHAUSTED",
+     "classifyRunError",
+     "RESERVED_KINDS_V1_NEXT",
+     "AGENT_EVENT_KINDS",
+     "INTERNAL_SIGNAL_KINDS",
+     "isAgentEventKind",
+     "MODEL_CATALOG_KINDS",
+     "EVENT_FIELD_ALIASES",
+     "applyEventAliases",
+     "eventIdOf",
+     "TRUNCATE_STYLES",
+     "truncateValue",
+     "AGENT_API_BASE",
+     "agentApiUrl",
+     "kindFields",
+     "parseAgentEvent",
+     "assertAgentEvent",
+     "FAIL_KINDS",
+     "FAIL_KIND_DEFAULT",
+     "FAIL_KIND_STATUS",
+     "isFailKind",
+     "fail",
+     "failKindOf",
+     "failStatusOf"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/__fixtures__/legacy-ddl.js",
+    "names": [
+     "LEGACY_SCHEMA_VERSION",
+     "LEGACY_DDL",
+     "applyLegacyDdl"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/commands-cache.js",
+    "names": [
+     "commandFileOf",
+     "sanitizeCommands"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/domain.js",
+    "names": [
+     "pmRoot",
+     "PM_ROOT",
+     "LEGACY_AGENTS_ROOT"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/index.js",
+    "names": [
+     "name",
+     "inject",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/registry-store.js",
+    "names": [
+     "REGISTRY_SCHEMA_VERSION",
+     "LEGACY_DB_PATH",
+     "migrateFromLegacy",
+     "recordAudit",
+     "readDiscoveryAll",
+     "upsertDiscoveryAll",
+     "readSpecAll",
+     "upsertSpecAll",
+     "readProviderMetaAll",
+     "upsertProviderMetaAll",
+     "readAuditAll"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/run-manager.js",
+    "names": [
+     "resolveRunFile",
+     "EPHEMERAL_PREFIX",
+     "EPHEMERAL_MAX",
+     "EPHEMERAL_TTL_MS",
+     "ephemeralStats",
+     "__peekEphemeralForTest",
+     "__resetEphemeralForTest",
+     "maxRunNumOf",
+     "STALE_AFTER_MS",
+     "staleOf"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/session-dispatch.js",
+    "names": [
+     "toAgentOptions"
+    ]
+   },
+   {
+    "file": "forge-agents/lib/zcode-stdio.js",
+    "names": [
+     "mapStateUpdated",
+     "mapToolUpdated",
+     "resolveProviderRuntimeEnv",
+     "buildAppServerEnv",
+     "buildSessionModel",
+     "mapUserInputQuestions"
+    ]
+   },
+   {
+    "file": "forge-cad/lib/tools.js",
+    "names": [
+     "name",
+     "inject",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-canvas/lib/tools.js",
+    "names": [
+     "name",
+     "inject",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-canvas/src/canvas/live-fixtures/index.ts",
+    "names": [
+     "LiveFixtureTable",
+     "listLiveFixtures"
+    ]
+   },
+   {
+    "file": "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+    "names": [
+     "LiveFrameEndpoints",
+     "isLiveFetchMockInstalled"
+    ]
+   },
+   {
+    "file": "forge-canvas/src/canvas/live-fixtures/member-detail-live.tsx",
+    "names": [
+     "LiveMemberDetail"
+    ]
+   },
+   {
+    "file": "forge-canvas/src/canvas/live-inspect.ts",
+    "names": [
+     "LIVE_SCOPE_PREFIX",
+     "sanitizeScopeToken",
+     "LIVE_EDITABLE_PROPS",
+     "LiveCssRule",
+     "asEditableProp",
+     "sanitizeCssValue",
+     "RectLike",
+     "PointLike",
+     "HitCandidate",
+     "containsPoint",
+     "depthWithin",
+     "LiveComputedKey",
+     "ComputedLike"
+    ]
+   },
+   {
+    "file": "forge-canvas/src/canvas/live-registry.ts",
+    "names": [
+     "LiveComponentId",
+     "LiveComponentEntry",
+     "listLiveComponents"
+    ]
+   },
+   {
+    "file": "forge-canvas/src/page-roundtrip.ts",
+    "names": [
+     "DocumentLevelFields"
+    ]
+   },
+   {
+    "file": "forge-cli-provider/lib/wiring.js",
+    "names": [
+     "sortEfforts",
+     "mapKey",
+     "defaultSessionMapFile",
+     "ephemeralRunsEnabled",
+     "modelOverrideFor",
+     "attachAbort",
+     "fallbackModelsOf",
+     "loadDirectModelKeys",
+     "channelsOf",
+     "isCustomModelId",
+     "toModelInfo"
+    ]
+   },
+   {
+    "file": "forge-messenger/lib/inflight-cli.mjs",
+    "names": [
+     "parseArgs",
+     "resolvePid",
+     "makeLsofExec",
+     "scanIssues",
+     "runCli"
+    ]
+   },
+   {
+    "file": "forge-messenger/lib/pause.js",
+    "names": [
+     "RESUMABLE_KINDS",
+     "parsePause",
+     "serializePause"
+    ]
+   },
+   {
+    "file": "forge-messenger/lib/resume-cli.mjs",
+    "names": [
+     "parseArgs",
+     "resolvePaths",
+     "runCli"
+    ]
+   },
+   {
+    "file": "forge-model/lib/index.js",
+    "names": [
+     "name",
+     "inject",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-model/lib/model/catalog-state.js",
+    "names": [
+     "GONE_MISS_RUNS",
+     "pendingNewModels"
+    ]
+   },
+   {
+    "file": "forge-model/lib/model/context-window-store.js",
+    "names": [
+     "__setContextWindowPathsForTest",
+     "invalidateContextWindowCache",
+     "contextWindowFor"
+    ]
+   },
+   {
+    "file": "forge-model/lib/plans/live.js",
+    "names": [
+     "LIVE_TTL_MS",
+     "BROWSER_TTL_MS",
+     "browserLiveCache",
+     "liveRebuild",
+     "lastGoodLiveCache",
+     "lastGoodStore",
+     "__setLastGoodLiveForTest",
+     "loadLastGoodLive",
+     "saveLastGoodLive",
+     "rememberLastGood",
+     "pruneDisabledLastGood",
+     "fallbackToLastGood",
+     "buildLive",
+     "withRemainingPercent",
+     "kickLiveRebuild",
+     "WARMUP_DELAY_MS"
+    ]
+   },
+   {
+    "file": "forge-model/lib/store/bridge.js",
+    "names": [
+     "__setPathsForTest",
+     "storeEnabled",
+     "__resetForTest"
+    ]
+   },
+   {
+    "file": "forge-plugin-status/src/inventory.ts",
+    "names": [
+     "PresetSnapshot",
+     "RemoteResult",
+     "InventoryUnavailableError"
+    ]
+   },
+   {
+    "file": "forge-plugin-status/src/plugin-status-panel.tsx",
+    "names": [
+     "PluginStatusPanelProps",
+     "makeLoader"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/agent-tools.js",
+    "names": [
+     "issueRender"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/context-brief.js",
+    "names": [
+     "extractExperiences",
+     "DEFAULT_ROLE_BUDGET",
+     "_internals"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/dispatch-link.js",
+    "names": [
+     "dropDispatchLink",
+     "countDispatchLinks"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/domain.js",
+    "names": [
+     "SIGNAL_EVENTS",
+     "DETAIL_EVENTS",
+     "ACTIVITY_EVENTS",
+     "EVENT_META",
+     "DISPATCH_TOKENS",
+     "FIELD_EVENTS",
+     "LEGACY_ACTIVITY_EVENTS",
+     "PRIORITY_VALUES",
+     "TERMINAL_STATUSES",
+     "PORTS",
+     "TTL",
+     "FM_ALLOWED",
+     "FIELD_OPTIONS",
+     "CREATE_GUARDED_FIELDS",
+     "CREATE_OPTIONAL_ENUM_FIELDS",
+     "FLOW_FIELD_SHAPES",
+     "validateBudgetShape",
+     "writeScopeOverlap",
+     "validateWriteScopeShape",
+     "MEMO_SCOPE_RE",
+     "MEMO_STALE_DATE_RE",
+     "validateMemoCardShape",
+     "FM_IMMUTABLE"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/inbox-store.js",
+    "names": [
+     "INBOX_DIR",
+     "CURSORS_FILE",
+     "readMessages"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/index.js",
+    "names": [
+     "name",
+     "inject",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/member-registry.js",
+    "names": [
+     "queueTargetForRunStatus"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/pm-store.js",
+    "names": [
+     "SCHEMA_VERSION",
+     "DDL_V1",
+     "DDL_V2",
+     "DDL_V3",
+     "DDL_V5",
+     "migrate",
+     "listTables",
+     "readAudit",
+     "refreshKnownFlags"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/roles.js",
+    "names": [
+     "REPO_ROOT",
+     "ROLE_IDS",
+     "DEFAULT_SKILL_FILES",
+     "DEFAULT_ROLE_BUDGET",
+     "rolesDir",
+     "skillsDir",
+     "loadRole",
+     "composeRolePrompt",
+     "buildRolePrompt",
+     "_resetRoleCache"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/routes/drafts-favorites.routes.js",
+    "names": [
+     "loadFavorites",
+     "saveFavorites",
+     "favoritesResolved"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/routes/issues.routes.js",
+    "names": [
+     "planEntityWrite"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/routes/tags.routes.js",
+    "names": [
+     "collectTagUsage",
+     "rewriteTagGlobal"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/sidecar.js",
+    "names": [
+     "writeLogFile",
+     "matchLogBlock"
+    ]
+   },
+   {
+    "file": "forge-pm/lib/tag-format.js",
+    "names": [
+     "TAG_RE",
+     "isValidTag",
+     "TYPE_TAGS"
+    ]
+   },
+   {
+    "file": "forge-pm/src/dsh/client-entry.tsx",
+    "names": [
+     "name",
+     "inject",
+     "registerDocCardSlot",
+     "ChipIndexMeta",
+     "ChipIndexSources",
+     "makeChipIndexLoader",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-pm/src/pm/doc-card.tsx",
+    "names": [
+     "DocPresentResult",
+     "DocCardSlotProps",
+     "turnProcessToggle",
+     "columnOf",
+     "DocCard"
+    ]
+   },
+   {
+    "file": "forge-pm/src/pm/linear-demo.tsx",
+    "names": [
+     "navTargetOf"
+    ]
+   },
+   {
+    "file": "forge-qoder-direct/lib/adapter.js",
+    "names": [
+     "MIN_IMAGE_EDGE",
+     "requestImageDimensions",
+     "longEdgeDimensions",
+     "resolveRequestImageTarget",
+     "plannedRequestOutput",
+     "duplicateLabelsOf",
+     "toModelInfo",
+     "effortsOf",
+     "toQoderMessages",
+     "contentHasImageBlock",
+     "collectImageRefs",
+     "imageParts",
+     "toQoderTools",
+     "buildChatPayload",
+     "thinkingHeadersForTest"
+    ]
+   },
+   {
+    "file": "forge-qoder-direct/lib/protocol.js",
+    "names": [
+     "signaturePath"
+    ]
+   },
+   {
+    "file": "forge-repowiki/lib/index.js",
+    "names": [
+     "name",
+     "inject",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-repowiki/lib/wiki-query.js",
+    "names": [
+     "resolvePage",
+     "pageTree",
+     "citeBlockRange",
+     "excerpt",
+     "hasWideChars",
+     "stripCite",
+     "splitSections",
+     "sectionList",
+     "runImpact",
+     "callersFor"
+    ]
+   },
+   {
+    "file": "forge-repowiki/src/wiki-view.tsx",
+    "names": [
+     "headerBuckets",
+     "panelBuckets",
+     "splitMermaidBlocks",
+     "PageBody",
+     "tocIndexAt",
+     "createScrollSync"
+    ]
+   },
+   {
+    "file": "forge-router-direct/lib/adapter.js",
+    "names": [
+     "ROUTER_DEFAULT_REASONING_EFFORT",
+     "FIRST_CHUNK_TIMEOUT_MS",
+     "ROUTER_FAILURE_CODE",
+     "defaultChain"
+    ]
+   },
+   {
+    "file": "forge-tailwind/src/dsh/client-entry.ts",
+    "names": [
+     "name",
+     "inject",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-trader/lib/tools.js",
+    "names": [
+     "name",
+     "inject",
+     "normalizeNegativeZero",
+     "apply"
+    ]
+   },
+   {
+    "file": "forge-trader/src/components/trader/SearchModal.tsx",
+    "names": [
+     "Row",
+     "stockMarketOf",
+     "pickKey",
+     "bareCode",
+     "resolveWatchRow",
+     "resolveLegacyRow",
+     "browseRowsOf",
+     "resolveActiveTab"
+    ]
+   },
+   {
+    "file": "forge-trader/src/store/search-history.ts",
+    "names": [
+     "HISTORY_LIMIT",
+     "HistoryItem",
+     "historyKey",
+     "sanitize"
+    ]
+   }
+  ]
+ },
+ "items": [
+  {
+   "pkg": "forge-agents",
+   "file": "forge-agents/lib/capability-probe.js",
+   "line": 65,
+   "name": "ENGINE_CACHE_DIR",
+   "kind": "factory",
+   "flags": []
+  },
+  {
+   "pkg": "forge-agents",
+   "file": "forge-agents/lib/capability-probe.js",
+   "line": 123,
+   "name": "clearEngineCache",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-agents",
+   "file": "forge-agents/lib/capability-probe.js",
+   "line": 256,
+   "name": "clearCapabilityCache",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-agents",
+   "file": "forge-agents/lib/dispatch.js",
+   "line": 72,
+   "name": "isActive",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-agents",
+   "file": "forge-agents/lib/model-catalog.js",
+   "line": 12,
+   "name": "EFFORT_ORDER",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-agents",
+   "file": "forge-agents/lib/quota-workbuddy.js",
+   "line": 22,
+   "name": "readWorkbuddyToken",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-agents",
+   "file": "forge-agents/lib/zcode-models.js",
+   "line": 153,
+   "name": "runtimeToCatalog",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-browser",
+   "file": "forge-browser/lib/index.js",
+   "line": 10,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-browser",
+   "file": "forge-browser/lib/index.js",
+   "line": 11,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-browser",
+   "file": "forge-browser/src/dsh/client-entry.tsx",
+   "line": 33,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-browser",
+   "file": "forge-browser/src/dsh/client-entry.tsx",
+   "line": 36,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-browser",
+   "file": "forge-browser/src/dsh/client-entry.tsx",
+   "line": 190,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-browser",
+   "file": "forge-browser/src/index.tsx",
+   "line": 225,
+   "name": "BrowserViewProps",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-cad",
+   "file": "forge-cad/lib/index.js",
+   "line": 29,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-cad",
+   "file": "forge-cad/lib/index.js",
+   "line": 32,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-cad",
+   "file": "forge-cad/lib/index.js",
+   "line": 34,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-cad",
+   "file": "forge-cad/src/dsh/client-entry.tsx",
+   "line": 11,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-cad",
+   "file": "forge-cad/src/dsh/client-entry.tsx",
+   "line": 16,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-cad",
+   "file": "forge-cad/src/dsh/client-entry.tsx",
+   "line": 18,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/lib/index.js",
+   "line": 28,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/lib/index.js",
+   "line": 32,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/canvas/live-geometry.ts",
+   "line": 62,
+   "name": "ScreenRect",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/canvas/live-isolation.ts",
+   "line": 35,
+   "name": "LiveFrameAttrs",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/canvas/live-isolation.ts",
+   "line": 41,
+   "name": "LiveFrameStyle",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/canvas/live-mount.tsx",
+   "line": 610,
+   "name": "liveDemoHint",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/canvas/step-controls.tsx",
+   "line": 17,
+   "name": "TokenSets",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/canvas/step-controls.tsx",
+   "line": 29,
+   "name": "useTokenSets",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/dsh/client-entry.tsx",
+   "line": 13,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/dsh/client-entry.tsx",
+   "line": 17,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/dsh/client-entry.tsx",
+   "line": 35,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/layout-check.ts",
+   "line": 73,
+   "name": "尺寸轴",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/palette.ts",
+   "line": 18,
+   "name": "PaletteMatch",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/schema.ts",
+   "line": 111,
+   "name": "GridTrack",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/schema.ts",
+   "line": 160,
+   "name": "尺寸模式判定",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/schema.ts",
+   "line": 276,
+   "name": "往返外带",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/token-identity.ts",
+   "line": 22,
+   "name": "载体数据",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/token-identity.ts",
+   "line": 25,
+   "name": "档表",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/token-identity.ts",
+   "line": 27,
+   "name": "色表",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/token-identity.ts",
+   "line": 49,
+   "name": "域名",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-cli-provider",
+   "file": "forge-cli-provider/lib/history.js",
+   "line": 107,
+   "name": "renderSystemHead",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/kibo/contribution-graph.tsx",
+   "line": 29,
+   "name": "Activity",
+   "kind": "type",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/kibo/contribution-graph.tsx",
+   "line": 37,
+   "name": "Labels",
+   "kind": "type",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/lib/load-state.ts",
+   "line": 34,
+   "name": "FiberPhase",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/lib/load-state.ts",
+   "line": 52,
+   "name": "PresetEnablement",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/lib/load-state.ts",
+   "line": 55,
+   "name": "LoadKind",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/query/query.ts",
+   "line": 9,
+   "name": "FieldLookup",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/query/query.ts",
+   "line": 12,
+   "name": "getFieldValue",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/query/query.ts",
+   "line": 17,
+   "name": "isEmptyValue",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/query/query.ts",
+   "line": 22,
+   "name": "stringifyValue",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/query/query.ts",
+   "line": 29,
+   "name": "numericValue",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/query/query.ts",
+   "line": 216,
+   "name": "QueryResult",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/components/display-menu.tsx",
+   "line": 11,
+   "name": "DisplayMenuProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/components/filter-menu.tsx",
+   "line": 10,
+   "name": "FilterMenuProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/components/portal-popover.tsx",
+   "line": 16,
+   "name": "PortalPopoverProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/components/row-context-menu.tsx",
+   "line": 11,
+   "name": "MenuItem",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/components/row-context-menu.tsx",
+   "line": 22,
+   "name": "RowContextMenuProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/views/board-view.tsx",
+   "line": 29,
+   "name": "BoardViewProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/views/card-view.tsx",
+   "line": 8,
+   "name": "CardViewProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/views/list-view.tsx",
+   "line": 34,
+   "name": "ListViewProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/views/table-view.tsx",
+   "line": 38,
+   "name": "TableViewProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/sql/view/views/timeline-view.tsx",
+   "line": 32,
+   "name": "TimelineViewProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/ui/kbd.tsx",
+   "line": 7,
+   "name": "Kbd",
+   "kind": "factory",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/ui/provider-icon.tsx",
+   "line": 87,
+   "name": "ProviderIconProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/ui/sheet.tsx",
+   "line": 143,
+   "name": "SHEET_SECTIONED",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/ui/sheet.tsx",
+   "line": 145,
+   "name": "SHEET_HEAD",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/ui/sheet.tsx",
+   "line": 147,
+   "name": "SHEET_BODY",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/ui/sheet.tsx",
+   "line": 149,
+   "name": "SHEET_FOOT",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-memory",
+   "file": "forge-memory/lib/index.js",
+   "line": 27,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-memory",
+   "file": "forge-memory/lib/index.js",
+   "line": 30,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-memory",
+   "file": "forge-memory/lib/index.js",
+   "line": 159,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/lib/index.js",
+   "line": 27,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/lib/index.js",
+   "line": 30,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/lib/index.js",
+   "line": 35,
+   "name": "ASSET_SUBDIR",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/dsh/client-entry.ts",
+   "line": 21,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/dsh/client-entry.ts",
+   "line": 24,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/dsh/client-entry.ts",
+   "line": 35,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/mermaid/mermaid-block.tsx",
+   "line": 30,
+   "name": "MERMAID_ASSET_BASE",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/mermaid/mermaid-block.tsx",
+   "line": 33,
+   "name": "PELE_ASSET_FILE",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/mermaid/mermaid-block.tsx",
+   "line": 49,
+   "name": "ensurePele",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/mermaid/viewer.ts",
+   "line": 258,
+   "name": "isMermaidViewerOpen",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-mermaid",
+   "file": "forge-mermaid/src/mermaid/viewer.ts",
+   "line": 445,
+   "name": "VIEWER_CSS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/actors-store.js",
+   "line": 46,
+   "name": "ACTORS_FILE_ENV",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/actors-store.js",
+   "line": 210,
+   "name": "__resetActorsWriteChain",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/deliver.js",
+   "line": 61,
+   "name": "FIRST_PARAGRAPH_MAX",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 67,
+   "name": "DISPATCH_INTERVAL_MS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 69,
+   "name": "HEARTBEAT_STALE_MS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 72,
+   "name": "HEALTH_CHECK_MS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 77,
+   "name": "MAX_DISPATCH_PER_TICK",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 93,
+   "name": "ASSET_AREAS",
+   "kind": "factory",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 98,
+   "name": "MEMBER_PRESET",
+   "kind": "factory",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 186,
+   "name": "namedTokensOf",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 196,
+   "name": "isPathToken",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 204,
+   "name": "isSymbolToken",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/dispatch-loop.js",
+   "line": 276,
+   "name": "isDirScope",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 78,
+   "name": "LIFECYCLE_EVENTS",
+   "kind": "factory",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 90,
+   "name": "isNoteEvent",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 127,
+   "name": "LEAD_ACTORS",
+   "kind": "factory",
+   "flags": [
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 142,
+   "name": "isLeadActor",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 157,
+   "name": "fmIdFromRel",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 164,
+   "name": "NOTE_EXCERPT_MAX",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 424,
+   "name": "isApprovalEvent",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/filter.js",
+   "line": 974,
+   "name": "isTerminalStatus",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 66,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 68,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 71,
+   "name": "DEFAULT_ME",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 73,
+   "name": "DEFAULT_PENDING_MAX",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 78,
+   "name": "DEFAULT_CHANNEL",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 80,
+   "name": "DEFAULT_RETRY_MIN_MS",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 81,
+   "name": "DEFAULT_RETRY_MAX_MS",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/index.js",
+   "line": 91,
+   "name": "reasonOf",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/inflight.js",
+   "line": 70,
+   "name": "INFLIGHT_TIERS",
+   "kind": "factory",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/inflight.js",
+   "line": 73,
+   "name": "LINK_SOURCES",
+   "kind": "factory",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/inflight.js",
+   "line": 76,
+   "name": "BRIEF_MAX",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/observe/observe-render.js",
+   "line": 26,
+   "name": "EVIDENCE_ZH",
+   "kind": "factory",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/relay-route.js",
+   "line": 122,
+   "name": "AUDIT_MAX_BYTES",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/report.js",
+   "line": 33,
+   "name": "REPORT_EXCERPT_MAX",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/restart-request.js",
+   "line": 69,
+   "name": "REASON_MIN",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/restart-request.js",
+   "line": 166,
+   "name": "readJsonl",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/restart-resume.js",
+   "line": 1212,
+   "name": "appendWakeLog",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/review-dispatch.js",
+   "line": 74,
+   "name": "REVIEW_WINDOW_MS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/review-dispatch.js",
+   "line": 76,
+   "name": "REVIEW_QUEUE_MAX",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/review-dispatch.js",
+   "line": 84,
+   "name": "REVIEW_MAX_ATTEMPTS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/review-dispatch.js",
+   "line": 91,
+   "name": "REVIEW_OWNED_MAX",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/session-route.js",
+   "line": 119,
+   "name": "BRIEF_BODY_CHARS",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/session-route.js",
+   "line": 367,
+   "name": "TITLE_FALLBACK_TASK",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/session-route.js",
+   "line": 439,
+   "name": "parseActorInput",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/state.js",
+   "line": 21,
+   "name": "STATE_VERSION",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-messenger",
+   "file": "forge-messenger/lib/team-channel.js",
+   "line": 135,
+   "name": "memberIdsFromProjection",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/__fixtures__/client-sources.ts",
+   "line": 22,
+   "name": "clientSourceFiles",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/gateway/engine.js",
+   "line": 36,
+   "name": "DSH_HOME",
+   "kind": "factory",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/gateway/http.js",
+   "line": 22,
+   "name": "findProviderForModel",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/model/discovery.js",
+   "line": 380,
+   "name": "discoverViaOpenAiModels",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/plans/flash-recommend.js",
+   "line": 71,
+   "name": "MIN_CASH_TOKENS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/plans/price-catalog.js",
+   "line": 85,
+   "name": "planPriceCatalogSnapshot",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/plans/providers.js",
+   "line": 1638,
+   "name": "fetchConsoleViaTab",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/plans/providers.js",
+   "line": 1939,
+   "name": "fetchBrowserPlan",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/plans/providers.js",
+   "line": 1981,
+   "name": "errLive",
+   "kind": "function",
+   "flags": [
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/plans/refresh-policy.js",
+   "line": 67,
+   "name": "targetTimeToday",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/lib/store/registry-ops.js",
+   "line": 30,
+   "name": "DEFAULT_VIEW_ID",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/dsh/catalog-meta.ts",
+   "line": 24,
+   "name": "MetaPrice",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/dsh/client-entry.tsx",
+   "line": 46,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/dsh/client-entry.tsx",
+   "line": 61,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/dsh/client-entry.tsx",
+   "line": 67,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/dsh/effort-signal.tsx",
+   "line": 30,
+   "name": "EffortTone",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/dsh/effort-signal.tsx",
+   "line": 65,
+   "name": "EffortSignalBarsProps",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/dsh/selector-switch.ts",
+   "line": 43,
+   "name": "SelectorSwitchEnv",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/model-select/data.ts",
+   "line": 29,
+   "name": "CLI_PROVIDER_IDS",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/model-select/flash.ts",
+   "line": 24,
+   "name": "FlashEquiv",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/model-select/flash.ts",
+   "line": 32,
+   "name": "FlashTier",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/model-select/flash.ts",
+   "line": 337,
+   "name": "FlashItem",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/model-select/labels.ts",
+   "line": 138,
+   "name": "ChipTone",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/model-select/labels.ts",
+   "line": 161,
+   "name": "FlashCostFacts",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/model-select/labels.ts",
+   "line": 198,
+   "name": "CostTier",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/adopt-form.tsx",
+   "line": 62,
+   "name": "AdoptForm",
+   "kind": "function",
+   "flags": [
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "line": 171,
+   "name": "PanelCardDashed",
+   "kind": "function",
+   "flags": [
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "line": 380,
+   "name": "TONE_BG",
+   "kind": "object",
+   "flags": [
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "line": 494,
+   "name": "LEVEL_GRAYS",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "line": 503,
+   "name": "levelOfPct",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "line": 515,
+   "name": "MiniBar",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "line": 577,
+   "name": "QuotaBarRow",
+   "kind": "function",
+   "flags": [
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/card-kit.tsx",
+   "line": 812,
+   "name": "StatStrip",
+   "kind": "function",
+   "flags": [
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/model-source.tsx",
+   "line": 323,
+   "name": "loadModelRowsEnabled",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "line": 132,
+   "name": "usePageShellBand",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "line": 138,
+   "name": "PageShellNavItem",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "line": 147,
+   "name": "PageShellNav",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "line": 179,
+   "name": "PageShellHeader",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "line": 208,
+   "name": "PageShellBody",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/page-shell.tsx",
+   "line": 223,
+   "name": "PageShellSectionHeader",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-model",
+   "file": "forge-model/src/surfaces/plans/provider-create-dialog.tsx",
+   "line": 31,
+   "name": "ProbedModel",
+   "kind": "type",
+   "flags": [
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/lib/index.js",
+   "line": 25,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/lib/index.js",
+   "line": 27,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/lib/index.js",
+   "line": 113,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/client-entry.tsx",
+   "line": 25,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/client-entry.tsx",
+   "line": 38,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/client-entry.tsx",
+   "line": 48,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/composer-limit-chip.tsx",
+   "line": 61,
+   "name": "ComposerLimitChipProps",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/entries-config.ts",
+   "line": 18,
+   "name": "LimitEntryName",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/limits-source.ts",
+   "line": 29,
+   "name": "LimitWindow",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/limits-source.ts",
+   "line": 41,
+   "name": "LimitBalancePart",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/limits-source.ts",
+   "line": 44,
+   "name": "LimitBalance",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/limits-source.ts",
+   "line": 47,
+   "name": "LocalUsage7",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/limits-source.ts",
+   "line": 83,
+   "name": "LimitsSnapshot",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-model-limits",
+   "file": "forge-model-limits/src/dsh/limits-source.ts",
+   "line": 407,
+   "name": "refreshLimits",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-plugin-status",
+   "file": "forge-plugin-status/lib/index.js",
+   "line": 8,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-plugin-status",
+   "file": "forge-plugin-status/lib/index.js",
+   "line": 10,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-plugin-status",
+   "file": "forge-plugin-status/lib/index.js",
+   "line": 12,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-plugin-status",
+   "file": "forge-plugin-status/src/dsh/client-entry.tsx",
+   "line": 24,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-plugin-status",
+   "file": "forge-plugin-status/src/dsh/client-entry.tsx",
+   "line": 27,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-plugin-status",
+   "file": "forge-plugin-status/src/dsh/client-entry.tsx",
+   "line": 54,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/lib/doc-pins.js",
+   "line": 97,
+   "name": "savePins",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/lib/doc-pins.js",
+   "line": 110,
+   "name": "updatePins",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/lib/doc-pins.js",
+   "line": 140,
+   "name": "documentRelOf",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/lib/doc-pins.js",
+   "line": 156,
+   "name": "readDocBlocks",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/lib/frontmatter-write-guard.js",
+   "line": 112,
+   "name": "OBJECT_STRINGIFIED_MARKER",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/scripts/lex-build-gate-entry.ts",
+   "line": 25,
+   "name": "runGate",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/scripts/link-health.mjs",
+   "line": 55,
+   "name": "computeLinkHealth",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/scripts/link-health.mjs",
+   "line": 127,
+   "name": "classifyLinks",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/scripts/link-health.mjs",
+   "line": 160,
+   "name": "collectFromPm",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/scripts/tag-migration/mapping.mjs",
+   "line": 13,
+   "name": "EXPLICIT",
+   "kind": "object",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/scripts/tag-migration/mapping.mjs",
+   "line": 103,
+   "name": "RULES",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/dsh/chat-issue-chip.ts",
+   "line": 34,
+   "name": "PmIssueTabParams",
+   "kind": "type",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/hooks/use-mobile.ts",
+   "line": 6,
+   "name": "useIsMobile",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/activity-stream/items.tsx",
+   "line": 149,
+   "name": "kindBadgeOf",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 17,
+   "name": "InboundRef",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 128,
+   "name": "DIRS",
+   "kind": "const",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 172,
+   "name": "REVIEW_STATUSES",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 173,
+   "name": "REVIEW_VERDICTS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 174,
+   "name": "REVIEW_STATUS_META",
+   "kind": "object",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 258,
+   "name": "repoRoots",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 262,
+   "name": "repoRootRegister",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 285,
+   "name": "pmReviewRun",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 299,
+   "name": "pmReviewMerge",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/api.ts",
+   "line": 1175,
+   "name": "PluginInventoryRemoteResult",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/bubble-toolbar.tsx",
+   "line": 30,
+   "name": "ConvertToIssueFn",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/db-adapter.ts",
+   "line": 210,
+   "name": "PhaseGroup",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/issue-block-context.ts",
+   "line": 10,
+   "name": "IssueBlockItem",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/issue-block-context.ts",
+   "line": 12,
+   "name": "IssueBlockCtx",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/issue-block-context.ts",
+   "line": 86,
+   "name": "resolveIssueBlockId",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lazy-editor.tsx",
+   "line": 69,
+   "name": "EDITOR_CHUNK_ID",
+   "kind": "const",
+   "flags": [
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/bridge-assertions.ts",
+   "line": 51,
+   "name": "runBridgeAssertions",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/bridge-assertions.ts",
+   "line": 631,
+   "name": "runCorpusRoundTrip",
+   "kind": "function",
+   "flags": [
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/bridge.ts",
+   "line": 30,
+   "name": "ALL_TRANSFORMERS",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/bridge.ts",
+   "line": 75,
+   "name": "linkifyMd",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/bridge.ts",
+   "line": 108,
+   "name": "normalizeListIndent",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/bubble.tsx",
+   "line": 37,
+   "name": "setLexCurrentDocIdProvider",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 109,
+   "name": "$isIssueNode",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 137,
+   "name": "DocNode",
+   "kind": "class",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 194,
+   "name": "$isDocNode",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 214,
+   "name": "DocTransformer",
+   "kind": "object",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 279,
+   "name": "MermaidTransformer",
+   "kind": "object",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 289,
+   "name": "MentionNode",
+   "kind": "class",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 321,
+   "name": "$isMentionNode",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 327,
+   "name": "MentionTransformer",
+   "kind": "object",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 355,
+   "name": "ImageNode",
+   "kind": "class",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 455,
+   "name": "$createHorizontalRuleNode",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 459,
+   "name": "HorizontalRuleTransformer",
+   "kind": "object",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 469,
+   "name": "$isHorizontalRuleNode",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/nodes.tsx",
+   "line": 542,
+   "name": "TableTransformer",
+   "kind": "object",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/slash-menu.tsx",
+   "line": 34,
+   "name": "LexSlashItem",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/slash-menu.tsx",
+   "line": 49,
+   "name": "LexAskAIProvider",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/slash-menu.tsx",
+   "line": 52,
+   "name": "setLexAskAIProvider",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/md-text.tsx",
+   "line": 16,
+   "name": "MdVariant",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/member-assembly.ts",
+   "line": 24,
+   "name": "LocalizedText",
+   "kind": "type",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/member-assembly.ts",
+   "line": 27,
+   "name": "PluginMeta",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/member-assembly.ts",
+   "line": 33,
+   "name": "RawPresetGroup",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/pm-shell-store.ts",
+   "line": 58,
+   "name": "PmShellSnapshot",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/pm-shell-store.ts",
+   "line": 120,
+   "name": "requestPmView",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/pm-shell-store.ts",
+   "line": 131,
+   "name": "PmOpenTarget",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/pm-shell-store.ts",
+   "line": 134,
+   "name": "requestPmOpen",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/selectors/color-picker.tsx",
+   "line": 44,
+   "name": "ColorPicker",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/shared/global-nav.tsx",
+   "line": 37,
+   "name": "GlobalNavView",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/status-icon.tsx",
+   "line": 8,
+   "name": "StatusIcon",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-qoder-direct",
+   "file": "forge-qoder-direct/lib/index.js",
+   "line": 22,
+   "name": "DIRECT_PROVIDERS",
+   "kind": "factory",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-qoder-direct",
+   "file": "forge-qoder-direct/lib/index.js",
+   "line": 37,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-qoder-direct",
+   "file": "forge-qoder-direct/lib/index.js",
+   "line": 38,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-qoder-direct",
+   "file": "forge-qoder-direct/lib/index.js",
+   "line": 46,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-repowiki",
+   "file": "forge-repowiki/lib/hash.js",
+   "line": 44,
+   "name": "rangeFingerprint",
+   "kind": "function",
+   "flags": [
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-repowiki",
+   "file": "forge-repowiki/lib/symbols.js",
+   "line": 85,
+   "name": "__clearGitDirCache",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-repowiki",
+   "file": "forge-repowiki/src/dsh/client-entry.tsx",
+   "line": 27,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-repowiki",
+   "file": "forge-repowiki/src/dsh/client-entry.tsx",
+   "line": 33,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-repowiki",
+   "file": "forge-repowiki/src/dsh/client-entry.tsx",
+   "line": 77,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-tailwind",
+   "file": "forge-tailwind/lib/index.js",
+   "line": 4,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-tailwind",
+   "file": "forge-tailwind/lib/index.js",
+   "line": 7,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-tailwind",
+   "file": "forge-tailwind/lib/index.js",
+   "line": 10,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/env-judgement.js",
+   "line": 42,
+   "name": "TURNOVER_LEGS",
+   "kind": "factory",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/env-judgement.js",
+   "line": 61,
+   "name": "TURNOVER_BANDS",
+   "kind": "factory",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/env-judgement.js",
+   "line": 92,
+   "name": "UNIT_YI",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/index.js",
+   "line": 35,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/index.js",
+   "line": 36,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/index.js",
+   "line": 251,
+   "name": "stopBackend",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/index.js",
+   "line": 310,
+   "name": "lastStopBackendReport",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/index.js",
+   "line": 524,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/lib/trader-pure.js",
+   "line": 165,
+   "name": "ladderCounts",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/chart-options.ts",
+   "line": 25,
+   "name": "MarketStatus",
+   "kind": "type",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/chart-state.ts",
+   "line": 33,
+   "name": "KlineBar",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/chart-state.ts",
+   "line": 43,
+   "name": "ChartSnapshot",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/chart-state.ts",
+   "line": 65,
+   "name": "ChartState",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/drawing/useDrawingTools.ts",
+   "line": 67,
+   "name": "UseDrawingToolsOptions",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/drawing/useDrawingTools.ts",
+   "line": 78,
+   "name": "UseDrawingToolsResult",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/RadialContextMenu.tsx",
+   "line": 73,
+   "name": "RadialContextMenuProps",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/rollingReel.ts",
+   "line": 9,
+   "name": "REEL_LEN",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/rollingReel.ts",
+   "line": 17,
+   "name": "DigitCell",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/rollingReel.ts",
+   "line": 26,
+   "name": "StaticCell",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/rollingReel.ts",
+   "line": 33,
+   "name": "Cell",
+   "kind": "type",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/rollingReel.ts",
+   "line": 35,
+   "name": "isDigitChar",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/rollingReel.ts",
+   "line": 71,
+   "name": "canonicalPos",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/charts/rollingReel.ts",
+   "line": 156,
+   "name": "MountWrite",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/trader/TraderStatusPill.tsx",
+   "line": 17,
+   "name": "TraderStatusPill",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/dsh/client-entry.tsx",
+   "line": 10,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/dsh/client-entry.tsx",
+   "line": 14,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/dsh/client-entry.tsx",
+   "line": 30,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/lib/smc.ts",
+   "line": 54,
+   "name": "FVG",
+   "kind": "interface",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/pages/LimitUpPage.tsx",
+   "line": 52,
+   "name": "LimitUpPage",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/store/account.ts",
+   "line": 29,
+   "name": "AccountTrade",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/store/account.ts",
+   "line": 42,
+   "name": "AccountPortfolio",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/store/account.ts",
+   "line": 53,
+   "name": "EquityPoint",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/store/account.ts",
+   "line": 60,
+   "name": "DrawdownInfo",
+   "kind": "interface",
+   "flags": []
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/lib/index.js",
+   "line": 11,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/lib/index.js",
+   "line": 14,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/client-entry.ts",
+   "line": 19,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/client-entry.ts",
+   "line": 38,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/client-entry.ts",
+   "line": 93,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/doc-width.tsx",
+   "line": 113,
+   "name": "writeWidthPreference",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/doc-width.tsx",
+   "line": 238,
+   "name": "PreviewWidthControls",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/features/register-features.ts",
+   "line": 41,
+   "name": "installForgeNav",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/panel-bridge.ts",
+   "line": 83,
+   "name": "subscribeAgentNeon",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/panel-bridge.ts",
+   "line": 89,
+   "name": "getAgentNeon",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/panel-bridge.ts",
+   "line": 90,
+   "name": "setAgentNeon",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/panel-bridge.ts",
+   "line": 101,
+   "name": "OfficialTabsFace",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/panel-bridge.ts",
+   "line": 113,
+   "name": "OfficialSidebarSource",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-float-state.ts",
+   "line": 26,
+   "name": "SessionFloatState",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-nav.ts",
+   "line": 12,
+   "name": "SessionReferenceLike",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-nav.ts",
+   "line": 59,
+   "name": "clearSessionSelection",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-nav.ts",
+   "line": 66,
+   "name": "currentSessionId",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-occurrence.tsx",
+   "line": 29,
+   "name": "FactoryRender",
+   "kind": "type",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-occurrence.tsx",
+   "line": 36,
+   "name": "SlotRender",
+   "kind": "type",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-occurrence.tsx",
+   "line": 51,
+   "name": "SessionOccurrenceInput",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-occurrence.tsx",
+   "line": 56,
+   "name": "SessionOccurrenceProps",
+   "kind": "type",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-occurrence.tsx",
+   "line": 64,
+   "name": "FixedChatView",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-occurrence.tsx",
+   "line": 77,
+   "name": "SessionLike",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 42,
+   "name": "SESSION_TAB_ID",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 45,
+   "name": "SESSION_PROTOCOL",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 55,
+   "name": "NEW_SESSION_IN_FLOAT_EVENT",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 63,
+   "name": "sessionTabAddress",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 72,
+   "name": "parseSessionTabAddress",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 107,
+   "name": "SESSION_OCCURRENCE_SLOT",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 194,
+   "name": "SessionRailBody",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 258,
+   "name": "openNewSessionInFloat",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/session-rail-host.tsx",
+   "line": 285,
+   "name": "openSessionInRail",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "forge-ui",
+   "file": "forge-ui/src/dsh/surface-official.ts",
+   "line": 66,
+   "name": "OfficialSurfaceDef",
+   "kind": "interface",
+   "flags": [
+    "entryFile",
+    "stringRef",
+    "testPinnedBySourceText"
+   ]
+  },
+  {
+   "pkg": "forge-window-chrome",
+   "file": "forge-window-chrome/lib/index.js",
+   "line": 6,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-window-chrome",
+   "file": "forge-window-chrome/lib/index.js",
+   "line": 8,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-window-chrome",
+   "file": "forge-window-chrome/lib/index.js",
+   "line": 10,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-window-chrome",
+   "file": "forge-window-chrome/src/dsh/client-entry.tsx",
+   "line": 23,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-window-chrome",
+   "file": "forge-window-chrome/src/dsh/client-entry.tsx",
+   "line": 28,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-window-chrome",
+   "file": "forge-window-chrome/src/dsh/client-entry.tsx",
+   "line": 30,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/adapter.js",
+   "line": 773,
+   "name": "explainHttpFailure",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/index.js",
+   "line": 18,
+   "name": "name",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/index.js",
+   "line": 19,
+   "name": "inject",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/index.js",
+   "line": 31,
+   "name": "apply",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/protocol.js",
+   "line": 52,
+   "name": "EP_CONFIG",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/protocol.js",
+   "line": 64,
+   "name": "FORCE_STREAM",
+   "kind": "const",
+   "flags": []
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/protocol.js",
+   "line": 210,
+   "name": "catalogCacheDir",
+   "kind": "function",
+   "flags": []
+  },
+  {
+   "pkg": "forge-workbuddy-direct",
+   "file": "forge-workbuddy-direct/lib/protocol.js",
+   "line": 634,
+   "name": "textOf",
+   "kind": "function",
+   "flags": [
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/assembly-check.mjs",
+   "line": 50,
+   "name": "mainRepoRoot",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/assembly-check.mjs",
+   "line": 177,
+   "name": "checkAssembly",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/atomic-artifact.mjs",
+   "line": 20,
+   "name": "writeArtifact",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/build-index-repowiki.mjs",
+   "line": 94,
+   "name": "credentialState",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/build-index-repowiki.mjs",
+   "line": 103,
+   "name": "expandHome",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 110,
+   "name": "otherThemeColor",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 147,
+   "name": "stripComments",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 152,
+   "name": "radiusLiteralHits",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 167,
+   "name": "radiusSourceGuard",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 188,
+   "name": "radiusStepProblems",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 202,
+   "name": "coreGenerationOk",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 233,
+   "name": "IDENTITY_SRC_FILES",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 236,
+   "name": "readIdentitySrc",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 247,
+   "name": "funcBody",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 271,
+   "name": "顶层段",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 283,
+   "name": "identityWriteGuard",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 421,
+   "name": "findDanglingVars",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 434,
+   "name": "looksLikeCanvasDoc",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/canvas-style-check.mjs",
+   "line": 439,
+   "name": "checkCanvasDoc",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/cdp-viz.mjs",
+   "line": 34,
+   "name": "VIZ_SNIPPET",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/check-css-block-depth.mjs",
+   "line": 72,
+   "name": "scanBraceBalance",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/check-design-token-exists.mjs",
+   "line": 110,
+   "name": "scanTokenRefs",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/component-map.mjs",
+   "line": 34,
+   "name": "buildMap",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/data-root-check.mjs",
+   "line": 39,
+   "name": "例外表",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/data-root-check.mjs",
+   "line": 58,
+   "name": "应跳过",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/data-root-check.mjs",
+   "line": 72,
+   "name": "scanSelf",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/data-root-check.mjs",
+   "line": 88,
+   "name": "scanStale",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/fix-frontmatter-quoting.mjs",
+   "line": 48,
+   "name": "defaultRoot",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/fix-frontmatter-quoting.mjs",
+   "line": 59,
+   "name": "collectMd",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/fix-frontmatter-quoting.mjs",
+   "line": 132,
+   "name": "planFile",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/fix-frontmatter-quoting.mjs",
+   "line": 190,
+   "name": "planRoot",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/fix-frontmatter-quoting.mjs",
+   "line": 246,
+   "name": "applyReport",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 60,
+   "name": "cacheRoot",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 63,
+   "name": "cachePathFor",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 66,
+   "name": "defaultCachePath",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 89,
+   "name": "listWorktrees",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 115,
+   "name": "dropAllCacheTrees",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 176,
+   "name": "dropCreatedBaseTrees",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 190,
+   "name": "ensureBaseTree",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 242,
+   "name": "dropBaseTree",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gate-base-tree.mjs",
+   "line": 248,
+   "name": "mergeBase",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gen-ctx-catalog.mjs",
+   "line": 284,
+   "name": "scanCtxSurface",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/gen-ctx-catalog.mjs",
+   "line": 363,
+   "name": "renderCatalog",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/install-hooks.mjs",
+   "line": 143,
+   "name": "install",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-code.mjs",
+   "line": 298,
+   "name": "RULES",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-code.mjs",
+   "line": 361,
+   "name": "nthInt",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-code.mjs",
+   "line": 420,
+   "name": "evaluate",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-code.mjs",
+   "line": 551,
+   "name": "selftest",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-common.mjs",
+   "line": 133,
+   "name": "runCli",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-common.mjs",
+   "line": 189,
+   "name": "selftest",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 58,
+   "name": "WHITELIST",
+   "kind": "factory",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 60,
+   "name": "EXIT",
+   "kind": "object",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 63,
+   "name": "PLACEHOLDER_WHY",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 64,
+   "name": "isReason",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 133,
+   "name": "resolveIdent",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 174,
+   "name": "resolveName",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 183,
+   "name": "scanFile",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-cross-pkg-events.mjs",
+   "line": 240,
+   "name": "evaluate",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/lint-scripts.mjs",
+   "line": 400,
+   "name": "run",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/md-corpus-guard.mjs",
+   "line": 274,
+   "name": "measure",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/md-corpus-guard.mjs",
+   "line": 377,
+   "name": "judgeResults",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/md-corpus-guard.mjs",
+   "line": 466,
+   "name": "buildBaseline",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/md-mermaid-lint.mjs",
+   "line": 24,
+   "name": "lintBlock",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/md-mermaid-lint.mjs",
+   "line": 107,
+   "name": "extractBlocks",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/migration-baseline.mjs",
+   "line": 114,
+   "name": "parseLoopBases",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/migration-baseline.mjs",
+   "line": 137,
+   "name": "parsePathValue",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/migration-baseline.mjs",
+   "line": 216,
+   "name": "topLevelField",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/migration-baseline.mjs",
+   "line": 291,
+   "name": "scanRoutes",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/plugin-load-scout.mjs",
+   "line": 107,
+   "name": "judgeLoad",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/pm-v2-baseline.mjs",
+   "line": 56,
+   "name": "REPO",
+   "kind": "const",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/pm-v2-baseline.mjs",
+   "line": 391,
+   "name": "collect",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/pm-v2-baseline.mjs",
+   "line": 533,
+   "name": "diffMetrics",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/pm-v2-baseline.mjs",
+   "line": 544,
+   "name": "emptyDenominators",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/pm-v2-baseline.mjs",
+   "line": 560,
+   "name": "verdictOf",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/resolve-tool.ts",
+   "line": 43,
+   "name": "ResolveOptions",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/resolve-tool.ts",
+   "line": 85,
+   "name": "RequireOptions",
+   "kind": "interface",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/review-range.mjs",
+   "line": 24,
+   "name": "buildHandoff",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/review-range.mjs",
+   "line": 38,
+   "name": "checkHandoff",
+   "kind": "function",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/review-range.mjs",
+   "line": 67,
+   "name": "runMain",
+   "kind": "function",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/wt-exclude-lib.mjs",
+   "line": 18,
+   "name": "WORKTREE_DIRS",
+   "kind": "const",
+   "flags": [
+    "entryFile"
+   ]
+  },
+  {
+   "pkg": "scripts",
+   "file": "scripts/wt-exclude-lib.mjs",
+   "line": 70,
+   "name": "WORKTREE_IGNORE_GLOBS",
+   "kind": "factory",
+   "flags": [
+    "entryFile",
+    "stringRef"
+   ]
+  }
+ ],
+ "files": [
+  {
+   "pkg": "forge-cad",
+   "file": "forge-cad/src/cad/vendor-entry.ts",
+   "lines": 11,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-canvas",
+   "file": "forge-canvas/src/core-entry.ts",
+   "lines": 53,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-design",
+   "file": "forge-design/src/ui/kbd.tsx",
+   "lines": 20,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/mcp/matter-mcp.mjs",
+   "lines": 435,
+   "half": "other"
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/hooks/use-mobile.ts",
+   "lines": 21,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/lexical/bridge-assertions.ts",
+   "lines": 687,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/selectors/color-picker.tsx",
+   "lines": 156,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/shared/blocks/layout.ts",
+   "lines": 71,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-pm",
+   "file": "forge-pm/src/pm/status-icon.tsx",
+   "lines": 32,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/preview/build.mjs",
+   "lines": 64,
+   "half": "other"
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/preview/server.mjs",
+   "lines": 65,
+   "half": "other"
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/components/trader/TraderStatusPill.tsx",
+   "lines": 95,
+   "half": "client"
+  },
+  {
+   "pkg": "forge-trader",
+   "file": "forge-trader/src/pages/LimitUpPage.tsx",
+   "lines": 245,
+   "half": "client"
+  }
+ ]
+}

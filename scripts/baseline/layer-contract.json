@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "waivers 是层契约存量欠账，逐条带 reason/ticket/expires，任务书明确 = waiver。"
+  },
+  "tool": "lint-layer.mjs",
+  "note": "层号 × 允许方向契约（ISS-697 P0 + P1）。层号越大越靠上：L0 基座 / L1 接缝原语 / L2 能力运行时 / L3 产品真相源 / L4 场景插件。只允许严格向下（src > dst）。waivers 是存量欠账，逐条带理由与归属批次；新增即红，修好一条摘一条（骨架会自动报化石）。禁止 --write 自动把新违规写进来。P1 起支持 subpathLayers：包内某个 exports 子路径若本身是「被上层复用的 UI 原语」，可单独标层号（守卫会校验该子路径在目标包 package.json 的 exports 里真实存在，不许凭空贴层号洗白）。物理下沉仍留既有 P5 / E-1 同批做（docs/memory/p2-dep-edges-2026-10-04.md §八 面 D）。2026-11-06 移除 forge-dsh-models（ISS-700）：它是 vscode-dsh-models/ 这个 VS Code 扩展的 package.json name，不是 29 个 forge-* 运行时插件之一——既没有 lib/ host 半、也不被任何 forge-* 包 import，本不该占 L1 层号；且它不在 sourceFiles 的扫描面内（PKG_RE 只认 forge-* 目录），这条登记永远判不到任何 import 边，只会让层表变化石。新守卫 LAYER-PHANTOM 从此拦「登记了不存在的包」。 【ISS-701 起】waivers 条目支持可选 match：对命中 detail 做子串匹配，把豁免从文件级收到**边级**（不带 match = 旧的文件级行为，向后兼容）。14 条 LAYER-SAME 已逐条登记「→ 目标包/子路径」，所以在已豁免文件里新加一条同层边仍会判红；match 对不上时骨架另报 stale（化石不能留）。",
+  "layers": {
+    "forge-service-kit": 1,
+    "forge-design": 1,
+    "forge-ui": 1,
+    "forge-agent-protocol": 1,
+    "forge-model-protocol": 1,
+    "forge-tailwind": 1,
+    "forge-widgets": 1,
+    "forge-window-chrome": 1,
+    "electron-shell": 1,
+    "forge-agents": 2,
+    "forge-model": 2,
+    "forge-model-limits": 2,
+    "forge-cli-provider": 2,
+    "forge-messenger": 2,
+    "forge-router-direct": 2,
+    "forge-qoder-direct": 2,
+    "forge-workbuddy-direct": 2,
+    "forge-trae-direct": 2,
+    "forge-pm": 3,
+    "forge-trader": 4,
+    "forge-cad": 4,
+    "forge-canvas": 4,
+    "forge-mermaid": 4,
+    "forge-repowiki": 4,
+    "forge-browser": 4,
+    "forge-plugin-status": 4,
+    "forge-memory": 2
+  },
+  "subpathLayers": {
+    "forge-mermaid/mermaid-block": 1
+  },
+  "waivers": {
+    "LAYER-REVERSE": [],
+    "LAYER-SAME": [
+      {
+        "file": "forge-cli-provider/lib/providers.js",
+        "match": "→ forge-agents/agent-api",
+        "reason": "L2→L2：host 侧 in-process API 调 forge-agents/agent-api。已在 forge-cli-provider/package.json 的 dsh.hostVendor.external 登记「不内联」——内联会 +110~163KB 且让 agents 的模块级可变状态出现两份内存。属已登记的运行时契约，不是偷渡依赖；P1 收口方向 = 抽成 L1 共享协议。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-cli-provider/lib/wiring.js",
+        "match": "→ forge-agents/agent-api",
+        "reason": "L2→L2：同 providers.js，host 组合根经 agent-api 取原语；hostVendor.external 已登记。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-messenger/lib/index.js",
+        "match": "→ forge-agents/agent-api",
+        "reason": "L2→L2：三处 import forge-agents/agent-api（1413/1539/1580）。信使必须同宿主调 agents.followup / sessionController.prompt，跨进程即哑；hostVendor.external 已登记。注意 session-route.js:39 的 forge-pm 只是注释，不是依赖。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/lib/plans/live.js",
+        "match": "→ forge-agents/plans-usage",
+        "reason": "L2→L2：取 forge-agents 的 Run 状态原语（DOC-256 §7.2 同进程 API，hostVendor.external 已登记）。P1 抽协议后进 L1。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/lib/store/__fixtures__/test-registry.js",
+        "match": "→ forge-agents/registry-store",
+        "reason": "L2→L2：测试夹具里两处 import agent-api 的注册表原语；与被测的 store 同层。P1 若把协议抽到 L1，此处自动合规。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/lib/store/bridge.js",
+        "match": "→ forge-agents/registry-store",
+        "reason": "L2→L2：store 桥接 agent-api 的 Run 读写；hostVendor.external 已登记。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/lib/store/export.js",
+        "match": "→ forge-agents/registry-store",
+        "reason": "L2→L2：导出路径读 agent-api 的 Run 明细；同包同层组合。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/lib/store/registry-ops.js",
+        "match": "→ forge-agents/registry-store",
+        "reason": "L2→L2：注册表操作经 agent-api；同包同层组合。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/src/dsh/effort-signal.test.ts",
+        "match": "→ forge-agents/agent-stream/effort-scale",
+        "reason": "L2→L2：client 半测试 import agent-api 的信号类型；同层测试依赖。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/src/model-select/select.tsx",
+        "match": "→ forge-agents/agent-stream/",
+        "reason": "L2→L2：选择器两处 import agent-api 的档位数据；同层 client 组合。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-model/src/model-select/use-selector-data.ts",
+        "match": "→ forge-agents/agent-stream/effort-scale",
+        "reason": "L2→L2：选择器数据源经 agent-api；同层 client 组合。P1 同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-ui/lib/browser-bridge.js",
+        "match": "→ forge-service-kit/fs",
+        "reason": "L1→L1：接缝层 import forge-service-kit 的 fs/net 原语。L1 内部基础原语互相组合属底座内部实现，不是跨层偷渡；若 P1 要严格禁同层，需先把「基础原语」再分一级，属架构裁决，不在本单。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-ui/src/dsh/doc-width.test.ts",
+        "match": "→ forge-service-kit/fs",
+        "reason": "L1→L1：测试 import service-kit；同 browser-bridge.js，L1 内部组合。P1 架构裁决同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      },
+      {
+        "file": "forge-ui/src/dsh/session-float-host.tsx",
+        "match": "→ forge-design/tokens",
+        "reason": "L1→L1：import forge-design 的 UI 原语；L1 内部组合。P1 架构裁决同上。【架构债·S3 处理】老板 2026-11-14 裁决：不纠缠老代码，留作架构债，S3 阶段统一梳理拆分；本条「P1 收口」方向据此作废。",
+        "ticket": "ISS-823",
+        "expires": "2026-12-31",
+        "debtKind": "architecture"
+      }
+    ]
+  }
+}

@@ -1,0 +1,899 @@
+{
+  "schema": "gate-health/1",
+  "meta": {
+    "head": "06cbeaffac22c0ccdeffebc2a9b0b5817c38e3ed",
+    "branch": "main",
+    "treeKind": "main",
+    "treeFingerprint": "1b56edea5fb81bad",
+    "cwd": "<repo>",
+    "dirtyFiles": 18,
+    "exitCodes": {"gateFast":0,"guard":2,"hostRatchet":1,"inventory":0},
+    "takenAt": "2026-10-24T10:37:37.731Z", "durations": {"gateFast":7.48,"guard":172.81,"hostRatchet":28.22}
+  },
+  "gates": [
+    {
+      "name": "迁移基线（ISS-570）",
+      "key": "迁移基线",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "PM v2 基线（ISS-583）",
+      "key": "PM v2 基线",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "语料格式冻结（ISS-850/L3-4a · 幂等 / 对象数组可解析 / 第二风格禁入 / 风险行棘轮）",
+      "key": "语料格式冻结",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "迁移基线守卫（ISS-587）",
+      "key": "迁移基线守卫",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "崩溃取证接线（ISS-587）",
+      "key": "崩溃取证接线",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "脚本红线（ISS-587）",
+      "key": "脚本红线",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "脚本红线门禁自身（ISS-587）",
+      "key": "脚本红线门禁自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "门禁骨架 lint-common（ISS-700）",
+      "key": "门禁骨架 lint-common",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "扫描输入集合 = 已入库文件（ISS-742）",
+      "key": "扫描输入集合 = 已入库文件",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "类型棘轮三族（ISS-706 host / ISS-763 client / ISS-764 壳 · 只许降不许升）",
+      "key": "类型棘轮三族",
+      "passed": false,
+      "detailPath": "/tmp/guard-baselines-host-typecheck-ratchet.mjs.check.txt"
+    },
+    {
+      "name": "棘轮自身（三族各有注入/还原/缺记录/超上限 + 纳管面缩小；ISS-764 起断言按**增量**写）",
+      "key": "棘轮自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "装配一致性体检自身（ISS-707）",
+      "key": "装配一致性体检自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "设计门禁自身（ISS-712）",
+      "key": "设计门禁自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "设计门禁 R1~R8（ISS-712 · 基线棘轮，只拦新增）",
+      "key": "设计门禁 R1~R8",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "组件清单生成器自身（ISS-944 · 派生自盘点器，八条牙含零实现与空表两支）",
+      "key": "组件清单生成器自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "组件清单与基线一致（ISS-944 · 漂移即红：出码用的 component_map 不许过期静默错）",
+      "key": "组件清单与基线一致",
+      "passed": false,
+      "detailPath": "/tmp/guard-baselines-component-map.mjs.check.txt"
+    },
+    {
+      "name": "画布样式门禁自身（ISS-939 · 正反控制齐：抄表四形/注释豁免/未判三态/拒判不 fail-open，禁恒绿；条数以脚本自己打印为准）",
+      "key": "画布样式门禁自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "画布样式门禁正样本（ISS-939 · fixture 红 = 判据坏，不许关）",
+      "key": "画布样式门禁正样本",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "数据根取法守卫自身（ISS-938 · A/B 两类 + 注释不算违例 + 例外在 fixture 上生效 + 化石检测，禁恒绿）",
+      "key": "数据根取法守卫自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "Prism 语言集与语料一致（需补 6 种，实现均覆盖（顺序检查跳过：bun 不可用））",
+      "key": "Prism 语言集与语料一致",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "mermaid 结构校验自身（ISS-935 · 六条正反控制，禁恒绿）",
+      "key": "mermaid 结构校验自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "文档里的 mermaid 块结构（ISS-935 · 只管配平，不做渲染校验）",
+      "key": "文档里的 mermaid 块结构",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "日志出口棘轮自身（ISS-719）",
+      "key": "日志出口棘轮自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "日志出口与错误 kind（ISS-719 · 只压新增 console·裸 throw·ctx.logger 直调）",
+      "key": "日志出口与错误 kind",
+      "passed": false,
+      "detailPath": "/tmp/guard-baselines-lint-log-outlet.mjs.check.txt"
+    },
+    {
+      "name": "代码规范门禁自身（ISS-722）",
+      "key": "代码规范门禁自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）",
+      "key": "代码规范 K 号门禁",
+      "passed": false,
+      "detailPath": "/tmp/guard-baselines-lint-code.mjs.check.txt"
+    },
+    {
+      "name": "跨包 window 事件判据自身（ISS-571 · 成对绿/只剩派发红/只剩监听红/白名单带理由绿/空理由红/未解析单列 + 「只看派发」「白名单不校验理由」两处变异必须变红 + 名字解析四形各有用例）",
+      "key": "跨包 window 事件判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "跨包 window 事件两端齐全（ISS-571 · 命名空间事件与打过 CustomEvent 的名字，单方即红；白名单必须带理由；未解析不静默）",
+      "key": "跨包 window 事件两端齐全",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "盘点器死码打标自身（ISS-732 三个 + ISS-723 第 4 批两个消费通道标记 · 五个各有判别力）",
+      "key": "盘点器死码打标自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "词法取数口径自身（ISS-762 · 注释不算代码 / 只数字符串字面量 / 转义不炸 / codeOnly 保长度保行号）",
+      "key": "词法取数口径自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "路由明细判据自身（ISS-767 · 24 条：半区/注释/转义/isDocLine 两侧用例）",
+      "key": "路由明细判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "两处口径的判据自身（ISS-624 · 13 条（判据本体与用例同模块 scripts/caliber-lib.mjs）：H5a 该免的三种形状免 / 真解析不到·workspace 内 vscode·子路径 vscode/foo·无 engines 声明四条不许免；D5 退役三条件、workspaces 内零消费者不许判退役、豁免非永久后门）",
+      "key": "两处口径的判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "重复明细判据自身（ISS-767 · 8 条：与三条度量同源 + 截断不静默 + 两跑一致）",
+      "key": "重复明细判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "死码账本判据自身（ISS-767 · 8 条：四轴分桶 + git 缺席不伪装成结论）",
+      "key": "死码账本判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "审计稿↔基线同源判据自身（ISS-753 · 九条用例含三条红路径）",
+      "key": "审计稿↔基线同源判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "审计稿与基线同源（ISS-753 · 复录漏产即红：--baseline-save 曾把 --write-audit 静默跳掉）",
+      "key": "审计稿与基线同源",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "审计稿新鲜度判据自身（ISS-563 · 十五条用例：文档↔基线两支 + 基线↔现仓两支 + 基线↔自己的边表（D5）四支 + 不判与只读生成块；D5 那条判据正反控制齐）",
+      "key": "审计稿新鲜度判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "审计稿 headline 与基线一致、基线对得上现仓、D5 对得上基线自己的边表（ISS-563 · 包数/文件数漂移即红；B7/H5a 等环境量不参与；D5 的「基线↔现仓」新鲜度不判，见脚本头）",
+      "key": "审计稿 headline 与基线一致、基线对得上现仓、D5 对得上基线自己的边表",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "别名登记表判据自身（ISS-715 · 化石/漏登/漂移/形状四条红路径）",
+      "key": "别名登记表判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "别名登记表与事实一致（ISS-715 · 同半区与跨包两条名单都要登记且消费方对得上）",
+      "key": "别名登记表与事实一致",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "K6a 点名判据自身（ISS-739 · 八条用例：闭包/半区/递归自名/单行箭头/变异各有判别力）",
+      "key": "K6a 点名判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "K6a 点名清单与 D2 同源且可复算（ISS-739 · 站点定位不到 = dup-detail 过期）",
+      "key": "K6a 点名清单与 D2 同源且可复算",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "client 产物落后判据自身（ISS-756 · 含「整树无产物 = 不适用」与工作树豁免两条）",
+      "key": "client 产物落后判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "交付完整性判据自身（ISS-696/775 · A/B 两象限各有牙 + 三种「不该报」的形态不报）",
+      "key": "交付完整性判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "依赖卫生判据自身（ISS-777 · 正向不误判 + 反向抓得到 + @source 与清单 json 两档不混）",
+      "key": "依赖卫生判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "风格债判据自身（ISS-726 乙 · 六项能红能绿、缺输入不蒙混）",
+      "key": "风格债判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "安装形状判据自身（ISS-791 · 真目录与断链抓得到、软链不误判、缺输入不蒙混）",
+      "key": "安装形状判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "明文密钥扫描判据自身（ISS-812 · 六类假密钥能抓 + 模式文件不自匹配 + 两个假阳性方向不误伤）",
+      "key": "明文密钥扫描判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "全文索引对账判据自身（ISS-788/806 · 两侧同空/条数相互抵消/entity LIKE 恒 0 三根假牙都抓得到）",
+      "key": "全文索引对账判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "全文索引对账",
+      "key": "全文索引对账",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "客户端渲染契约门禁自身（ISS-736 · TC1 五类分支能红、回调不误伤）",
+      "key": "客户端渲染契约门禁自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "React hooks 数量恒定（ISS-736 · TC1 棘轮，只拦新增）",
+      "key": "React hooks 数量恒定",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "活推送契约门禁自身（ISS-724 · CC1 游标 / CC2 重拉 能红、透传不误伤）",
+      "key": "活推送契约门禁自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "SSE 广播通道的游标与对账口（ISS-724 · docs/code.md §10）",
+      "key": "SSE 广播通道的游标与对账口",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "语料守卫判据自身（ISS-850/L3-4a · 四条判据各有「该红/不该红」两侧 + REV-016 白名单反向控制 + 刷基线不许吸收新遗产 + 语料不存在判「不判」）",
+      "key": "语料守卫判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "Prism 语言集判据自身（ISS-603 · 期望集口径双向验证：语料在用的列入、code-prism 自带/mermaid/无包语言不列入 + 语料不存在判「不判」）",
+      "key": "Prism 语言集判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "租约与归属护栏自身（ISS-583 · 20 场景：空锁可接管 / 未到期在途必须拒 / 读不出全链路 fail-closed（status·claim·release·link·rm）/ merged 只出声不夺权且凭据只认括号内单号 / 持有者三条证据 / rm 的 --force 一次收干净不留半截 / 采集层崩了要判红 / 纯 host 插件不被静默跳过 / 链接写成功却指错也要点名)",
+      "key": "租约与归属护栏自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "工作树 base 落后 + 产物补建判据自身（ISS-734③ / ISS-584 · 7 场景 17 断言，四组变异必红：删守卫块/删缓存树排除/删 fail-closed 标记/删判红块；无 bun 环境自动跳过依赖构建的那两条断言，不假红）",
+      "key": "工作树 base 落后 + 产物补建判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "测试 env 恢复守卫自身（ISS-633 · 裸三段与模板内裸三段必红、模板内给 FORGE_PM_ROOT 赋值不误伤、分母非零）",
+      "key": "测试 env 恢复守卫自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "体检自身的详情命名（ISS-760 · 同脚本 --check 与 --selftest 必须分开）",
+      "key": "体检自身的详情命名",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "装配一致性",
+      "key": "装配一致性",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "链接健康判据自身（ISS-646 · 三清单正例 + 空库/全连通两支负例 + canonRef 生效）",
+      "key": "链接健康判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "纪律层篇幅（ISS-725 · 上限 27,000 B）",
+      "key": "纪律层篇幅",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "装配挂载解析判据自身（ISS-651 · 该算的算 / 不该算的不算 / 读不到要出声）",
+      "key": "装配挂载解析判据自身",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "4 处 {{变量}} 全在引擎注册表内（预设 5 个：preset-matter, preset-trader, preset-builder, preset-reviewer, preset-designer）",
+      "key": "4 处 {{变量}} 全在引擎注册表内",
+      "passed": true,
+      "detailPath": null
+    },
+    {
+      "name": "matter(3210 · dev)",
+      "key": "matter(3210 · dev)",
+      "passed": true,
+      "detailPath": null
+    }
+  ],
+  "quickGates": [
+    {
+      "id": "design",
+      "label": "设计门禁 R 号",
+      "current": 0,
+      "debt": 112
+    },
+    {
+      "id": "code",
+      "label": "代码规范 K 号",
+      "current": 5,
+      "debt": 15
+    },
+    {
+      "id": "deps",
+      "label": "依赖卫生",
+      "current": 14,
+      "debt": 14
+    }
+  ],
+  "typeRatchet": {
+    "families": [
+      {
+        "family": "host 半",
+        "declaredPackages": 26,
+        "rows": [
+          {
+            "pkg": "forge-agent-protocol",
+            "current": 1,
+            "ceiling": 1,
+            "state": "等于上限",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-agents",
+            "current": 94,
+            "ceiling": 101,
+            "state": "低于上限（可收线 101 → 94）",
+            "marker": "↓"
+          },
+          {
+            "pkg": "forge-cli-provider",
+            "current": 69,
+            "ceiling": 73,
+            "state": "低于上限（可收线 73 → 69）",
+            "marker": "↓"
+          },
+          {
+            "pkg": "forge-browser",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-ui",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-pm-notify",
+            "current": 1,
+            "ceiling": 1,
+            "state": "等于上限",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-codeguide",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-pm",
+            "current": 176,
+            "ceiling": 200,
+            "state": "低于上限（可收线 200 → 176）",
+            "marker": "↓"
+          },
+          {
+            "pkg": "forge-canvas",
+            "current": 43,
+            "ceiling": 43,
+            "state": "等于上限",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-trader",
+            "current": 0,
+            "ceiling": 13,
+            "state": "低于上限（可收线 13 → 0）",
+            "marker": "↓"
+          },
+          {
+            "pkg": "forge-impact",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-repowiki",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-cad",
+            "current": 4,
+            "ceiling": 5,
+            "state": "低于上限（可收线 5 → 4）",
+            "marker": "↓"
+          },
+          {
+            "pkg": "forge-archive",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-model",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-model-protocol",
+            "current": 4,
+            "ceiling": 4,
+            "state": "等于上限",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-service-kit",
+            "current": 6,
+            "ceiling": 8,
+            "state": "低于上限（可收线 8 → 6）",
+            "marker": "↓"
+          },
+          {
+            "pkg": "forge-teammate-model",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-mermaid",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-messenger",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-model-limits",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-qoder-direct",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-workbuddy-direct",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-trae-direct",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-window-chrome",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-tailwind",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          }
+        ]
+      },
+      {
+        "family": "client 半",
+        "declaredPackages": 16,
+        "rows": [
+          {
+            "pkg": "forge-agents",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-browser",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-ui",
+            "current": 10,
+            "ceiling": 0,
+            "state": "超上限 0 → 10",
+            "marker": "✗"
+          },
+          {
+            "pkg": "forge-pm-notify",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-codeguide",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-pm",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-canvas",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-trader",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-repowiki",
+            "current": 0,
+            "ceiling": null,
+            "state": "无上限记录",
+            "marker": "✗"
+          },
+          {
+            "pkg": "forge-cad",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-design",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-model",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-mermaid",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-model-limits",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-window-chrome",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          },
+          {
+            "pkg": "forge-tailwind",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          }
+        ]
+      },
+      {
+        "family": "壳（非 workspace）",
+        "declaredPackages": 1,
+        "rows": [
+          {
+            "pkg": "electron-shell",
+            "current": 0,
+            "ceiling": 0,
+            "state": "零错误（阻塞门禁）",
+            "marker": "✓"
+          }
+        ]
+      }
+    ],
+    "samples": [
+      {
+        "pkg": "forge-ui",
+        "text": "src/dsh/session-float-host.tsx(95,11): error TS2339: Property 'useSession' does not exist on type 'SessionMaybeStandardProps & GlobalStandardProps & PropsRenderFactories'."
+      },
+      {
+        "pkg": "forge-ui",
+        "text": "src/dsh/session-float-host.tsx(95,23): error TS2339: Property 'useSessions' does not exist on type 'SessionMaybeStandardProps & GlobalStandardProps & PropsRenderFactories'."
+      },
+      {
+        "pkg": "forge-ui",
+        "text": "src/dsh/session-float-host.tsx(95,36): error TS2339: Property 'sessionId' does not exist on type 'SessionMaybeStandardProps & GlobalStandardProps & PropsRenderFactories'."
+      }
+    ],
+    "summary": {
+      "families": 3,
+      "packages": 43,
+      "headerPackages": 43,
+      "headerFamilies": 3,
+      "redFromHeader": 2,
+      "redCounted": 2,
+      "unjudged": 0,
+      "current": 408,
+      "ceiling": 449,
+      "nullCurrent": 0,
+      "nullCeiling": 1
+    },
+    "dedup": {
+      "tsc": true,
+      "packages": 43,
+      "expect": 408,
+      "total": 408,
+      "distinct": 296,
+      "crossPkg": 53,
+      "mismatch": false,
+      "byFamily": {
+        "host 半": {
+          "total": 398,
+          "distinct": 286,
+          "crossPkg": 53,
+          "expect": 398,
+          "mismatch": false
+        },
+        "client 半": {
+          "total": 10,
+          "distinct": 10,
+          "crossPkg": 0,
+          "expect": 10,
+          "mismatch": false
+        },
+        "壳（非 workspace）": {
+          "total": 0,
+          "distinct": 0,
+          "crossPkg": 0,
+          "expect": 0,
+          "mismatch": false
+        }
+      }
+    }
+  },
+  "inventory": {
+    "dupImplementations": {
+      "id": "D2",
+      "value": "238 / 92",
+      "number": 238,
+      "title": "同名多份实现（不同文件里同名且有函数/类体）/ 其中跨包",
+      "missing": false
+    },
+    "copyPasteClusters": {
+      "id": "D3",
+      "value": "113 / 644",
+      "number": 113,
+      "title": "跨文件复制粘贴函数簇（≥2 文件、token 归一 12-gram Jaccard≥0.6）/ 涉及函数数",
+      "missing": false
+    },
+    "godModules": {
+      "id": "N4",
+      "value": "27 / 67",
+      "number": 27,
+      "title": "≥1000 行的源文件（god module）/ 500~999 行",
+      "missing": false
+    },
+    "zeroRefExports": {
+      "id": "Z2",
+      "value": "3326 / 597 / 18%",
+      "number": 597,
+      "title": "导出总数 / 零引用导出（import 解析后无人取用）/ 占比",
+      "missing": false
+    },
+    "sourceLines": {
+      "id": "T1",
+      "value": "29 / 801 / 199688",
+      "number": 199688,
+      "title": "包数 / 源文件数 / 源码行数（已排 vendor 与产物）",
+      "missing": false
+    }
+  },
+  "processTax": {
+    "commits30d": 1760,
+    "gateChurn": 238,
+    "rework": 204,
+    "gateRatio": 13.5,
+    "reworkRatio": 11.6
+  },
+  "knownRulerDefects": [
+    {
+      "id": "H5b 42→3",
+      "what": "判据不认 peerDependencies：UI 包把 react/react-dom 放 peer 里 ⇒ 39 处假欠账",
+      "evidence": "docs/code-migration.md S1-1 收尾（ISS-739 第 2 格）"
+    },
+    {
+      "id": "C7b 12→3",
+      "what": "口径把仓内脚本算进 host 半：9 处是 scripts/ 的开发工具，每加一个工具就顶高一格",
+      "evidence": "docs/code-audit.md:288（C7b 明细）"
+    },
+    {
+      "id": "R7b 152",
+      "what": "测试标题里的「退回 25s」被时长正则命中，棘轮上限被一条措辞假顶 151→152",
+      "evidence": "docs/code-migration.md:121（ISS-731 复录）"
+    },
+    {
+      "id": "ISS-620",
+      "what": "包改名后白名单键没跟着改：一笔债在两个包里各报一次红（报两头红）",
+      "evidence": "docs/memory/state-reality-gap-2026-10-20.md:11"
+    },
+    {
+      "id": "Z2",
+      "what": "把 .d.ts 镜像条目当零引用导出：反向惩罚\"补类型\"这件事（891→814）",
+      "evidence": "docs/code-audit.md:706"
+    },
+    {
+      "id": "K2b 77→78",
+      "what": "一层口径按第三段取：每加一个 src 根文件就涨一格，涨格的从来不是债",
+      "evidence": "docs/code.md:244（K2c 口径修正段）"
+    }
+  ],
+  "notes": [
+    "可复算性：除 meta.takenAt 与 meta.durations 外逐字节稳定；这两个波动字段刻意放在同一行，方便 `sed s/\"takenAt\":.*//` 一次剥掉",
+    "树身份 meta.treeKind=main（cwd=<repo>）：棘轮上限、构建产物、软链都是某一棵树的状态，两棵树上同一份代码本来就有两个数（docs/memory/code-spec-inventory-2026-09-22.md §30）",
+    "树指纹 meta.treeFingerprint：sha256(HEAD·分支·toplevel·排序后脏清单·git diff HEAD 内容哈希) 前 16 位（own 产物已剔除）——HEAD 相同而指纹不同 ⇒ 同一提交上工作区被改过 ⇒ 判\"不可比\"；HEAD 不同 ⇒ 跨提交前后对比，可比但只读趋势",
+    "processTax 三条口径（可自行复算）：① 提交总数 = `git log --since=\"30 days ago\" --oneline` 的行数；② 门禁类 = 说明匹配 /棘轮|门禁|基线|baseline|lint|ratchet|复录/u；③ 返工审查类 = 说明匹配 /返工|审查|F[0-9]/u。已知偏宽：F[0-9] 会命中任何带 F+数字 的说明（不止\"返工\"），故返工比例是上界不是精确值；lint 同理",
+    "durations 落在 meta 内（与 takenAt 同行）而不是顶层独立键：这是让上面的剥离规则天然覆盖两个波动字段的唯一排法",
+    "类型债去重口径：本脚本按包再跑一次与棘轮**同一条** tsc 命令（tsc -p <cfg> --noEmit，cwd 到包目录）收全量错误原文，键 = 仓库相对「文件(行,列): error TSxxxx」；total=408（应等于棘轮现值 408）· distinct=296 · crossPkg=53（被 ≥2 个包各记一次的）",
+    "脏度量排除了本脚本自己的产物（scripts/baseline/gate-health/ 与 docs/mockups/gate-health-*.html），否则跑一次快照就会让快照不可复算",
+    "god module 取 N4：code-inventory 里没有叫 K2a 的度量（K2a 是 lint 的\"脚本行数 ≤1000\"红线），N4 才是\"≥1000 行源文件\""
+  ]
+}

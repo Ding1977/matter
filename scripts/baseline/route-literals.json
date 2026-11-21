@@ -1,0 +1,3055 @@
+{
+ "tool": "route-ledger-lib.mjs",
+ "note": "全仓路由字面量明细（与 code-inventory 的 C8/C9/C9b/C10 同一次测量、同一份数组）；端点归一的点名清单，不是门禁 · 口径已按 09-22 老板选「乙」改为「同半区重复 + 跨半区核一致」；09-24 起再排除**跨 bundle 成对**（见 crossBundleAssets 与 ISS-793）",
+ "totals": {
+  "literals": 312,
+  "uniqPaths": 170,
+  "copiedPaths": 93,
+  "crossPkgPaths": 17,
+  "alienPairs": 13,
+  "sameHalfCopies": 8,
+  "crossHalfPairs": 85,
+  "danglingRefs": 0,
+  "crossBundleAssets": 0,
+  "staleCrossBundle": 0
+ },
+ "copied": [
+  {
+   "p": "/forge-agents",
+   "files": [
+    {
+     "k": "forge-agent-protocol/lib/index.d.ts",
+     "line": 234,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-agent-protocol/lib/index.js",
+     "line": 246,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-agents/lib/routes-run-lifecycle.js",
+     "line": 24,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-agents/lib/routes.js",
+     "line": 42,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-agents/src/agent-api-base.ts",
+     "line": 10,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 12,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/index.js",
+     "line": 550,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/shared/agent-api-base.ts",
+     "line": 10,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/agent-route-parity.mjs",
+     "line": 38,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 78,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 266,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-agent-protocol",
+    "forge-agents",
+    "forge-model",
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-cad/commit",
+   "files": [
+    {
+     "k": "forge-cad/lib/index.js",
+     "line": 103,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-cad/src/cad/cad-view.tsx",
+     "line": 416,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-cad"
+   ]
+  },
+  {
+   "p": "/forge-cad/new",
+   "files": [
+    {
+     "k": "forge-cad/lib/index.js",
+     "line": 141,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-cad/src/cad/cad-view.tsx",
+     "line": 552,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-cad"
+   ]
+  },
+  {
+   "p": "/forge-cad/state",
+   "files": [
+    {
+     "k": "forge-cad/lib/index.js",
+     "line": 70,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-cad/src/cad/cad-view.tsx",
+     "line": 324,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-cad"
+   ]
+  },
+  {
+   "p": "/forge-cad/upload",
+   "files": [
+    {
+     "k": "forge-cad/lib/index.js",
+     "line": 158,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-cad/src/cad/cad-view.tsx",
+     "line": 578,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-cad/src/cad/cad-view.tsx",
+     "line": 590,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-cad"
+   ]
+  },
+  {
+   "p": "/forge-canvas/baselines",
+   "files": [
+    {
+     "k": "forge-canvas/lib/endpoints.js",
+     "line": 10,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-canvas/src/endpoints.ts",
+     "line": 9,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas"
+   ]
+  },
+  {
+   "p": "/forge-canvas/doc",
+   "files": [
+    {
+     "k": "forge-canvas/lib/endpoints.js",
+     "line": 8,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-canvas/src/endpoints.ts",
+     "line": 7,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas"
+   ]
+  },
+  {
+   "p": "/forge-canvas/export-project",
+   "files": [
+    {
+     "k": "forge-canvas/lib/endpoints.js",
+     "line": 12,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-canvas/src/endpoints.ts",
+     "line": 11,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas"
+   ]
+  },
+  {
+   "p": "/forge-canvas/exports",
+   "files": [
+    {
+     "k": "forge-canvas/lib/endpoints.js",
+     "line": 11,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-canvas/src/endpoints.ts",
+     "line": 10,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas"
+   ]
+  },
+  {
+   "p": "/forge-canvas/imports",
+   "files": [
+    {
+     "k": "forge-canvas/lib/endpoints.js",
+     "line": 14,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-canvas/src/endpoints.ts",
+     "line": 13,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas"
+   ]
+  },
+  {
+   "p": "/forge-canvas/revision",
+   "files": [
+    {
+     "k": "forge-canvas/lib/endpoints.js",
+     "line": 9,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-canvas/src/endpoints.ts",
+     "line": 8,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas"
+   ]
+  },
+  {
+   "p": "/forge-canvas/theme-tokens",
+   "files": [
+    {
+     "k": "forge-canvas/lib/endpoints.js",
+     "line": 13,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-canvas/src/endpoints.ts",
+     "line": 12,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas"
+   ]
+  },
+  {
+   "p": "/forge-cli-provider/config",
+   "files": [
+    {
+     "k": "forge-cli-provider/lib/config-routes.js",
+     "line": 102,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 15,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-cli-provider/model-channels",
+   "files": [
+    {
+     "k": "forge-cli-provider/lib/config-routes.js",
+     "line": 99,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 16,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-mermaid",
+   "files": [
+    {
+     "k": "forge-mermaid/lib/index.js",
+     "line": 32,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-mermaid/src/dsh/client-entry.ts",
+     "line": 27,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-mermaid/src/mermaid/mermaid-block.tsx",
+     "line": 30,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-mermaid"
+   ]
+  },
+  {
+   "p": "/forge-model-limits/entries",
+   "files": [
+    {
+     "k": "forge-model-limits/lib/index.js",
+     "line": 42,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model-limits/src/dsh/entries-config.ts",
+     "line": 12,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model-limits"
+   ]
+  },
+  {
+   "p": "/forge-model-limits/overview",
+   "files": [
+    {
+     "k": "forge-model-limits/lib/index.js",
+     "line": 33,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model-limits/src/dsh/endpoint.ts",
+     "line": 9,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model-limits"
+   ]
+  },
+  {
+   "p": "/forge-plans/gateway/keys",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/gateway.routes.js",
+     "line": 11,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 17,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/gateway/overview",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/gateway.routes.js",
+     "line": 13,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 18,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/model-meta",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/models.routes.js",
+     "line": 251,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 27,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/all",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/models.routes.js",
+     "line": 252,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 19,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/enable-new",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/models.routes.js",
+     "line": 256,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 28,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/flash",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/flash.routes.js",
+     "line": 261,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 23,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/refresh",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/catalog.routes.js",
+     "line": 93,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 29,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/set",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/models.routes.js",
+     "line": 253,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 30,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/set-all",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/models.routes.js",
+     "line": 254,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 31,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/overview",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/overview.routes.js",
+     "line": 27,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 32,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/providers",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/providers.routes.js",
+     "line": 99,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 33,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/providers/probe",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/providers.routes.js",
+     "line": 101,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 34,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/providers/set",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/providers.routes.js",
+     "line": 100,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 35,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/view",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/views.routes.js",
+     "line": 83,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 36,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-plans/view/save",
+   "files": [
+    {
+     "k": "forge-model/lib/routes/views.routes.js",
+     "line": 84,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 37,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model"
+   ]
+  },
+  {
+   "p": "/forge-pm",
+   "files": [
+    {
+     "k": "forge-pm/lib/index.js",
+     "line": 543,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/proxy.js",
+     "line": 51,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/agent-route-parity.mjs",
+     "line": 37,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 78,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 266,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/lint-channel-contract.mjs",
+     "line": 354,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/lint-channel-contract.mjs",
+     "line": 415,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/migration-baseline.mjs",
+     "line": 545,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/plugin-load-scout.mjs",
+     "line": 127,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/agents/profile",
+   "files": [
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 14,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 207,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 13,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/asset",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/documents.routes.js",
+     "line": 85,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 549,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/attachment",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/documents.routes.js",
+     "line": 33,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 540,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/approve",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/auth.routes.js",
+     "line": 84,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1381,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/auth-e2e-verify.mjs",
+     "line": 211,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/auth-e2e-verify.mjs",
+     "line": 269,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/channels",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/auth.routes.js",
+     "line": 242,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1372,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/deny",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/auth.routes.js",
+     "line": 257,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1390,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/request",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/auth.routes.js",
+     "line": 57,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 213,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/auth-e2e-verify.mjs",
+     "line": 196,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/revoke",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/auth.routes.js",
+     "line": 194,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 253,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1398,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/auth-e2e-verify.mjs",
+     "line": 252,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/comment",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/comments.routes.js",
+     "line": 25,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 148,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 514,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/comment-update",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/comments.routes.js",
+     "line": 131,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 531,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/create",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 227,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 118,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 11,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/db-health",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/platform.routes.js",
+     "line": 349,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 84,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 98,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/delete",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 428,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 482,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-approval",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/documents.routes.js",
+     "line": 322,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 196,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 197,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 198,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 724,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-delete",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/documents.routes.js",
+     "line": 585,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 799,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-import",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/documents.routes.js",
+     "line": 416,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 179,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 12,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-meta",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/documents.routes.js",
+     "line": 183,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 707,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/documents",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/documents.routes.js",
+     "line": 155,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 161,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/draft-delete",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/drafts-favorites.routes.js",
+     "line": 195,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 646,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/draft-save",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/drafts-favorites.routes.js",
+     "line": 127,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 638,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/drafts",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/drafts-favorites.routes.js",
+     "line": 66,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 627,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/favorites",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/drafts-favorites.routes.js",
+     "line": 22,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/favorites.tsx",
+     "line": 43,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/favorites.tsx",
+     "line": 68,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/field",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 280,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 411,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/field-many",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 328,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 425,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/inbox/ack",
+   "files": [
+    {
+     "k": "forge-messenger/lib/deliver/inbox-consumer-http.js",
+     "line": 31,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/routes/inbox.routes.js",
+     "line": 114,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/list",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 37,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 67,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 363,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 62,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/members",
+   "files": [
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 13,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 16,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 8,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/create",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 98,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1115,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/detail",
+   "files": [
+    {
+     "k": "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+     "line": 86,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 159,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/status",
+   "files": [
+    {
+     "k": "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+     "line": 82,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 123,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1123,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/update",
+   "files": [
+    {
+     "k": "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+     "line": 82,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 142,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1147,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/memo-create",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/memos.routes.js",
+     "line": 134,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 595,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/memo-delete",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/memos.routes.js",
+     "line": 230,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 604,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/memos",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/memos.routes.js",
+     "line": 23,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 586,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/note",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/comments.routes.js",
+     "line": 93,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 154,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 473,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 108,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 114,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 121,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 163,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/purge",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 512,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 500,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/queue",
+   "files": [
+    {
+     "k": "forge-pm/lib/dispatch-queue.js",
+     "line": 376,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 9,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/repo-roots",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/platform.routes.js",
+     "line": 310,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 259,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 263,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/restore",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 471,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 491,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/review/merge",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/reviews.routes.js",
+     "line": 109,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 300,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/review/run",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/reviews.routes.js",
+     "line": 165,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 291,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/settings",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/platform.routes.js",
+     "line": 196,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 16,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/status",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 368,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 141,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 464,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/tag-delete",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/tags.routes.js",
+     "line": 145,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 887,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/tag-rename",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/tags.routes.js",
+     "line": 95,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 879,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/tag-save",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/tags.routes.js",
+     "line": 42,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 871,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/tags",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/tags.routes.js",
+     "line": 23,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 867,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/teams",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 182,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1223,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1228,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1236,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/update-delete",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/projects.routes.js",
+     "line": 73,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 455,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/update-write",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/projects.routes.js",
+     "line": 20,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 446,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/version",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/platform.routes.js",
+     "line": 105,
+     "via": "字面量"
+    },
+    {
+     "k": "scripts/pm-v2-verify.mjs",
+     "line": 42,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/views",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/platform.routes.js",
+     "line": 271,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 981,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 986,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/whoami",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/platform.routes.js",
+     "line": 120,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 244,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-pm/write",
+   "files": [
+    {
+     "k": "forge-pm/lib/routes/issues.routes.js",
+     "line": 84,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/mcp/matter-mcp.mjs",
+     "line": 130,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 10,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-pm"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/index",
+   "files": [
+    {
+     "k": "forge-repowiki/lib/endpoints.js",
+     "line": 16,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-repowiki/src/endpoints.ts",
+     "line": 12,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-repowiki"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/outline",
+   "files": [
+    {
+     "k": "forge-repowiki/lib/endpoints.js",
+     "line": 18,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-repowiki/src/endpoints.ts",
+     "line": 14,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-repowiki"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/pages",
+   "files": [
+    {
+     "k": "forge-repowiki/lib/endpoints.js",
+     "line": 26,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-repowiki/src/endpoints.ts",
+     "line": 22,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-repowiki"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/read",
+   "files": [
+    {
+     "k": "forge-repowiki/lib/endpoints.js",
+     "line": 20,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-repowiki/src/endpoints.ts",
+     "line": 16,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-repowiki"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/search",
+   "files": [
+    {
+     "k": "forge-repowiki/lib/endpoints.js",
+     "line": 22,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-repowiki/src/endpoints.ts",
+     "line": 18,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-repowiki"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/stale",
+   "files": [
+    {
+     "k": "forge-repowiki/lib/endpoints.js",
+     "line": 24,
+     "via": "字面量"
+    },
+    {
+     "k": "forge-repowiki/src/endpoints.ts",
+     "line": 20,
+     "via": "字面量"
+    }
+   ],
+   "pkgs": [
+    "forge-repowiki"
+   ]
+  }
+ ],
+ "crossPkg": [
+  {
+   "p": "/forge-agents",
+   "pkgs": [
+    "forge-agent-protocol",
+    "forge-agents",
+    "forge-model",
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-agent-protocol/lib/index.d.ts",
+    "forge-agent-protocol/lib/index.js",
+    "forge-agents/lib/routes-run-lifecycle.js",
+    "forge-agents/lib/routes.js",
+    "forge-agents/src/agent-api-base.ts",
+    "forge-model/src/endpoints.ts",
+    "forge-pm/lib/index.js",
+    "forge-pm/src/pm/shared/agent-api-base.ts",
+    "scripts/agent-route-parity.mjs",
+    "scripts/extract-agent-routes.mjs"
+   ]
+  },
+  {
+   "p": "/forge-cli-provider/config",
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-model"
+   ],
+   "files": [
+    "forge-cli-provider/lib/config-routes.js",
+    "forge-model/src/endpoints.ts"
+   ]
+  },
+  {
+   "p": "/forge-cli-provider/model-channels",
+   "pkgs": [
+    "forge-cli-provider",
+    "forge-model"
+   ],
+   "files": [
+    "forge-cli-provider/lib/config-routes.js",
+    "forge-model/src/endpoints.ts"
+   ]
+  },
+  {
+   "p": "/forge-pm",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/index.js",
+    "forge-pm/lib/proxy.js",
+    "scripts/agent-route-parity.mjs",
+    "scripts/extract-agent-routes.mjs",
+    "scripts/lint-channel-contract.mjs",
+    "scripts/migration-baseline.mjs",
+    "scripts/plugin-load-scout.mjs"
+   ]
+  },
+  {
+   "p": "/forge-pm/agents/profile",
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ],
+   "files": [
+    "forge-model/src/endpoints.ts",
+    "forge-pm/lib/routes/members.routes.js",
+    "forge-pm/src/pm/endpoints.ts"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/approve",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/routes/auth.routes.js",
+    "forge-pm/src/pm/api.ts",
+    "scripts/auth-e2e-verify.mjs"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/request",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/routes/auth.routes.js",
+    "forge-pm/mcp/matter-mcp.mjs",
+    "scripts/auth-e2e-verify.mjs"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/revoke",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/routes/auth.routes.js",
+    "forge-pm/mcp/matter-mcp.mjs",
+    "forge-pm/src/pm/api.ts",
+    "scripts/auth-e2e-verify.mjs"
+   ]
+  },
+  {
+   "p": "/forge-pm/db-health",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/routes/platform.routes.js",
+    "scripts/pm-v2-verify.mjs"
+   ]
+  },
+  {
+   "p": "/forge-pm/inbox/ack",
+   "pkgs": [
+    "forge-messenger",
+    "forge-pm"
+   ],
+   "files": [
+    "forge-messenger/lib/deliver/inbox-consumer-http.js",
+    "forge-pm/lib/routes/inbox.routes.js"
+   ]
+  },
+  {
+   "p": "/forge-pm/list",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/routes/issues.routes.js",
+    "forge-pm/mcp/matter-mcp.mjs",
+    "scripts/pm-v2-verify.mjs"
+   ]
+  },
+  {
+   "p": "/forge-pm/members",
+   "pkgs": [
+    "forge-model",
+    "forge-pm"
+   ],
+   "files": [
+    "forge-model/src/endpoints.ts",
+    "forge-pm/lib/routes/members.routes.js",
+    "forge-pm/src/pm/endpoints.ts"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/detail",
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ],
+   "files": [
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+    "forge-pm/lib/routes/members.routes.js"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/status",
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ],
+   "files": [
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+    "forge-pm/lib/routes/members.routes.js",
+    "forge-pm/src/pm/api.ts"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/update",
+   "pkgs": [
+    "forge-canvas",
+    "forge-pm"
+   ],
+   "files": [
+    "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+    "forge-pm/lib/routes/members.routes.js",
+    "forge-pm/src/pm/api.ts"
+   ]
+  },
+  {
+   "p": "/forge-pm/note",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/routes/comments.routes.js",
+    "forge-pm/mcp/matter-mcp.mjs",
+    "forge-pm/src/pm/api.ts",
+    "scripts/pm-v2-verify.mjs"
+   ]
+  },
+  {
+   "p": "/forge-pm/version",
+   "pkgs": [
+    "forge-pm",
+    "scripts"
+   ],
+   "files": [
+    "forge-pm/lib/routes/platform.routes.js",
+    "scripts/pm-v2-verify.mjs"
+   ]
+  }
+ ],
+ "alien": [
+  "forge-agent-protocol → /forge-agents",
+  "forge-canvas → /forge-pm",
+  "forge-messenger → /forge-pm",
+  "forge-model → /forge-agents",
+  "forge-model → /forge-cli-provider",
+  "forge-model → /forge-plans",
+  "forge-model → /forge-pm",
+  "forge-pm → /forge-agents",
+  "forge-pm → /forge-pm-assets",
+  "scripts → /Users",
+  "scripts → /forge-agents",
+  "scripts → /forge-pm",
+  "scripts → /forge-x"
+ ],
+ "crossBundleAssets": [],
+ "staleCrossBundle": [],
+ "sameHalf": [
+  {
+   "p": "/forge-agents",
+   "halves": [
+    "client:3",
+    "host:5",
+    "scripts:2"
+   ],
+   "files": [
+    {
+     "k": "forge-agent-protocol/lib/index.d.ts",
+     "line": 234,
+     "half": "host"
+    },
+    {
+     "k": "forge-agent-protocol/lib/index.js",
+     "line": 246,
+     "half": "host"
+    },
+    {
+     "k": "forge-agents/lib/routes-run-lifecycle.js",
+     "line": 24,
+     "half": "host"
+    },
+    {
+     "k": "forge-agents/lib/routes.js",
+     "line": 42,
+     "half": "host"
+    },
+    {
+     "k": "forge-agents/src/agent-api-base.ts",
+     "line": 10,
+     "half": "client"
+    },
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 12,
+     "half": "client"
+    },
+    {
+     "k": "forge-pm/lib/index.js",
+     "line": 550,
+     "half": "host"
+    },
+    {
+     "k": "forge-pm/src/pm/shared/agent-api-base.ts",
+     "line": 10,
+     "half": "client"
+    },
+    {
+     "k": "scripts/agent-route-parity.mjs",
+     "line": 38,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 78,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 266,
+     "half": "scripts"
+    }
+   ]
+  },
+  {
+   "p": "/forge-mermaid",
+   "halves": [
+    "client:2",
+    "host:1"
+   ],
+   "files": [
+    {
+     "k": "forge-mermaid/lib/index.js",
+     "line": 32,
+     "half": "host"
+    },
+    {
+     "k": "forge-mermaid/src/dsh/client-entry.ts",
+     "line": 27,
+     "half": "client"
+    },
+    {
+     "k": "forge-mermaid/src/mermaid/mermaid-block.tsx",
+     "line": 30,
+     "half": "client"
+    }
+   ]
+  },
+  {
+   "p": "/forge-pm",
+   "halves": [
+    "host:2",
+    "scripts:5"
+   ],
+   "files": [
+    {
+     "k": "forge-pm/lib/index.js",
+     "line": 543,
+     "half": "host"
+    },
+    {
+     "k": "forge-pm/lib/proxy.js",
+     "line": 51,
+     "half": "host"
+    },
+    {
+     "k": "scripts/agent-route-parity.mjs",
+     "line": 37,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 78,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/extract-agent-routes.mjs",
+     "line": 266,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/lint-channel-contract.mjs",
+     "line": 354,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/lint-channel-contract.mjs",
+     "line": 415,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/migration-baseline.mjs",
+     "line": 545,
+     "half": "scripts"
+    },
+    {
+     "k": "scripts/plugin-load-scout.mjs",
+     "line": 127,
+     "half": "scripts"
+    }
+   ]
+  },
+  {
+   "p": "/forge-pm/agents/profile",
+   "halves": [
+    "client:2",
+    "host:1"
+   ],
+   "files": [
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 14,
+     "half": "client"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 207,
+     "half": "host"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 13,
+     "half": "client"
+    }
+   ]
+  },
+  {
+   "p": "/forge-pm/inbox/ack",
+   "halves": [
+    "host:2"
+   ],
+   "files": [
+    {
+     "k": "forge-messenger/lib/deliver/inbox-consumer-http.js",
+     "line": 31,
+     "half": "host"
+    },
+    {
+     "k": "forge-pm/lib/routes/inbox.routes.js",
+     "line": 114,
+     "half": "host"
+    }
+   ]
+  },
+  {
+   "p": "/forge-pm/members",
+   "halves": [
+    "client:2",
+    "host:1"
+   ],
+   "files": [
+    {
+     "k": "forge-model/src/endpoints.ts",
+     "line": 13,
+     "half": "client"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 16,
+     "half": "host"
+    },
+    {
+     "k": "forge-pm/src/pm/endpoints.ts",
+     "line": 8,
+     "half": "client"
+    }
+   ]
+  },
+  {
+   "p": "/forge-pm/members/status",
+   "halves": [
+    "client:2",
+    "host:1"
+   ],
+   "files": [
+    {
+     "k": "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+     "line": 82,
+     "half": "client"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 123,
+     "half": "host"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1123,
+     "half": "client"
+    }
+   ]
+  },
+  {
+   "p": "/forge-pm/members/update",
+   "halves": [
+    "client:2",
+    "host:1"
+   ],
+   "files": [
+    {
+     "k": "forge-canvas/src/canvas/live-fixtures/live-fetch-mock.ts",
+     "line": 82,
+     "half": "client"
+    },
+    {
+     "k": "forge-pm/lib/routes/members.routes.js",
+     "line": 142,
+     "half": "host"
+    },
+    {
+     "k": "forge-pm/src/pm/api.ts",
+     "line": 1147,
+     "half": "client"
+    }
+   ]
+  }
+ ],
+ "crossHalf": [
+  {
+   "p": "/forge-cad/commit",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-cad/new",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-cad/state",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-cad/upload",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-canvas/baselines",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-canvas/doc",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-canvas/export-project",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-canvas/exports",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-canvas/imports",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-canvas/revision",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-canvas/theme-tokens",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-cli-provider/config",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-cli-provider/model-channels",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-model-limits/entries",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-model-limits/overview",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/gateway/keys",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/gateway/overview",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/model-meta",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/all",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/enable-new",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/flash",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/refresh",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/set",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/models/set-all",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/overview",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/providers",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/providers/probe",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/providers/set",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/view",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-plans/view/save",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/asset",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/attachment",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/approve",
+   "halves": [
+    "client",
+    "host",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/channels",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/deny",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/request",
+   "halves": [
+    "host",
+    "mcp",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/auth/revoke",
+   "halves": [
+    "client",
+    "host",
+    "mcp",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/comment",
+   "halves": [
+    "client",
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-pm/comment-update",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/create",
+   "halves": [
+    "client",
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-pm/db-health",
+   "halves": [
+    "host",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/delete",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-approval",
+   "halves": [
+    "client",
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-delete",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-import",
+   "halves": [
+    "client",
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-pm/doc-meta",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/documents",
+   "halves": [
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-pm/draft-delete",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/draft-save",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/drafts",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/favorites",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/field",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/field-many",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/list",
+   "halves": [
+    "host",
+    "mcp",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/create",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/members/detail",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/memo-create",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/memo-delete",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/memos",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/note",
+   "halves": [
+    "client",
+    "host",
+    "mcp",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/purge",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/queue",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/repo-roots",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/restore",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/review/merge",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/review/run",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/settings",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/status",
+   "halves": [
+    "client",
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-pm/tag-delete",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/tag-rename",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/tag-save",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/tags",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/teams",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/update-delete",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/update-write",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/version",
+   "halves": [
+    "host",
+    "scripts"
+   ]
+  },
+  {
+   "p": "/forge-pm/views",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-pm/whoami",
+   "halves": [
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-pm/write",
+   "halves": [
+    "client",
+    "host",
+    "mcp"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/index",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/outline",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/pages",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/read",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/search",
+   "halves": [
+    "client",
+    "host"
+   ]
+  },
+  {
+   "p": "/forge-repowiki/stale",
+   "halves": [
+    "client",
+    "host"
+   ]
+  }
+ ],
+ "dangling": []
+}

@@ -1,0 +1,78 @@
+{
+  "cwd": "forge-pm",
+  "test": "bun test lib/import-mode.test.js",
+  "mutations": [
+    {
+      "name": "realpath 不归一大小写（.native → 普通 realpathSync）",
+      "file": "lib/import-mode.js",
+      "from": "      return realpathSync.native(x)",
+      "to": "      return realpathSync(x)"
+    },
+    {
+      "name": "roots 侧不归一（只 resolve，不 realpath）",
+      "file": "lib/import-mode.js",
+      "from": "      try { return real(resolve(String(v))) } catch { return String(v) }",
+      "to": "      try { return resolve(String(v)) } catch { return String(v) }"
+    },
+    {
+      "name": "roots 表内命中不再保源（表判据失效）",
+      "file": "lib/import-mode.js",
+      "from": "      if (p === r || p.startsWith(base)) return true // ① 表内命中 ⇒ 保源",
+      "to": "      if (false) return true // ① 注入"
+    },
+    {
+      "name": "取消文档库自身排除",
+      "file": "lib/import-mode.js",
+      "from": "    if (p === pr || p.startsWith(pr.endsWith(\"/\") ? pr : pr + \"/\")) return false",
+      "to": "    // 注入：取消文档库排除"
+    },
+    {
+      "name": "去掉相对/绝对归一（resolve）",
+      "file": "lib/import-mode.js",
+      "from": "    p = real(resolve(absPath))",
+      "to": "    p = real(absPath)"
+    },
+    {
+      "name": "失败安全被破坏（任意 git 仓内不再保源）",
+      "file": "lib/import-mode.js",
+      "from": "      if (existsSync(join(d, \".git\"))) return true",
+      "to": "      if (false) return true"
+    },
+    {
+      "name": "路由侧退回自带决策（双路径分叉复活）",
+      "file": "lib/routes/documents.routes.js",
+      "from": "        const mode = normalizeImportMode(input && input.mode, String((input && input.path) || \"\"))",
+      "to": "        const mode = (input && input.mode) === \"copy\" ? \"copy\" : \"move\""
+    },
+    {
+      "name": "路由侧：保留字面量、只改数据流（审查员 V2）",
+      "file": "lib/routes/documents.routes.js",
+      "from": "        const mode = normalizeImportMode(input && input.mode, String((input && input.path) || \"\"))",
+      "to": "        const mode = ((input && input.mode) === \"copy\") ? \"copy\" : \"move\"\n        if (false) normalizeImportMode(input && input.mode, String((input && input.path) || \"\"))"
+    },
+    {
+      "name": "路由侧：丢 path 实参（审查员 M1）",
+      "file": "lib/routes/documents.routes.js",
+      "from": "normalizeImportMode(input && input.mode, String((input && input.path) || \"\"))",
+      "to": "normalizeImportMode(input && input.mode, \"\")"
+    },
+    {
+      "name": "裸仓不再保源（审查员 MAJOR-2）",
+      "file": "lib/import-mode.js",
+      "from": "      if (existsSync(join(d, \"HEAD\")) && existsSync(join(d, \"objects\")) && existsSync(join(d, \"refs\"))) {\n        return true\n      }",
+      "to": "      if (false) {\n        return true\n      }"
+    },
+    {
+      "name": "路由侧丢掉调用方的显式 mode（审查 MAJOR-1）",
+      "file": "lib/routes/documents.routes.js",
+      "from": "normalizeImportMode(input && input.mode, String((input && input.path) || \"\"))",
+      "to": "normalizeImportMode(undefined, String((input && input.path) || \"\"))"
+    },
+    {
+      "name": "agent 侧丢掉调用方的显式 mode",
+      "file": "lib/agent-tools.js",
+      "from": "normalizeImportMode(a.mode, typeof a.path === \"string\" ? a.path : \"\")",
+      "to": "normalizeImportMode(undefined, typeof a.path === \"string\" ? a.path : \"\")"
+    }
+  ]
+}

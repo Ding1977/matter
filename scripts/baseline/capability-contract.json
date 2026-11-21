@@ -1,0 +1,34 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "能力契约存量债（rule,pkg）逐条带 reason、只许降不许升，是典型存量豁免；修好一条删一条。"
+  },
+ "_comment": "能力契约存量债（ISS-681）。记的是「当下确实还不合契约」的 (规则, 包)，**不是放行许可**：只许降不许升，修好一条就从这里删一条（--write 复录）。数字口径 = 违规的 (规则号, 包) 集合，不是条数 —— 一条修好 + 一条新增不许对冲成绿。C1=声明 image 却发不出图 · C2=inputModalities 缺字段（= undefined = 引擎放行）· C0=登记表外的适配器包。unjudged 也要同步登记：探不了的包比基线上多 ⇒ 判红（否则「环境坏了」会永久伪装成「没问题」）。",
+ "tool": "lint-capability-contract.mjs",
+ "recordedAt": "2026-11-03T23:08:07.791Z",
+ "adapters": [
+  "forge-trae-direct",
+  "forge-workbuddy-direct",
+  "forge-qoder-direct",
+  "forge-cli-provider",
+  "forge-router-direct"
+ ],
+ "unjudged": [
+  {
+   "pkg": "forge-router-direct",
+   "reason": "forge-router-direct 是虚拟 provider：listModels 是实例方法、无 resolveModel ⇒ 探针结构不适用（补探针是独立单）"
+  }
+ ],
+ "offenders": [
+  {
+   "rule": "C2",
+   "pkg": "forge-cli-provider",
+   "detail": "toModelInfo(capability-probe-text) 的 inputModalities 缺失/非法 —— 必须显式写 [\"text\"]（不写 = undefined = 引擎放行图片）"
+  },
+  {
+   "rule": "C2",
+   "pkg": "forge-qoder-direct",
+   "detail": "resolveModel(capability-probe-typed-by-user) 的 inputModalities 缺失/非法 —— 必须显式写 [\"text\"]（不写 = undefined = 引擎放行图片）"
+  }
+ ]
+}

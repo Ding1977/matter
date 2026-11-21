@@ -1,0 +1,34 @@
+{
+  "note": "静态判据 S1/S2 的例外清单（ISS-907）。s1/s2 是 key(相对路径:行号)→code 的精确映射，spec 用 toEqual 对账：多一条、少一条、行号漂移都红。每条 reason 必填且非空，spec 独立判。例外都是本单写范围外、P5 设计批待补 CSS Module 的裸标题——登记在此只作棘轮基线，不是合规宣言；ISS-907 只修 apps/web/src/kb-shell.tsx 那三处（不在本清单）。",
+  "s1": {
+    "apps/web/src/boot.ts:91": {
+      "code": "h1",
+      "reason": "chrome 品牌标题，P4 遗留裸 h1；P5 设计批给 chrome 补 CSS Module 时一并修（DOC-533 段一补充），本单写范围只含 kb-shell.tsx"
+    },
+    "apps/web/src/editor-demo.tsx:179": {
+      "code": "h1",
+      "reason": "编辑器夹具页标题，非产品页；夹具单后续补样式，不在 ISS-907 写范围"
+    },
+    "packages/client/ui-model/src/client/panel/detail.tsx:41": {
+      "code": "h2",
+      "reason": "ui-model 详情标题，未挂 web 壳；P5 设计批 ui-model 视觉化时修，本单不碰该包 src"
+    },
+    "packages/client/ui-model/src/client/panel/panel.tsx:108": {
+      "code": "h2",
+      "reason": "ui-model 面板标题，未挂 web 壳；同上，P5 设计批范围"
+    },
+    "packages/client/ui-pm/src/client/detail/detail.tsx:33": {
+      "code": "h2",
+      "reason": "ui-pm 详情标题，未挂 web 壳；P5 设计批 ui-pm 视觉化时修"
+    },
+    "packages/client/ui-pm/src/client/list/list.tsx:76": {
+      "code": "h2",
+      "reason": "ui-pm 列表标题，未挂 web 壳；同上，P5 设计批范围"
+    },
+    "packages/client/ui-pm/src/client/table/table.tsx:60": {
+      "code": "h2",
+      "reason": "ui-pm 表格标题，未挂 web 壳；同上，P5 设计批范围"
+    }
+  },
+  "s2": {}
+}

@@ -44,3 +44,19 @@ jobs:
       # 没有前置 build，test lane 解析 @matter/* 入口即红。
       - run: pnpm run build
       - run: pnpm run test
+  gates:
+    runs-on: ubuntu-latest
+    # 公开仓 gates lane。冷 checkout 无 lib/ 产物 —— 与 test lane 同例，先 build 再跑门禁。
+    # 档位 = next（22 格，实测 10s 量级）；公开仓 export 面=packages/**+scripts/**，
+    # 缺失的根配置（.oxlintrc*.json）/ 文档语料 依赖的格在该档判不了或红，详见本单 note 的「判据落差」。
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.13.1
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@11.28.5 --activate
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - name: Gate tier (next)
+        run: node scripts/run-gates.mjs --tier next

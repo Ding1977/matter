@@ -1,0 +1,37 @@
+{
+  "cwd": ".",
+  "test": "node scripts/preset-var-check.mjs --selftest",
+  "_comment": "ISS-615：预设变量守卫（scripts/preset-var-check.mjs）自己的牙。基线 = 它的 --selftest 全绿；每一处注入都必须让 selftest **变红**，否则说明那条用例是恒绿的（`docs/code.md` §7.1 K8b「从没红过的守卫等于没有守卫」）。跑法：node scripts/guard-mutate.mjs --spec scripts/guard-mutate.spec.iss1397.json",
+  "mutations": [
+    {
+      "name": "M1 判据失效：未注册也放行（missing 恒空）",
+      "file": "scripts/preset-var-check.mjs",
+      "from": "const missing = refs.filter((r) => r.name !== undefined && !whitelist.has(r.name))",
+      "to": "const missing = [] // 注入：不注册也放行"
+    },
+    {
+      "name": "M2 判据失效：畸形引用不判（malformed 恒空）",
+      "file": "scripts/preset-var-check.mjs",
+      "from": "const malformed = refs.filter((r) => r.malformed === true)",
+      "to": "const malformed = [] // 注入：畸形不判"
+    },
+    {
+      "name": "M3 口径放宽：注释也当正文（误报方向）",
+      "file": "scripts/preset-var-check.mjs",
+      "from": "      if (trimmed === '' || /^\\s*#/.test(raw)) continue",
+      "to": "      if (trimmed === '') continue // 注入：注释也当正文"
+    },
+    {
+      "name": "M4 白名单来源过期：注册点形态扫不到（必须落进「不判」而不是绿）",
+      "file": "scripts/preset-var-check.mjs",
+      "from": "const REGISTER_AT = /systemPrompt",
+      "to": "const REGISTER_AT = /ZZZ_NEVER_MATCHES"
+    },
+    {
+      "name": "M5 「不判」冒充绿：把空白名单直接当通过",
+      "file": "scripts/preset-var-check.mjs",
+      "from": "if (scan.names.size === 0) {",
+      "to": "if (false) { // 注入：空白名单不判也不出声"
+    }
+  ]
+}

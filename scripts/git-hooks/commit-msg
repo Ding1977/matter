@@ -1,0 +1,58 @@
+#!/bin/sh
+# ISS-282 / S5：commit message 必须带 ISS 单号（带号率 22% → 硬约束）
+#
+# 背景：main 近 60 天 191 个提交只有 43 个带 ISS 号（22%），导致 125 张 done 里
+#       94 张事后无法回答「是哪次改动交付的」（ISS-282 审计结论）。
+#
+# 放行条件（满足任一即通过）：
+#   1. 提交信息含 ISS-<数字>
+#   2. merge / revert 自动生成的提交
+#   3. 含豁免标记 [no-issue]（用于纯私人/临时改动，请谨慎）
+#   4. 环境变量 SKIP_ISSUE_CHECK=1
+#
+# 安装：git config core.hooksPath scripts/git-hooks
+# 绕过：本次提交加 [no-issue]，或 SKIP_ISSUE_CHECK=1 git commit ...，或 --no-verify
+
+msg_file="${1:-}"
+[ -n "$msg_file" ] && [ -f "$msg_file" ] || exit 0
+
+# 只看首行与整体前 4000 字符（避免超长 body 拖慢）
+subject=$(head -n 1 "$msg_file" 2>/dev/null || true)
+msg=$(head -c 4000 "$msg_file" 2>/dev/null || true)
+
+# 1) 已带单号
+case "$msg" in
+  *ISS-[0-9]*) exit 0 ;;
+esac
+
+# 2) merge / revert
+case "$subject" in
+  "Merge "*) exit 0 ;;
+  "Revert "*) exit 0 ;;
+  "Merge branch "*) exit 0 ;;
+esac
+
+# 3) 显式豁免
+case "$msg" in
+  *"[no-issue]"*) exit 0 ;;
+esac
+
+# 4) 环境变量豁免
+[ "$SKIP_ISSUE_CHECK" = "1" ] && exit 0
+
+cat >&2 <<'EOF'
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[ISS-282] 提交被拒：commit message 里没有 ISS 单号
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+为什么：本仓 22% 的提交带号，导致交付归属事后不可追溯
+        （125 张 done 里 94 张找不到对应提交）。
+
+怎么改（任选其一）：
+  1. 在提交信息里带上单号，例如：
+       fix(forge-pm): 修掉 XX（ISS-312）
+       feat(forge-ui): 新增 YY（ISS-282 / ISS-310）
+  2. 确实是私人/临时改动 → 提交信息加 [no-issue]
+  3. 一次性绕过 → SKIP_ISSUE_CHECK=1 git commit ...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+exit 1

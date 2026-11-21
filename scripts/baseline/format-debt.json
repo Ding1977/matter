@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-11-19T12:21:58.235Z",
+  "tool": "format-debt",
+  "mode": "zero-tolerance",
+  "scope": "packages/*/*",
+  "items": {
+    "trailing_ws": 0,
+    "tab_indent": 0,
+    "no_final_newline": 0,
+    "crlf": 0,
+    "multi_blank": 0,
+    "arrow_paren_mixed": 0
+  },
+  "ceiling": {
+    "trailing_ws": 0,
+    "tab_indent": 0,
+    "no_final_newline": 0,
+    "crlf": 0,
+    "multi_blank": 0,
+    "arrow_paren_mixed": 0
+  },
+  "files": 57,
+  "note": "ISS-890 甲案：射程 packages/*/* + 零容忍（ceiling 恒 0，违例必须=0；抬数字消不了红）。只检查不改（ISS-726 乙）。引号 / 分号风格在 code-inventory 的 N7 / N8，不在此重算。"
+}

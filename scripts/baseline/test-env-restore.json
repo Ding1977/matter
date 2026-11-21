@@ -1,0 +1,17 @@
+{
+ "recordedAt": "2026-10-26",
+ "tool": "test-env-restore-guard.mjs --write-baseline",
+ "note": "测试内 process.env 赋值**没有恢复保障**的存量。只拦新增；压低是成绩，抬高要给理由。",
+ "存量": {
+  "forge-pm/lib/paths.test.js#FORGE_PM_ROOT": "forge-pm/lib/paths.test.js:20 → FORGE_PM_ROOT（2 处）",
+  "forge-pm/lib/sidecar.test.js#FORGE_PM_ROOT": "forge-pm/lib/sidecar.test.js:21 → FORGE_PM_ROOT（1 处）",
+  "forge-pm/src/pm/lexical/bridge.test.ts#NODE_ENV": "forge-pm/src/pm/lexical/bridge.test.ts:24 → NODE_ENV（1 处）",
+  "forge-agents/lib/registry-api.test.js#DSH_HOME": "forge-agents/lib/registry-api.test.js:17 → DSH_HOME（1 处）",
+  "forge-agents/lib/registry-store.test.js#DSH_HOME": "forge-agents/lib/registry-store.test.js:20 → DSH_HOME（3 处）",
+  "forge-agents/lib/zcode-ask-branch.test.js#FORGE_AGENTS_ROOT": "forge-agents/lib/zcode-ask-branch.test.js:23 → FORGE_AGENTS_ROOT（1 处）",
+  "forge-agents/lib/zcode-stdio.test.js#FORGE_AGENTS_ROOT": "forge-agents/lib/zcode-stdio.test.js:20 → FORGE_AGENTS_ROOT（1 处）",
+  "forge-canvas/lib/canvas-project-export.test.js#FORGE_COMPONENT_MAP": "forge-canvas/lib/canvas-project-export.test.js:75 → FORGE_COMPONENT_MAP（1 处）",
+  "forge-canvas/lib/canvas-project-export.test.js#DSH_THEME_CLIENT": "forge-canvas/lib/canvas-project-export.test.js:83 → DSH_THEME_CLIENT（1 处）",
+  "forge-canvas/lib/canvas-store.test.js#DSH_HOME": "forge-canvas/lib/canvas-store.test.js:348 → DSH_HOME（4 处）"
+ }
+}

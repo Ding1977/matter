@@ -1,0 +1,254 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+
+  // ── 设计说明（ISS-713）────────────────────────────────────────────────────────
+  // 照 ~/dsh-src/.oxlintrc.json（357 行，DSH 官方）抄结构，但逐条判断过：
+  // 官方是 packages/*/*/src/** 的多层包布局，我方是扁平的 forge-*/src（client 半）+ forge-*/lib（host 半）。
+  // 每一处与官方不同的地方都在下面就近写了「为什么改 / 为什么保留」。
+
+  // ⚠️ 保留官方的空数组：**不使用任何默认插件**。
+  //   oxlint 默认会开 unicorn / oxc / typescript 三类插件；官方空数组 = 一个都不开，
+  //   规则一律由 overrides 里显式列（配合 correctness: "off"）。
+  //   为什么不改成 ["typescript"]：开了就等于把官方关掉的几百条默认规则一次性引入，
+  //   存量量级会从「可治理」变成「不可治理」——与本单「先量再选档」的顺序冲突。
+  "plugins": [],
+
+  // ⚠️ 保留官方的 correctness: "off"：不靠默认类别兜底。
+  //   oxlint 默认 correctness 是开的（`-D correctness`）。关掉它意味着**每一条报出来的错
+  //   都是我们点名要的**，而不是「默认塞给我的」。好处是噪声可控、能逐条说清为什么该红；
+  //   代价是漏掉官方默认里本该要的规则 —— 这个代价由下面的显式规则表承接。
+  "categories": {
+    "correctness": "off"
+  },
+
+  "options": {
+    // 与官方一致：源码里写了 eslint-disable 但没真抑制住任何问题时出声（warn）。
+    // 这条正对本仓现状 —— 实测有大量 `eslint-disable-next-line react-hooks/exhaustive-deps`
+    // 在没有 react 插件时是空转的，它把这些空转指令点出来。
+    "reportUnusedDisableDirectives": "warn",
+    // 本单的核心：类型级判据。没有它，typescript/* 里那批规则全部退化或失效。
+    "typeAware": true
+  },
+
+  "env": {
+    "builtin": true
+  },
+
+  // ── ignorePatterns：与官方的四处分歧都在这里 ────────────────────────────────────
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+
+    // 我方专属：in-repo 工作树（`ws.sh new --in-repo`）物理上在主检出目录内。
+    //   不排除的话 `oxlint .` 会把同一份代码按「每棵在途工作树各一遍」重复判 ——
+    //   违例数直接翻 N 倍（实测主检出下挂着 20+ 棵），那是假数字。
+    ".wt/**",
+    "**/.wt/**",
+    // ISS-724：官方工作树池（`ws.sh` 的 `.agents/worktrees`，本机软链 → ~/wt/dsh-forge）。
+    //   搬家后它是**仓内真实目录**，不排除的话 `oxlint .` 会把整个池子（50 棵）按每棵各判一遍。
+    //   ⚠️ 这两行是**字面量**，与 `scripts/wt-exclude-lib.mjs` 的 WORKTREE_IGNORE_GLOBS 同源但无法 import
+    //   （本文件是 JSONC 配置，不是模块）⇒ 改名单时**两处都要改**；lib 里有断言用例钉着这一刻（见 --selftest）。
+    ".agents/worktrees/**",
+    "**/.agents/worktrees/**",
+
+    // 官方第 1 处分歧 ——【不忽略 **/lib/** 整目录，但本单不把 lib 的 .ts 纳入判据】。
+    //   官方把 lib 当构建产物（tsdown 输出），所以一行 `**/lib/**` 整目录排除。
+    //   我方相反：forge-*/lib/** 是 **host 半源码**（手写 .js，见 docs/architecture-overview.md），
+    //   盲抄官方的 `**/lib/**` 等于把本仓一半源码判成不存在。
+    //
+    //   但**射程**由下面的 overrides 决定，本单只列 forge-*/src/**（见组 1 的 files），
+    //   此处 ignorePatterns **不排除 lib**（保留将来纳入的可能），只是 overrides 的 files 没列 lib。
+    //   为什么不列：实测 lib 下 48 个 .ts（39 个 *.test.ts + 8 个 *.d.ts + 1 个 fixture）跑出 6018 条，
+    //   其中 **3761 条（62%）是 `error` 类型级联** —— lib 的测试 import 同目录 .js，
+    //   那些 .js 走 tsconfig.lib.json 的 checkJs 但**不带 .d.ts**，tsgolint 解析成 `error` 类型，
+    //   于是每一处调用/取属性都报 no-unsafe-*。那不是代码不安全，是**类型声明缺口**（该另开单）。
+    //   对照组：src 下同样口径只有 72 条 error 类型（占 2%）—— 说明 src 的类型解析是健康的。
+    //   ⇒ 先把 3457 条真数接进棘轮；lib 的 6018 条等类型声明补齐后再接，届时基线自然会说话。
+
+    // 官方第 2 处分歧 ——【不忽略专有的 scripts/**/*.mjs，但也不判它们，理由不是「省事」】。
+    //   官方忽略 `**/*.js` `**/*.mjs`；我方 scripts/ 下 124 个 .mjs 是核心资产。
+    //   但老板已裁定（甲方案）：**scripts/*.mjs 不进 oxlint 射程**。
+    //   理由：.mjs 不在任何 tsconfig program 里，typeAware 对它们**无效**，进来只能判语法级
+    //   （no-var / prefer-const 这类），而让它们真有类型检查要 allowJs + checkJs，
+    //   那会炸出几百到几千条存量错 —— 收益低于成本，且大概率烂尾。
+    //   ⇒ 这条忽略**不是照抄官方**，是算过账后的决定。同一笔账适用于所有 .js/.mjs：
+    "**/*.js",
+    "**/*.mjs",
+
+    // 工具配置文件在仓库 TS program 之外（与官方同理，但我方只有一个变体）
+    "**/*.config.ts"
+  ],
+
+  "overrides": [
+    {
+      // ── 组 1：共享的严格 typeAware 规则（源码 + 测试同款）────────────────────
+      // 官方拆分理由（照抄）：源/测差异另放短 override，这一组只放两边都成立的。
+      // 我方路径映射：官方 `packages/*/*/src/**` + `apps/*/src/**` → 我方 `forge-*/src/**`；
+      //               官方 `packages/**/tests/**` → 我方测试**同目录共存**（*.test.ts），故只列目录。
+      "files": [
+        "forge-*/src/**/*.{ts,tsx}",
+      ],
+      "rules": {
+        "no-var": "error",
+        "prefer-const": "error",
+        "prefer-rest-params": "error",
+        "prefer-spread": "error",
+        "no-array-constructor": "error",
+        "no-unused-expressions": "error",
+        "no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
+        ],
+        "no-useless-constructor": "error",
+        // 官方在这里禁 crypto.randomUUID（浏览器非安全上下文不给）。
+        // 我方实测 `grep -rn "crypto.randomUUID" forge-*/src` = **0 处**
+        // ⇒ 保留此规则（成本为 0，将来有人写出第一处时当场红），但把 message 改成我方口径。
+        "no-restricted-properties": [
+          "error",
+          {
+            "object": "crypto",
+            "property": "randomUUID",
+            "message": "crypto.randomUUID 在非安全上下文（明文 HTTP 局域网页）不可用；本仓如需 UUID 走既有工具，不要直连浏览器 API"
+          }
+        ],
+
+        // 以下 typescript/* 全是**依赖类型信息**的规则 —— 没有 typeAware 它们不会报，这正是本单要接的东西
+        "typescript/await-thenable": "error",
+        "typescript/ban-ts-comment": ["error", { "minimumDescriptionLength": 10 }],
+        "typescript/no-array-delete": "error",
+        "typescript/no-base-to-string": "error",
+        "typescript/no-confusing-void-expression": "error",
+        "typescript/no-deprecated": "error",
+        "typescript/no-duplicate-enum-values": "error",
+        "typescript/no-duplicate-type-constituents": "error",
+        "typescript/no-dynamic-delete": "error",
+        "typescript/no-empty-object-type": "off",
+        "typescript/no-explicit-any": "error",
+        "typescript/no-extra-non-null-assertion": "error",
+        "typescript/no-extraneous-class": "error",
+        // 官方注释：agent loop 里的悬空 Promise 是本仓最高价值的被 lint 发现的 bug 类。
+        // 我方同理（host 半大量 async 路由/工具调用），保留 error。
+        "typescript/no-floating-promises": "error",
+        "typescript/no-for-in-array": "error",
+        "typescript/no-implied-eval": "error",
+        "typescript/no-invalid-void-type": "off",
+        "typescript/no-meaningless-void-operator": "error",
+        "typescript/no-misused-new": "error",
+        "typescript/no-misused-promises": "error",
+        "typescript/no-misused-spread": "error",
+        "typescript/no-mixed-enums": "error",
+        "typescript/no-namespace": "off",
+        "typescript/no-non-null-asserted-nullish-coalescing": "error",
+        "typescript/no-non-null-asserted-optional-chain": "error",
+        "typescript/no-redundant-type-constituents": "error",
+        "typescript/no-require-imports": "error",
+        "typescript/no-this-alias": "error",
+        "typescript/no-unnecessary-boolean-literal-compare": "error",
+        "typescript/no-unnecessary-template-expression": "error",
+        "typescript/no-unnecessary-type-arguments": "error",
+        "typescript/no-unnecessary-type-assertion": "error",
+        "typescript/no-unnecessary-type-constraint": "error",
+        "typescript/no-unnecessary-type-conversion": "error",
+        "typescript/no-unnecessary-type-parameters": "error",
+        "typescript/no-unsafe-argument": "error",
+        "typescript/no-unsafe-assignment": "error",
+        "typescript/no-unsafe-call": "error",
+        "typescript/no-unsafe-declaration-merging": "error",
+        "typescript/no-unsafe-enum-comparison": "error",
+        "typescript/no-unsafe-function-type": "error",
+        "typescript/no-unsafe-member-access": "error",
+        "typescript/no-unsafe-return": "error",
+        "typescript/no-unsafe-unary-minus": "error",
+        "typescript/no-useless-default-assignment": "error",
+        "typescript/no-wrapper-object-types": "error",
+        "typescript/prefer-as-const": "error",
+        "typescript/prefer-literal-enum-member": "error",
+        "typescript/prefer-namespace-keyword": "error",
+        "typescript/prefer-promise-reject-errors": "error",
+        "typescript/prefer-reduce-type-parameter": "error",
+        "typescript/prefer-return-this-type": "error",
+        "typescript/related-getter-setter-pairs": "error",
+        "typescript/restrict-plus-operands": [
+          "error",
+          {
+            "allowAny": false,
+            "allowBoolean": false,
+            "allowNullish": false,
+            "allowNumberAndString": false,
+            "allowRegExp": false
+          }
+        ],
+        "typescript/return-await": ["error", "error-handling-correctness-only"],
+        "typescript/triple-slash-reference": "error",
+        "typescript/unbound-method": "error",
+        "typescript/unified-signatures": "error",
+        "typescript/use-unknown-in-catch-callback-variable": "error",
+        "no-void": "off"
+      },
+      "plugins": ["typescript"]
+    },
+    {
+      // ── 组 2：非测试源码的**更严**子集（官方同构）──────────────────────────────
+      // 官方只在「非测试」上开这 6 条：它们对测试误报高（mock 的 async 签名、故意抛非 Error、
+      // 断言后的可选链等）。我方测试是同目录 `*.test.ts(x)` 共存，故用通配符反向排除。
+      "files": [
+        "forge-*/src/**/*.{ts,tsx}",
+      ],
+      "excludeFiles": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
+      "rules": {
+        "typescript/no-non-null-assertion": "error",
+        "typescript/no-unnecessary-condition": ["error", { "allowConstantLoopConditions": true }],
+        "typescript/only-throw-error": "error",
+        "typescript/require-await": "error",
+        "typescript/restrict-template-expressions": [
+          "error",
+          { "allowNumber": true, "allowBoolean": true }
+        ],
+        "typescript/switch-exhaustiveness-check": [
+          "error",
+          { "considerDefaultExhaustiveForUnions": true }
+        ]
+      },
+      "plugins": ["typescript"]
+    },
+    {
+      // ── 组 3：测试文件的放宽（官方同构，理由沿用官方注释）───────────────────────
+      // ⚠️ 射程必须**与组 1/2 同域**（都收在 forge-*/src/ 下）。
+      //   写成裸的 `**/*.test.ts` 会把全仓（含 lib、含 scripts）的测试一起放宽 ——
+      //   实测漏进 `forge-model/lib/selector-contract.test.ts` 一条违例，
+      //   与「射程只到 src」的口径自相矛盾（多出来的那条在 A/B 两个口径下都对不上数）。
+      //   ignorePatterns 里没有 `**/lib/**`，所以放宽规则必须自己把射程钉住。
+      "files": [
+        "forge-*/src/**/*.test.ts",
+        "forge-*/src/**/*.test.tsx",
+        "forge-*/src/**/*.spec.ts",
+        "forge-*/src/**/*.spec.tsx"
+      ],
+      "rules": {
+        "typescript/no-invalid-void-type": "error",
+        // 断言通常紧跟在一个已证明存在的 expect() 之后
+        "typescript/no-non-null-assertion": "off",
+        "typescript/no-unnecessary-condition": "off",
+        // 测试会故意抛非 Error
+        "typescript/only-throw-error": "off",
+        // mock 的 execute() 必须保留 async 签名
+        "typescript/require-await": "off",
+        "typescript/restrict-template-expressions": "off"
+      },
+      "plugins": ["typescript"]
+    }
+
+    // ── 与官方的其余差异（未配置，逐条说明为什么）────────────────────────────────
+    // ① 官方的 sonarjs 组（no-identical-functions 等 8 条）：需要 jsPlugin `eslint-plugin-sonarjs`，
+    //    本单**没有装**该依赖（工单只批了 oxlint + oxlint-tsgolint + jscpd）。
+    //    不擅自加依赖 ⇒ 整组不配。同类目标（重复代码）由第二轮的 jscpd 承担。
+    // ② 官方的 @stylistic 组（indent / semi / quotes / max-len 等 10 条）：
+    //    需要 jsPlugin `@stylistic/eslint-plugin`，同样未装。
+    //    本仓现状是**没有** prettier/biome 做格式化，风格一致性靠人；这一组是独立话题，另开单。
+    // ③ 官方的 fixtures / webworker 特例 override：都是 DSH 官方仓库的专属路径，我方不存在，不抄。
+  ]
+}

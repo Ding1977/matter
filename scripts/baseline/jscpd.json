@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "jscpd 重复率 lastWrite.reason 记录抬线依据，棘轮只许降不许升，属存量豁免记账。"
+  },
+  "duplicatedLines": 0,
+  "clones": 0,
+  "duplicatedTokens": 0,
+  "percentage": 0,
+  "lines": 4798,
+  "tokens": 17448,
+  "sources": 26,
+  "cloneFingerprints": [],
+  "lastWrite": {
+    "at": "2026-11-18T11:35:18.773Z",
+    "by": "dylan",
+    "reason": "ISS-524：新树零容忍清债完成——先清 7 克隆到 0，再切判据（inferScope→packages/*/*/src、J1/J2→clones===0、J4 锁常量、minTokens 60）；旧树 forge-* 冻结不扫，基线退为清债记录",
+    "from": {
+      "duplicatedLines": 8481,
+      "clones": 749
+    },
+    "to": {
+      "duplicatedLines": 0,
+      "clones": 0
+    },
+    "delta": {
+      "duplicatedLines": -8481,
+      "clones": -749
+    }
+  },
+  "provenance": {
+    "recordedAt": "2026-11-09",
+    "recordedBy": "l2-jscpd（builder 子会话）· ISS-717 建版 → ISS-763 补录（redcells）",
+    "command": "node scripts/gates/lint-jscpd.mjs --write --reason \"<说明>\"",
+    "howToReverify": "node scripts/gates/lint-jscpd.mjs --measure   # 现算，不信本文件的数字",
+    "scope": "forge-*/src/** 的 .ts/.tsx（射程由 .jscpd.json 的 pattern + ignore 表达，不在代码里写死）",
+    "config": ".jscpd.json：minTokens 60 / minLines 6 / mode mild / format typescript+tsx（照官方 ~/dsh-src/.jscpd.json）",
+    "tool": "jscpd 5.4.2（根 devDependencies，^5.0.12）"
+  },
+  "whyThisNumber": {
+    "summary": "110 处克隆 / 1639 行重复 / 1.42%（1639/115073 行；12228/724010 token = 1.69%），514 个文件。这是实测存量，不是估算、不是抽样。⚠️ 本段数字是 **ISS-763 补录**后的值：初版（108/1620，500 文件）录于 2026-11-08 10:15，而 ISS-689（d28bd214）与 ISS-673（db1d793a）是当天 14:52 随 cd42b3e5 之后才并入 main —— **那次录制时树上还没有这批代码**，所以数字变大不是代码变差，是基线漏了一批已合入的代码。",
+    "headline": "⚠️ 1.42% 不是及格线，是今天的存量。目标不是维持 1.42%，是逐单往下压。",
+    "whyNotZero": "1620 行重复不可能一次清零：每一处都要判断「是真重复还是同形异构」，判断成本远高于计数成本。零容忍会让门禁从落地那刻起永远红着 —— 长红的门禁等于没有门禁（同 gate-fast.mjs 头注、同 lint-oxlint.mjs 的 whyNotZero）。",
+    "whyAllowedToStay": "取棘轮而非清零：基线锁住现值，任何新增立刻红；任何下降必须真的改代码。让存量债可见、可控、只减不增。",
+    "whatIsThreshold": "minTokens 60 / minLines 6 决定了「多短的重复不算」——这是官方口径，改它等于改分母。⚠️ 调大阈值能让数字立刻变好看，那是「把体温计换个刻度」，不是退烧。改阈值必须在 --reason 里说明并单独评审。",
+    "whoDecided": "Lead 定「照官方配置形态 + 棘轮」，本单执行；基线数值由 builder 实测定稿。",
+    "ratchetDirection": "只许降：duplicatedLines / clones 只能变小。降的唯一合法方式是真的改代码 —— 见 antiGaming。"
+  },
+  "antiGaming": {
+    "rule": "⛔ 不许靠「排除文件/目录」或「调大 minTokens/minLines」让判据变绿",
+    "why": "本判据的数由两处决定：射程（pattern/ignore）与阈值（minTokens/minLines/mode）。改这两处都能让数字下降而一行业务代码没动。",
+    "howItIsEnforced": [
+      "射程与阈值都写在 .jscpd.json —— 改它会在 git diff 里留痕（不是藏在代码里的隐形排除）",
+      "J3：改基线必须带非空 --reason，占位符不算",
+      "判据代码里**不写死任何排除**：inferScope() 只决定「从哪个目录开始扫」，扫什么由配置决定"
+    ],
+    "legitimatePath": "真消除了重复 ⇒ 跑 --write --reason \"<说明>\" 重建基线（diff 里看得见数字和理由）",
+    "testedAt": "2026-11-08 selftest 23 例，含：恒绿检测（造重复必红）/ 恒红检测（零重复必绿）/ 判不了不当绿 / --write 保治理字段 / J3 空理由与占位理由必红"
+  },
+  "knownDefects": {
+    "overlapWithCodeInventory": {
+      "what": "本仓已有 scripts/code-inventory.mjs 的 D2/D3 重复度度量（经 lint-code.mjs 的 K 号门禁把关）",
+      "relation": "**射程不同，不是重复造轮子**：D2/D3 是 AST 级、按「函数」粒度判「哪些函数像复制品」；jscpd 是 token 级、跨任意语句块判「哪段代码字面重复」。前者能判语义等价的改写，后者能抓跨函数的整段复制。",
+      "action": "两者并存。若将来发现大量重叠，先把两份名单并排看过再决定是否合并 —— 现在没有这个数据，不预先裁撤任何一边。",
+      "openQuestion": "⚠️ 本单**没有量化**两者的重叠度（多少个 jscpd 克隆同时也是 D3 的簇）。Lead 曾提出「两个重复度判据并存算不算重复造轮子」，这个数据是回答它的前提，但不在本单范围。"
+    },
+    "libNotInScope": {
+      "what": "forge-*/lib/** 的 .js 不在射程内",
+      "why": "jscpd 的 format 只认 typescript/tsx；lib 的 host 半是手写 .js。与 oxlint 判据同理（ISS-713 的 knownDefects.libNotInScope）。",
+      "status": "未纳入，也未被本单判定为「该纳入」—— 若要纳入需先改 format 支持 javascript，那会改变全仓统计口径，属独立决策。"
+    },
+    "cloneIdentityApproximation": {
+      "what": "「新增克隆对」的识别用 format + 两侧文件名 + 片段内容 的哈希当身份",
+      "why": "克隆对的位置会随上方代码增删整体位移，拿位置当身份会把「上面插了一行」报成「这处重复是新增的」—— 全是假阳性。",
+      "residualRisk": "片段移动但内容不变 ⇒ 认作同一个（这是想要的）；片段改了一个字 ⇒ 认作新增（可能把「修了一处重复」报成「新增一处」，偏保守，不放过真新增）。这是近似，不是精确身份。"
+    },
+    "determinismChecked": {
+      "what": "同一份代码连跑 3 次结果是否一致（若抖，棘轮会假红）",
+      "result": "已验证：2026-11-08 连跑 3 次，clones=108 / lines=1620 三次完全一致",
+      "residualRisk": "只证明「同机、同代码、连跑」的稳定。跨机器或升级 jscpd 小版本后未必一致 —— 升级时重跑 --measure 对账。"
+    }
+  },
+  "measure": {
+    "note": "2026-11-08 快照。代码一改就会漂，读之前先跑 `--measure` 现算。",
+    "forks": {
+      "tsx（226 文件 / 64019 行）": {
+        "clones": 77,
+        "duplicatedLines": 1196,
+        "percentage": 1.87
+      },
+      "typescript（274 文件 / 47191 行）": {
+        "clones": 31,
+        "duplicatedLines": 424,
+        "percentage": 0.9
+      },
+      "total": {
+        "clones": 108,
+        "duplicatedLines": 1620,
+        "duplicatedTokens": 12627,
+        "lines": 111210,
+        "tokens": 704729,
+        "percentage": 1.46,
+        "percentageTokens": 1.79,
+        "sources": 500
+      }
+    }
+  },
+  "config": {
+    "minTokens": 60,
+    "minLines": 6,
+    "mode": "mild",
+    "format": [
+      "typescript",
+      "tsx",
+      "javascript"
+    ],
+    "pattern": "**/*.{ts,tsx,js}",
+    "ignore": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.wt/**",
+      "**/tests/**"
+    ],
+    "ignorePattern": [
+      "(?s)/\\* jscpd:ignore-start \\*/.*?/\\* jscpd:ignore-end \\*/"
+    ]
+  },
+  "configFingerprint": "[[\"minTokens\",60],[\"minLines\",6],[\"mode\",\"mild\"],[\"format\",[\"typescript\",\"tsx\",\"javascript\"]],[\"pattern\",\"**/*.{ts,tsx,js}\"],[\"ignore\",[\"**/node_modules/**\",\"**/dist/**\",\"**/.wt/**\",\"**/tests/**\"]],[\"ignorePattern\",[\"(?s)/\\\\* jscpd:ignore-start \\\\*/.*?/\\\\* jscpd:ignore-end \\\\*/\"]]]",
+  "scopeFingerprint": "[\"packages/pm/issue/src\",\"packages/pm/project/src\",\"packages/storage/storage-domain/src\",\"packages/storage/storage-journal/src\",\"packages/storage/storage-json/src\",\"packages/storage/storage/src\"]"
+}

@@ -1,0 +1,244 @@
+{
+  "generatedAt": "2026-11-09T22:07:39.015Z",
+  "head": "09d8cf48",
+  "routes": {
+    "total": 94,
+    "byKind": {
+      "exact": 91,
+      "prefix": 3
+    },
+    "agent": [
+      "/forge-agents/agent-ask/reply",
+      "/forge-agents/agent-commands",
+      "/forge-agents/agent-models",
+      "/forge-agents/agent-sessions",
+      "/forge-agents/agent-usage",
+      "/forge-agents/agent/run/archive",
+      "/forge-agents/agent/run/cancel",
+      "/forge-agents/agent/run/changes",
+      "/forge-agents/agent/run/events",
+      "/forge-agents/agent/runs",
+      "/forge-agents/agent/steer",
+      "/forge-agents/agents",
+      "/forge-agents/resources",
+      "/forge-pm/agent/dispatch",
+      "/forge-pm/agents/profile"
+    ],
+    "missingPath": []
+  },
+  "eventContract": {
+    "runs": 357,
+    "events": 198114,
+    "kinds": {
+      "ask/permission": {
+        "count": 86,
+        "fields": [
+          "at",
+          "channel",
+          "kind",
+          "metadata",
+          "patterns",
+          "permission",
+          "requestId",
+          "seq",
+          "timeoutMs"
+        ]
+      },
+      "ask/question": {
+        "count": 5,
+        "fields": [
+          "at",
+          "channel",
+          "kind",
+          "questions",
+          "requestId",
+          "seq",
+          "tool"
+        ]
+      },
+      "ask/settled": {
+        "count": 89,
+        "fields": [
+          "askKind",
+          "at",
+          "auto",
+          "by",
+          "kind",
+          "note",
+          "requestId",
+          "seq"
+        ]
+      },
+      "msg/assistant": {
+        "count": 85936,
+        "fields": [
+          "at",
+          "kind",
+          "seq",
+          "text"
+        ]
+      },
+      "msg/raw": {
+        "count": 306,
+        "fields": [
+          "at",
+          "kind",
+          "raw",
+          "seq",
+          "sessionUpdate"
+        ]
+      },
+      "msg/thought": {
+        "count": 86999,
+        "fields": [
+          "at",
+          "kind",
+          "seq",
+          "text"
+        ]
+      },
+      "msg/tool_call": {
+        "count": 2133,
+        "fields": [
+          "at",
+          "input",
+          "kind",
+          "seq",
+          "status",
+          "tool",
+          "toolCallId",
+          "toolKind"
+        ]
+      },
+      "msg/tool_result": {
+        "count": 16406,
+        "fields": [
+          "at",
+          "kind",
+          "output",
+          "seq",
+          "status",
+          "tool",
+          "toolCallId"
+        ]
+      },
+      "msg/user": {
+        "count": 197,
+        "fields": [
+          "at",
+          "kind",
+          "seq",
+          "text"
+        ]
+      },
+      "run/cancelled": {
+        "count": 48,
+        "fields": [
+          "at",
+          "elapsedMs",
+          "error",
+          "kind",
+          "reason",
+          "seq",
+          "sessionRef",
+          "status",
+          "stopReason"
+        ]
+      },
+      "run/completed": {
+        "count": 227,
+        "fields": [
+          "at",
+          "elapsedMs",
+          "kind",
+          "seq",
+          "sessionRef",
+          "status",
+          "stopReason"
+        ]
+      },
+      "run/error": {
+        "count": 34,
+        "fields": [
+          "at",
+          "code",
+          "details",
+          "kind",
+          "message",
+          "retryable",
+          "seq",
+          "source"
+        ]
+      },
+      "run/failed": {
+        "count": 82,
+        "fields": [
+          "at",
+          "elapsedMs",
+          "error",
+          "kind",
+          "seq",
+          "sessionRef",
+          "status"
+        ]
+      },
+      "run/progress": {
+        "count": 3577,
+        "fields": [
+          "at",
+          "capabilities",
+          "configId",
+          "encoding",
+          "endpoint",
+          "kind",
+          "phase",
+          "pid",
+          "progress",
+          "recreated",
+          "reused",
+          "seq",
+          "sessionId",
+          "text",
+          "unlisted",
+          "webUrl"
+        ]
+      },
+      "run/running": {
+        "count": 337,
+        "fields": [
+          "at",
+          "kind",
+          "seq",
+          "status"
+        ]
+      },
+      "run/usage": {
+        "count": 1637,
+        "fields": [
+          "at",
+          "kind",
+          "seq",
+          "usage"
+        ]
+      },
+      "todo/update": {
+        "count": 15,
+        "fields": [
+          "at",
+          "items",
+          "kind",
+          "seq"
+        ]
+      }
+    }
+  },
+  "urlCallSites": {
+    "count": 4,
+    "sites": [
+      "forge-model/src/endpoints.ts ×1",
+      "forge-pm/lib/routes/dispatch.routes.js ×1",
+      "forge-pm/lib/routes/members.routes.js ×1",
+      "forge-pm/src/pm/endpoints.ts ×1"
+    ]
+  }
+}

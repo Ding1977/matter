@@ -1,0 +1,51 @@
+{
+  "recordedAt": "2026-11-18T10:49:33.799Z",
+  "count": 0,
+  "candidateCount": 2,
+  "cssOnly": 1,
+  "devCeiling": null,
+  "devCount": 30,
+  "devUnknown": 0,
+  "devUsedByRule": 104,
+  "devItems": [
+    "forge-agents → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-cli-provider → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-cli-provider → @deepseek-ai/dsh（bin dsh 未被 scripts 调用）",
+    "forge-browser → @tailwindcss/cli（bin tailwindcss 未被 scripts 调用）",
+    "forge-browser → tailwindcss（无 bin，且源码没引用）",
+    "forge-ui → @deepseek-ai/dsh-api-workspace-controller（无 bin，且源码没引用）",
+    "forge-ui → @deepseek-ai/dsh-workspace（无 bin，且源码没引用）",
+    "forge-canvas → forge-pm（无 bin，且源码没引用）",
+    "forge-trader → @tailwindcss/cli（bin tailwindcss 未被 scripts 调用）",
+    "forge-trader → tailwindcss（无 bin，且源码没引用）",
+    "forge-cad → @deepseek-ai/dsh-client-ui-slots（无 bin，且源码没引用）",
+    "forge-model → @tailwindcss/cli（bin tailwindcss 未被 scripts 调用）",
+    "forge-model → tailwindcss（无 bin，且源码没引用）",
+    "forge-mermaid → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-memory → typescript（bin tsc,tsserver 未被 scripts 调用）",
+    "forge-messenger → @deepseek-ai/dsh（bin dsh 未被 scripts 调用）",
+    "forge-messenger → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-qoder-direct → @deepseek-ai/dsh（bin dsh 未被 scripts 调用）",
+    "forge-qoder-direct → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-router-direct → @deepseek-ai/dsh（bin dsh 未被 scripts 调用）",
+    "forge-router-direct → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-workbuddy-direct → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-trae-direct → @deepseek-ai/dsh（bin dsh 未被 scripts 调用）",
+    "forge-trae-direct → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）",
+    "forge-window-chrome → @deepseek-ai/dsh-client-locale（无 bin，且源码没引用）",
+    "forge-window-chrome → @deepseek-ai/dsh-client-ui-primitives（无 bin，且源码没引用）",
+    "forge-window-chrome → @deepseek-ai/dsh-client-ui-sidebar（无 bin，且源码没引用）",
+    "forge-window-chrome → @deepseek-ai/dsh-client-ui-slots（无 bin，且源码没引用）",
+    "forge-window-chrome → @deepseek-ai/dsh-workspace（无 bin，且源码没引用）",
+    "forge-tailwind → @deepseek-ai/cordis（bin cordis 未被 scripts 调用）"
+  ],
+  "byPkg": {
+    "forge-ui": 2
+  },
+  "items": [],
+  "exemptItems": [
+    "forge-ui → @deepseek-ai/dsh-client-store（具名豁免：见 scripts/deps-hygiene.mjs 的 INSTALL_FACE_ALLOW）",
+    "forge-ui → simple-icons（具名豁免：见 scripts/deps-hygiene.mjs 的 INSTALL_FACE_ALLOW）"
+  ],
+  "note": "ISS-884：ceiling 棘轮已退休，判据改绝对口径『未用依赖=0』（未豁免候选须为 0）。count = 未豁免未用依赖（须 0），candidateCount = 候选总数（含具名豁免，不从统计消失），items/exemptItems 逐条带理由与摘除条件（ISS-635：豁免只免判红，不减候选）。dev 档需三条精确规则（@types 环境豁免 / @types 目标被 import / bin 名被 scripts 调用），任一读不到 bin 就整档不判。"
+}

@@ -1,0 +1,21 @@
+{
+  // 浏览器壳独立 tsconfig（ISS-537 / P4-S1）。apps/ 在 packages glob 外——不进
+  // tsconfig.next.json 的 references（那是 packages 图，verify-tsconfig-coverage 只扫 packages/**）。
+  // 需要类型检查时单独跑 `tsc -p apps/web/tsconfig.json --noEmit`（scripts/dev:web 不依赖它）。
+  // 用 base.client.emit 拿 DOM lib + react-jsx；noEmit 覆盖它的 emit 设置（壳由 Vite 构建）。
+  "extends": "../../tsconfig.base.client.emit.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": false,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@matter/client-ui-theme/client": ["../../packages/client/ui-theme/src/client/index.ts"],
+      "@matter/client-ui-kb/client": ["../../packages/client/ui-kb/src/client/index.ts"],
+      // ISS-538：/editor-demo 夹具与 kb 三步流消费 ui-blocks 真编辑器（headless view + full schema）。
+      "@matter/client-ui-blocks/client": ["../../packages/client/ui-blocks/src/client/index.ts"],
+      "@deepseek-ai/cordis": ["../../node_modules/.pnpm/@deepseek-ai+cordis@4.1.0/node_modules/@deepseek-ai/cordis"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx", "aliases.ts", "vite.config.ts"]
+}

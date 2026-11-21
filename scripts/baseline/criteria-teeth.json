@@ -1,0 +1,564 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "K 号 wontfix 条目以 reason 记录「不补判据」的存量欠账，列入 grandfathered 棘轮（19），按存量豁免对待。"
+  },
+  "_readme": [
+    "⛔ 由 scripts/gates/lint-criteria-teeth.mjs --write 生成，**不要手改**。",
+    "真相源三处：docs/code.md 的行内字段（牙：/ 不补：）· scripts/lint-code.mjs 的 RULES · 门禁登记（guard-baselines.sh / gates/registry.json）。",
+    "改判据牙位 = 改那三处之一，再跑 --write。手改本文件会被 --check 判红（与真相源不符）。"
+  ],
+  "_generatedBy": "node scripts/gates/lint-criteria-teeth.mjs --write",
+  "_count": {
+    "total": 75,
+    "teeth": 56,
+    "report": 0,
+    "wontfix": 19,
+    "none": 0
+  },
+  "criteria": {
+    "K10a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K10a",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K10b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K10b",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K10c": {
+      "kind": "wontfix",
+      "reason": "「退役要同时改三处（实现 / 门禁判据清单 / 文档）」跨越代码与文档两类面，且「是否该同时改」取决于这次退役的语义 —— 机器能判「门禁清单里还有个已删文件」（`lint-criteria-teeth` 的 R2 正好在收这个），但判不出「这次退役是否漏改了文档」",
+      "source": "docs/code.md 不补字段"
+    },
+    "K10d": {
+      "kind": "wontfix",
+      "reason": "「改名类改动必须列全耦合面」要求机器知道**这次改动是什么类**（改名 vs 改语义），静态 diff 分不出两者；且「活着的服务掩盖坏的工作树」要靠运行态复验（= K7f，同样判不了）",
+      "source": "docs/code.md 不补字段"
+    },
+    "K10e": {
+      "kind": "wontfix",
+      "reason": "「被替换的文档不删、标 superseded 并留取代链」可由文档 frontmatter 判，但它属**文档治理**，本仓的真相源是 Matter 文档库（`matter_doc` 的 status 流转），不在代码侧；写一条只扫 `docs/` 的 lint 会与 Matter 的 status 形成第二真相源",
+      "source": "docs/code.md 不补字段"
+    },
+    "K10f": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K10f",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K11a": {
+      "kind": "rule",
+      "file": "scripts/lint-channel-contract.mjs",
+      "id": "CC1",
+      "mode": null,
+      "registered": "selfcheck --selftest \"活推送契约门禁自身（ISS-724 · CC1 游标 / CC2 重拉 能红、透传不误伤）\" / selfcheck --check \"SSE 广播通道的游标与对账口（ISS-724 · docs/code.md §10）\"",
+      "source": "docs/code.md:559 牙字段"
+    },
+    "K11b": {
+      "kind": "rule",
+      "file": "scripts/lint-channel-contract.mjs",
+      "id": "CC2",
+      "mode": null,
+      "registered": "selfcheck --selftest \"活推送契约门禁自身（ISS-724 · CC1 游标 / CC2 重拉 能红、透传不误伤）\" / selfcheck --check \"SSE 广播通道的游标与对账口（ISS-724 · docs/code.md §10）\"",
+      "source": "docs/code.md:560 牙字段"
+    },
+    "K11c": {
+      "kind": "rule",
+      "file": "scripts/lint-channel-contract.mjs",
+      "id": "CC3",
+      "mode": null,
+      "registered": "selfcheck --selftest \"活推送契约门禁自身（ISS-724 · CC1 游标 / CC2 重拉 能红、透传不误伤）\" / selfcheck --check \"SSE 广播通道的游标与对账口（ISS-724 · docs/code.md §10）\"",
+      "source": "docs/code.md:561 牙字段"
+    },
+    "K11d": {
+      "kind": "wontfix",
+      "reason": "本条是 K11a~K11c 的**适用边界**（哪些流不算广播），判它等于判「这个代理搬的是不是真相」—— 静态看到的是字节转发，看不到它背后有没有连接集合。实际已由 `lint-channel-contract.mjs` 的 `HUB_RE` 硬证据判法覆盖（只有 hub 或连接集合才算广播），故本条是那条判据的**说明**而非独立判据",
+      "source": "docs/code.md 不补字段"
+    },
+    "K1a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K1a",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K1b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K1b",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K1c": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K1c",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K1d": {
+      "kind": "script",
+      "file": "scripts/assembly-check.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"装配一致性体检自身（ISS-707）\"",
+      "source": "docs/code.md:165 牙字段"
+    },
+    "K1e": {
+      "kind": "wontfix",
+      "reason": "「引擎自己说」的反面是「脚本里那行文本」，机器要分辨这两者得真起引擎核对运行态 —— 本仓无同进程引擎句柄可查，硬判只能读那行文本（正是本条禁止的）。已有 `verify:live` 走真机，属单包手验，不是按编号可判的静态形态",
+      "source": "docs/code.md 不补字段"
+    },
+    "K1f": {
+      "kind": "script",
+      "file": "scripts/assembly-check.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"装配一致性体检自身（ISS-707）\"",
+      "source": "docs/code.md:167 牙字段"
+    },
+    "K1g": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K1g",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K2a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K2a",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K2b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K2b",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K2c": {
+      "kind": "script",
+      "file": "scripts/code-inventory.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"盘点器死码打标自身（ISS-732 三个 + ISS-723 第 4 批两个消费通道标记 · 五个各有判别力）\" / selfcheck --selftest-routes \"路由明细判据自身（ISS-767 · 24 条：半区/注释/转义/isDocLine 两侧用例）\" / report_only \"代码盘点基线对照（ISS-701 · 只报计数漂移）\"",
+      "source": "docs/code.md:245 牙字段"
+    },
+    "K2d": {
+      "kind": "script",
+      "file": "scripts/scan-input.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"扫描输入集合 = 已入库文件（ISS-742）\"",
+      "source": "docs/code.md:246 牙字段"
+    },
+    "K3a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3a",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K3b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3b",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K3c": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3c",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K3d": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3d",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K3e": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3e",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K3f": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3f",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K3g": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3g",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K3h": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K3h",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K4a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K4a",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K4b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K4b",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K4c": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K4c",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K4d": {
+      "kind": "script",
+      "file": "scripts/host-typecheck-ratchet.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --check \"类型棘轮三族（ISS-706 host / ISS-763 client / ISS-764 壳 · 只许降不许升）\" / selfcheck --selftest \"棘轮自身（三族各有注入/还原/缺记录/超上限 + 纳管面缩小；ISS-764 起断言按**增量**写）\"",
+      "source": "docs/code.md:199 牙字段"
+    },
+    "K4e": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K4e",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5a",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5b",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5c": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5c",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5d": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5d",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5e": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5e",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5f": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5f",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5g": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5g",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K5h": {
+      "kind": "rule",
+      "file": "scripts/lint-tool-contract.mjs",
+      "id": "TC1",
+      "mode": null,
+      "registered": "selfcheck --selftest \"客户端渲染契约门禁自身（ISS-736 · TC1 五类分支能红、回调不误伤）\" / selfcheck --check \"React hooks 数量恒定（ISS-736 · TC1 棘轮，只拦新增）\"",
+      "source": "docs/code.md:218 牙字段"
+    },
+    "K5i": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K5i",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K6a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K6a",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K6b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K6b",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K6c": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K6c",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K6d": {
+      "kind": "wontfix",
+      "reason": "本条是**度量口径**（共享层消费者数，多不一定坏、少才要问），不是红线判据 —— 原文自己写了「多不一定坏」，机器判不出「少到多少才算病」，硬立阈值会把正当的一次性下沉判红。已是 `lint-code` 的 `D5` 度量，按 report 档如实登记",
+      "source": "docs/code.md 不补字段"
+    },
+    "K6e": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K6e",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K6f": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K6f",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K6g": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K6g",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K6h": {
+      "kind": "wontfix",
+      "reason": "「两份实现是否等价」的证明本身需要人给出语义域与输入分布；机器能判的只有「函数体逐字节相同」这一最弱形态，会把合法的语法级归一化误判成不等价。已是人审判据（§7.2），按 §0.4 如实留在规范里",
+      "source": "docs/code.md 不补字段"
+    },
+    "K7a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K7a",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K7b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K7b",
+      "mode": "whitelist",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K7c": {
+      "kind": "wontfix",
+      "reason": "「判据落在正确对象上」是**对判据的判据**（元层），没有独立的可执行形态：要判它得先知道每条判据该排除什么，这等于重写每条判据。已由 K8b（每条门禁自带 selftest 且做反向验证）在**实例层**兜住",
+      "source": "docs/code.md 不补字段"
+    },
+    "K7d": {
+      "kind": "wontfix",
+      "reason": "「模块级状态在触发点前自行重置」只有跑到真实测试里才看得见，静态读不出「这个断言依赖了上一个文件留下的状态」。已有 `bun test --isolate`（本仓门禁口径）在**运行层**消除了这一形态 —— 隔离跑就不共享模块状态",
+      "source": "docs/code.md 不补字段"
+    },
+    "K7e": {
+      "kind": "wontfix",
+      "reason": "本条治的是**人写验证命令**时的错（`cmd",
+      "source": "docs/code.md 不补字段"
+    },
+    "K7f": {
+      "kind": "wontfix",
+      "reason": "「必须真启动 + 打接口」的判据 = 真去启动宿主。本仓明令 agent 不起常驻服务（AGENTS §4.5），且同一时间只有一个实例 —— 机器判它要么抢端口、要么判不了。已有 `verify:live` 按包手跑，属人验",
+      "source": "docs/code.md 不补字段"
+    },
+    "K7g": {
+      "kind": "wontfix",
+      "reason": "「用客观 oracle 量判据完整性」要求存在一个机器生成的可信第二来源；有没有 oracle、以及 oracle 选得对不对（K7g 自己写了「选错比没有更危险」），机器判不了。已由 §7.3.1 的案例约束 + K7h 的成对重跑纪律兜住",
+      "source": "docs/code.md 不补字段"
+    },
+    "K7h": {
+      "kind": "wontfix",
+      "reason": "「判据变动必须成对重新量」是**过程纪律**（人改判据时的动作），可机判的近似形态是「每条判据都配一份变异 spec」，而那正是 K8b / `guard-mutate` 的活 —— 给它单独立一条 lint，等于让某个门禁的 `--selftest` 给自己发合格证",
+      "source": "docs/code.md 不补字段"
+    },
+    "K7i": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K7i",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K7j": {
+      "kind": "wontfix",
+      "reason": "本条原文已自承「机器判『断言挂在系统调用入口还是字面量』要跨语言 AST + 打桩识别，判不准会误伤合格写法」。要真判须对每个测试文件打桩并观察实际 syscall —— 那是每个测试自带的活儿，不是一条能扫全仓的静态判据",
+      "source": "docs/code.md 不补字段"
+    },
+    "K8a": {
+      "kind": "script",
+      "file": "scripts/gates/lint-criteria-teeth.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"判据有牙率门禁自身（ISS-729 反向验证：摘登记变红/路径变异变红/恢复变绿/report 变红/号搬进注释变红/一号两主变红/漏条目变红；ISS-794 加卡片源与 R5 映射）\" / selfcheck --check \"K8a 判据有牙率（ISS-729 · code.md 75 条 K 判据 ↔ 台账 1:1，有牙 56 / 不补 19 / 落空 0；ISS-794 影子期 --source=cards 同读数）\"",
+      "source": "docs/code.md:258 牙字段"
+    },
+    "K8b": {
+      "kind": "wontfix",
+      "reason": "**工具有，未接线**：`scripts/guard-mutate.mjs` 就是做变异验证的器具（基线绿 / 注入红 / 还原干净三判据）。但它在 `guard-baselines.sh` / `run-gates.mjs` / `.github/workflows/` / `package.json` **四处零登记**（我逐处查过）。⇒ 本条不补 lint 条目（补了是空壳），接线另单；现状如实登记为「工具有、未接线」",
+      "source": "docs/code.md 不补字段"
+    },
+    "K8c": {
+      "kind": "script",
+      "file": "scripts/lint-common.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"门禁骨架 lint-common（ISS-700）\"",
+      "source": "docs/code.md:260 牙字段"
+    },
+    "K8d": {
+      "kind": "script",
+      "file": "scripts/lint-common.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"门禁骨架 lint-common（ISS-700）\"",
+      "source": "docs/code.md:261 牙字段"
+    },
+    "K8e": {
+      "kind": "script",
+      "file": "scripts/scan-input.mjs",
+      "id": null,
+      "mode": null,
+      "registered": "selfcheck --selftest \"扫描输入集合 = 已入库文件（ISS-742）\"",
+      "source": "docs/code.md:262 牙字段"
+    },
+    "K8f": {
+      "kind": "wontfix",
+      "reason": "本条要求「守卫自己也有单测」，而**判「某个守卫有没有单测」需要按守卫逐个反查测试文件有没有覆盖它的判据**——机器只能判出「存在 `*.test.mjs`」（本仓已有 6 个），判不出「这个单测真的在守那条判据」。已有的可行近似是 K8b 的 `--selftest`（每个门禁自证能红能绿），K8b 本身又受 `guard-mutate` 未接线之限",
+      "source": "docs/code.md 不补字段"
+    },
+    "K9a": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K9a",
+      "mode": "zero",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K9b": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K9b",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K9c": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K9c",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K9d": {
+      "kind": "wontfix",
+      "reason": "「stdout 为主 + 宿主 logger 为镜像」里的**主出口**是实测结论（哪一路有人能看见），静态读不出「这路输出人看不看得见」。`lint-log-outlet.mjs` 已判「不许裸用 console」这一半（可静态判），主/镜像这一半要靠真机看日志",
+      "source": "docs/code.md 不补字段"
+    },
+    "K9e": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K9e",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K9f": {
+      "kind": "rule",
+      "file": "scripts/lint-code.mjs",
+      "id": "K9f",
+      "mode": "ratchet",
+      "registered": "selfcheck --selftest \"代码规范门禁自身（ISS-722）\" / selfcheck --check \"代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）\"",
+      "source": "lint-code RULES"
+    },
+    "K9g": {
+      "kind": "wontfix",
+      "reason": "「读侧必须容忍历史错误对象没有 kind」的判据要构造一个「没有 kind 的历史对象」喂进每条读侧代码 —— 这是每条调用点的单测，不是能扫全仓的静态形态；已有的 K9f 棘轮只管「新增裸 throw 要带 kind」（写侧），读侧容忍留在人审",
+      "source": "docs/code.md 不补字段"
+    },
+    "K9h": {
+      "kind": "wontfix",
+      "reason": "**有实现，形态是 K8a 的②（行为验证）**：`scripts/guard-mutate.spec.iss1839.json` 就是 K9h 的行为档 spec（自带三判据：基线绿 / 注入红 / 还原干净）。**但 `guard-mutate` 零接线**（`guard-baselines.sh` / `run-gates.mjs` / CI / `package.json` 四处全 0 条），且该 spec 的基线现在是红的（ISS-692 留 2 条）。⇒ 不在 lint 侧硬凑一个「不做这件事」的门禁；接线与修绿另单",
+      "source": "docs/code.md 不补字段"
+    }
+  }
+}

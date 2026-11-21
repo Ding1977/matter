@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Matter 真相源自动快照（ISS-483）。
+
+  安装：
+    cp scripts/com.openforge.pm-backup.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.openforge.pm-backup.plist
+
+  卸载：
+    launchctl unload ~/Library/LaunchAgents/com.openforge.pm-backup.plist
+
+  ⚠️ 为什么是 StartInterval 3600（每小时）而不是"每日一次"：
+    脚本对「无变更」是零成本的（`git diff --cached --quiet` 直接跳过、不留空 commit），
+    而每小时跑一次把最坏情况的丢失窗口从 24 小时压到 1 小时 —— 代价只是每天多 24 次
+    `git status`（毫秒级）。要退回每日，把 StartInterval 改成 86400 即可。
+-->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.openforge.pm-backup</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string><repo>/scripts/pm-backup.sh</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StartInterval</key>
+	<integer>3600</integer>
+	<key>StandardOutPath</key>
+	<string><home>/.dsh/pm-backup.log</string>
+	<key>StandardErrorPath</key>
+	<string><home>/.dsh/pm-backup.log</string>
+</dict>
+</plist>

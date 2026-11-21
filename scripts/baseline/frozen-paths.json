@@ -1,0 +1,266 @@
+{
+  "_meta": {
+    "kind": "frozen",
+    "note": "冻结路径清单（verify-freeze），frozen/advisory 两组；这是冻结范围账本，不是待修豁免，真判据是 verify-freeze。",
+    "gate": "verify-freeze",
+    "issue": "ISS-798",
+    "spec": "阶段 0-2「建冻结门禁 verify-freeze」（S0-5）—— 依据文档名 refactor-stage-playbook-2026-11-10.md（见 spec_tracking_note：该文档未被 git 跟踪，不作仓内可查证来源）",
+    "authority": "冻结口径：冻结路径 git diff --numstat 的 added == 0；纯注释新增（行首 // 或 /* 起的块）豁免；纯删除放行但必须列名。此口径由本文件与 scripts/gates/verify-freeze.mjs 文件头自述承载，不依赖仓外文档",
+    "generatedBy": "git ls-files -- <dir>（不是手列；2026-11-12 实测）",
+    "why": "旧树冻结只读 = 主规划 §0 结论 1。这份清单的作用不是「标记哪些代码老」，而是给出 measured 的分母 —— 空分母会让门禁恒绿",
+    "frozenMeaning": "进判据：这些路径上新增逻辑行 = 红",
+    "advisoryMeaning": "只报不红：仍在正常演进的工具链/文档面，冻死它们等于冻死重构本身",
+    "frozenGroups": 39,
+    "frozenFiles": 1428,
+    "notFrozen": [
+      {
+        "paths": [
+          "*/cordis.patch.yml",
+          "*/package.json",
+          "*/tsconfig*.json"
+        ],
+        "count": 117,
+        "yes_count_note": "git ls-files 实测 117 个（22 + 30 + 65）",
+        "why": "这三个面**不算旧树源码**，故不冻结。判据：① 它们是**接线与声明**（插件挂载 / 依赖 / 编译配置），不是业务逻辑；② 重构期必须能改 —— 新树接管时要加 workspace、换 entry、调 tsconfig，冻死它们等于冻死 S1~S5 本身；③ 主规划 §7 的冻结对象写的是「旧树源码」，配置面不在其列。",
+        "risk": "代价是这三个面可以被任意改而门禁不响（实测 EXIT=0）。若要覆盖，应另起一张单做「配置面差异审计」，而不是塞进本单的冻结判据（会与重构自身的接线需求打架）。"
+      }
+    ],
+    "spec_tracking_note": "本轮引用的 specs/refactor-*.md 三份文档 **未被 git 跟踪**（git ls-files specs/ = 0，全历史 0 次提交），只在主 checkout 的磁盘上存在。故本文件只写**文档名**、不写可点击路径，且不把它们当作仓内可查证的真相源；判据口径以本文件与 verify-freeze.mjs 文件头为准。",
+    "retiredDomains": [
+      {
+        "domain": "review（REV 单 / review-sync / review-run）",
+        "authority": "ISS-810 · 2026-11-13 老板裁决：结单改用 DSH PR + 落点门禁，REV 单不再使用",
+        "state": "已退役，冻结不再演进。不删（删要动冻结区与存量数据）、不修、不再引用",
+        "files": [
+          "forge-pm/lib/review-sync.js",
+          "forge-pm/lib/review-run.js"
+        ],
+        "inFrozenGroups": [
+          "forge-pm/lib/"
+        ],
+        "residualCalls": "逐点核对（ISS-810 审查实测，勿凭印象改）：① ensureReviewForIssue 零调用（只有 done-gate.js:890 定义 + 测试 + 注释）；② B 向三个调用点中 entity-ops.js:590 与 agent-tools.js:1165 是活路径（/forge-pm/field、/forge-pm/field-many 经 actorChannel=ui 触发 shouldSyncBSide），只有 done-gate.js:1079 在本域内；③ settleReviewRun 由 routes/reviews.routes.js:210 调用，该路由 index.js:942 无条件挂载 ⇒ 非死码",
+        "data": "pm/reviews/ 120 张真单（另有 120 activity + 2 comments 侧车，共 242 个文件）归档保留；最新 REV-122 created=2026-11-06，此后无新单",
+        "doNotRevive": "后人看到 review 域不必再问「要不要恢复」——政策上不恢复（技术层面置 true 仍会重新注册三件，代码未删）"
+      }
+    ]
+  },
+  "frozen": [
+    {
+      "path": "forge-agent-protocol/lib/",
+      "files": 6,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-agents/lib/",
+      "files": 114,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-agents/src/",
+      "files": 27,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-cli-provider/lib/",
+      "files": 22,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-browser/lib/",
+      "files": 1,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-browser/src/",
+      "files": 18,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-ui/lib/",
+      "files": 2,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-ui/src/",
+      "files": 24,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-pm/lib/",
+      "files": 199,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-pm/src/",
+      "files": 238,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-canvas/lib/",
+      "files": 26,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-canvas/src/",
+      "files": 88,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-trader/lib/",
+      "files": 22,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-trader/src/",
+      "files": 62,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-trader/server/",
+      "files": 91,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-repowiki/lib/",
+      "files": 15,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-repowiki/src/",
+      "files": 6,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-cad/lib/",
+      "files": 5,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-cad/src/",
+      "files": 8,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-design/src/",
+      "files": 93,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-model/lib/",
+      "files": 119,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-model/src/",
+      "files": 58,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-model-protocol/lib/",
+      "files": 20,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-service-kit/lib/",
+      "files": 27,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-mermaid/lib/",
+      "files": 1,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-mermaid/src/",
+      "files": 9,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-messenger/lib/",
+      "files": 66,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-model-limits/lib/",
+      "files": 1,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-model-limits/src/",
+      "files": 20,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-qoder-direct/lib/",
+      "files": 6,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-router-direct/lib/",
+      "files": 6,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-workbuddy-direct/lib/",
+      "files": 6,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-trae-direct/lib/",
+      "files": 6,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-window-chrome/lib/",
+      "files": 1,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-window-chrome/src/",
+      "files": 4,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-plugin-status/lib/",
+      "files": 1,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-plugin-status/src/",
+      "files": 5,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-tailwind/lib/",
+      "files": 1,
+      "why": "旧树源码（重构期冻结只读）"
+    },
+    {
+      "path": "forge-tailwind/src/",
+      "files": 4,
+      "why": "旧树源码（重构期冻结只读）"
+    }
+  ],
+  "advisory": [
+    {
+      "path": "scripts/",
+      "why": "工具链自身仍在演进（门禁/脚本是重构的脚手架，不是被重构的对象）；冻结它会与 ISS-742~2090 一连串门禁单冲突"
+    },
+    {
+      "path": "docs/",
+      "why": "文档随重构演进（记忆/规范/规则卡）；冻死文档等于让规范腐坏"
+    },
+    {
+      "path": ".github/",
+      "why": "CI 编排仍在演进（ISS-799 正在改 ci.yml）"
+    },
+    {
+      "path": "specs/",
+      "why": "规划文档本身就是重构产物"
+    },
+    {
+      "path": "forge-widgets/",
+      "why": "仅 locale 资源、0 个跟踪源码文件（实测）—— 没有可冻结的代码面"
+    }
+  ]
+}

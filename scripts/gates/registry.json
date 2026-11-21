@@ -1,0 +1,2932 @@
+[
+  {
+    "id": "verify-ui-typography",
+    "semantics": ["static"],
+    "spec": "verify-ui-typography.spec.ts",
+    "tiers": ["fast", "full", "ci"],
+    "owner": "builder",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-907 / DOC-533 段三：S1 裸标题禁用 + S2 字号字重只用档位。判据本体在 packages/client/ui-theme/tests/typography-scan.ts + typography.test.ts，本薄包装只做全仓扫 ⇄ 例外清单精确对账。合法集动态读真值源（字号档=theme.css 的 --matter-alias-font-size-*，字重档=expected/font-weight-tiers.json），不写死；S1 走 TypeScript AST（注释/字符串不误伤，认 JSX 与 createElement 两形态）；例外落 expected/typography-exceptions.json 且每条带理由，toEqual 多一条少一条都红。静态扫描秒级（实测 ~0.2s），进 fast 供 dev 高频。spec 6/6 含必然失败反向对照（多/少/code 漂移/空理由/读不到）。",
+    "cells": []
+  },
+  {
+    "id": "verify-spec",
+    "semantics": ["doc-sync"],
+    "spec": "verify-spec.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-742 / 计划 §5 G1-4：规范自审闸。存量 37 条全部进 scripts/baseline/spec-lint.json 并逐条写 why（棘轮），清理由 G3 规则卡重写。",
+    "neverAllowFailure": true,
+    "neverAllowFailureWhy": "AGENTS.md + specs/ 是每轮注入给 agent 的契约；免了门禁等于静默改规则",
+    "cells": []
+  },
+  {
+    "id": "verify-web-snapshots",
+    "semantics": [
+      "snapshot"
+    ],
+    "spec": "verify-web-snapshots.spec.ts",
+    "tiers": [
+      "full",
+      "ci"
+    ],
+    "owner": "builder",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 180000,
+    "note": "段一浏览器快照回归（Playwright + ARIA + MATTER_SNAPSHOT 三态）：replay 只读比对 3 场景×3 视口共 9 条基线，红点名场景+视口+行号。⛔ 不进 fast（要起 host+vite+Chromium）；⛔ 判据只以 MATTER_SNAPSHOT=replay 起测试，绝不写基线。缺 vitest/Chromium/0 基线判不了（不是绿）。判据本体 scripts/gates/verify-web-snapshots.ts，spec 自检含正反/干扰/缺输入向量。",
+    "cells": []
+  },
+  {
+    "id": "verify-gate-registry",
+    "semantics": ["contracts"],
+    "spec": "verify-gate-registry.spec.ts",
+    "tiers": [
+      "pre-commit",
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "timeoutMs": 60000,
+    "cells": []
+  },
+  {
+    "id": "verify-file-size",
+    "semantics": ["static"],
+    "spec": "verify-file-size.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "note": "实测 0.19s（ISS-772 现场：`bun scripts/gates/verify-file-size.ts` 0.065s 总耗时 / 0.19s 含冷启动；selftest 14/14）。ISS-772 把 4 个超记录值的文件降回记录值以下后转 full+ci：run-gates.mjs 2504→2334、code-inventory.mjs 1909→1688、forge-messenger/lib/index.js 2064→2059、forge-pm/lib/done-gate.js 1161→1156；ceiling 同批收线到新值。不进 fast：计划 §11 只要求 full/ci，fast 留给「合入前最要紧」的格。\n\n【已退役 2026-11-18 · ISS-887】DOC-518 步3 批量退役：旧树已冻结、无新增债可防，形式化棘轮对新树无意义（新树类型/规模由 tsc -b 等替代判据承担）。按 ISS-853 四步法 status→deprecated，tiers 与脚本/spec 保留在盘（删盘上文件会触发 verify-gate-registry 悬空检查）。 本条为旧树 verify-file-size，非 ISS-885 已删的 verify-file-size-new。",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "timeoutMs": 60000,
+    "cells": []
+  },
+  {
+    "id": "verify-type-ratchet",
+    "semantics": ["static"],
+    "spec": "verify-type-ratchet.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "note": "【已退役 2026-11-18 · ISS-887】DOC-518 步3 批量退役：旧树已冻结、无新增债可防，形式化棘轮对新树无意义（新树类型/规模由 tsc -b 等替代判据承担）。按 ISS-853 四步法 status→deprecated，tiers 与脚本/spec 保留在盘（删盘上文件会触发 verify-gate-registry 悬空检查）。",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "timeoutMs": 300000,
+    "cells": []
+  },
+  {
+    "id": "verify-doc-budgets",
+    "semantics": ["doc-sync"],
+    "spec": "verify-doc-budgets.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "timeoutMs": 60000,
+    "neverAllowFailure": true,
+    "neverAllowFailureWhy": "常驻规范文档字节上限，防失控（149KB 的 README 就是这么长出来的）",
+    "cells": []
+  },
+  {
+    "id": "verify-ctx-catalog",
+    "semantics": ["doc-sync"],
+    "spec": "verify-ctx-catalog.spec.ts",
+    "tiers": [
+      "doc",
+      "doc-sync",
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-16",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-862 / DOC-512 §5.6：`docs/ctx-catalog.md` 的新鲜度判据，也是本仓第一个 `doc` 档格（DSH 的 `doc-sync` 同构）。生成物进 git，机制是失败驱动：改源码忘跑 gen-ctx-catalog ⇒ 本格红 ⇒ 跑生成器 ⇒ 提交。判据直接 import 生成器的 buildCatalog（同一函数、同一扫描面），不另写一份扫描 —— 两份实现迟早分叉成「生成器说最新、判据说旧」，届时没人能说清哪边对。0 个包判 unjudged（空表与空表当然一致，那不是绿）。红文案含 文件:行 + 期望 + 实际 + 重生成命令。",
+    "cells": []
+  },
+  {
+    "id": "verify-catalogs",
+    "semantics": ["doc-sync"],
+    "spec": "verify-catalogs.spec.ts",
+    "tiers": [
+      "doc",
+      "doc-sync",
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-20",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-893 / DOC-516 §四 D1：一张格校 3 张 catalog（ctx/event/dependency）的新鲜度，接 doc 档。生成器 `scripts/gen-catalog.ts` 单入口、多 extractor（3 个真实消费者），判据 import 同一批 extractor 的 generateAll（同一 program、同一渲染），不另写扫描 —— 两份实现迟早分叉成「生成器说最新、判据说旧」。生成物进 git，机制仍是失败驱动：改源码忘跑生成器 ⇒ 本格红 ⇒ `node scripts/gen-catalog.ts` ⇒ 提交。0 个包判 unjudged(needs:corpus)（空表与空表当然一致，那不是绿），按 ISS-854 纪律补票。红文案含 文件:行 + 期望 + 实际 + 能直接粘的重生成命令。",
+    "cells": []
+  },
+  {
+    "id": "verify-field-catalog",
+    "semantics": ["doc-sync"],
+    "spec": "verify-field-catalog.spec.ts",
+    "tiers": [
+      "doc",
+      "doc-sync",
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-20",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-896 / DOC-516 §四 D8：`docs/field-catalog.md`（三域字段清单）的新鲜度判据。生成器 `scripts/gen-field-catalog.ts` 读 AST（z.strictObject 字面量 + 每字段 z.* 链尾 `.meta({writable,widget,indexable})` 三键俱全才算字段清单 schema——blocks 叶子/DocRecord/Patch 天然不收，加字段忘写 meta ⇒ schema 整张从表里消失 ⇒ 本格红，meta 纪律由机器兜底）。判据 import 生成器的 buildFieldCatalog（同一函数、同一扫描面），不另写扫描。生成物进 git，机制失败驱动：改 schema 忘跑生成器 ⇒ 本格红 ⇒ `node scripts/gen-field-catalog.ts` ⇒ 提交。0 张 schema 判 unjudged(no-corpus)（空表与空表当然一致，那不是绿）。红文案含 文件:行 + 期望 + 实际 + 「跑生成器」与能直接粘的重生成命令。spec 含必然失败用例（改一字/删文件/改头各断言 failed）。",
+    "cells": []
+  },
+  {
+    "id": "verify-block-catalog",
+    "semantics": ["doc-sync"],
+    "spec": "verify-block-catalog.spec.ts",
+    "tiers": [
+      "doc",
+      "doc-sync",
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-20",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-900 / DOC-520 §四 F-2：docs/block-catalog.md（28 块清单）的新鲜度判据，照 F-1=ISS-896 全同构。生成器 scripts/gen-block-catalog.ts 读 packages/kb/blocks/src/spec.ts 的 AST：一个块 = const X = z.strictObject({ ...base(\"type\"), <显式字段> })，type 取自 base(\"…\") 字符串字面量（不是 schema 变量名）、字段为 base 之外的显式属性；分组取自 A_BASIC_TYPES/B_BUSINESS_TYPES/C_NOTION_TYPES 三张词表，容器/引用标记取自 CONTAINER_TYPES/REFERENCE_TYPES——词表是分组唯一真相源，改词表不改 schema（或反之）都让生成物变、本格红；第一批 14 = A 档 9 + B 档 5（issueRef/docRef/mermaid/toggle/view，ISS-532 钉死口径，业务常量不从 spec.ts 推导）。判据 import 生成器的 buildBlockCatalog（同一函数、同一扫描面、同一排序），不另写扫描。生成物进 git，机制失败驱动：改 spec.ts 忘跑生成器 ⇒ 本格红 ⇒ node scripts/gen-block-catalog.ts ⇒ 提交。0 个块判 unjudged(no-corpus)（空表与空表当然一致，那不是绿）。红文案含 文件:行 + 期望 + 实际 + 「跑生成器」与能直接粘的重生成命令。spec 含必然失败用例（改一字/删文件/改头各断言 failed 且点名文件:行）与真语料数字（28 / 9-7-12 / 容器 3 / 引用 4 / 第一批 14）。无 next 档 ⇒ 不适用 ISS-854 unjudged 台账票（语料在仓内、预期可判绿）。",
+    "cells": []
+  },
+  {
+    "id": "verify-tsconfig-paths",
+    "semantics": ["static"],
+    "spec": "verify-tsconfig-paths.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-20",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "ISS-897 / DOC-520 §四 P-b（ISS-518 盲区闭环）：包名 ⇔ paths 键双向对账闸。漏配一条 paths 此前没有任何判据红——直到第一个跨包消费方撞 TS2307（报错在 consumer 不在漏配处，ISS-518 的 storage-journal 实测）。乙方案（Lead 拍）：纯对账不生成（D4 生成区域机制落地后再议 gen-tsconfig-paths 升级路线）。正向=盘上每个 packages/<g>/<p> 的 manifest.name 必须是 tsconfig.base.emit.json compilerOptions.paths 的键（红文案含包名+期望+实际+「在 tsconfig.base.emit.json 的 paths 补一条」与能直接粘的键值）；反向=paths 键对不上任何包名 ⇒ 悬空红。与 verify-tsconfig-coverage 互补：那格判 references 图（会不会被编译），本格判 paths（跨包模块解析），两半合起来才是「新包接入」的机器对账。语料：包侧复用 scanPackages()（什么算一个包只有一处定义，组目录不参与）；paths 侧 parseJsonc（emit 基座满篇注释，JSON.parse 直接抛，不降级正则）。manifest 坏（JSON 坏/无 name）按红不静默；0 个包 / 基座缺席 / 取不到 typescript ⇒ unjudged(no-corpus|no-binary) 退 2 非绿；基座在但 JSONC 坏 / paths 写成非对象 ⇒ 红（语料坏不是缺语料）。与 ISS-855（值有效性射程：目标文件存在+被真实 import，待裁决）分界已写进文件头。spec 51 断言含必然失败向量（抽一条键立刻红、0 包 unjudged 不当绿）与真实 IO 红绿对照（造包不补 ⇒ 红 → 补 ⇒ 绿 → 悬空 ⇒ 红）。",
+    "cells": []
+  },
+  {
+    "id": "doc-typecheck",
+    "semantics": ["doc-sync"],
+    "spec": "doc-typecheck.spec.ts",
+    "tiers": [
+      "doc",
+      "doc-sync"
+    ],
+    "owner": "lead",
+    "since": "2026-11-20",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "ISS-894 / DOC-516 §四 D2：裁剪移植自 DSH doc-typecheck（927 行全搬过度，本格 ~220 行）。射程=自有 API 示例（根 README + docs 下 md + packages 两层包 md；排除 dsh-wiki / memory / *.zh.md / 生成头注文件）。绝对判据：射程内 ts fence 零 TS 错（专用 tsconfig 的 @matter/* paths 指已构建 lib/types）；0 语料或没构建 ⇒ unjudged（no-corpus / no-build），不冒绿、不判红。无理由 ignore-check ⇒ 红（意图显式），比例只打印不判红。零新依赖：~20 行行扫描器提 fence。spec 5 变异：in-scope 坏 fence 红带文件:行 / 无理由 ignore 红 / 空语料 unjudged / 头注与 dsh-wiki 坏 fence 不红（各带正向对照）。",
+    "cells": []
+  },
+  {
+    "id": "verify-memory-index",
+    "semantics": ["doc-sync"],
+    "spec": "verify-memory-index.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "timeoutMs": 30000,
+    "allowFailure": true,
+    "allowFailureWhy": "老板 2026-11-13 裁决：过程记录类文档不进审查、不走门禁。本格判 docs/memory/ 归档表与实体的对账，属过程记录类 ⇒ 降为只报不红（红照出，用于发现腐化；不拦合入）。AGENTS.md、specs 等机器读契约仍走门禁。",
+    "note": "ISS-766：docs/memory/README.md 归档表 ↔ 磁盘实体双向对账（悬空 + 缺条目）。verify-spec 只扫 docs/*.md 单层、doc-budgets 不含 memory/README，两个方向此前都无人判。封存目录（archive/pool-archive/wt-salvage-*/triage-*/evidence-*/attachments/patches）与 README 自身不要求索引。",
+    "cells": []
+  },
+  {
+    "id": "verify-exemption-register",
+    "semantics": ["contracts"],
+    "spec": "verify-exemption-register.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-13",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-814：全库 171 条门禁豁免 / 0 条有到期日 ⇒ 门禁的绿是一张允许清单。本单只做两件事：① 新增豁免必须带 expires（某文件无 expires 条数 > grandfathered 上限 ⇒ 红）② grandfathered 只减不增（与 git show HEAD 的旧上限比，调高 ⇒ 红）。ticket 必填 / 过期即红 / 理由质量 三件后续单补。【ISS-891 补注·真实职责+为何留】本格守的是「豁免清单不得静默扩张」——新增豁免必须带 expires、grandfathered 上限只减不增；留它是因为门禁的绿本质是允许清单，撤掉即豁免可无限增长而无人判红。名字准确，不改 id。",
+    "cells": []
+  },
+  {
+    "id": "web-crash-evidence",
+    "kind": "legacy",
+    "script": "scripts/web-crash-evidence.sh",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "web-crash-evidence-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "selftest",
+        "label": "崩溃取证接线（ISS-587）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scan-input",
+    "kind": "legacy",
+    "script": "scripts/scan-input.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "scan-input-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "扫描输入集合 = 已入库文件（ISS-742）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lexical-lib",
+    "kind": "legacy",
+    "script": "scripts/lexical-lib.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "lexical-lib-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "词法取数口径自身（ISS-762 · 注释不算代码 / 只数字符串字面量 / 转义不炸 / codeOnly 保长度保行号）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "caliber-lib",
+    "kind": "legacy",
+    "script": "scripts/caliber-lib.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "caliber-lib-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "两处口径的判据自身（ISS-624 · 13 条（判据本体与用例同模块 scripts/caliber-lib.mjs）：H5a 该免的三种形状免 / 真解析不到·workspace 内 vscode·子路径 vscode/foo·无 engines 声明四条不许免；D5 退役三条件、workspaces 内零消费者不许判退役、豁免非永久后门）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dup-detail-lib",
+    "kind": "legacy",
+    "script": "scripts/dup-detail-lib.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "dup-detail-lib-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "重复明细判据自身（ISS-767 · 8 条：与三条度量同源 + 截断不静默 + 两跑一致）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dead-code-ledger",
+    "kind": "legacy",
+    "script": "scripts/dead-code-ledger.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "dead-code-ledger-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "死码账本判据自身（ISS-767 · 8 条：四轴分桶 + git 缺席不伪装成结论）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ws-allocate.test",
+    "kind": "legacy",
+    "script": "scripts/tests/ws-allocate.test.sh",
+    "owner": "lead",
+    "since": "2026-11-17",
+    "status": "active",
+    "note": "ISS-872（W-1）：建树唯一入口 allocate 的守卫自身。与 ws-bin-mirror.test / ws-lease-selftest 同族（legacy bash + runner=selfcheck）。",
+    "cells": [
+      {
+        "id": "ws-allocate.test-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "selftest",
+        "label": "建树唯一入口 allocate（ISS-872 · 11 例：会话树下建树且非空 / 登记行恰为 kind+path+branch+parent 四字段 / 同号二次被拒不建第二棵且打印归属 / **真并发**两进程同号只成一棵且落败方有话说 / **登记表 CAS 不丢行**（两不同单号并发写两行都在）/ 建树失败回滚占位不留空目录且不动别人的分支 / 登记表坏 JSON 拒绝建树 / 落点已存在不删他人占位。变异实测：去掉 mkdir 占位 ⇒ A4 红；去掉 rm -rf 回滚 ⇒ A5 红；去掉 flock ⇒ A4c 红。⚠️ **去掉 flock 时 A4 仍绿** —— 那棵「不许两棵」是 mkdir 在守，与登记表的锁是两条独立防线，故 A4c 必须单列，否则 CAS 的原子写只是注释里的一句话）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ws-lease-selftest",
+    "kind": "legacy",
+    "script": "scripts/ws-lease-selftest.sh",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "ws-lease-selftest-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "selftest",
+        "label": "租约与归属护栏自身（ISS-583 · 20 场景：空锁可接管 / 未到期在途必须拒 / 读不出全链路 fail-closed（status·claim·release·link·rm）/ merged 只出声不夺权且凭据只认括号内单号 / 持有者三条证据 / rm 的 --force 一次收干净不留半截 / 采集层崩了要判红 / 纯 host 插件不被静默跳过 / 链接写成功却指错也要点名)",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ws-base-guard-selftest",
+    "kind": "legacy",
+    "script": "scripts/ws-base-guard-selftest.sh",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "ws-base-guard-selftest-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "selftest",
+        "label": "工作树 base 落后 + 产物补建判据自身（ISS-734③ / ISS-584 · 7 场景 17 断言，四组变异必红：删守卫块/删缓存树排除/删 fail-closed 标记/删判红块；无 bun 环境自动跳过依赖构建的那两条断言，不假红）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ws-bin-mirror.test",
+    "kind": "legacy",
+    "script": "scripts/tests/ws-bin-mirror.test.sh",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）",
+    "cells": [
+      {
+        "id": "ws-bin-mirror.test-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "selftest",
+        "label": "工作树 .bin 镜像写穿守卫自身（ISS-504 · 6 例：老式软链迁真目录 / 迁移后写不落主检出 / 第三方 bin 仍解析 / dangling_bin_list 干净报空且悬空点得出 / 幂等；变异：把 mirror_bin_dir 改回整目录软链 ⇒ 4 例必红）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "verify-test-wiring",
+    "kind": "legacy",
+    "script": "scripts/gates/verify-test-wiring.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）。⚠️ 它是 `scripts/gates/` 下的 .mjs 判据（不是 .ts 新载体）⇒ 走 legacy 分支；`verify-gate-registry` 的 `.ts` 双向判只看 .ts，不受影响",
+    "cells": [
+      {
+        "id": "verify-test-wiring",
+        "semantics": ["unit"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "测试接线（ISS-710 · scripts/*.test.mjs 每一个都必须被某条执行路径选中，A ⊄ B 即点名判红；豁免须带非空理由且双向失效检测）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "verify-test-wiring-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "测试接线判据自身（ISS-710 · 19 条正反例：漏接必红 / 注释·echo·只 set-- 都不算接线 / 分母为 0 判红 / 空理由豁免不算豁免 / 化石与幽灵双向）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "verify-repo-not-bare",
+    "kind": "legacy",
+    "script": "scripts/gates/verify-repo-not-bare.mjs",
+    "owner": "lead",
+    "since": "2026-11-13",
+    "status": "active",
+    "note": "ISS-797：主 checkout 两度（11-11 20:55 / 11-12 23:45）被写坏 core.bare 而无一判据发现；本格只管「改坏了能否被发现」，不查诱因",
+    "cells": [
+      {
+        "id": "verify-repo-not-bare",
+        "semantics": ["hygiene"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "没有 checkout 是 bare、无已暂存误删（ISS-797 · 逐个 checkout 跑 rev-parse --is-bare-repository；B1 扫主仓+全部工作树，B2 只扫当前 checkout；判不了给 2 不给绿）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "verify-repo-not-bare-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "bare 判据自身（ISS-797 · 17 例真造仓库：正常 / bare=true / 暂存误删 / 非误删 / 非 git / 路径不存在 / 主仓+3工作树 / 主仓坏站好树里 / B2 射程两条 / --json 形状 / B2 豁免 6 例（有登记 / 无登记 / 清单坏 / 清单缺 / 缺 issue / 登记但没删））",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "verify-hooks-installed",
+    "kind": "legacy",
+    "script": "scripts/gates/verify-hooks-installed.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-746 试点 · F5 守卫自身）。⚠️ 同 verify-test-wiring：.mjs 判据走 legacy 分支",
+    "cells": [
+      {
+        "id": "verify-hooks-installed",
+        "semantics": ["hygiene"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "钩子已装（ISS-718 · core.hooksPath 解析后指向 scripts/git-hooks · 四个钩子齐全且可执行；判不了判红不判绿）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "verify-hooks-installed-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "钩子已装判据自身（ISS-718 · 8 条正反例：绝对路径也算装 / 未设置 / 指向 husky / 缺文件 / 缺执行位 / 不在仓库 / 目录不存在）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "host-typecheck-ratchet",
+    "kind": "legacy",
+    "script": "scripts/host-typecheck-ratchet.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）\n\n【已退役 2026-11-18 · ISS-887】DOC-518 步3 批量退役：旧树已冻结、无新增债可防，形式化棘轮对新树无意义（新树类型/规模由 tsc -b 等替代判据承担）。按 ISS-853 四步法 status→deprecated，tiers 与脚本/spec 保留在盘（删盘上文件会触发 verify-gate-registry 悬空检查）。 另：build-index-credential-selftest.after 对本条的硬依赖已同 diff 删除。",
+    "cells": [
+      {
+        "id": "host-typecheck-ratchet",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "类型棘轮三族（ISS-706 host / ISS-763 client / ISS-764 壳 · 只许降不许升）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "host-typecheck-ratchet-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "棘轮自身（三族各有注入/还原/缺记录/超上限 + 纳管面缩小；ISS-764 起断言按**增量**写）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "route-alias-check",
+    "kind": "legacy",
+    "script": "scripts/route-alias-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "route-alias-check-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "别名登记表判据自身（ISS-715 · 化石/漏登/漂移/形状四条红路径）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "route-alias-check",
+        "semantics": ["contracts"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "别名登记表与事实一致（ISS-715 · 同半区与跨包两条名单都要登记且消费方对得上）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "k6a-screen",
+    "kind": "legacy",
+    "script": "scripts/k6a-screen.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "k6a-screen-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "K6a 点名判据自身（ISS-739 · 八条用例：闭包/半区/递归自名/单行箭头/变异各有判别力）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "k6a-screen",
+        "semantics": ["contracts"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "K6a 点名清单与 D2 同源且可复算（ISS-739 · 站点定位不到 = dup-detail 过期）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "canvas-style-check",
+    "kind": "legacy",
+    "script": "scripts/canvas-style-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "canvas-style-check-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "画布样式门禁自身（ISS-939 · 正反控制齐：抄表四形/注释豁免/未判三态/拒判不 fail-open，禁恒绿；条数以脚本自己打印为准）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "canvas-style-check-fixture",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--fixture",
+        "label": "画布样式门禁正样本（ISS-939 · fixture 红 = 判据坏，不许关）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "data-root-check",
+    "kind": "legacy",
+    "script": "scripts/data-root-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "data-root-check-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "数据根取法守卫自身（ISS-938 · A/B 两类 + 注释不算违例 + 例外在 fixture 上生效 + 化石检测，禁恒绿）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "data-root-check",
+        "semantics": ["static"],
+        "runner": "livecheck",
+        "arg": "--check",
+        "label": "数据根只留一份取法（新增手写 DSH_HOME 回落 / homedir 字面量即红；存量见 scripts/baseline/data-root.json）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "prism-lang-guard",
+    "kind": "legacy",
+    "script": "scripts/prism-lang-guard.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "prism-lang-guard",
+        "semantics": ["static"],
+        "runner": "livecheck",
+        "arg": "--check",
+        "label": "Prism 语言集与语料一致（ISS-603 · 语料在用的语言必须都被补上）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "prism-lang-guard-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "Prism 语言集判据自身（ISS-603 · 期望集口径双向验证：语料在用的列入、code-prism 自带/mermaid/无包语言不列入 + 语料不存在判「不判」）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secret-scan-guard",
+    "kind": "legacy",
+    "script": "scripts/secret-scan.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）。⚠️ 条目 id 加 `-guard` 后缀：`secret-scan` 这个 id 已被 STANDALONE_GATES 的全树扫描格占用（那个跑 --worktree，本条目只登记它的自检格）",
+    "cells": [
+      {
+        "id": "secret-scan",
+        "runner": "check",
+        "arg": "--worktree",
+        "label": "明文密钥扫描（已入库文件 · ISS-354/812）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "semantics": ["hygiene"]
+      },
+      {
+        "id": "secret-scan-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "明文密钥扫描判据自身（ISS-812 · 六类假密钥能抓 + 模式文件不自匹配 + 两个假阳性方向不误伤）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "search-index-reconcile",
+    "kind": "legacy",
+    "script": "scripts/search-index-reconcile.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "search-index-reconcile-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "全文索引对账判据自身（ISS-788/806 · 两侧同空/条数相互抵消/entity LIKE 恒 0 三根假牙都抓得到）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "search-index-reconcile",
+        "semantics": ["contracts"],
+        "runner": "livecheck",
+        "arg": "--check",
+        "label": "全文索引与域声明一致（ISS-788）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "stale-client-bundle-guard",
+    "kind": "legacy",
+    "script": "scripts/stale-client-bundle.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）。⚠️ 条目 id 加 `-guard` 后缀：`stale-client-bundle` 这个 id 已被 INLINE_GATES 的内联格占用（那个是全量档只报不红，本条目只登记它的自检格）",
+    "cells": [
+      {
+        "id": "stale-client-bundle",
+        "runner": "check",
+        "arg": "",
+        "label": "client 产物落后源码（ISS-756 · 只报不红）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "allowFailure": true,
+        "allowFailureWhy": "guard-baselines.sh 对该格只出声不进 fail（amend/rebase 刷 mtime 会造假红）",
+        "semantics": ["artifacts"]
+      },
+      {
+        "id": "stale-client-bundle-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "client 产物落后判据自身（ISS-756 · 含「整树无产物 = 不适用」与工作树豁免两条）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "watch-home-links",
+    "kind": "legacy",
+    "script": "scripts/watch-home-links.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "watch-home-links-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "软链观测器自身（ISS-699 · 正反例：路径归一 / 自造临时 home 上探针有效 / 部分失明判不 observable / 无软链跳过不报红）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "test-env-restore-guard",
+    "kind": "legacy",
+    "script": "scripts/test-env-restore-guard.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "test-env-restore-guard-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "测试 env 恢复守卫自身（ISS-633 · 裸三段与模板内裸三段必红、模板内给 FORGE_PM_ROOT 赋值不误伤、分母非零）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "review-range",
+    "kind": "legacy",
+    "script": "scripts/review-range.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh（ISS-748 · F4 度量/棘轮）",
+    "cells": [
+      {
+        "id": "review-range-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "审查区间口径（ISS-602 · 三点=diff / 两点=commit，混用会静默污染审查面；交接完整性门：清单条数必须 == N）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "link-health",
+    "kind": "legacy",
+    "script": "forge-pm/scripts/link-health.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:581 与 582（ISS-750 · F3 结构/装配）",
+    "cells": [
+      {
+        "id": "link-health",
+        "semantics": ["doc-sync"],
+        "runner": "livecheck",
+        "arg": "",
+        "label": "链接健康三清单（ISS-646 · 只报不红）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "link-health-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "链接健康判据自身（ISS-646 · 三清单正例 + 空库/全连通两支负例 + canonRef 生效）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "assembly-check-guard",
+    "kind": "legacy",
+    "script": "scripts/assembly-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:426（ISS-750 · F3 结构/装配）。⚠️ 条目 id 加 `-guard` 后缀：`assembly-check` 这个 id 已被别的来源的同名格占用（`guard-baselines.sh 内联`），本条目只登记它的自检格",
+    "cells": [
+      {
+        "id": "assembly-check",
+        "runner": "check",
+        "arg": "--check",
+        "label": "装配一致性：声明 / 软链 / 自带 patch 三方对齐（ISS-707）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["contracts"]
+      },
+      {
+        "id": "assembly-check-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "装配一致性体检自身（ISS-707）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "assembly-diff-check",
+    "kind": "legacy",
+    "script": "scripts/assembly-diff-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:617 与 618（ISS-750 · F3 结构/装配）",
+    "cells": [
+      {
+        "id": "assembly-diff-check-selftest",
+        "semantics": ["selftest"],
+        "runner": "livecheck",
+        "arg": "--selftest",
+        "label": "装配对账自检（生产精简白名单 · 多挂须登记理由 · 化石即红）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "assembly-diff-check",
+        "semantics": ["contracts"],
+        "runner": "livecheck",
+        "arg": "",
+        "label": "装配现算与登记表一致（挂载数一天变三次 ⇒ 只能现算，别抄）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "assembly-mounts-lib",
+    "kind": "legacy",
+    "script": "scripts/assembly-mounts-lib.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:614（ISS-750 · F3 结构/装配）",
+    "cells": [
+      {
+        "id": "assembly-mounts-lib-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "装配挂载解析判据自身（ISS-651 · 该算的算 / 不该算的不算 / 读不到要出声）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "check-host-dist-fresh",
+    "kind": "legacy",
+    "script": "scripts/check-host-dist-fresh.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:780（ISS-750 · F3 结构/装配）",
+    "cells": [
+      {
+        "id": "check-host-dist-fresh",
+        "semantics": ["artifacts"],
+        "runner": "livecheck",
+        "arg": "",
+        "label": "宿主产物新鲜（ISS-610 · lib/** 最新 mtime ≤ dist/host.js；11 个包逐条比对，过期即红；无 dist 自报不判）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "no-new-tailwind",
+    "kind": "legacy",
+    "script": "scripts/no-new-tailwind.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "note": "迁移自 scripts/guard-baselines.sh:621 与 627（ISS-750 · F3 结构/装配）\n\n【已退役 2026-11-18 · ISS-887】DOC-518 步3 批量退役：旧树已冻结、无新增债可防，形式化棘轮对新树无意义（新树类型/规模由 tsc -b 等替代判据承担）。按 ISS-853 四步法 status→deprecated，tiers 与脚本/spec 保留在盘（删盘上文件会触发 verify-gate-registry 悬空检查）。",
+    "cells": [
+      {
+        "id": "no-new-tailwind-selftest",
+        "semantics": ["selftest"],
+        "runner": "livecheck",
+        "arg": "--selftest",
+        "label": "Tailwind 门禁自检（名单外新文件即红 · 计数回升即红 · 没扫到说不判）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "no-new-tailwind",
+        "semantics": ["static"],
+        "runner": "livecheck",
+        "arg": "",
+        "baseline": "scripts/baseline/tailwind-files.json",
+        "label": "Tailwind 工具类零新增（老板裁「甲 + 新代码零容忍」的后半句）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ui-load-contract",
+    "kind": "legacy",
+    "script": "scripts/ui-load-contract.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:609 与 610（ISS-750 · F3 结构/装配）",
+    "cells": [
+      {
+        "id": "ui-load-contract-selftest",
+        "semantics": ["selftest"],
+        "runner": "livecheck",
+        "arg": "--selftest",
+        "label": "UI 挂载契约自检（消费者/提供者上电一致 · 退役服务无提供点）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "ui-load-contract",
+        "semantics": ["contracts"],
+        "runner": "livecheck",
+        "arg": "",
+        "label": "UI 挂载契约真数据（ISS-569 那类「一侧面板全空」要能提前报）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "migration-baseline",
+    "kind": "legacy",
+    "script": "scripts/migration-baseline.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:280 与 418（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/B 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "migration-baseline",
+        "semantics": ["snapshot"],
+        "runner": "check",
+        "arg": "--check",
+        "classify": true,
+        "label": "迁移基线（ISS-570）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "migration-baseline-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "迁移基线守卫（ISS-587）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pm-v2-baseline",
+    "kind": "legacy",
+    "script": "scripts/pm-v2-baseline.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:281（ISS-752 · F2 基线/审计）。⚠️ triage 判定 B 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "pm-v2-baseline",
+        "semantics": ["snapshot"],
+        "runner": "check",
+        "arg": "--check",
+        "label": "PM v2 基线（ISS-583）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "md-corpus-guard",
+    "kind": "legacy",
+    "script": "scripts/md-corpus-guard.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:284 与 511（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/B 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "md-corpus-guard",
+        "semantics": ["doc-sync"],
+        "runner": "check",
+        "arg": "--check",
+        "label": "语料格式冻结（ISS-850/L3-4a · 幂等 / 对象数组可解析 / 第二风格禁入 / 风险行棘轮）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "md-corpus-guard-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "语料守卫判据自身（ISS-850/L3-4a · 四条判据各有「该红/不该红」两侧 + REV-016 白名单反向控制 + 刷基线不许吸收新遗产 + 判据4 带引号值不计 + 地板：空根/根不存在 ⇒ 不判且 exit 3）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "audit-doc-sync",
+    "kind": "legacy",
+    "script": "scripts/audit-doc-sync.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:470 与 471（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/C 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "audit-doc-sync-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "审计稿↔基线同源判据自身（ISS-753 · 九条用例含三条红路径）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "audit-doc-sync",
+        "semantics": ["snapshot", "doc-sync"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "审计稿与基线同源（ISS-753 · 复录漏产即红：--baseline-save 曾把 --write-audit 静默跳掉）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "audit-freshness",
+    "kind": "legacy",
+    "script": "scripts/audit-freshness.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:477 与 478（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/B 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "audit-freshness-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "审计稿新鲜度判据自身（ISS-563 · 十五条用例：文档↔基线两支 + 基线↔现仓两支 + 基线↔自己的边表（D5）四支 + 不判与只读生成块；D5 那条判据正反控制齐）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "audit-freshness",
+        "semantics": ["snapshot"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "审计稿 headline 与基线一致、基线对得上现仓、D5 对得上基线自己的边表（ISS-563 · 包数/文件数漂移即红；B7/H5a 等环境量不参与；D5 的「基线↔现仓」新鲜度不判，见脚本头）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "code-inventory",
+    "kind": "legacy",
+    "script": "scripts/code-inventory.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:464 与 466 与 548（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/B/D 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "code-inventory-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "盘点器死码打标自身（ISS-732 三个 + ISS-723 第 4 批两个消费通道标记 · 五个各有判别力）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "code-inventory-selftest-routes",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest-routes",
+        "label": "路由明细判据自身（ISS-767 · 24 条：半区/注释/转义/isDocLine 两侧用例）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "code-inventory",
+        "semantics": ["snapshot"],
+        "runner": "report_only",
+        "arg": "--compare",
+        "label": "代码盘点基线对照（ISS-701 · 只报计数漂移）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "component-map",
+    "kind": "legacy",
+    "script": "scripts/component-map.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:429 与 430（ISS-752 · F2 基线/审计）。⚠️ triage 判定 C 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "component-map-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "组件清单生成器自身（ISS-944 · 派生自盘点器，八条牙含零实现与空表两支）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "component-map",
+        "semantics": ["snapshot"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "组件清单与基线一致（ISS-944 · 漂移即红：出码用的 component_map 不许过期静默错）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "delivery-integrity",
+    "kind": "legacy",
+    "script": "scripts/delivery-integrity.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:484 与 571（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/D 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "delivery-integrity-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "交付完整性判据自身（ISS-696/775 · A/B 两象限各有牙 + 三种「不该报」的形态不报）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "delivery-integrity",
+        "semantics": ["hygiene"],
+        "runner": "report_only",
+        "arg": "--compare",
+        "label": "交付完整性对照（ISS-696/775 · 只报不判）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "deps-hygiene",
+    "kind": "legacy",
+    "script": "scripts/deps-hygiene.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:487 与 573（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/B 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "deps-hygiene-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "依赖卫生判据自身（ISS-777 · 正向不误判 + 反向抓得到 + @source 与清单 json 两档不混）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "deps-hygiene",
+        "semantics": ["static"],
+        "runner": "report_only",
+        "arg": "--compare",
+        "label": "依赖卫生对照（ISS-884 · dependencies 未豁免未用依赖=0 绝对判据，射程含 packages/*/*；旧树具名豁免仍具名保留）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "design-component-inventory",
+    "kind": "legacy",
+    "script": "scripts/design-component-inventory.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:551（ISS-752 · F2 基线/审计）。⚠️ triage 判定 D 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "design-component-inventory",
+        "semantics": ["snapshot"],
+        "runner": "report_only",
+        "arg": "--compare",
+        "label": "设计侧组件基线对照（ISS-694 §M6 · 只报件数与清单漂移）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "format-debt",
+    "kind": "legacy",
+    "script": "scripts/format-debt.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:489 与 587（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/B 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单。ISS-890 甲案：射程收窄到 packages/*/*（旧树 forge-* 与 scripts 判据不扫），六项零容忍（ceiling 恒 0、违例必须=0，抬数字消不掉红），不引 formatter 依赖（ISS-726 已否决 Biome）",
+    "cells": [
+      {
+        "id": "format-debt-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "风格债判据自身（ISS-726 乙 · 六项能红能绿、缺输入不蒙混 · ISS-890 加射程与零容忍档）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "format-debt",
+        "semantics": ["static"],
+        "runner": "report_only",
+        "arg": "--compare",
+        "label": "风格债六项对照（ISS-726 乙 · 只检查不改 · ISS-890 新树 packages/*/* 零容忍、任一违例即红、无 formatter 依赖）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "install-shape",
+    "kind": "legacy",
+    "script": "scripts/install-shape.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:491 与 595（ISS-752 · F2 基线/审计）。⚠️ triage 判定 A/B 类（docs/gates-triage.md §2），迁的是「谁来跑它」，口径问题另立单",
+    "cells": [
+      {
+        "id": "install-shape-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "安装形状判据自身（ISS-791 · 真目录与断链抓得到、软链不误判、缺输入不蒙混）",
+        "tiers": [
+          "full",
+          "ci"
+        ]
+      },
+      {
+        "id": "install-shape",
+        "semantics": ["hygiene"],
+        "runner": "report_only",
+        "arg": "--compare",
+        "label": "安装形状对照（ISS-791/1900 · 新增断链/真目录即红 · 指向仓外只报不红）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "preset-var-check",
+    "kind": "legacy",
+    "script": "scripts/preset-var-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:638 与 639（ISS-753 · F6 预设变量）",
+    "cells": [
+      {
+        "id": "preset-var-check-selftest",
+        "semantics": ["selftest"],
+        "runner": "livecheck",
+        "arg": "--selftest",
+        "label": "预设变量判据自身（ISS-615 · 正反控制齐：该红该绿、注释不误伤、畸形两条、三条「不判不许冒充绿」、反向控制「注册点删掉必须变红」）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "preset-var-check",
+        "semantics": ["contracts"],
+        "runner": "livecheck",
+        "arg": "",
+        "label": "预设人设变量在引擎注册表内（ISS-615 · {{…}} 未注册/畸形即红；home 或引擎树读不到时自己说「不判」）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-criteria-teeth",
+    "kind": "legacy",
+    "script": "scripts/gates/lint-criteria-teeth.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:458 与 459（ISS-754 · F1 代码/文档规则 lint）",
+    "cells": [
+      {
+        "id": "lint-criteria-teeth-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "判据有牙率门禁自身（ISS-729 反向验证：摘登记变红/路径变异变红/恢复变绿/report 变红/号搬进注释变红/一号两主变红/漏条目变红；ISS-794 加卡片源与 R5 映射）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-criteria-teeth",
+        "semantics": ["contracts"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "K8a 判据有牙率（ISS-729 · code.md 75 条 K 判据 ↔ 台账 1:1，有牙 56 / 不补 19 / 落空 0；ISS-794 影子期 --source=cards 同读数）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-jscpd",
+    "kind": "legacy",
+    "script": "scripts/gates/lint-jscpd.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:756 与 757（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-jscpd（docs/gates-triage.md §2 · 射程/口径有坑）；工业标准件包装（头注自述与 K 号 / code-inventory 度量射程重叠，非重复造轮子；口径问题另立单）",
+    "cells": [
+      {
+        "id": "lint-jscpd",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "jscpd 重复度棘轮（ISS-717 · 重复行与克隆对只许降；改基线须带理由）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-jscpd-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "jscpd 判据自身（ISS-717 · 23 条正反例：恒绿检测 / 恒红检测 / 判不了不当绿 / --write 保治理字段 / J3 空理由必红）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-boot-log",
+    "kind": "legacy",
+    "script": "scripts/lint-boot-log.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:646 与 647（ISS-754 · F1 代码/文档规则 lint）",
+    "cells": [
+      {
+        "id": "lint-boot-log-selftest",
+        "semantics": ["selftest"],
+        "runner": "livecheck",
+        "arg": "--selftest",
+        "label": "启动日志自检自身（能咬 failed to import / 未激活 / bundle 跳过；旧启动的失败不报）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-boot-log",
+        "semantics": ["hygiene"],
+        "runner": "livecheck",
+        "arg": "",
+        "label": "最近一次启动无静默失败（failed to import · did not activate · skipping bundle）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-capability-contract",
+    "kind": "legacy",
+    "script": "scripts/lint-capability-contract.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:509 与 510（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-capability-contract（docs/gates-triage.md §2 · 射程/口径有坑）",
+    "cells": [
+      {
+        "id": "lint-capability-contract-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "能力契约门禁自身（ISS-681 · C1 声明 image 却发不出图 / C2 inputModalities 缺字段 都能红能绿；unjudged 不冒充绿；C0 登记表外的新适配器包被点名；剥注释不误伤 URL）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-capability-contract",
+        "semantics": ["contracts"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "模型能力声明与实际出站一致（ISS-681 · 只拦新增）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-channel-contract",
+    "kind": "legacy",
+    "script": "scripts/lint-channel-contract.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:504 与 505（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-channel-contract-selftest/lint-channel-contract（docs/gates-triage.md §2 · 射程/口径有坑）",
+    "cells": [
+      {
+        "id": "lint-channel-contract-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "活推送契约门禁自身（ISS-724 · CC1 游标 / CC2 重拉 能红、透传不误伤）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-channel-contract",
+        "semantics": ["contracts"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "SSE 广播通道的游标与对账口（ISS-724 · docs/code.md §10）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-code",
+    "kind": "legacy",
+    "script": "scripts/lint-code.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "note": "迁移自 scripts/guard-baselines.sh:453 与 454（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-code（docs/gates-triage.md §2 · 射程/口径有坑）\n\n【已退役 2026-11-18 · ISS-887】DOC-518 步3 批量退役：旧树已冻结、无新增债可防，形式化棘轮对新树无意义（新树类型/规模由 tsc -b 等替代判据承担）。按 ISS-853 四步法 status→deprecated，tiers 与脚本/spec 保留在盘（删盘上文件会触发 verify-gate-registry 悬空检查）。",
+    "cells": [
+      {
+        "id": "lint-code-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "代码规范门禁自身（ISS-722）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-code",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "代码规范 K 号门禁（ISS-722 · 白名单必须带理由，棘轮只许降）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-common",
+    "kind": "legacy",
+    "script": "scripts/lint-common.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "note": "迁移自 scripts/guard-baselines.sh:422（ISS-754 · F1 代码/文档规则 lint）\n\n【已退役 2026-11-18 · ISS-887】只退 registry 中本 selftest 格；脚本 scripts/lint-common.mjs 必须留盘——反向依赖 5 个，其中 lint-design.mjs、lint-layer.mjs 随本批退役，仍有 3 个不退 importer（verify-test-wiring / lint-log-outlet / lint-writer-uniqueness）会碎。",
+    "cells": [
+      {
+        "id": "lint-common-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "门禁骨架 lint-common（ISS-700）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-cross-pkg-events",
+    "kind": "legacy",
+    "script": "scripts/lint-cross-pkg-events.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:462 与 463（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-cross-pkg-events（docs/gates-triage.md §2 · 射程/口径有坑）",
+    "cells": [
+      {
+        "id": "lint-cross-pkg-events-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "跨包 window 事件判据自身（ISS-571 · 成对绿/只剩派发红/只剩监听红/白名单带理由绿/空理由红/未解析单列 + 「只看派发」「白名单不校验理由」两处变异必须变红 + 名字解析四形各有用例）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-cross-pkg-events",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "跨包 window 事件两端齐全（ISS-571 · 命名空间事件与打过 CustomEvent 的名字，单方即红；白名单必须带理由；未解析不静默）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-layer",
+    "kind": "legacy",
+    "script": "scripts/lint-layer.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "note": "迁移自 scripts/guard-baselines.sh:653 与 654（ISS-754 · F1 代码/文档规则 lint）\n\n【已退役 2026-11-18 · ISS-887】DOC-518 步3 批量退役：旧树已冻结、无新增债可防，形式化棘轮对新树无意义（新树类型/规模由 tsc -b 等替代判据承担）。按 ISS-853 四步法 status→deprecated，tiers 与脚本/spec 保留在盘（删盘上文件会触发 verify-gate-registry 悬空检查）。 本条为旧树 lint-layer（非已退役的 lint-layer-new，勿混）；方向判据按重构总规划 §5.4 不设（L0–L4 已废）。",
+    "cells": [
+      {
+        "id": "lint-layer",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "分层契约门禁（ISS-697 · 依赖只能向下，子路径守卫 / 同层横向 / 判不了也判红 / 层表登记的包必须真实存在（键=包名）；只压新增）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-layer-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "分层契约门禁自身（ISS-697 · 26 条正反例：AST 取数 / 注释与守卫字符串不误伤 / 子路径洗白能拦 / 层表幽灵正反例（含目录名≠包名）/ 规则接线可测 / 豁免生效与失效双向）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-log-outlet",
+    "kind": "legacy",
+    "script": "scripts/lint-log-outlet.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:446 与 447（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-log-outlet（docs/gates-triage.md §2 · 射程/口径有坑）",
+    "cells": [
+      {
+        "id": "lint-log-outlet-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "日志出口棘轮自身（ISS-719）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-log-outlet",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "日志出口与错误 kind（ISS-719 · 只压新增 console·裸 throw·ctx.logger 直调）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-scripts",
+    "kind": "legacy",
+    "script": "scripts/lint-scripts.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:420 与 421（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-scripts（docs/gates-triage.md §2 · 射程/口径有坑）",
+    "cells": [
+      {
+        "id": "lint-scripts",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "脚本红线（ISS-587）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-scripts-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "脚本红线门禁自身（ISS-587）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-tool-contract",
+    "kind": "legacy",
+    "script": "scripts/lint-tool-contract.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "deprecated",
+    "note": "迁移自 scripts/guard-baselines.sh:502 与 503（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 lint-tool-contract（docs/gates-triage.md §2 · 射程/口径有坑）\n\n【已退役 2026-11-18 · ISS-887】DOC-518 步3 批量退役：旧树已冻结、无新增债可防，形式化棘轮对新树无意义（新树类型/规模由 tsc -b 等替代判据承担）。按 ISS-853 四步法 status→deprecated，tiers 与脚本/spec 保留在盘（删盘上文件会触发 verify-gate-registry 悬空检查）。 TC2（hooks 数量恒定）随本条一起退（整条 entry deprecated，TC1/TC2 两 cell 一并退出派生）。",
+    "cells": [
+      {
+        "id": "lint-tool-contract-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "客户端渲染契约门禁自身（ISS-736 · TC1 五类分支能红、回调不误伤）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-tool-contract",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "React hooks 数量恒定（ISS-736 · TC1 棘轮，只拦新增）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "lint-writer-uniqueness",
+    "kind": "legacy",
+    "script": "scripts/lint-writer-uniqueness.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:658 与 659（ISS-754 · F1 代码/文档规则 lint）",
+    "cells": [
+      {
+        "id": "lint-writer-uniqueness",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "唯一写者门禁（ISS-698 · App proxyBase / dev 不回指 / bundles 非空 / 配置齐全读得动）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-writer-uniqueness-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "唯一写者门禁自身（ISS-698 · 9 条正反例：注释不误伤 / 判不了不当绿 / 读不动也判红）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "md-mermaid-lint",
+    "kind": "legacy",
+    "script": "scripts/md-mermaid-lint.mjs",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:444 与 445（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 md-mermaid-lint（docs/gates-triage.md §2 · 射程/口径有坑）",
+    "cells": [
+      {
+        "id": "md-mermaid-lint-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "mermaid 结构校验自身（ISS-935 · 六条正反控制，禁恒绿）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "md-mermaid-lint",
+        "semantics": ["doc-sync"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "文档里的 mermaid 块结构（ISS-935 · 只管配平，不做渲染校验）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "shell-utf8-var-guard",
+    "kind": "legacy",
+    "script": "scripts/shell-utf8-var-guard.sh",
+    "owner": "lead",
+    "since": "2026-11-09",
+    "status": "active",
+    "note": "迁移自 scripts/guard-baselines.sh:451 与 452（ISS-754 · F1 代码/文档规则 lint）。⚠️ triage 判定 B 类 shell-utf8-var-guard（docs/gates-triage.md §2 · 射程/口径有坑）",
+    "cells": [
+      {
+        "id": "shell-utf8-var-guard-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "shell 全角标点紧邻变量判据自身（ISS-655 · 红样本判红 + 绿样本判绿 + heredoc 内容不判）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "shell-utf8-var-guard",
+        "semantics": ["static"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "shell 里 \\$var 紧跟全角标点（ISS-655 · set -u 下必报 unbound variable；正解 \\${var}）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "verify-gate-coverage",
+    "semantics": ["contracts"],
+    "spec": "verify-gate-coverage.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-13",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "ISS-812：registry 声明 ↔ 实际调度格双向对账（① 声明了没派生 ② 实际有但无归属 ③ 基线自身说谎 ④ 派生物指向不存在的脚本 ⑤ 格数棘轮 ⑥ 入口存在性——防 export class 库被登记成格后 EXIT=0 的假绿，ISS-824）。恢复 ISS-800 删掉 --verify-coverage 后失去的元判据。硬编码格必须登记在 scripts/gates/gate-coverage-allowlist.json——收拢 ISS-B 时每迁一格删一条，迁完清单为空即收口。【ISS-891 补注·真实职责+为何留】本格是元判据，双向对账 registry 声明与实际调度格（漏派生 / 野格 / 基线说谎 / 派生物指向不存在脚本 / 格数只许减 / 入口存在性）；留它是因为「新增硬编码格不被发现」本身就是一类静默回归，撤掉即无人守。名字准确，不改 id。",
+    "neverAllowFailure": true,
+    "neverAllowFailureWhy": "它是元判据：免了等于让「新增硬编码格不会被发现」这件事重新变成无人守，与本单目的直接相反",
+    "cells": []
+  },
+  {
+    "id": "lint-caliber-drift",
+    "kind": "legacy",
+    "script": "scripts/gates/lint-caliber-drift.mjs",
+    "owner": "lead",
+    "since": "2026-11-10",
+    "status": "active",
+    "note": "ISS-795：度量口径漂移判据。只抽 code-inventory.mjs 里决定口径的 8 个常量算指纹（不扫整份文件、不看 git 历史）；变了必须同批动 code-gates.json 的 ceiling 并在 ratchetNotes 写明。抽取失败判红，基线缺失判不了。【ISS-891 补注·真实职责+为何留】本格抽 code-inventory.mjs 的 8 个口径常量算指纹，防度量口径悄悄漂移（指纹变了必须同批改 code-gates.json 的 ceiling 并写明理由）；留它是因为覆盖率等数字的可信度全靠口径稳定，撤掉即数字可在无人察觉下换算法。名字准确，不改 id。",
+    "cells": [
+      {
+        "id": "lint-caliber-drift-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "度量口径漂移判据自身（ISS-795 · 四格反向验证：改 SHINGLE 必红并点名 / --write 承认后绿 / 常量改名必红（载体缺失）/ 基线缺失判不了）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "lint-caliber-drift",
+        "semantics": ["snapshot"],
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "度量口径与 code-inventory.mjs 一致（ISS-795 · 8 个口径常量指纹；变了必须同批动 code-gates.json 的 ceiling）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "verify-freeze",
+    "kind": "legacy",
+    "script": "scripts/gates/verify-freeze.mjs",
+    "owner": "lead",
+    "since": "2026-11-12",
+    "status": "active",
+    "note": "ISS-798 / playbook S0-5：旧树冻结门禁。判据 = 冻结路径 git diff numstat added==0，纯注释/纯删除豁免。口径同 guard-baselines check()：0 绿 / 1 红 / 3 判不了。",
+    "cells": [
+      {
+        "id": "verify-freeze",
+        "semantics": ["hygiene"],
+        "runner": "livecheck",
+        "arg": "--check",
+        "label": "冻结门禁（旧树只读）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "classify": false
+      },
+      {
+        "id": "verify-freeze-selftest",
+        "semantics": ["selftest"],
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "冻结门禁自身（三态自检）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "classify": false
+      }
+    ]
+  },
+  {
+    "id": "verify-cordis-config",
+    "semantics": ["static"],
+    "spec": "verify-cordis-config.spec.ts",
+    "tiers": [
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "ISS-819 移植官方 DSH 判据：校验 cordis.patch.yml 的 metadata 字段合法性（!!js 只许出现在 config/disabled），加 exports[\"./client\"] 与 dsh.client 必须同现。",
+    "cells": []
+  },
+  {
+    "id": "publint-all",
+    "spec": "publint-all.spec.ts",
+    "tiers": [
+      "full"
+    ],
+    "semantics": ["artifacts"],
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "ISS-822 移植官方：检查 25 个包的发布物合法性（exports/main/types 指向的文件是否真在 npm 发布视图里）。实测 11 条 error / 4 个包，已报 ISS-827 待修 —— 本判据随红，不为了变绿改 package.json。不进 fast：存量红不该拦别人合入。整树未构建时退 unjudged(no-build)（dist/ 不入库）。",
+    "cells": []
+  },
+  {
+    "id": "project-code-rules-size",
+    "kind": "legacy",
+    "script": "scripts/gates/project-code-rules-size.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 inline-gates.mjs 的 custom() 闭包外化成真实脚本：registry 只有 spec/legacy 两种 kind，没有脚本就没有登记位 ⇒ 它曾永久占白名单一格。上限 27,000 B 是判据本体，脚本里不可调（机构形态见脚本 --selftest）。",
+    "cells": [
+      {
+        "id": "project-code-rules-size",
+        "runner": "check",
+        "arg": "--check",
+        "label": "纪律层篇幅（ISS-725 · docs/project-code-rules.md 上限 27,000 B）",
+        "tiers": [
+          "full"
+        ],
+        "semantics": ["doc-sync"]
+      }
+    ]
+  },
+  {
+    "id": "lint-mutation-tests",
+    "kind": "legacy",
+    "script": "scripts/gates/lint-mutation-tests.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 inline-gates.mjs 外化。⚠️ 外化时保留了两条硬约束：① 必须经 shell 跑（spawnSync(bun,[...glob]) 不展开 glob），那行同时是跑步器与 glob 射程，verify-test-wiring 按行认它；② 用 bunBin() 的绝对路径。见脚本文件头。",
+    "cells": [
+      {
+        "id": "lint-mutation-tests",
+        "runner": "check",
+        "arg": "--check",
+        "label": "端到端变异测试：scripts/*.test.mjs 全量（ISS-701 · 摘规则/降 level 必须变红）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["unit"]
+      }
+    ]
+  },
+  {
+    "id": "client-artifacts",
+    "kind": "legacy",
+    "script": "scripts/gates/client-artifacts.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 的 custom() 闭包外化。三态：齐=绿 / 没 build 过=判不了 / build 过但缺=红（用「没跑」冒充「判据不符」会更坏）。口径与 ci.yml 那条 node -e 断言同源。",
+    "cells": [
+      {
+        "id": "client-artifacts",
+        "runner": "check",
+        "arg": "--check",
+        "label": "客户端产物齐（forge-ui / forge-pm / forge-model 的 dist/client.js 都在）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["artifacts"]
+      }
+    ]
+  },
+  {
+    "id": "check-pm-suite-twice",
+    "kind": "legacy",
+    "script": "scripts/check-pm-suite-twice.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 的 STANDALONE_GATES 收进登记表。runner=livecheck：脚本用 rc=3 表「判不了（bun 起不来）」，rc=2 表真不一致 —— 与 VERDICT.livecheck 的档位同构。",
+    "cells": [
+      {
+        "id": "check-pm-suite-twice",
+        "runner": "livecheck",
+        "arg": "",
+        "unjudgedCodes": [3],
+        "label": "forge-pm 全量套件两遍逐项一致（ISS-660 · 用门实际跑的命令）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["unit"]
+      }
+    ]
+  },
+  {
+    "id": "gate-base-leak",
+    "kind": "legacy",
+    "script": "scripts/gates/gate-base-leak.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。",
+    "cells": [
+      {
+        "id": "gate-base-leak",
+        "runner": "check",
+        "arg": "",
+        "label": "门禁缓存树不泄漏（游离 base 树 ≤ 5 棵 · ISS-726）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "semantics": ["hygiene"]
+      }
+    ]
+  },
+  {
+    "id": "gate-health",
+    "kind": "legacy",
+    "script": "scripts/gate-health.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。只登记 --selftest：--compare 要两份历史快照，那是查进度的动作不是门禁（无参调用只会得到用法并 exit 2）。",
+    "cells": [
+      {
+        "id": "gate-health",
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "门禁健康度判据自身（ISS-647 · 变异必报恶化 / 还原必报 0 变化 / 页面无外链）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["selftest"]
+      }
+    ]
+  },
+  {
+    "id": "git-health",
+    "kind": "legacy",
+    "script": "scripts/git-health-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。allowFailureWhy 原样搬运，未新增豁免。",
+    "cells": [
+      {
+        "id": "git-health",
+        "runner": "check",
+        "arg": "",
+        "label": "交付链体检（带号率 / 未提交 / 僵尸分支 · ISS-282）",
+        "tiers": [
+          "full"
+        ],
+        "allowFailure": true,
+        "allowFailureWhy": "它读的是「本机 checkout 的现状」（未提交文件 / 分支），与代码对不对无关；WARN_ONLY 形态本就是建议项",
+        "semantics": ["hygiene"]
+      }
+    ]
+  },
+  {
+    "id": "preset-parity",
+    "kind": "legacy",
+    "script": "scripts/preset-parity-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。脚本用 rc=3 表判不了（实测空 HOME 下 exit 3），与 VERDICT.check 的第三态对齐。",
+    "cells": [
+      {
+        "id": "preset-parity",
+        "runner": "check",
+        "arg": "",
+        "label": "home 级预设与官方 standard 逐行对账（ISS-592 事故面）",
+        "tiers": [
+          "full"
+        ],
+        "allowFailure": true,
+        "allowFailureWhy": "读 $DSH_HOME/cordis.patch.yml；工作树里这个 home 未必存在（缺席时它自己 exit 3 判不了），判红就是「这台机器没装」",
+        "semantics": ["contracts"]
+      }
+    ]
+  },
+  {
+    "id": "runtime-secret",
+    "kind": "legacy",
+    "script": "scripts/runtime-secret-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。⚠️ 该脚本的「有新增」用 rc=2（不是 1），在 check 档会被读成回归红 —— 与 allowFailure 的既有口径一致（只出声不阻断），未新增豁免。",
+    "cells": [
+      {
+        "id": "runtime-secret",
+        "runner": "check",
+        "arg": "",
+        "label": "运行态明文密钥（~/.dsh/*/state 这类仓外目录 · ISS-837）",
+        "tiers": [
+          "full"
+        ],
+        "allowFailure": true,
+        "allowFailureWhy": "扫描面在仓外运行态目录；本机没跑过服务就没有语料，缺席不等于干净（脚本自己会说分母）",
+        "semantics": ["hygiene"]
+      }
+    ]
+  },
+  {
+    "id": "assembly-realize",
+    "kind": "legacy",
+    "script": "scripts/assembly-realize-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。",
+    "cells": [
+      {
+        "id": "assembly-realize",
+        "runner": "check",
+        "arg": "",
+        "label": "装配级实化判据（ISS-652 · 面板半 + 工具半真装进同一棵树）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["artifacts"]
+      }
+    ]
+  },
+  {
+    "id": "dts-gate",
+    "kind": "legacy",
+    "script": "scripts/dts-gate-check.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。",
+    "cells": [
+      {
+        "id": "dts-gate",
+        "runner": "check",
+        "arg": "",
+        "label": "dts 门禁覆盖（ISS-647 · 手写 .d.ts 不许逃过类型检查）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["artifacts"]
+      }
+    ]
+  },
+  {
+    "id": "matter-plugin-port",
+    "kind": "legacy",
+    "script": "scripts/check-matter-plugin-port.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。",
+    "cells": [
+      {
+        "id": "matter-plugin-port",
+        "runner": "check",
+        "arg": "",
+        "label": "Matter 打包插件端口（ISS-592 · 分发物不许写死 3220）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["static"]
+      }
+    ]
+  },
+  {
+    "id": "gates-registry",
+    "kind": "legacy",
+    "script": "scripts/gates/verify-gates-registry.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。⚠️ 本条读的是本文件自身：收拢后 gates/ 下新增的 3 个外化脚本必须在这里有着落，否则它的判据 A 当场报孤儿。",
+    "cells": [
+      {
+        "id": "gates-registry",
+        "runner": "check",
+        "arg": "",
+        "label": "判据层登记齐全（丙规则 · gates/ 下每个判据都必须在册，scripts/ 根不许放新判据；规则见 scripts/gates/README.md）",
+        "tiers": [
+          "fast",
+          "full",
+          "ci"
+        ],
+        "semantics": ["contracts"]
+      }
+    ]
+  },
+  {
+    "id": "ci-red-to-issue-selftest",
+    "kind": "legacy",
+    "script": "scripts/gates/ci-red-to-issue.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。",
+    "cells": [
+      {
+        "id": "ci-red-to-issue-selftest",
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "CI 红 → 建单翻页器自身（ISS-715 ③ · 日志解析两态可分 / 判不了区段不越界 / 幂等不重复建单）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["selftest"]
+      }
+    ]
+  },
+  {
+    "id": "review-ledger-selftest",
+    "kind": "legacy",
+    "script": "scripts/gates/review-ledger.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-820 从 gate-tables.mjs 收进登记表。",
+    "cells": [
+      {
+        "id": "review-ledger-selftest",
+        "runner": "selfcheck",
+        "arg": "--selftest",
+        "label": "审查质量台账自身（ISS-773 · 两条阳性对照：全无卡必须报 100% / 残缺卡不得算有卡）",
+        "tiers": [
+          "full",
+          "ci"
+        ],
+        "semantics": ["selftest"]
+      }
+    ]
+  },
+  {
+    "id": "build-index-credential",
+    "kind": "legacy",
+    "script": "scripts/tests/build-index-credential.test.mjs",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "note": "ISS-825：node:test 形态的 CLI 层判据（ISS-657）。本格是它**唯一**的执行路径 —— 此前 registry / run-gates / selfcheck / package.json / CI / git-hooks 全部 0 处引用（逐项查过）；lint-mutation-tests 的 glob 是 `scripts/*.test.mjs` 只扫一层，够不到 scripts/tests/ 这个嵌套目录。⚠️ 不能用 bun test 跑：实测它能执行但报 `0 pass / 0 fail`（bun 只数自己的 expect），退出码恒 0 ⇒ 会把「16/16 通过」和「一条都没判」读成同一个绿。故走 node 直跑。",
+    "cells": [
+      {
+        "id": "build-index-credential-selftest",
+        "runner": "selfcheck",
+        "arg": "--check",
+        "label": "build-index-repowiki CLI 退出码判据（ISS-657 · 凭据失效须 exit 2 而非 1；本文件忽略多余实参）",
+        "tiers": ["full"],
+        "semantics": ["selftest"]
+      }
+    ]
+  }
+,
+  {
+    "id": "verify-exit-codes",
+    "semantics": ["contracts"],
+    "spec": "verify-exit-codes.spec.ts",
+    "tiers": [
+      "fast",
+      "full",
+      "ci"
+    ],
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-832：退出码口径一致性。README 的口径行必须与 scripts/lib/exit-codes.mjs 逐字一致；两个读者必须真的 import 它（复制常量即红）。反向用例：改文档数字必红。",
+    "neverAllowFailure": true,
+    "neverAllowFailureWhy": "口径文档与实现分叉正是本单要修的病；免了门禁等于把「静默改口径」写进配置",
+    "cells": []
+  },
+  {
+    "id": "verify-plugin-shape",
+    "semantics": ["static"],
+    "spec": "verify-plugin-shape.spec.ts",
+    "tiers": ["next"],
+    "note": "新树 manifest 外形闸（9 条不变式，照抄 DSH check-workspace-constraints.ts:577-612）。1~8 逐字对齐官方：cordis 必须 peer+dev 双写且 range 相同 / type=module / main=lib/index.js / types=lib/types/index.d.ts / exports[\".\"].types 与 .default。第 9 条 files 为简化版：只判含 lib/index.js、lib/types/**/*.d.ts、src 三项，不判推导与顺序（完整推导见官方 :312-385）；spec 内有一条可执行记录，补推导时该条会红。ISS-849 起包名前缀与框架依赖**分开**：包名前缀 = @matter/（SCOPE_PREFIX，已拍），cordis 依赖用真名 @deepseek-ai/cordis（cordisPackage() 不带参、不从 scope 派生）—— 原实现 ${scope}cordis 要求一个不存在的 @matter/cordis，照它写则 pnpm install 失败、写真名则本判据报 2 条红，两个方向互斥。只扫 packages/*/*。变异实测：造坏包 ⇒ 5 条红；恢复 ⇒ 绿；0 包 ⇒ unjudged(no-corpus) 非绿。",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "timeoutMs": 60000,
+    "cells": []
+  },
+  {
+    "id": "lint-complexity",
+    "semantics": ["static"],
+    "spec": "lint-complexity.spec.ts",
+    "tiers": ["next"],
+    "note": "新树函数复杂度闸（DSH 全无此类判据，本仓自补 + DSH 分布支撑；措辞不作「对齐 DSH」）。三阈值均由 DSH packages/ 5,901 文件实测支撑，口径 = 判据同一引擎 oxlint 1.76.0 max=0 抽值（详见 docs/memory/dsh-complexity-distribution-2026-11-18.md）：函数 ≤100 行（前例 TS-AST p99=94，oxlint 口径 p99=129 尾部差异据实记录，老板裁决不动）/ 嵌套 ≤4（每函数最大 p99=4、p99.9=5、max=8 ⇒ 4 = p99 自然边界）/ 圈复杂度 ≤15（p99=12、p99.5=17、max=219、>15 仅 0.62% ⇒ 15 在 p99 与 p99.5 之间）。工具用 oxlint（1.76.0 原生支持 max-lines-per-function / max-depth / complexity），配置在新树专用 .oxlintrc.next.json，根 .oxlintrc.json 零改动。文件级行数不归本格（交 verify-file-size-new）。变异实测：13 层嵌套 + 120 行函数 ⇒ 10 条红；.tsx 同样命中。",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "timeoutMs": 120000,
+    "cells": []
+  },
+  {
+    "id": "lint-layer-new",
+    "semantics": ["static"],
+    "spec": "lint-layer-new.spec.ts",
+    "tiers": ["next"],
+    "note": "双轴架构的逻辑轴唯一执行者（DSH 无包级依赖方向判据：verify-module-graph 只判文档新鲜度，verify-package-dependencies 管段落不管方向 —— 没有本格，L0-L4 退化成一纸文档）。三条判据：LAYER-REVERSE 反向依赖 / LAYER-INJECT L4 下行与横向只许 import type（值走注入服务，照 DSH packages/client/AGENTS.md:40）/ LAYER-SUBPATH 子路径原语登记必须真在 exports 里。层表读 scripts/baseline/layer-contract-next.json（键 = packages/ 下两段相对路径，与旧表 layer-contract.json 分家，旧表一行未动）。扫描根限定 <pkg>/src，测试目录不在射程 —— 与 DSH verify-client-domain-graph.ts:85 同口径（它只扫 src/client/，全文件 grep tests 零命中）。四步对照实测：同一条 import 在 tests/ 绿、搬到 src/ 红。0 包时 unjudged(no-corpus) 非绿。\n\n【已退役 2026-11-16 · ISS-853】老板 2026-11-15 拍板「甲」= 完全丢掉 L0–L4（DOC-512 §5.4）。本判据对新树作废 ⇒ status 改 deprecated（deriveRegistryGates:259 只派生 active 条目）。脚本与 spec 保留不删：DOC-512 引用过它们，且删盘上文件会触发 verify-gate-registry 的悬空检查。",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "deprecated",
+    "timeoutMs": 120000,
+    "cells": []
+  },
+  {
+    "id": "verify-client-domain-graph",
+    "semantics": ["static"],
+    "spec": "verify-client-domain-graph.spec.ts",
+    "tiers": ["next"],
+    "note": "新树 client 包内部分层闸（照抄 DSH verify-client-domain-graph.ts）：contract/(0) 共享契约 → <domain>/(1) 域实现 → apply.ts|index.ts(2) 装配点；域间禁互相 import，只有装配点可跨域。扫描根限 src/client/，tests/ 不在射程（与 DSH :85 同口径，官方全文件 grep tests 零命中 —— 它没写排除逻辑，是扫描根天然避开；测试取别包值构造被测对象是正当用法，不该进豁免名单）。**两处相对官方的主动差异**：① no-corpus 退 2 而非退 0 —— 官方 main() 在 0 包时仍打印 clean. 走默认退出码 0，本仓今天已修 4 个「扫空算绿」同族（ISS-731/2180/2182/2174），主动加固；② 官方 :68 放行「域→顶层非装配文件」（官方自己 tree 上实测 101 条走这条路），本仓照抄口径不收紧 —— 收紧等于宣布官方 76 个包结构违规，那是规范决策不是门禁能定的。交付时的反向控制实验：同一文件在 tests/ 不报、搬进 src/client/alpha/impl.spec.ts 立刻红，证明「不报」由位置决定而非豁免名单。",
+    "owner": "lead",
+    "since": "2026-11-14",
+    "status": "active",
+    "timeoutMs": 60000,
+    "cells": []
+  },
+  {
+    "id": "lint-rule-fingerprint",
+    "semantics": ["static"],
+    "spec": "lint-rule-fingerprint.spec.ts",
+    "tiers": ["next"],
+    "note": "规则集指纹闸：规则归一化（severity → 1|2、按键名排序、off 丢弃、选项保留，逐字照抄 DSH lint-rule-fingerprint.spec.ts:44-62）后算 sha256，改任何一条规则的存在性/严重级/选项即红。JSONC 用 typescript 的 parseConfigFileTextToJson（与官方同一函数，零新依赖；3 候选路径，解析不到退 unjudged(no-binary) 不降级成正则 —— 实测朴素正则会静默吃掉 glob 里的 /*...*/：**/node_modules/** 被剥成 **/node_modulesdist...，解析成功但值全错）。相对官方一处必要偏离：官方 9 组 override 是叠加式，本仓 3 组是互斥式（ov1 带 excludeFiles 排除 tests、ov2 只对 tests 生效），照搬单聚合会让「删掉 ov1 一条 error 规则」指纹不动 = 漏检；故分 root:src 与 root:test 两个 profile。另必须先叠顶层 rules 再叠 overrides —— 新树配置只有顶层 3 条，漏了这步指纹恒为空集永远绿。",
+    "owner": "lead",
+    "since": "2026-11-15",
+    "status": "active",
+    "timeoutMs": 180000,
+    "cells": []
+  },
+  {
+    "id": "gen-layer-graph",
+    "semantics": ["static"],
+    "spec": "gen-layer-graph.spec.ts",
+    "tiers": ["next"],
+    "note": "双轴映射表生成器（老板 2026-11-14 亲拍乙档）：从 manifest 生成 package × group × logical_layer × peerDependencies 依赖图 + --check 判过期，一条命令判三件事（图过期 / 反向边 / peer 声明与真实 import 是否一致）。主规划 §11 记的「双轴映射表字段已定、尚未建表」那张表第一次落地。骨架照抄 DSH gen-module-graph.ts，加 logical_layer 列读 layer-contract-next.json（不另立第二份层表）。照抄会遇到的坑：官方 package-graph.ts:52-57 只读 peerDependencies，而本仓旧树内部 peer 边 = 0 条（13 dep + 31 dev + 0 peer），直接照抄画出空图 —— 故本格同时做符号级对账。只做 --check 不做 --fix：回写 package.json 在多 worktree 并行时是事故源。三处已知缺口（不是等价简化）：Typert 生成源码不移植、--fix 不实现、translation-pairing 不实现。\n\n【已退役 2026-11-16 · ISS-853】老板 2026-11-15 拍板「甲」= 完全丢掉 L0–L4（DOC-512 §5.4）。本判据对新树作废 ⇒ status 改 deprecated（deriveRegistryGates:259 只派生 active 条目）。脚本与 spec 保留不删：DOC-512 引用过它们，且删盘上文件会触发 verify-gate-registry 的悬空检查。",
+    "owner": "lead",
+    "since": "2026-11-15",
+    "status": "deprecated",
+    "timeoutMs": 180000,
+    "cells": []
+  },
+  {
+    "id": "verify-plugin-entry-exports",
+    "semantics": ["static"],
+    "spec": "verify-plugin-entry-exports.spec.ts",
+    "tiers": ["next"],
+    "note": "插件入口导出闸（ISS-838 / W0-GATE-G2，照抄 DSH scripts/verify-plugin-entry-exports.ts:7-14 的第一刀）：函数插件（入口有值导出 apply）旁边有 default 导出即红，无条件无例外；无 apply 且 default 是 class（或纯 AST 判不出它是不是 class）时，name/inject/Config 当值导出即红；其余（库、抽象 default class 的 capability seam）不查。事故驱动：postmortem 0001 —— Loader unwrapExports 先取 exports.default ?? exports，多一行 export default apply 就把整个命名空间丢掉、inject 失效，178 个绿测试 + 100% 覆盖率下产品完全不可用。纯 AST 无 Program（新树 packages/ 暂无包，tsconfig 聚合编空气），typescript 走 gen-layer-graph 同一组候选路径，取不到退 unjudged(no-binary) 不降级成正则。export * 与 export { default } from 跟进相对 specifier（不跟进就能靠拆到 impl.ts 绕过 ⇒ 假绿），成环 / 超 8 跳 / 裸包 specifier 一律红不静默。与官方三处差异已在文件头逐条交代，要紧的一条：口径收窄到 default（官方另判函数插件上任何额外值导出，实测其语料 181 个函数插件入口中 30 个靠白名单 grand 住）—— 但漏判可见，绿的时候 detail 会数出「另有 N 个…本判据不判」。0 入口、或函数插件与服务插件均为 0 ⇒ unjudged(no-corpus) 不算绿，但不像官方要求两种形态各 ≥1（新树单形态会永久红）。变异实测：造坏 export default apply ⇒ 1 条红带行号；恢复 ⇒ 绿；服务插件加 export const name ⇒ 红；恢复 ⇒ 绿。selftest 68 条断言。交叉验证：官方 373 个入口语料上判出 6 条，与官方 plugin-entry-existing-exports.ts 白名单放过的同一批逐条对上。",
+    "owner": "lead",
+    "since": "2026-11-15",
+    "status": "active",
+    "timeoutMs": 60000,
+    "cells": []
+  },
+  {
+    "id": "lint-dead-code",
+    "semantics": ["static"],
+    "spec": "lint-dead-code.spec.ts",
+    "tiers": ["next"],
+    "note": "死代码闸的第一段，只做 `v8 ignore` 必须带真理由（ISS-844 / W0-GATE-G8 裁剪版）。出处逐字：DSH `packages/client/AGENTS.md:130` —— never a bare ignore。判据三条：裸 `/* v8 ignore */` 红 / `v8 ignore next`（及 `next 8` 这类只有行数）红 / `--` 之后理由 trim 后 <5 字符红；`start|else|if|file|next` 带理由绿，`stop` 放行 —— 配对终止符，理由写在 `start` 那侧：实测 DSH 全树 `start` 79 条全带理由、`stop` 79 条全不带，判 `stop` 等于落地当天全红。取数用 TS AST 抹字面量 + scanner 取注释，三条岔路都实测过：纯正则扫会假红（`const re = /[/*] v8 ignore/` 被当成多行注释）；只靠 AST leading-range 会漏（JSX 空表达式容器里的注释一个都取不到）；只靠裸 scanner 会漏（`ptc-runtime-python/src/index.ts` 的 20 条指令裸扫只见 5 条，其余被吞 ⇒ 假绿）。实测 DSH 真语料 3050 个 src 文件：1058 条指令，无理由 15 条全部真红、0 假红，理由最短 13 字符（故 5 字符下限不误伤）。0 个包 / 0 个文件 ⇒ unjudged(no-corpus) 退 2，不是绿（新树 W1 之前就是这个状态）。selftest 64 条断言全过；变异实测：裸 ignore ⇒ exit 1 且报出 path:line，补上理由 ⇒ exit 0。⚠️ 本格不判覆盖率配置与 reporter —— 那两件要等新树有真实包与真实覆盖率产物，现在编不出反例（编不出反例的判据等于没判），另开单接。",
+    "owner": "lead",
+    "since": "2026-11-15",
+    "status": "active",
+    "timeoutMs": 120000,
+    "cells": []
+  },
+  {
+    "id": "verify-workspace-constraints",
+    "semantics": ["static"],
+    "spec": "verify-workspace-constraints.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-16",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "ISS-849：新树包名不变式三条（private:true / version 与根一致 / workspace 内互引必须 workspace: 协议）。其余六条（cordis peer+dev 双写且 range 相同 · type=module · main/types/exports 逐字 · files 三项 · 组目录禁 package.json）在 verify-plugin-shape，本格不重复实现 —— 净增量 3 条不是 6 条，实测 grep -c private/version 在 plugin-shape 均为 0。语料归零 or 根 version 取不到 ⇒ unjudged(no-corpus) 退 2 非绿。包扫描复用 plugin-shape 的 scanPackages()（「什么算一个包」只有一处定义）。与官方两处有意分歧写在文件头：不判 private:false 的白名单分档（新树无发布包，编不出反例）、只认 workspace:* 不引入 vendor/native 的 workspace:~ 分叉。",
+    "cells": []
+  },
+  {
+    "id": "verify-tsconfig-coverage",
+    "semantics": ["static"],
+    "spec": "verify-tsconfig-coverage.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-16",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "ISS-850：封「包未进 references ⇒ 类型错静默跳过」。DSH 无此判据，自建（实查 7 处 projectReferences 消费者，无一处判「盘上有 tsconfig 但没人 reference 它」）。两个方向：正向=盘上每个 packages/<g>/<p>/tsconfig.json 必须在 tsconfig.next.json 的 references 图里（含间接，包级 tsconfig 自己的 references 也走）；反向=图里有但盘上没有 ⇒ 悬空 reference 红。实测坐实陷阱③：新建 packages/kb/blocks + 一处 TS2322，未登记时 tsc -b EXIT=0 且不产 lib/，登记后 EXIT=1 —— 而本判据在未登记那一刻就红。语料只认盘上实际文件，不从 pnpm-workspace.yaml 反推（反推会让「忘了建目录」被判绿）。包级 tsconfig 的发现不复用 scanPackages()：那个以 package.json 为判据，用它会漏掉有 manifest 没 tsconfig 的包。0 个包级 tsconfig / 聚合入口缺席 / 取不到 typescript ⇒ unjudged(no-corpus|no-binary) 退 2 非绿。JSONC 用 typescript 的 parseConfigFileTextToJson，不降级成正则。spec 49 条断言含真实 IO 层（发现器 + 含间接解图 + 成环）。",
+    "cells": []
+  },
+  {
+    "id": "verify-tree-depth",
+    "semantics": ["hygiene"],
+    "spec": "verify-tree-depth.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-17",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "ISS-870（W-0）：两级工作树准入的机器形态。原「禁止套娃」只在 ws.sh adopt 一条命令里、且方向与老板 2026-11-17 定的二级形态相反（工单树就该建在会话树里 `<会话树>/.agents/worktrees/ISS-N`）⇒ 换成恰好两级 + 本判据兜住深度。三断言：① ∀depth≤1（红=三层及以上，无定义）② depth=1 ⇒ .agents/trees.json 登记且 kind=issue、parent 指到外层（红=无登记的随手嵌套，ISS-688 那类）③ depth=0 且非主检出 ⇒ 无记录只报不红（实测存量 51 棵，清理由人执行）。⛔ ③ 绝不放宽 ②。口径：双侧 realpath 归一 —— 主检出池 .agents/worktrees→~/wt/dsh-forge 让同一棵树有两种写法，不归一则 ② 对每棵合法树误红（spec 用真软链 IO 用例钉住这条：把默认归一换成恒等，实测红 2 条）。登记表文件缺席 ⇒ 按空表判（不许用 0 表示跳过，gate-runtime 头注①）；表在但读不动 ⇒ unjudged(no-corpus)。主检出不作父节点（new --in-repo 的 .wt/ISS-x 不是嵌套）。spec 47 条断言含真实 IO（软链归一 + 登记表三态 + porcelain 解析）。",
+    "cells": []
+  },
+  {
+    "id": "verify-package-readme",
+    "semantics": ["doc-sync"],
+    "spec": "verify-package-readme.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-16",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "ISS-850：新树包 README 闸，只判三条 + 一条存在性，不搬 DSH 那 658 行（其 Model Experience 415 行判「工具包 README 的模型可见段落」，新树 P0 有 0 个真实工具包 ⇒ 照搬等于一排永远走不到的分支）。① ## Summary 存在且 ≤100 词（countWords 逐字照 DSH：split(/\\s+/u).filter(Boolean).length ≈ wc -w）② ## Known Limitations and Deferred Work 是最后一个 H2 且段内 ≥1 条顶层 `- ` 条目（标题逐字）③ README.md/README.zh.md/README.i18n.yaml 三件套齐全 3b 有 package.json 就必须有 README.md（缺失是红，不是跳过）。与 DSH 两处有意偏离已写进文件头：段尾按任意级标题收（DSH 只按 ^## 收，会把 ### 子节的字数算进 Summary）、标题扫描 fence-aware（DSH 纯正则扫全文，代码块里的 `## ` 会被当标题 ⇒ 假红）。spec 实测抓到一个真缺陷并已修：body 用 .trim() 会把段内首行缩进吃掉，把 `  - x` 子项误判成顶层条目。语料=有 manifest 的包，0 个 ⇒ unjudged(no-corpus) 退 2 非绿。落地当天真实语料是红的（2 个包都还没写 README），非判据缺陷。",
+    "cells": []
+  },
+  {
+    "id": "verify-coverage-collect",
+    "semantics": ["artifacts"],
+    "spec": "verify-coverage-collect.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-16",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "P1-1：覆盖率**采集**闸（DOC-512 §5.5.6「新树要在 P1 就把覆盖率采集跑通」）。只判采得到，**不判百分比** —— 阈值定在 P3，P1 设阈值等于提前上曲线。判据两条：① 非 total 条目 > 0；② 含 /packages/ 的条目 > 0（第二条是本格存在的具体理由：旧树 821 文件足以撑住总数，新树掉出射程照样绿）。⛔ 不引入新档名：DOC-512 的 dev/pre-push 属门禁框架改造，另议。本单实测两条真因（已写进 vitest.config.ts）：① coverage.exclude 的 **/wt/** 按**绝对路径**匹配，默认落点 ~/wt/dsh-forge/<ISS> 里每个文件都含 /wt/ 段 ⇒ 整棵树被排除、采到 0 文件而屏幕无提示（同一条 glob 在 test.exclude 是相对路径、挡不住工作树 —— 非对称，别统一）；② coverage.include 缺 packages/*/*/src/** ⇒ 新树 0 文件在射程。修后实测 831 条目 / 新树 10。变异实测（2026-11-16）：include 改回 forge-*/src/** ⇒ 红「新树 0 个文件在射程」；exclude 加回 **/wt/** ⇒ 红「零个文件在射程」；恢复 ⇒ 绿。spec 14/14 含 5 条必然失败向量。timeoutMs 120000：实测本格 3.38s（run-gates --only 读数，含真跑两包 51 个测试 + 覆盖采集），留 35 倍余量抗 CI 冷机；不写 30s 是因为它同时跑测试与 instrument，冷启动会翻倍。",
+    "cells": []
+  },
+  {
+    "id": "run-package-tests",
+    "semantics": ["unit"],
+    "spec": "run-package-tests.spec.ts",
+    "tiers": [
+      "next"
+    ],
+    "owner": "builder",
+    "since": "2026-11-17",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "ISS-866：next 档唯一一格**跑测试**的判据。老板 2026-11-17「开发以门禁变绿为目标，代码通不通服务于门禁」的物理形态：`grep 'vitest' scripts/run-gates.mjs` 0 命中、pre-push 明文「只带 typecheck，不带 test」、selfcheck 的 notCovered 自认漏 test ⇒ 新树 149 个断言曾经没有任何一格门禁在跑，而 storage-domain 在主 checkout 根本 import 不起来时 next 档仍 9 格全绿。射程只跑 packages/<g>/<p>/tests/（老板定「新树本来就不应该跑旧树的测试」），⛔ 绝跑 forge-… 旧树 536 个文件。语义 unit（红 = 测试没通过）。四态：有断言红 ⇒ 1；0 个测试文件 ⇒ 2(no-corpus)；全部包跑不起来 ⇒ 2(no-build)；**部分包缺构建 ⇒ 0 但逐包出声**（主 checkout 不构建是环境常态，实测 2 包缺 lib/ 而另 2 包 111 断言真跑过 —— 为跑不起来的包把真读数一起废成判不了没有道理）。⛔ 跳过必须比通过刺眼（detail 带 ⚠️ +「这不是测试通过」+ 包名 + 补法），治的就是今天屏幕上只有一行 (0 test) 没人注意。实测 4 包 9 文件 149 断言 1.07s；spec 45/45 含 7 类必然失败向量。timeoutMs 120000（实测 1.07s 留 110 倍余量抗 CI 冷机 + 首次 vite 装载）。",
+    "cells": []
+  },
+  {
+    "id": "flow-metrics",
+    "semantics": ["snapshot"],
+    "spec": "flow-metrics.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-16",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "Matter 流程指标基线观测（2026-11-16）。依据 specs/iss-flow-gates-spec-2026-11-14.md 的七态×十动作×36 条门禁。观测器本体在 scripts/gates/flow-metrics.ts，恒 passed —— 本格守的是它自己：判不了不当绿 / 0 分母不报 100% / 停留计入前态 / 首条已是 in_review 不漏计。写 spec 时真抓到两个 bug：① 漏计「首条记录即 in_review」的单（退回率分母从 878 错成 185，1.7% 被误报成 8.1%）② 同一单多次进 in_review 时证据重复 push，完整率算出 -1.7%。首测基线：覆盖率 42.3%（2197 单中 929 单有完整状态流）/ 非法跳转 13.6% / 审查退回 1.7% / 证据完整率 0.1%（自检段是新规矩，存量不追溯）。",
+    "cells": []
+  },
+  {
+    "id": "verify-coverage-threshold",
+    "semantics": ["artifacts"],
+    "spec": "verify-coverage-threshold.spec.ts",
+    "tiers": ["coverage"],
+    "owner": "lead",
+    "since": "2026-11-18",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "ISS-522 / C-0a：覆盖率**阈值**闸（与 verify-coverage-collect 的「采集通不通」职责分离）。判 coverage-summary.json 每个非 total 文件四维 pct 是否达阈值（默认 100，从配置读）；本格的主交付是**判词** —— 读 coverage-final.json 自己生成 `文件:行:列` + expected/actual + howToFix 三选一 + forbidden，因为 vitest perFile 100 的原生 ERROR 没有行号，而 DSH 的 reporter 搬不动（istanbul-lib-report 从 scripts/ 解析不到），故零新依赖自生成。豁免走 scripts/baseline/coverage-exempt.json（带 ticket+expires），首批只放 brand.ts（v8 单行恒等函数盲区）；⛔ 其余 15 个不达标文件是真缺口，属 C-0b。交付时本格**红是预期**（实测 49 条 finding），红文案带行号 —— 不许为变绿调阈值或加豁免。独立 coverage 档，不进 next/fast/ci（C-2 才接远程 CI）。spec 24/24 含必然失败向量 + 豁免有牙变异对照 + 实仓用例；spec 抓到过一个真 bug（全豁免误报 unjudged，已修）。",
+    "cells": []
+  },
+  {
+    "id": "verify-no-unknown-casts",
+    "semantics": ["static"],
+    "spec": "verify-no-unknown-casts.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-18",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-879：no-unknown-casts 语法指纹守卫，移植 DSH scripts/verify-no-unknown-casts.ts，封 strict 逃逸口（as unknown as X 绕过类型检查，verify-type-ratchet 只数 TS 错误码看不见）。AST 扫 packages/*/*/src 下所有 as unknown 断言，按 syntax token（去注释/空白）SHA-256 指纹记数；新指纹/新文件⇒红、存量指纹变多⇒红、指纹消失⇒提示 prune（按身份退役、非数量棘轮，老板 2026-11-18 拍板口径）。判词带 文件:行 + 指纹前12位 + 期望/实际 + 怎么改；判不了（基线缺席/读不动 no-baseline、0 源文件 no-corpus、无 typescript no-binary）单列退 2 不冒绿。--prune 仅在确认无新增后写回基线。存量实测 5 处 / 3 文件（pm/issue、pm/project 各 2，storage-domain 1），逐指纹登记在 scripts/baseline/no-unknown-casts.baseline.json，不写空基线。相对 DSH 两处有意差异：射程收窄到 packages/*/*/src（旧树归旧判据）、指纹消失从抛错红改为提示 prune 仍绿（对齐按身份退役口径）。spec 47 条断言含 AST 四写法 + 五类不误伤 + 指纹稳定 + 判定五态 + fail-closed 三态 + 变异（改基线计数/删记录必红）+ 基线结构体检 + 按身份退役 + 真扫盘反向控制（注入一处必红带行号，移除恢复绿）。tier map 已含 next:[\"next\"]（registry-derive.mjs:18），无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "verify-export-jsdoc",
+    "semantics": ["static"],
+    "spec": "verify-export-jsdoc.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-18",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-881：导出 JSDoc 契约守卫，移植 DSH scripts/verify-export-jsdoc.ts + jsdoc.ts，外层套 ISS-879 verify-no-unknown-casts 的纯指纹基线形态（不加 allowFailure，一个机制做到存量不阻塞+新增必红+按身份退役）。AST 扫 packages/*/*/src 所有导出声明，描述 prose + 函数式导出的 @param/@returns，按「文件+符号+违规类型」SHA-256 身份指纹记数；新身份/新文件⇒红、存量变多⇒红、身份消失⇒提示 prune 仍绿。判词带 文件:行 + 符号名 + 期望/实际 + 怎么改；判不了（no-baseline/no-corpus/no-binary）单列退 2 不冒绿。修复 DSH 结构性盲区：DSH restrictedPublicNames() 只认 lib/types/*.d.ts 可达公开名，非入口源新导出看不见；本判据照抄 2259 scanCasts —— git ls-files --cached --others --exclude-standard + AST 全量扫，不依赖 build 产物反推（实测：非入口源注入缺 tag 导出，DSH 0 违规，本判据 +2 违规红）。存量实测 26 条 / 15 符号 / 全 storage-journal 一个包 / missing-param:11 + missing-returns:15 / 零无注释，逐身份登记 scripts/baseline/export-jsdoc.baseline.json，不写空基线。保留豁免：heritage 继承（去掉 26→29，多出 Error.name 噪声）、协议槽 Config/inject/apply/name/reusable、构造子、re-export、augmentation；inline callable 当前 0 个保留 fail-closed 骨架。spec 85 条 ok()（实跑 81：4 条在 guard/skip 分支未执行），含 jsdoc 四函数 + AST 豁免 + 指纹稳定 + 判定五态 + fail-closed 三态 + 变异 + 基线体检 + 真扫盘 26 条 + 入口源/非入口源各一次注入必红（验盲区已修）+ 移除绿。tier map 已含 next:[\"next\"]（registry-derive.mjs:18），无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "verify-node-next-types",
+    "semantics": ["static"],
+    "spec": "verify-node-next-types.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-18",
+    "status": "active",
+    "timeoutMs": 120000,
+    "note": "ISS-882：外部 NodeNext 消费者契约守卫，移植 DSH scripts/verify-node-next-types.ts（164 行）。扫 packages/*/*/package.json 的公开 specifier（types + exports[].types），建临时 NodeNext ESM 工程软链 6 包、生成 index.ts 逐个 import * as modN、用 node node_modules/typescript/bin/tsc -p 外部编译，验构建后的 .d.ts 能被标准外部消费者消费（publint-all 只验包结构，不验真实类型消费）。保留 DSH 轻量预检：扫 lib/types 下 .d.ts 相对 specifier 无扩展名（NodeNext 必报），先报带 文件:行 的错——这是 deficit 可定位来源。三态 fail-closed（对齐 2259/2261）：预检违规/外部编译失败⇒红；产物齐且编译通过⇒绿；判不了单列退 2 不冒绿：产物缺失 no-build · 无 typescript no-binary · 0 包/0 specifier no-corpus。**与 DSH 的唯一有意差异**：DSH 原样在 build 产物缺失时 process.exit(1) 判红（verify-node-next-types.ts:102-106），但本树 6 包中部分未 build 是环境态（lib/ 随构建走不随 clone 走），照抄会把环境缺料冒充真缺陷 ⇒ 改判 unjudged(no-build)。当前工作树 6 包全无 lib/types 产物 ⇒ --check 真读数是 unjudged(no-build) EXIT=2（不冒绿不判红），构造好产物的临时 fixture 树⇒6 包外部编译通过绿。spec 48 条 ok()（grep -c 实核 48，--selftest 实跑 48 全过），含纯函数 + 绿路径 + 无扩展名红/修复绿 + 产物缺失 unjudged + no-binary/no-corpus unjudged + 变异公开 .d.ts 外部编译失败红/还原绿 + NodeNext tsconfig 口径 + 真树形态。tier map 已含 next:[\"next\"]（registry-derive.mjs:18），无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "verify-no-top-level-await",
+    "semantics": ["static"],
+    "spec": "verify-no-top-level-await.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-18",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-883：模块级 await 守卫，移植 DSH scripts/verify-no-top-level-await.ts（267 行）。AST 扫 packages/*/*/src 的三种顶层 await（await 表达式 / for await / await using），atModuleScope() 用函数边界排除函数内 await；顶层 block/if/for/class 计算成员里的也抓，字符串/模板/注释天然不报。可执行文件按声明排除（#! 开头 shebang + manifest bin 命名源），不按文件名猜。禁令型判据（有违例即红），不建指纹基线、不加 allowFailure：本树 28 .ts / 0 顶层 await ⇒ --check 上线即绿。判词带 文件:行 + 源码行 + 怎么改。**与 DSH 的两处有意差异**：① 删掉「语料至少一个 .tsx」断言（DSH sourceCorpus 强制含 .tsx，本树 0 .tsx，照抄会抛 'corpus holds no .tsx file' 假红）；保留「语料非空」+「不漏任何含 TS 的包 src 目录」两条完整性检查，缩小 glob 漏包⇒判红（完整性失败，不是判不了）。② DSH 在语料问题处裸 throw；本实现转三态输出：0 文件⇒unjudged(no-corpus)、无 typescript⇒unjudged(no-binary)、漏包⇒failed，不裸抛。spec 58 条 ok()（grep -c 实核 58，--selftest 实跑 58 全过），含三种形态各注入必红带行号+移除绿、函数内 await 不误伤（含本树 28 真实源反向控制）、词法嵌套 4 处、字符串/注释不误报、shebang/bin 排除、0 .tsx 语料仍绿、漏包判红、三态 fail-closed。tier map 已含 next:[\"next\"]（registry-derive.mjs:18），无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "lint-log-outlet-next",
+    "semantics": ["static"],
+    "spec": "lint-log-outlet-next.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-19",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-889：新树日志/错误规范守卫，契约 docs/specs/log-error-convention-next.md 与本判据/清债同一 diff。AST 扫 packages/*/*/src/**/*.{ts,tsx} 三条禁令型规则（词表同旧树 G1 console / G2 裸 throw new Error / G3 ctx.logger 直调，但射程严格隔离；旧 scripts/lint-log-outlet.mjs 保留不动）。工厂 ctx.logger(\"name\") 唯一合规、工厂实例 logger.error 与类型化错误类不误伤、tests 不入射程（规范三问结论）。禁令型零容忍：不建指纹基线、不加 allowFailure，0 违例上线即绿。判词带 文件:行 + 源码行 + 怎么改。三态 fail-closed：0 源⇒unjudged(no-corpus)、无 typescript⇒unjudged(no-binary)、漏包⇒failed（完整性失败），不冒绿。spec 带三类注入红/移除绿 + 反向控制 + tests 隔离 + 完整性 + 三态 + 真树 0 违例。进 next 档按 ISS-854 补票（unjudged-ledger.json，needs:*，ticket=ISS-889，expires=2026-12-31）。tier map 已含 next:[\"next\"]（registry-derive.mjs:18），无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "verify-client-ui-i18n",
+    "semantics": ["static"],
+    "spec": "verify-client-ui-i18n.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-20",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-531 / W12 雏形判据：client 包用户可见文案走 locale 字典、禁硬编码。AST 扫 packages/client/*/src/**/*.{ts,tsx} 含 CJK 的字符串字面量——中文产品里这是「用户可见文案」的可机判代理；经 t/tr/translate/formatMessage（含 i18n.t/locale.t 形式）字典调用的中文不算裸文案，其余为违例（finding 带 文件:行:文本）。存量 ui-theme 21 条 token description 是文档元数据不渲染到 UI，按 ISS-530 登记豁免带票、不扩红（需求段 5 原话）。口径刻意保守（只判 CJK 代理这一个信号、不解析 JSX 文本/模板拼接），但能判红：spec 含必然失败向量（裸中文⇒红）+ 字典白名单 + 豁免生效/失效双向变异 + 三态（no-corpus/no-binary 不冒绿）+ 真仓实扫绿。tier map 已含 next:[\"next\"]（registry-derive.mjs:18），无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "verify-remote-surface",
+    "semantics": ["static"],
+    "spec": "verify-remote-surface.spec.ts",
+    "tiers": ["next"],
+    "owner": "lead",
+    "since": "2026-11-20",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-533 / W12 雏形判据（api 组首包）：@Remote 导出面/契约形态可机判。AST 扫 packages/api/<pkg>/src/**/*.ts 里 extends TypertRemoteService 的 controller，四判：① super(ctx, '<key>') 的 service key 必须是非空字符串字面量（key 是构造器第二参，照 DSH TypertRemoteService 签名）② ≥1 个 @Remote 方法③ 装饰器形态合法（@Remote / @Remote('name') / @Remote({name:'...'})）④ 双向导出面锁：实际端点 ⊆ 契约表 且 契约表 ⊆ 实际端点、端点名不重复——删掉单个契约端点（如 update）也红，finding 点名「契约端点缺失：<name>」并要求同步契约表；未登记 service key 只判结构不套白名单（新包不使判据变假，避免过期断言）。三态 fail-closed：0 controller ⇒ unjudged(no-corpus)、无 typescript ⇒ unjudged(no-binary)、有违例 ⇒ failed。spec 18 断言含必然失败向量（非字面量 key / 数字实参 / 空导出面 / 缺 super / 契约端点缺失 ⇒ 红）+ 越界端点 + 未登记放行 + 重复端点 + 三态 + 真仓绿。进 next 档按 ISS-854 补票（unjudged-ledger，needs:next-src-corpus，ticket=ISS-533）。tier map 已含 next:[\"next\"]，无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "verify-shell-boot",
+    "semantics": ["static"],
+    "spec": "verify-shell-boot.spec.ts",
+    "tiers": [
+      "next"
+    ],
+    "owner": "lead",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-537 / W12 雏形判据：浏览器壳 boot 接线静态判。扫 apps/web 源码判 5 组可机判不变量：①index.html 有 #root + module script；②boot.ts 静态 import installThemeStyles/installDswBridgeStyles/DocList 且两个 install 调用点数各为 1（review-2305 观察项：重复装追加 style 标签）；③甲形态 src 下无 DSH 注入层 token（__DSH_BOOT__/__ModuleLoader__/applyIndexInjections/__DSH_BOOT_READY__）；④config 从 URL query(URLSearchParams)+构建期 env(VITE_SHELL_*) 注入、后端地址不写死；⑤embed 开关暴露且有渲染分支。纯文本判（注释先摘除），不解析控制流。spec 含必然失败向量（删 import/装两次/塞注入层 token/写死地址/缺载体各必红）+ 真仓绿 + unjudged + stripComments 单测。进 next 档按 ISS-854 补票（unjudged-ledger，needs:apps-web-corpus，ticket=ISS-537，ci=needs-build）。tier map 已含 next:[\"next\"]，无需改 derive。",
+    "cells": []
+  },
+  {
+    "id": "verify-public-wash-mapping",
+    "semantics": ["contracts"],
+    "spec": "verify-public-wash-mapping.spec.ts",
+    "tiers": ["full", "ci"],
+    "owner": "builder",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 30000,
+    "note": "ISS-904 / P5 公开仓同步机制：scripts/baseline/public-wash-mapping.json 三章判据——①可解析（4+→<1000 小号段双射、无碰撞）②append-only 形态（前 36 条 legacy 连续 ISS-501..；其后 appended[] 逐条对应、目标从 537 连续、禁重排重算）③覆盖当前 main 白名单 4+ token 全集（main ⊆ mapping，活 tripwire：main 进新 token 即红，逼同步追加）。三态 fail-closed：缺文件/无 main ref/坏结构 ⇒ unjudged。射程取 git 对象（git grep origin/main）保证本机与 CI 同集。不进 fast（自证在 gateselfcheck + ci）。spec 含正例 + 三章反向用例 + 重排即红 + 历史 token 不误报。",
+    "cells": []
+  },
+  {
+    "id": "verify-web-route-reachability",
+    "semantics": ["contracts", "static"],
+    "spec": "verify-web-route-reachability.spec.ts",
+    "tiers": ["full", "ci"],
+    "owner": "linmo",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-906 / P0 门禁对齐·路由可达。照 DSH verify-client-route-resolution.ts 的问题意识（浏览器面路由判据、零新依赖），但按本仓入口形态重写：本仓是裸 Vite + main.ts 手写 pathname 分派（无路由库、无 DSH 的 faceConfigs paths 门面），DSH 那份判的是 request target document-relative（fetch/Request/URL 首参不许写 /api/x），与「声明路由可达 / 无死路由」不同问题。判三件：①声明（与 location.pathname 比较的路径字面量）所在模块必须在 HTML <script type=module> 的静态 import 图里；②分派分支须有 imported 且目标文件存在的处理器；③相对 import 不许断链。三态 fail-closed：0 源文件 unjudged(no-corpus)、无入口 failed。spec 10 断言含死路由/不可达声明/断链/无入口必红 + 真语料绿 + 真语料注入死路由必红。红证据：main.ts 注入 if(path==='/ghost') void mountGhost(root) ⇒ failed 点名 main.ts:27。不进 fast。",
+    "cells": []
+  },
+  {
+    "id": "verify-browser-bundle-purity",
+    "semantics": ["static", "contracts"],
+    "spec": "verify-browser-bundle-purity.spec.ts",
+    "tiers": ["full", "ci"],
+    "owner": "linmo",
+    "since": "2026-11-21",
+    "status": "active",
+    "timeoutMs": 60000,
+    "note": "ISS-906 / P0 门禁对齐·bundle 纯度。重写（不移植 DSH client-bundle-purity.spec.ts + browser-bundled-externals.ts + bundle-input-isolation.ts）：那套依赖 tsdown clientBundle/staticLinked preset、lib/client.js 产物、experimental 包输入隔离、product-isolation.ts，本仓全无对应物；本仓 client 包是 @matter/client-*、浏览器面是 src/client 树、lib/ 与 dist/ 是 gitignore 构建产物（build:shell 当前因外部包缺 export 失败），照搬恒红。按本仓结构做纯静态判 5 条：node 核心模块 / server-only 原生模块 / 兄弟 client 包越层 / apps/web 根路径引 client 包 / 产物面 node 符号（产物在盘才扫）。type-only 擦除不计。三态 fail-closed：0 浏览器面文件 unjudged(no-corpus)。spec 14 断言含 5 条规则各自必红 + 真语料绿 + 真语料注入越层引用必红。红证据：ui-model/src/client/index.ts 注入 import '@matter/client-ui-kb/client' ⇒ failed 点名 index.ts:9。不进 fast。",
+    "cells": []
+  }
+]

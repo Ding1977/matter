@@ -1,0 +1,124 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "oxlint lastWrite.reason 记录抬线依据，棘轮只许降不许升，属存量豁免记账。"
+  },
+  "maxErrors": 3808,
+  "warnings": 48,
+  "byRule": {
+    "eslint(no-unused-vars)": 188,
+    "typescript(no-non-null-assertion)": 157,
+    "typescript(ban-ts-comment)": 22,
+    "typescript(no-explicit-any)": 50,
+    "typescript(no-dynamic-delete)": 13,
+    "eslint(prefer-const)": 8,
+    "eslint(no-unused-expressions)": 3,
+    "typescript(no-invalid-void-type)": 1,
+    "typescript(no-extraneous-class)": 1,
+    "typescript(triple-slash-reference)": 1,
+    "typescript(no-misused-spread)": 4,
+    "typescript(no-unnecessary-condition)": 595,
+    "typescript(no-confusing-void-expression)": 769,
+    "typescript(no-unnecessary-type-conversion)": 233,
+    "typescript(no-unsafe-assignment)": 175,
+    "typescript(no-unsafe-member-access)": 412,
+    "typescript(no-unsafe-argument)": 70,
+    "typescript(no-base-to-string)": 182,
+    "typescript(switch-exhaustiveness-check)": 1,
+    "typescript(no-unnecessary-type-assertion)": 447,
+    "typescript(use-unknown-in-catch-callback-variable)": 29,
+    "typescript(restrict-template-expressions)": 25,
+    "typescript(no-useless-default-assignment)": 2,
+    "typescript(no-unsafe-return)": 22,
+    "typescript(restrict-plus-operands)": 79,
+    "typescript(no-unnecessary-boolean-literal-compare)": 12,
+    "typescript(require-await)": 11,
+    "typescript(no-misused-promises)": 22,
+    "typescript(no-floating-promises)": 13,
+    "typescript(no-duplicate-type-constituents)": 1,
+    "typescript(no-unsafe-call)": 228,
+    "typescript(unbound-method)": 3,
+    "typescript(no-deprecated)": 5,
+    "typescript(await-thenable)": 9,
+    "typescript(prefer-return-this-type)": 1,
+    "typescript(no-unnecessary-template-expression)": 6,
+    "typescript(no-meaningless-void-operator)": 7,
+    "typescript(no-unnecessary-type-parameters)": 1
+  },
+  "measure": {
+    "A-full（src+lib，官方规则全集）": {
+      "errors": 9474,
+      "warnings": 48,
+      "files": 608
+    },
+    "B-src-only（甲方案=本判据射程）": {
+      "errors": 3457,
+      "warnings": 48,
+      "files": 539
+    },
+    "C-src-correctness（只 correctness 类）": {
+      "errors": 196,
+      "warnings": 0,
+      "files": 539
+    }
+  },
+  "provenance": {
+    "recordedAt": "2026-11-07",
+    "recordedBy": "l2-oxlint（builder 子会话）· ISS-713 · 待 Lead 复核",
+    "command": "node scripts/gates/lint-oxlint.mjs --write",
+    "howToReverify": "node scripts/gates/lint-oxlint.mjs --measure   # 三口径现算",
+    "scope": "forge-*/src/**/*.{ts,tsx}（不含 lib、不含 scripts/*.mjs、不含 *.js）",
+    "ruleSet": "官方 ~/dsh-src/.oxlintrc.json 的显式规则集（plugins:[] + correctness:off），共 72 条规则参与扫描、37 条有命中",
+    "oxlintVersion": "1.76.0 + oxlint-tsgolint@7.0.2001（typeAware 后端）"
+  },
+  "whyThisNumber": {
+    "summary": "3457 条是 forge-*/src/** 下 287 个文件的真实存量违例，不是估算、不是抽样。",
+    "whyNotZero": "清零不现实：这类违规（no-unsafe-* / no-unnecessary-condition / no-confusing-void-expression）需要逐个判断语义才能改，一次做完工作量远超本单，且会掩盖真 bug。零容忍会让门禁从落地那刻起永远红着 —— 长红的门禁等于没有门禁（同 gate-fast.mjs 头注口径）。",
+    "whyAllowedToStay": "取棘轮而非清零：基线锁住现值，任何新增立刻红；任何下降必须真的改代码。让存量债可见、可控、只减不增。",
+    "whoDecided": "Lead 批准（2026-11-07）「棘轮 + 全规则」方案，替代原「先只判 correctness 类」的分阶段方案 —— 后者会把 no-floating-promises / no-misused-promises / no-unsafe-* 这些只有 typeAware 才判得出的规则排除在外，等于装了 typeAware 却不许它干活。",
+    "ratchetDirection": "只许降：maxErrors 只能变小。降的唯一合法方式是真的改代码 —— 见本文件 antiGaming。"
+  },
+  "antiGaming": {
+    "rule": "⛔ 不许通过删除/关闭规则来降低违例数",
+    "howItIsEnforced": "lint-oxlint.mjs 的 O2：基线 byRule 里有数、当前归零的规则 ⇒ 判红并点名。删规则降数会当场被抓。",
+    "legitimatePath": "真修完了 ⇒ 跑 --write 重建基线（规则自然从未命中集合消失，git diff 里看得见）",
+    "testedAt": "2026-11-07 实测：删掉 typescript/no-confusing-void-expression（694 条）⇒ 总数 2763 < 基线 3457，O1 本来会绿；O2 判红 exit 1"
+  },
+  "knownDefects": {
+    "traderTypeAwareBroken": {
+      "what": "forge-trader/tsconfig.json:15 有 \"baseUrl\": \".\" ⇒ tsgolint 整包拒绝解析（Option baseUrl has been removed）",
+      "impact": "该包 59 个 .ts 处于**类型感知失效**状态：它们本该报的违例一个没报 ⇒ **本基线可能偏低**",
+      "affectsThisBaseline": true,
+      "fixIssue": "ISS-504（问题②，该单三个问题里优先级最高）",
+      "fixIssueStatus": "backlog —— 截至 2026-11-07 记录时未开工",
+      "afterFix": "修完须重跑 `node scripts/gates/lint-oxlint.mjs --measure`，据此 `--write` 更新本基线。违例数很可能上升，那是**补回了漏报**，不是回归。",
+      "mustFixBefore": "本基线被当作「生效」的对照之前 —— 否则基线锁在一个错误状态上"
+    },
+    "libNotInScope": {
+      "what": "forge-*/lib/ 下 48 个 .ts 未纳入射程",
+      "measured": "6018 条，其中 3761 条（62%）是 error 类型级联假违例",
+      "cause": "lib 的测试 import 同目录 .js，那些 .js 有 checkJs 但无 .d.ts ⇒ tsgolint 解析成 error 类型",
+      "fixIssue": "ISS-504（问题③）",
+      "fixIssueStatus": "backlog —— 本单只记录 + 量数，不修"
+    },
+    "worktreeBunAddPollutesMain": {
+      "what": "在工作树里 bun add 会把 bin 链接写进主 checkout 的 node_modules/.bin（工作树的 .bin / .bun 是软链到主检出的）",
+      "impact": "生成悬空软链、破坏「主 checkout 干净」这个前提。ISS-713 期间实测踩中并已清理。",
+      "fixIssue": "ISS-504（问题①）",
+      "fixIssueStatus": "backlog"
+    }
+  },
+  "filesWithViolations": 314,
+  "lastWrite": {
+    "at": "2026-11-08T23:10:24.456Z",
+    "by": "dylan",
+    "reason": "ISS-716 合并（634684b2）带入 233 条 type-aware 违例，pre-commit 未过、经老板授权 --no-verify 收尾；已建 ISS-735 清理，本次仅止血抬基线，不是还债",
+    "from": 3690,
+    "to": 3808,
+    "delta": 118,
+    "rulesVanished": [],
+    "rulesAppeared": [
+      "typescript(no-extraneous-class)"
+    ]
+  }
+}

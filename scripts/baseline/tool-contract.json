@@ -1,0 +1,8 @@
+{
+ "recordedAt": "2026-09-22",
+ "tool": "lint-tool-contract.mjs --write",
+ "note": "TC1 = 可跳过分支里调 hook 的处数。棘轮：只许降不许升（新增即红）。存量清零归各业务批次，不在本门禁里顺手改渲染逻辑。 存量原为三处（forge-ui 的 home / register / global-search）同一形态：注入式 hook prop —— props.useSessionPendingInteraction ? props.useSessionPendingInteraction(...) : undefined，是刻意的依赖注入接缝（同文件注释里记过它引发的真实缺陷）。⚠️ ISS-566 起存量清零（home 于 ISS-565 删、register 那处随帧删、global-search 于 ISS-566 删）⇒ TC1 实测 0。 两条路里选了〔记进棘轮 + 点名〕，**没有把判据窄化成只认裸标识符调用**：窄化就等于让这类〔条件里调 hook〕从此隐形。",
+ "ceilings": {
+  "TC1": 3
+ }
+}

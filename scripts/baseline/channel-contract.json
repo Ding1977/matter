@@ -1,0 +1,13 @@
+{
+ "tool": "lint-channel-contract.mjs",
+ "recordedAt": "2026-09-22",
+ "note": "广播型 SSE 通道：CC1 游标 · CC2 订阅端非推送重拉（两条判红）；CC3 只报（静态判不准是否故意纯增量流）",
+ "ceiling": {
+  "CC1": 0,
+  "CC2": 0
+ },
+ "offenders": {
+  "CC1": [],
+  "CC2": []
+ }
+}

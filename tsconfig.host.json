@@ -1,0 +1,38 @@
+{
+  // 根 host face 聚合（ISS-539 · P4-N1）——generator 接线的最小宿主配置。
+  // findWorkspaceRoot() 认「同时含 tsconfig.host.json + packages/」的祖先为根；
+  // WorkspaceAnalyzer 从本文件的 projectReferences 发现 contributor（source-only）。
+  // 主类型检查入口仍是 tsconfig.next.json；本文件只供 scripts/generate-typert.ts 使用。
+  "extends": "./tsconfig.base.emit.json",
+  "compilerOptions": {
+    "noEmit": true,
+    // generator 的 isTypeMetaSymbol 只认 protocol 的 registration 或同名 declare module 块。
+    // DSH 用 workspace:* + base paths 指源达成；本仓 npm 直装，故用 scripts 的 shim 达同一目的
+    // （见 scripts/typert-protocol-shim.d.ts）。paths 在 extends 间不合并，必须列全 @matter 别名。
+    "paths": {
+      "@deepseek-ai/dsh-typert-protocol": ["./scripts/typert-protocol-shim.d.ts"],
+      "@matter/storage": ["./packages/storage/storage/src/index.ts"],
+      "@matter/storage-json": ["./packages/storage/storage-json/src/index.ts"],
+      "@matter/storage-domain": ["./packages/storage/storage-domain/src/index.ts"],
+      "@matter/storage-journal": ["./packages/storage/storage-journal/src/index.ts"],
+      "@matter/issue": ["./packages/pm/issue/src/index.ts"],
+      "@matter/project": ["./packages/pm/project/src/index.ts"],
+      "@matter/blocks": ["./packages/kb/blocks/src/index.ts"],
+      "@matter/document": ["./packages/kb/document/src/index.ts"],
+      "@matter/document-controller": ["./packages/api/document-controller/src/index.ts"],
+      "@matter/client-ui-theme": ["./packages/client/ui-theme/src/index.ts"],
+      "@matter/client-ui-blocks": ["./packages/client/ui-blocks/src/index.ts"],
+      "@matter/client-ui-kb": ["./packages/client/ui-kb/src/index.ts"]
+    }
+  },
+  "include": [],
+  // generator 从本文件的 references 建立 host face 的 registration 集。Remote codec 的
+  // 递归类型（Block 归 @matter/blocks）与 boundary 类型（DocRecord 归 @matter/document）
+  // 的所有者都必须登记进本 face，否则 resolvedCycleReference / publicRemoteType 报
+  // "not owned by this face"。DSH 的 tsconfig.host.json 同理列全包（实测 318 条）。
+  "references": [
+    { "path": "./packages/kb/blocks" },
+    { "path": "./packages/kb/document" },
+    { "path": "./packages/api/document-controller" }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-02",
+  "tool": "data-root-check.mjs --write-baseline",
+  "存量": {
+    "forge-agent-protocol/lib/protocol.test.js#literal-dsh-home": "forge-agent-protocol/lib/protocol.test.js:208 literal-dsh-home",
+    "forge-agents/lib/domain.test.js#literal-dsh-home": "forge-agents/lib/domain.test.js:32 literal-dsh-home",
+    "forge-cli-provider/lib/config.js#hand-rolled-root": "forge-cli-provider/lib/config.js:166 hand-rolled-root",
+    "forge-cli-provider/lib/config.js#literal-dsh-home": "forge-cli-provider/lib/config.js:166 literal-dsh-home",
+    "forge-cli-provider/lib/wiring.js#hand-rolled-root": "forge-cli-provider/lib/wiring.js:117 hand-rolled-root",
+    "forge-cli-provider/lib/wiring.js#literal-dsh-home": "forge-cli-provider/lib/wiring.js:117 literal-dsh-home",
+    "forge-messenger/lib/inflight-cli.mjs#hand-rolled-root": "forge-messenger/lib/inflight-cli.mjs:76 hand-rolled-root —— 例外（ISS-781）：本 CLI 的回落是 ~/.dsh-matter（3210 的 profile 盘，watchdog 只守它），内核 dshHome() 的回落是 ~/.dsh ⇒ 换内核会改默认落点，属行为变更。包内已收成唯一一份（resume-cli.mjs:resolvePaths 改为复用本函数），故不是重复抄写。摘除条件：内核给出「回落可注入」的取根（或 3210 迁回 ~/.dsh）后改用内核并删本条。",
+    "forge-model/lib/plans/providers.js#literal-dsh-home": "forge-model/lib/plans/providers.js:545 literal-dsh-home",
+    "forge-monitor/lib/index.js#literal-dsh-home": "forge-monitor/lib/index.js:26 literal-dsh-home",
+    "forge-pm/lib/paths.test.js#literal-dsh-home": "forge-pm/lib/paths.test.js:12 literal-dsh-home",
+    "forge-pm/lib/sidecar.test.js#literal-dsh-home": "forge-pm/lib/sidecar.test.js:20 literal-dsh-home",
+    "forge-pm/scripts/pm-parent-child-audit.mjs#literal-dsh-home": "forge-pm/scripts/pm-parent-child-audit.mjs:24 literal-dsh-home",
+    "forge-services/lib/index.js#hand-rolled-root": "forge-services/lib/index.js:31 hand-rolled-root",
+    "forge-services/lib/index.js#literal-dsh-home": "forge-services/lib/index.js:31 literal-dsh-home",
+    "forge-shell/lib/bridge.js#literal-dsh-home": "forge-shell/lib/bridge.js:22 literal-dsh-home"
+  }
+}

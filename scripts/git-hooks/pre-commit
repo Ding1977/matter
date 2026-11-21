@@ -1,0 +1,300 @@
+#!/usr/bin/env bash
+# pre-commit —— 暂存区快检（ISS-721）
+#
+# ── 为什么装在这里 ────────────────────────────────────────────────────────────
+# 官方 `~/dsh-src/lefthook.yml` 的 pre-commit 有 6 个 job（translation pairing /
+# archived agent notes / lint(staged) / third-party notices / whitespace /
+# vendor manifest guard）。我方 `scripts/git-hooks/` 原本只有 commit-msg · pre-push ·
+# reference-transaction —— **提交前一道检查都没有**。
+# 后果不是「闸不严」，是**问题从「提交时」漏到「push 时」**：pre-push 跑的是
+# `run-gates --tier fast`（89 格全量），一次 push 才知道错，返工成本高一个数量级。
+#
+# 本钩子补的是官方那 6 个 job 里**只依赖暂存内容、且能在 2s 内跑完**的那几类：
+#   ① staged lint       —— 官方 `lint (staged)` / `--config .oxlintrc.staged.json`
+#   ② whitespace        —— 官方 `whitespace (staged)` / `git diff --cached --check`
+#   ③ secret-scan       —— 官方 pre-commit 没有，但本仓 secret-scan 已在 CI 与
+#                          run-gates 里跑；提交前拦一次成本极低、漏出去的代价最高
+#
+# 官方另外 3 个 job（translation pairing / archived agent notes / third-party
+# notices / vendor manifest guard）**没有搬**：它们的输入是本仓不存在的产物
+# （`.i18n.yaml` / `.agents/notes/archived` / vendor 目录），搬过来就是空转。
+#
+# ── 三条硬约束（改了就等于把闸变成摆设）─────────────────────────────────────
+#   1. **只查暂存**，不查工作区。官方同口径（`{staged_files}`）。
+#      查工作区 = 把你没打算提交的改动拦下来，人会立刻 `--no-verify`。
+#   2. **不搬 pre-push 的整闸**。89 格塞进每次 commit ⇒ 每次提交等 4~9s ⇒ 必被绕。
+#      本钩子的全部价值在「快」：慢的 pre-commit 比没有更糟（人会把 --no-verify
+#      练成肌肉记忆，连带把真该拦的一起绕掉）。
+#   3. **判不了就红，不当绿**。oxlint / secret-scan 缺席时不许静默放行
+#      （本仓反复记的那一族：看不见 ≠ 没有）。
+#
+# ── 逃生口：只有 git 自带的 `--no-verify` ────────────────────────────────────
+# 不设 SKIP_* / MATTER_GATE_SKIP 之类的私有旗标（与 pre-push 同口径：静默可绕的闸
+# 没有信息价值）。绕了请在 issue note 里写明原因。
+#
+# ── 已知偏差（诚实说明，不假装没有）──────────────────────────────────────────
+# oxlint 只能读**磁盘文件**，读不到 index 里的 blob。所以「部分暂存」
+# （`git add -p` 只暂存了文件的一部分行）时，它判的是工作区版本，可能比暂存版本
+# 多/少几条。这个偏差是 oxlint 的能力边界，不是本钩子的选择：
+# 把暂存内容导出到临时目录再判，会让 tsconfig 相对路径全断 ⇒ 实测报
+# `typescript(tsconfig-error): Cannot find type definition file for 'bun'`（假红）。
+# 两害相权取「判工作区版本」：全量暂存（绝大多数情况）下二者完全一致。
+#
+# 安装：node scripts/install-hooks.mjs（或 bun install 的 postinstall）
+# 绕过：git commit --no-verify
+set -uo pipefail
+
+# ── git_isolated：在「与外层仓库无关」的环境里跑 git ──────────────────────────
+# `git commit` 跑钩子时会把 GIT_DIR / GIT_INDEX_FILE 等导出到环境，且它们**优先于
+# CWD**。任何在临时目录里跑的 git 都必须先经这里，否则会写进真实仓（ISS-722 血案：
+# 把工作树 index 覆盖成 3 个文件、把 core.bare 改成 true，97 个工作树一度全失效）。
+#
+# 做法：枚举**所有**继承来的 GIT_* 变量逐个 `env -u` 剥掉，而不是硬编码几个名字 ——
+# 将来 git 多导出一个变量（比如 GIT_SHALLOW_FILE）也不会再炸一次。
+# 剥干净后由调用方显式传入它自己的 GIT_DIR/GIT_WORK_TREE。
+#
+# 判据：`git_isolated "$SCAN" "$SCAN/.git" git status` 之类的调用不会碰到外层仓。
+git_isolated() {
+  local work="$1"; shift
+  local gitdir="$1"; shift
+  local -a strip=()
+  local v
+  # 剥掉**所有**继承来的 GIT_*（而不是硬编码几个名字）：将来 git 多导出一个变量
+  # 也不会再炸一次（ISS-722 的教训就是「只想到已知的那几个」）。
+  for v in $(env | sed -n 's/^\(GIT_[A-Z_]*\)=.*/\1/p'); do
+    strip+=("-u" "$v")
+  done
+  # ⚠️ bash 3.2 在 `set -u` 下展开**空数组**会报 `unbound variable` 并退出。
+  #    这里必须分两支：无 GIT_* 时（例如人手直接跑钩子）不能把空数组塞进 env。
+  if [ "${#strip[@]}" -eq 0 ]; then
+    ( cd "$work" && env \
+        GIT_DIR="$gitdir" GIT_WORK_TREE="$work" \
+        git "$@" )
+  else
+    ( cd "$work" && env "${strip[@]}" \
+        GIT_DIR="$gitdir" GIT_WORK_TREE="$work" \
+        git "$@" )
+  fi
+}
+
+REPO_ROOT="$(git rev-parse --show-toplevel)" || exit 1
+cd "$REPO_ROOT" || exit 1
+
+fail=0
+err() { echo "[pre-commit] ✗ $*" >&2; }
+
+# 暂存里有没有东西（空提交 / --allow-empty / merge 无冲突解：一律秒过）
+# 用 `-z` 读成数组：路径含空格或换行时 `$( )` 会切坏（本仓有带空格的历史路径）。
+#
+# ⚠️ `R` 必须在过滤器里（ISS-834）。少了它：只 `git mv` 的提交在这里读到空 ⇒ 下面
+# `exit 0` 秒过，**四条判据一条都不跑**。实测 `git mv f g` + 同一提交里追加行尾空白：
+# 单跑 `git diff --cached --check` 是 rc=2（红），走钩子却是 rc=0（放行）。
+# 重构期的大量搬迁 = 每次搬迁都是盲区，且知道这条的人可主动利用。
+#
+# 重命名用**新路径**是安全的：`--name-only` 对 R 只吐新路径（R100 与 R090 实测同），
+# 而新路径就在 index 里 ⇒ `checkout-index`/oxlint/`--check` 都取得到内容。
+# （旧路径已不在 index 里，拿它去 `checkout-index` 会失败。）
+staged_all=()
+while IFS= read -r -d '' f; do staged_all+=("$f"); done \
+  < <(git diff --cached --name-only -z --diff-filter=ACMR)
+if [ "${#staged_all[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+# ── ① whitespace：行尾空白 + 冲突标记 + space-before-tab ─────────────────────
+# 用 git 自带判据（官方 lefthook 的 `whitespace (staged)` 就是这一条),而不是自己写正则。
+# 实测覆盖（`git diff --cached --check`）：
+#   行尾空白            → "trailing whitespace."
+#   <<<<<<< / ======= / >>>>>>> → "leftover conflict marker"
+#   缩进里「空格后跟 tab」 → "space before tab in indent."
+# ⚠️ 它**不**报「tab 后跟空格」（实测），那一条由下面的 ② 补。
+ws_out="$(git diff --cached --check 2>&1)"
+if [ -n "$ws_out" ]; then
+  echo "[pre-commit] ✗ whitespace / 冲突标记：git diff --cached --check" >&2
+  printf '%s\n' "$ws_out" >&2
+  fail=1
+fi
+
+# ── ② 缩进里「tab 后跟空格」（`--check` 的缺口）──────────────────────────────
+# 只看 diff 的**新增行**（`+` 开头），只看行首缩进段。存量不判 —— 存量行尾空白的
+# 全仓有 138 行，判存量就是每天拦所有人（长红的门禁等于没有门禁）。
+# 只用内联 node：仓里没有现成的「混缩进」判据可复用，为一条正则新建 .mjs 不值（克制）。
+#
+# ⚠️ 这里**故意不传 pathspec**（ISS-834 实测）：一旦给 `git diff` 传 pathspec，
+#    而那个 pathspec 只含**新路径**（`--name-only --diff-filter=R` 只吐新路径），
+#    git 就**关掉重命名检测**，把纯改名当成「新增文件」⇒ 整份文件每一行都算新增行。
+#    实测（20 行文件纯 `git mv`）：不带 pathspec ⇒ 0 条新增行；带新路径 ⇒ 21 条。
+#    后果：一个历史上就带混缩进的文件，搬个目录就被判红 —— 纯改名误伤，重构期天天拦人。
+#    删掉 pathspec 语义完全等价：`--cached` 本来就是「只看了暂存 vs HEAD」，
+#    `"${staged_all[@]}"` 是**从同一个 diff 里**取出来的，不是额外收窄。
+#    （唯一区别：D 文件也会进 diff，但删除只有 `-` 行，下面只认 `+` 行，不受影响。）
+indent_bad="$(git diff --cached --unified=0 --diff-filter=ACMR \
+  | node -e '
+const fs = require("node:fs")
+const diff = fs.readFileSync(0, "utf8")
+let file = "?"
+const bad = []
+for (const line of diff.split("\n")) {
+  if (line.startsWith("+++ b/")) { file = line.slice(6); continue }
+  if (!line.startsWith("+") || line.startsWith("+++")) continue
+  const indent = /^[ \t]*/.exec(line.slice(1))[0]
+  if (indent.includes("\t") && indent.includes(" ")) bad.push(`${file}: ${JSON.stringify(line.slice(0, 80))}`)
+}
+if (bad.length) { console.log(bad.join("\n")); process.exit(1) }
+' 2>&1)"
+if [ -n "$indent_bad" ]; then
+  echo "[pre-commit] ✗ 缩进里 tab 与空格混用（新增行）：" >&2
+  printf '%s\n' "$indent_bad" >&2
+  fail=1
+fi
+
+# ── ③ staged lint：只对暂存的 forge-*/src/**/*.{ts,tsx} 跑 oxlint ─────────────
+# 射程与 `.oxlintrc.json` 的组 1/2/3 `files` 完全一致（`forge-*/src/**/*.{ts,tsx}`）。
+# 为什么只看 src 不看 lib/scripts：`.oxlintrc.json` 头注已裁过 —— lib 的类型声明
+# 缺口会炸出 6018 条假错，scripts/*.mjs 不在任何 tsconfig program 里（typeAware 无效）。
+# 射程在这里抄窄了，就等于「lint 绿」不覆盖全仓；抄宽了，等于把存量假红塞进每次提交。
+#
+# ⚠️ 这里**必须**保留 glob pathspec（射程靠它），也**必须**含 `R`（ISS-834）：
+#    只改名不改内容时，`--diff-filter=AC` 读不到任何路径 ⇒ 搬进 `forge-*/src/` 的文件
+#    一次都不 lint（实测：`scripts/legacy.ts` → `forge-a/src/legacy.ts`，AC 给空，ACMR 给新路径）。
+#    带 glob pathspec 时 rename 仍按**新路径**报出来（实测同目录、跨目录两种），
+#    新路径落在 glob 内就是要 lint 的目标 —— 与 oxlint 读磁盘文件的偏差无关。
+lint_files=()
+while IFS= read -r -d '' f; do lint_files+=("$f"); done \
+  < <(git diff --cached --name-only -z --diff-filter=ACMR -- \
+      ':(glob)forge-*/src/**/*.ts' ':(glob)forge-*/src/**/*.tsx')
+
+if [ "${#lint_files[@]}" -gt 0 ]; then
+  # 找 oxlint：与 scripts/gates/lint-oxlint.mjs 的 findOxlint() 同序（先包目录真身，
+  # 再 .bin 软链）。两处口径必须一致，否则「pre-commit 绿、门禁红」会互相打脸。
+  OX=""
+  for c in "$REPO_ROOT/node_modules/oxlint/bin/oxlint" "$REPO_ROOT/node_modules/.bin/oxlint"; do
+    if [ -x "$c" ]; then OX="$c"; break; fi
+  done
+  CFG="$REPO_ROOT/.oxlintrc.json"
+  if [ -z "$OX" ] || [ ! -f "$CFG" ]; then
+    # 判不了 = 红（不当绿）。缺依赖时静默放行，等于「lint 从没跑过而你以为跑过」。
+    err "有 ${#lint_files[@]} 个暂存的 src 文件要 lint，但 oxlint/.oxlintrc.json 找不到 ⇒ 判不了，不冒充绿"
+    err "  修：bun install（提供 node_modules/oxlint 与 .oxlintrc.json）"
+    fail=1
+  else
+    # 不传 --fix：pre-commit 不许偷偷改暂存内容（那会让「提交了什么」变得不可预测，
+    # 官方 `lint (staged)` 的 --fix 配 stage_fixed 是 lefthook 的能力，git 钩子没有）。
+    lint_out="$("$OX" -c "$CFG" -- "${lint_files[@]}" 2>&1)"
+    lint_rc=$?
+    if [ "$lint_rc" -ne 0 ]; then
+      echo "[pre-commit] ✗ staged lint（oxlint · ${#lint_files[@]} 个文件）：" >&2
+      printf '%s\n' "$lint_out" >&2
+      fail=1
+    fi
+  fi
+fi
+
+# ── ④ secret-scan：对**暂存内容**跑，不是对已入库文件跑 ──────────────────────
+# `scripts/secret-scan.mjs` 的 CLI 只有三档：`--worktree`（扫 `git ls-files` 的已入库
+# 文件）/ `--diff <base>`（扫某 commit 之后的新增行）/ `--selftest`。它**没有**
+# 「扫暂存」这一档，也没有 export 可供 import。
+#
+# 工单纪律是「能接就接；只能全量扫就对 staged 逐个扫，不要重写它」。三条路都比过：
+#   A. 直接 `--worktree`：扫的是**已入库**内容。`git add` 之后还没 commit 的文件不在
+#      `git ls-files` 里 ⇒ **新文件完全扫不到**，恰恰是最该拦的那一类。否决。
+#   B. `--diff HEAD`：`git -C ROOT diff HEAD..HEAD` 恒为空 ⇒ 恒绿。否决。
+#   C. 建一棵临时「index 镜像树」：把暂存版本 `git checkout-index --prefix` 导出，
+#      在里面 `git init && git add -A` ⇒ 再跑**原封不动**的 `--worktree`。
+#      这样 `git ls-files` 的集合恰好 = 本次暂存集合，模式表 / 占位符豁免 / 豁免形状
+#      棘轮全部沿用同一份实现（改它一次就够，不用改两处）。实测 ~0.1s。采用。
+#
+# ⚠️⚠️ 血案（ISS-722，2026-11-08）：这条路第一次写错了，把共享仓写坏。
+#   `git commit` 跑钩子时会把 **`GIT_DIR` / `GIT_INDEX_FILE` 导出到环境**，而
+#   **这两个变量优先级高于 CWD**（$GIT_DIR/.git 与 $GIT_INDEX_FILE 一旦设了，
+#   `cd` 到哪都没用）。于是 `( cd "$SCAN" && git init . && git add -A )` 里的
+#   `git add -A` 写的是**真实工作树的 index**，把它覆盖成 `$SCAN` 里的那 3 个文件
+#   ⇒ 下一次 commit 的 tree 只剩 3 条 ⇒ 2776 个 delete。同时 `git init` 把
+#   主仓 `core.bare` 改成了 true ⇒ 全部工作树的 git 一起失效。
+#   为什么本地直接 `bash scripts/git-hooks/pre-commit` 测不出来：**手工跑钩子时
+#   没有这两个变量**，只有在 `git commit` 里才有。这就是「本地试过没问题」的经典陷阱。
+#   ⇒ 凡在本钩子里进临时目录跑 git，一律经 `git_isolated`：先剥掉**全部**继承来的
+#   `GIT_*`（不是只 unset 已知那几个 —— 将来 git 多导出一个就再炸一次），再显式给
+#   镜像树自己的 `GIT_DIR`/`GIT_WORK_TREE`。显式传，不靠继承。
+#
+# ⚠️ 为什么是**复制**脚本而不是 import/改它：`secret-scan.mjs` 的 ROOT 由
+# `path.resolve(import.meta.dirname, "..")` 推出，且不带 export。给它加 `--staged`
+# 是改它的契约（本单写范围不含该文件）；所以复制一份到镜像树里，跑的是**同一份字节**，
+# 判据仍只有一份真相源。下面用「输出里必须有『工作区扫描』字样」当作接缝的自检 ——
+# 它将来若改了输出格式，这里立刻红，而不是静默变绿。
+if [ -f scripts/secret-scan.mjs ] && [ -f scripts/baseline/secret-scan-exempt.json ]; then
+  TMPROOT="$(mktemp -d "${TMPDIR:-/tmp}/pc-secret.XXXXXX")"
+  if [ -z "${TMPROOT:-}" ] || [ ! -d "$TMPROOT" ]; then
+    err "建不出临时目录 ⇒ secret-scan 判不了，不冒充绿"
+    fail=1
+  else
+    SCAN="$TMPROOT/scan"
+    mkdir -p "$SCAN/scripts/baseline"
+    cp scripts/secret-scan.mjs "$SCAN/scripts/" \
+      && cp scripts/baseline/secret-scan-exempt.json "$SCAN/scripts/baseline/"
+    if [ $? -ne 0 ]; then
+      err "复制 secret-scan.mjs / 豁免基线失败 ⇒ 判不了，不冒充绿"
+      fail=1
+    else
+      # 只导出暂存版本（`--prefix` 保留仓库内相对路径）。删除的文件不在 index 里，
+      # 而 `--diff-filter=ACMR` 已把 D 排掉，故两者口径一致。
+      # ⚠️ 重命名导出的是**新路径**（`staged_all` 里存的就是新路径，见上方 staged_all 的注释）：
+      #    新路径在 index 里 ⇒ `checkout-index` 取得到；旧路径已不在 index 里，用了会失败。
+      #    ISS-834 之前 R 被过滤掉：纯改名时 `staged_all` 为空 ⇒ 第 91 行就 `exit 0`，
+      #    secret-scan 这一整段**根本没执行**；改名+改内容时也只导出得到被改的 A/C/M 项。
+      #
+      # ⚠️ 下面两处 git 调用**必须**经 `git_isolated`：直接 `cd "$SCAN" && git ...` 会
+      #    因为继承 GIT_DIR/GIT_INDEX_FILE 而写进真实仓（ISS-722 血案，见文件头）。
+      # -f：:231 已把工作区版 secret-scan.mjs / secret-scan-exempt.json 拷进 $SCAN，
+      # 它们若也在 staged_all 里，不带 -f 时 checkout-index 会以 "already exists" 拒绝覆盖
+      # ⇒ secret-scan 判不了、任何暂存 secret-scan-exempt.json 的提交都被假冲突挡下。
+      # 带 -f 覆盖这两份（内容与暂存版一致），其余暂存文件照常导出 —— 正是本段本意。
+      if ! git checkout-index -f --prefix="$SCAN/" -- "${staged_all[@]}"; then
+        err "导出暂存内容失败 ⇒ secret-scan 判不了，不冒充绿"
+        fail=1
+      elif ! git_isolated "$SCAN" "$SCAN/.git" init -q >/dev/null 2>&1 \
+           || ! git_isolated "$SCAN" "$SCAN/.git" add -A >/dev/null 2>&1; then
+        err "临时 index 镜像树建立失败 ⇒ secret-scan 判不了，不冒充绿"
+        fail=1
+      else
+        # secret-scan.mjs 内部跑 `git -C ROOT ls-files`，ROOT = 脚本上级目录 = $SCAN。
+        # 它同样会继承外层 GIT_DIR ⇒ 先用 git_isolated 剥干净，再显式给它镜像树自己的
+        # GIT_DIR/GIT_WORK_TREE（同一个坑，同一个修法）。
+        secret_out="$( cd "$SCAN" \
+                       && env $(env | sed -n 's/^\(GIT_[A-Z_]*\)=.*/-u \1/p') \
+                            GIT_DIR="$SCAN/.git" GIT_WORK_TREE="$SCAN" \
+                            node scripts/secret-scan.mjs --worktree 2>&1 )"
+        secret_rc=$?
+        if [ "$secret_rc" -ne 0 ]; then
+          echo "[pre-commit] ✗ secret-scan（暂存内容）：" >&2
+          printf '%s\n' "$secret_out" >&2
+          fail=1
+        elif ! printf '%s' "$secret_out" | grep -q '工作区扫描'; then
+          # 接缝自检：输出格式变了就红，不许「跑了个不认识的东西」当成通过。
+          err "secret-scan 输出里没有『工作区扫描』字样 ⇒ 接法失效，判不了，不冒充绿"
+          printf '%s\n' "$secret_out" >&2
+          fail=1
+        fi
+      fi
+    fi
+    rm -rf "$TMPROOT"
+  fi
+else
+  err "scripts/secret-scan.mjs 或 scripts/baseline/secret-scan-exempt.json 缺失 ⇒ 判不了，不冒充绿"
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  cat >&2 <<'EOF'
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[pre-commit] 提交被拒（ISS-721 · 只查暂存区）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+修到上面每条变绿再提交。确实要绕过：
+  git commit --no-verify
+并把绕过原因写进本轮 issue note（不设私有 SKIP 旗标，有意如此）。
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  exit 1
+fi
+
+exit 0

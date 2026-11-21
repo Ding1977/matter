@@ -1,0 +1,428 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "verify-spec 存量白名单（ISS-742），逐条 why、只减不增，属存量豁免。"
+  },
+  "recordedAt": "2026-11-09",
+  "unit": "file+lineText",
+  "note": "verify-spec 的存量白名单（ISS-742）。匹配口径：file 相同 + 命中行（空白归一后）包含 lineText；line 仅供人读，不参与匹配。why 为空 ⇒ 该条无效、问题照红。新增条目必须写 why；本文件只减不增（摘掉一条 = 还一笔债）。",
+  "allowed": [
+    {
+      "file": "docs/code-migration.md",
+      "line": 145,
+      "lineText": "复现 harness）⇒ 新增 `scripts/demo-harness.ts`；`forge-agents · fi",
+      "why": "迁移台账记录当格新建的 scripts/demo-harness.ts，当夜返修时已搬去 forge-canvas/scripts/；台账只追加不改写，属档案不是可跟随指针"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 442,
+      "lineText": "nerated.ts` 重跑 `bun scripts/build-styles.mjs`",
+      "why": "指包内 forge-design/scripts/build-styles.mjs（文件在），计划正文省了包前缀；根 scripts/ 下同路径不存在"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 137,
+      "lineText": ".22s×2；`@keyframes` 共 9 个 ⇒",
+      "why": "组件迁移的实测读数快照（CSS 计数），属审计档案非规范正文；改写归 G3"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 388,
+      "lineText": "归一化到语句级对比共 7 个差异块、共有 305 行",
+      "why": "同一份迁移审计的行级 diff 读数，属档案非规范正文；改写归 G3"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 418,
+      "lineText": "共 7 个再导出名，全仓零使用者",
+      "why": "审计里的再导出计数，属档案非规范正文；改写归 G3"
+    },
+    {
+      "file": "docs/matter-event-bus-plan-2026-10-05.md",
+      "line": 346,
+      "lineText": "ge-events` 运行时聚合 + `scripts/lint-event-catalog.mjs` 静态对账",
+      "why": "计划表里「门禁新写」的待落地脚本，属计划档案非规范正文"
+    },
+    {
+      "file": "docs/matter-event-bus-plan-2026-10-05.md",
+      "line": 461,
+      "lineText": "`scripts/lint-event-catalog.mjs`（新）：① 每个 `publish/r",
+      "why": "同一条计划项的展开定义，正文自带「（新）」标明尚未落地"
+    },
+    {
+      "file": "docs/matter-event-bus-plan-2026-10-05.md",
+      "line": 347,
+      "lineText": "统一 resync 帧（现在有 2 份）",
+      "why": "计划里记录的当时缺口读数，属计划档案；改写归 G3"
+    },
+    {
+      "file": "docs/matter-orchestration-desktop-orca-2026-09-27.md",
+      "line": 464,
+      "lineText": "产物 `scripts/probe-acp.mjs` + `docs/memory/acp",
+      "why": "计划里「整条线的闸门卡」待产出的探针脚本，尚未落地"
+    },
+    {
+      "file": "docs/matter-orchestration-desktop-orca-2026-09-27.md",
+      "line": 467,
+      "lineText": "新脚本 `scripts/pm-zombie-report.mjs`",
+      "why": "计划表标注「新脚本」的待落地项"
+    },
+    {
+      "file": "docs/matter-v2-refactor-spec-2026-09-25.md",
+      "line": 110,
+      "lineText": "`scripts/matter-contract-check.mjs --check` + `--selft",
+      "why": "计划判据表里待写的 check 脚本（该 SPEC 的交货物，不是现状指引）"
+    },
+    {
+      "file": "docs/matter-v2-refactor-spec-2026-09-25.md",
+      "line": 111,
+      "lineText": "`scripts/matter-projection-check.mjs`（逐表跑 rebuild+diff）",
+      "why": "同上，计划判据表里待写的投影 check 脚本"
+    },
+    {
+      "file": "docs/matter-v2-refactor-spec-2026-09-25.md",
+      "line": 194,
+      "lineText": "派生：`scripts/gen-matter-contract.mjs` → `src/pm/vocab.ge",
+      "why": "计划里的 codegen 目标脚本（待写），属计划档案"
+    },
+    {
+      "file": "docs/matter-v2-refactor-spec-2026-09-25.md",
+      "line": 405,
+      "lineText": "`、`scripts/gen-matter-contract.mjs` |",
+      "why": "同一份计划里该 codegen 脚本的第二处引用（表内交货物清单）"
+    },
+    {
+      "file": "docs/model-desktop-integration-plan-v2-2026-09-27.md",
+      "line": 263,
+      "lineText": "改卡后 `node scripts/compile-memory.mjs --out AGENTS.local.",
+      "why": "计划里的一次性编译脚本（未入库），属计划档案"
+    },
+    {
+      "file": "docs/model-domain-architecture-plan-2026-10-03.md",
+      "line": 431,
+      "lineText": "构建流程 `scripts/build-client.mjs:11-99`",
+      "why": "指包内 forge-ui/scripts/build-client.mjs，计划正文省了包前缀；行号断言的出处也在包内"
+    },
+    {
+      "file": "docs/model-domain-architecture-plan-v2-2026-10-03.md",
+      "line": 118,
+      "lineText": "` · `scripts/build-client.mjs` |",
+      "why": "同上，包目录清单里的构建脚本，省了包前缀"
+    },
+    {
+      "file": "docs/review-independent-redesign-2026-10-06.md",
+      "line": 177,
+      "lineText": "| 加 `scripts/review-ledger.mjs --since <date>`（**只",
+      "why": "计划里待写的台账脚本，尚未落地"
+    },
+    {
+      "file": "docs/review-independent-redesign-2026-10-06.md",
+      "line": 314,
+      "lineText": "由 `scripts/review-scope.mjs`（新增，P-1 的台账件顺手带上）",
+      "why": "计划正文自带「新增」标注，指待落地脚本"
+    },
+    {
+      "file": "specs/dsh-0.1.5-session-a-upgrade-plan-v2.md",
+      "line": 163,
+      "lineText": "v1 §6 Step 0 引用的 `scripts/dsh-zstd-official.mjs` **不存在**",
+      "why": "正文点名的是「v1 遗留的悬空引用**不存在**」，指错本身就是要记的事"
+    },
+    {
+      "file": "specs/dsh-0.1.5-session-a-upgrade-plan-v2.md",
+      "line": 314,
+      "lineText": "| §6 Step 0 | 用 `scripts/dsh-zstd-official.mjs` 出基线 | 该脚本**不存在**",
+      "why": "同一条：表中已判定「该脚本**不存在**、改用别路」，是有意留痕"
+    },
+    {
+      "file": "specs/dsh-0.1.5-session-v3-ab-split-plan.md",
+      "line": 72,
+      "lineText": "明确 insert 9 个；软链共 12 个。）",
+      "why": "计划里当时的软链数读数，属计划快照"
+    },
+    {
+      "file": "specs/dsh-0.1.5-session-v3-ab-split-plan.md",
+      "line": 143,
+      "lineText": "+ `Menu` + `Modal`，共 4 个文件（`dsh/register.tsx",
+      "why": "计划里当时的耦合面文件计数，属计划快照"
+    },
+    {
+      "file": "specs/engine-minimal-foundation-plan.md",
+      "line": 167,
+      "lineText": "共 3 个（详见 `engine-field-in",
+      "why": "计划里标「待意图确认」的口径计数，属计划快照"
+    },
+    {
+      "file": "specs/forge-cad-figma-shadcn-refactor.md",
+      "line": 65,
+      "lineText": "ailwind-input.css`、`scripts/build-client.mjs` |",
+      "why": "指包内 forge-ui/scripts/build-client.mjs，计划清单省了包前缀"
+    },
+    {
+      "file": "specs/forge-cad-figma-shadcn-refactor.md",
+      "line": 200,
+      "lineText": "3. `scripts/build-client.mjs` 头部插 Tailwind 编译段",
+      "why": "计划施工步骤里的包内构建脚本（同上，省了包前缀）"
+    },
+    {
+      "file": "specs/forge-files-shadcn-refactor-plan.md",
+      "line": 30,
+      "lineText": "4. `scripts/build-client.mjs` 头部插入 Tailwind 编译段",
+      "why": "计划施工步骤里的包内构建脚本（同上，省了包前缀）"
+    },
+    {
+      "file": "specs/novel-editor-refactor.md",
+      "line": 9,
+      "lineText": "详情描述 / 评论输入框 / 项目描述 共 4 个挂载点）",
+      "why": "调研范围描述里的挂载点计数，属调研快照"
+    },
+    {
+      "file": "specs/plans-card-unify-plan.md",
+      "line": 34,
+      "lineText": "src/components/ui/` 共 14 个：",
+      "why": "调研实测读数（shadcn 组件数），属调研快照"
+    },
+    {
+      "file": "specs/plans-card-unify-plan.md",
+      "line": 54,
+      "lineText": "ry.json`，380KB）：**共 41 个组件，其中没有 `card`**",
+      "why": "调研实测读数（registry 组件数），属调研快照"
+    },
+    {
+      "file": "specs/plans-page-redesign.md",
+      "line": 169,
+      "lineText": "3. `scripts/build-client.mjs` 加 tailwind CLI 步骤",
+      "why": "计划施工步骤里的包内构建脚本（同上，省了包前缀）"
+    },
+    {
+      "file": "specs/iss-flow-upgrade-plan-v2.md",
+      "line": 33,
+      "lineText": "写 `scripts/lint-issue-format.mjs`",
+      "why": "计划表里的「待写脚本」条目（「写」是动作，不是「已存在」断言）；文件落地前属计划引用"
+    },
+    {
+      "file": "specs/trader-reliability-plan-2026-10-25.md",
+      "line": 249,
+      "lineText": "当前 7 个",
+      "why": "2026-10-25 历史计划里的现状快照；按 §4.1 ② 应改成「快照 + 复检命令」，计划正文不改写，清理归 G3"
+    },
+    {
+      "file": "docs/matter-spec-gates-and-laya-plan-2026-09-28.md",
+      "line": 136,
+      "lineText": "| `scripts/gate-fast.mjs` | 快闸执行器：复用现成三条",
+      "why": "ISS-800 退役 gate-fast.mjs（三套门禁合一）后留下的档案行；该文档是 2026-09-28 的方案稿，记述的是当时打算怎么造，不是可跟随指针"
+    },
+    {
+      "file": "specs/gate-consolidation-plan-2026-11-07.md",
+      "line": 497,
+      "lineText": "| `scripts/gate-fast.mjs` | 326 行 / 只登记 **4 格** |",
+      "why": "ISS-800 退役 gate-fast.mjs 后留下的台账行；此处是盘点读数（行数/格数），属历史快照"
+    },
+    {
+      "file": "specs/gate-underive-design-2026-11-09.md",
+      "line": 487,
+      "lineText": "新增 `scripts/gates/verify-guard-cell-ids.ts` + `.spec.ts`",
+      "why": "ISS-800 随 guard 一并退役该判据；本文是「落地步骤」设计稿（开头明写只读设计稿、不改代码），记述当初新增了什么"
+    },
+    {
+      "file": "specs/gate-underive-design-2026-11-09.md",
+      "line": 505,
+      "lineText": "`node scripts/gates/verify-guard-cell-ids.ts --check` 绿",
+      "why": "同上，设计稿里的验收步骤快照；该脚本已随 guard 退役（ISS-800）"
+    },
+    {
+      "file": "specs/unified-spec-and-gates-plan-2026-11-09.md",
+      "line": 324,
+      "lineText": "| G3f guard 格 id 静态对账 | ISS-756 |",
+      "why": "计划表里 G3f 这一行的落点记录（含 commit sha）；ISS-800 退役该判据后此行成为档案"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 7,
+      "lineText": "> 用途：① 门禁脚本（`scripts/lint-design.mjs`）的规则与白名单来源；② 统一收口时的施工清单。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 54,
+      "lineText": "### A4. 门禁规则（`scripts/lint-design.mjs` · **该脚本尚未创建**）",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 159,
+      "lineText": "### B7. 门禁规则（`scripts/lint-design.mjs` R4 · 脚本尚未创建）",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 226,
+      "lineText": "### C6. 门禁规则（`scripts/lint-design.mjs` R7 · 脚本尚未创建）",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 310,
+      "lineText": "### G1b. 字号门禁规则（`scripts/lint-design.mjs` R2 · 脚本尚未创建）",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 406,
+      "lineText": "### H4. 门禁规则（`scripts/lint-design.mjs` R3 · 脚本尚未创建）",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 454,
+      "lineText": "### I4. 门禁规则（`scripts/lint-design.mjs` R6 · 脚本尚未创建）",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-audit.md",
+      "line": 540,
+      "lineText": "`scripts/lint-design.mjs` 尚未创建（同 R1~R7）。R8 的规则文本在规范 §2.9，**本节是它的白名单与基线来源**：",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 16,
+      "lineText": "5. **门禁上线**：新建 `scripts/lint-design.mjs`（R1~R7），接入 `ws.sh guard`，先跑基线快照只拦新代码。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 257,
+      "lineText": "2. `node scripts/lint-design.mjs --check`（门禁上线后）。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 537,
+      "lineText": "`node scripts/lint-design.mjs --check`（R8a 26 → 23）。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design-system-migration.md",
+      "line": 624,
+      "lineText": "复算：`node scripts/design-component-inventory.mjs --compare` · `node scripts/lint-design.mjs --check` ·",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design.md",
+      "line": 146,
+      "lineText": "| **门禁** | `scripts/lint-design.mjs` + 守卫测试 | CI / `ws.sh guard` | 提交时（硬失败） |",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design.md",
+      "line": 1228,
+      "lineText": "> 白名单、例外清单与现存违规数一律在 **审计 §J**（门禁脚本 `scripts/lint-design.mjs` 读它，不读本章）。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/design.md",
+      "line": 300,
+      "lineText": "- ⛔ **自造 `--dsw-*` 名字**（DSH 没有 `state-danger-primary` / `state-ok-primary` / `accent-primary` / `label-disabled`… 共 14 个已存在的幽灵引用，见审计 §A5）",
+      "why": "旧 UI 规范正文里的现状数字快照；该文档已于 2026-11-21 废止，保留作历史沿革，不再作为行动依据",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/gates-triage.md",
+      "line": 62,
+      "lineText": "| lint-design-selftest | selfcheck | 0（7s） | 本体（7s） | walk+全文正则 | —（本格不读基线） | — | A | `scripts/lint-design.mjs --selftest` |",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/gates-triage.md",
+      "line": 63,
+      "lineText": "| lint-design | selfcheck | 1（39s） | 有 selftest（另格） | walk+全文正则 | —（本格不读基线） | — | B | `scripts/lint-design.mjs --check` |",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/matter-migration-review-and-next-plan-2026-09-27.md",
+      "line": 282,
+      "lineText": "1. **门禁正在红着走**：`bash scripts/ci-dryrun.sh --quick` 严格档 5 条棘轮超限（R1b 1089/1001 · R2a 620/602 · R4a 128/125 · R5a 119/117 · R8a 6/5），且红存在于 HEAD —— 本轮只写 `.md`，而扫描面 `scripts/lint-design.mjs:33` 只收 `ts/tsx/js/css`，不可能引入。⇒ 说明 M-023「自审直接合」的清单里缺了「收工体检全绿」这一项。顺带好消息：R8a 多出的那一个正是 `forge-model-desktop/src/ui/slider.tsx`，**移出旧包即回到上限**。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/matter-new-home-gate-baseline-2026-09-28.md",
+      "line": 3,
+      "lineText": "> **性质**：现状数字 + 待拍口径。**不是规范条文**（对错仍在 `docs/design.md` / `docs/code.md`），也**不是已生效的基线**——`scripts/baseline/design-lint.json` 一个字没改，`scripts/lint-design.mjs` 一个字没改。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/matter-new-home-gate-baseline-2026-09-28.md",
+      "line": 5,
+      "lineText": "> **复算命令**：临时把 `scripts/lint-design.mjs:167` 的 `hits.filter(h => !inMatter(h.file))` 放开为 `return hits`，跑 `node scripts/lint-design.mjs`（工作树内操作，跑完 `git checkout --` 还原；本文数字即此口径产出，扫 960 文件 / 11 条规则 / 命中 2285）。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/matter-new-home-gate-baseline-2026-09-28.md",
+      "line": 52,
+      "lineText": "- **`scripts/lint-design.mjs:4` 的用法注释承诺 `--json`，代码里没有这个分支**（`grep -n json` 只命中注释行）。⇒ 想拿机器可读明细只能改代码。已按缺陷登记，不在这单里顺手修（属文档漂移族，与 DOC-320 的「规范正文写了但代码没做」同族）。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/matter-spec-gates-and-laya-plan-2026-09-28.md",
+      "line": 52,
+      "lineText": "4. 静态质量门禁对新家**零覆盖**：42 条 K 号判据 `0` 条扫 matter 四包（转述：`scripts/code-inventory.mjs:68` 包名正则只认 `forge-*|electron-shell`）；11 条 R 号只有 R4f 咬新家，其余 10 条在 `scripts/lint-design.mjs:167` 用一行 `filter(h => !inMatter(h.file))` 把新家整体摘掉。⇒ 我上一轮实测的\"R8a 该报 6 实算 8\"就是这条过滤的显形。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/matter-spec-gates-and-laya-plan-2026-09-28.md",
+      "line": 150,
+      "lineText": "第 4 条不是 bug，是 **ISS-910 从推断升级为实测**：根因 `scripts/lint-design.mjs:167` 的 `hits.filter(h => !inMatter(h.file))` 把 10 条 R 号对新家整体摘掉（注释称\"由 R4f 单独零容忍判红\"，而 R4f 只管 z-index 一条）。本轮**故意不动它**——取消过滤属 ISS-910，要连带定新家零容忍基线，不该和装闸混进同一次改动。所以现在的形状是：**旧家有牙，新家只有测试那一层兜着**。",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/project-design-test-rules.md",
+      "line": 296,
+      "lineText": "- **0.1.5 官方共 66 个**（`Icon*OutlineNN` / `Icon*FilledNN`），覆盖 列表/会话/工作区/设置/主题 等。",
+      "why": "旧 UI 规范正文里的现状数字快照；该文档已于 2026-11-21 废止，保留作历史沿革，不再作为行动依据",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "docs/red-cells-5-diagnosis.md",
+      "line": 32,
+      "lineText": "**两处实现缺陷（我逐行复核过 `scripts/lint-design.mjs:388-395`）**：",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，该设计门禁脚本 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "specs/gate-underive-design-2026-11-09.md",
+      "line": 209,
+      "lineText": "| 1 | `scripts/lint-design.mjs` | 2 | `lint-design-selftest` selfcheck `--selftest` fast<br>`lint-design` selfcheck `--check` full | lint-design |",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/lint-design.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    },
+    {
+      "file": "specs/unified-spec-and-gates-plan-2026-11-09.md",
+      "line": 275,
+      "lineText": "| 项目已有可复用件 | `.agents/skills/pre-push-checks/SKILL.md:23-64`、`review-gate/SKILL.md:12-35,170-175`、`.github/workflows/ci.yml:65-111`、`scripts/check-design-token-exists.mjs`（正面基线） |",
+      "why": "2026-11-21 老板拍板废止自研 UI 规范，scripts/check-design-token-exists.mjs 已按令删除；此行是历史文档对该脚本的沿革记录，不是可跟随的现行指针",
+      "expires": "2027-06-30"
+    }
+  ]
+}

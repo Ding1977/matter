@@ -1,0 +1,400 @@
+{
+  "_meta": {
+    "kind": "ledger",
+    "note": "「判不了」豁免台账（ISS-728），每格声明 unjudgedKind/ticket/expires；是台账不是待修豁免，任务书明确 = ledger。"
+  },
+  "_note": "「判不了」豁免台账（ISS-728）。每格必须声明 unjudgedKind + ticket + expires。改法是加行/改行；删行即恢复严格模式（该格一旦判不了就红）。",
+  "_rules": [
+    "unjudgedKind = designed ⇒ 本档永远没有绿可言（report_only 只报不判）。不计入配额，不受 xfail_strict。",
+    "unjudgedKind = needs:<资源> ⇒ 缺这个资源才判不了。计入配额，且受 xfail_strict（资源其实在却仍判不了 ⇒ 红 = 豁免成了化石）。",
+    "ticket 为空或 expires 早于今天 ⇒ 该格一旦 unjudged 立刻红。不许写「永久」。",
+    "expires 到期即红，逼补真票；确实还要豁免 ⇒ 续期并写明理由。"
+  ],
+  "gates": {
+    "verify-catalogs": {
+      "unjudgedKind": "needs:corpus",
+      "note": "ISS-893 / DOC-516 §四 D1：3 张 catalog 的新鲜度判据，packages/<group>/<pkg> 扫到 0 个包时判不了（空表与空表当然一致，那不是绿）—— 语料是 packages/ 源码，资源在本仓，CI 与本地同判。按 ISS-854 纪律补票。",
+      "ticket": "ISS-893",
+      "expires": "2027-06-30",
+      "ci": "machine",
+      "ciWhy": "只读本仓 packages/ 源码与 docs/*catalog* 生成物，CI 与本地同判"
+    },
+    "doc-typecheck": {
+      "unjudgedKind": "needs:next-build",
+      "note": "ISS-894 / DOC-516 §四 D2：doc-typecheck 的专用 tsconfig 把 @matter/* 指到 packages/*/*/lib/types；未构建（无 lib 产物）时判不了「射程内 ts fence 零 TS 错」—— 空声明下真编译无从谈起，判 unjudged 不判红也不冒绿。缺的是构建产物（随 build 产出，不是本机专属），复用 next-build 探针（lib/index.js 在不在）同口径。0 in-scope fence 时另判 no-corpus（本条目按 needs:next-build 记账；no-corpus 是同一门的第三态，仍不冒绿）。按 ISS-854 纪律补票。",
+      "ticket": "ISS-894",
+      "expires": "2027-06-30",
+      "ci": "needs-build",
+      "ciWhy": "CI 需先 build 产出 lib/types 才能真编译；未构建时本地与 CI 同判 unjudged，不依赖本机专属资源"
+    },
+    "code-inventory": {
+      "unjudgedKind": "designed",
+      "note": "本档不判「新增违例」：带 K 号的违例度量由 lint-code 判（scripts/lint-code.mjs --check），本档只报计数漂移",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "machine",
+      "ciWhy": "不依赖本机专属资源，CI 与本地同判"
+    },
+    "design-component-inventory": {
+      "unjudgedKind": "designed",
+      "note": "本档不判「新增违例」：件数/分层随正常施工变化，组件层的红在 lint-design 的 R 号与 lint-code 的 K6a/K6d",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "machine",
+      "ciWhy": "不依赖本机专属资源，CI 与本地同判"
+    },
+    "delivery-integrity": {
+      "unjudgedKind": "designed",
+      "note": "本档只报不判：口径「提交正文提到过单号」既不充分也不必要，没有「新增违例」判据",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "machine",
+      "ciWhy": "不依赖本机专属资源，CI 与本地同判"
+    },
+    "migration-baseline": {
+      "unjudgedKind": "designed",
+      "probe": "driftKind(输出)==='stale'（唯一带 --classify 的 check 格）",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "machine",
+      "ciWhy": "不依赖本机专属资源，CI 与本地同判",
+      "note": "基线差异只有 ~ 前缀时算「基线过期」= 不是红也不是绿（run-gates:174 的 STALE 路径）。这不是缺资源，是本档设计上的第三态，故归 designed：不计配额、不受 xfail_strict。"
+    },
+    "pm-v2-baseline": {
+      "unjudgedKind": "needs:pm-root",
+      "probe": "$FORGE_PM_ROOT 或 $DSH_HOME/pm 存在，且该档各分母 > 0",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "needs-home",
+      "ciWhy": "依赖 ~/.dsh/pm 数据根，CI 上不存在（见 ISS-728 引的 CI 日志 run 42458376751）"
+    },
+    "md-corpus-guard": {
+      "unjudgedKind": "needs:corpus",
+      "probe": "$FORGE_CORPUS_ROOT 或 ~/.dsh/pm 存在，且扫到的 md 数 >= MIN_CORPUS_FILES(1000)",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "needs-home",
+      "ciWhy": "依赖 ~/.dsh/pm 数据根，CI 上不存在（见 ISS-728 引的 CI 日志 run 42458376751）"
+    },
+    "deps-hygiene": {
+      "unjudgedKind": "needs:baseline",
+      "probe": "scripts/baseline/deps-hygiene.json 存在；否则 workspace 结构可读且非空",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "machine",
+      "ciWhy": "不依赖本机专属资源，CI 与本地同判"
+    },
+    "format-debt": {
+      "unjudgedKind": "needs:baseline",
+      "probe": "该格基线文件存在；否则 typescript 编译器可解析（tscBin 三候选）",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "machine",
+      "ciWhy": "不依赖本机专属资源，CI 与本地同判"
+    },
+    "install-shape": {
+      "unjudgedKind": "needs:baseline",
+      "probe": "install-shape 的形状基线文件存在",
+      "ticket": "TBD-2026-11-08",
+      "expires": "2026-12-08",
+      "ci": "machine",
+      "ciWhy": "不依赖本机专属资源，CI 与本地同判"
+    },
+    "check-pm-suite-twice": {
+      "unjudgedKind": "designed",
+      "note": "ISS-833：本判据的设计前提（forge-pm 的 test = `bun test` 汇总格式）已随 ISS-505 换 vitest 失效 ⇒ 读不到 pass/fail/tests/files。脚本按包脚本内容直接退 3（判不了），不冒充红也不冒充绿。旧树 `forge-pm/` 是绞杀对象且 `frozen-paths.json` 冻结只读，老板 2026-11-14 裁决不纠缠旧代码 ⇒ 不修解析器、不投永久的豁免。旧树删掉后本格连同脚本一并退役。",
+      "ticket": "ISS-833",
+      "expires": "2027-03-31",
+      "ci": "needs-bun",
+      "ciWhy": "依赖 bun 可执行（门跑的是包脚本 `bun run test`），CI 需显式安装"
+    },
+    "lint-mutation-tests": {
+      "unjudgedKind": "needs:bun",
+      "probe": "bun 真能执行（PATH 上的 bun 或 ~/.bun/bin/bun 跑得出 --version，见 scripts/lib/bun-bin.mjs）",
+      "note": "ISS-816：本格「scripts/*.test.mjs 全量变异测试」必须用 bun 跑。旧实现有两条路假设不一致（查找认绝对路径、执行走 PATH）⇒ 本机没把 bun 放 PATH 时 exit 127 被记成红。现两路统一走 bunBin()，bun 真跑不起来就到这里记判不了。",
+      "ticket": "ISS-816",
+      "expires": "2026-12-13",
+      "ci": "needs-bun",
+      "ciWhy": "依赖 bun 可执行，CI 需显式安装（与 check-pm-suite-twice 同口径）"
+    },
+    "link-health": {
+      "unjudgedKind": "needs:pm-corpus",
+      "probe": "$FORGE_PM_ROOT 或 ~/.dsh/pm（defaultDshHome，不认 DSH_HOME）下 md 数 >= 100，且扫到实体 > 0",
+      "ticket": "ISS-744",
+      "expires": "2026-12-09",
+      "ci": "needs-home",
+      "ciWhy": "三清单要读真实 PM 语料；CI 无 ~/.dsh/pm（同 md-corpus-guard 的 needs-home 口径）",
+      "note": "ISS-744：本格以前「实体 0 个」时 exit 0（输出说不判、码上是绿）。脚本已改 exit 3 = 判不了；判据牙仍在 --selftest（selfcheck 档），本档永远只报不红。"
+    },
+    "search-index-reconcile": {
+      "unjudgedKind": "needs:pm-corpus",
+      "probe": "forge-pm.db 存在，且声明集与表内行数不同时为 0（两侧都空 ⇒ 不判）",
+      "ticket": "ISS-744",
+      "expires": "2026-12-09",
+      "ci": "needs-home",
+      "ciWhy": "要读 ~/.dsh-matter/forge-pm.db 派生索引；CI 上不存在（同 pm-v2-baseline 口径）",
+      "note": "ISS-744：库不存在 / 库打不开 / 声明与表两侧都空，三种都改 exit 3。第三种以前判绿（0 == 0），是「空集相等当对账通过」。"
+    },
+    "prism-lang-guard": {
+      "unjudgedKind": "needs:bun-store",
+      "probe": "node_modules/.bun 下有 prismjs@* 与 @lexical+code-prism@*（旧树 forge-pm 的依赖 store）",
+      "ticket": "ISS-899",
+      "expires": "2026-12-31",
+      "ci": "needs-home",
+      "ciWhy": "期望集的「Prism 有无包 / code-prism 自带」过滤读旧树 forge-pm 的 node_modules/.bun（prismjs + @lexical/code-prism），该 store 只在主检出 bun 环境存在；工单树 / CI 冷装是 pnpm 布局。语料与实现文件都在盘上，判不了只源于包依赖环境",
+      "note": "ISS-899：原先 store 探不到被当「无包」全过滤 ⇒ 期望集恒空 ⇒ 恒「需补 0 种」假绿（主检出 bun 环境真判正常）。本单改诚实第三态：依赖不在 ⇒ 不判（exit 2）；语料早退（ISS-832）仍在前。判据牙仍在 --selftest（selfcheck 档，夹具自包含不读真 store）。"
+    },
+    "check-host-dist-fresh": {
+      "unjudgedKind": "needs:host-dist",
+      "probe": "仓内至少一个 forge-*/dist/host.js 存在",
+      "ticket": "ISS-744",
+      "expires": "2026-12-09",
+      "ci": "needs-build",
+      "ciWhy": "CI 只跑 build:client、不构建 host 产物（ci.yml:55）⇒ 分母为 0；本地装齐的树才判得了",
+      "note": "ISS-744：工作树 / 全新 clone / CI 上「无 dist」以前 exit 0（自报不判却报绿）。改 exit 3 后 guard 与 run-gates 都显示「判不了」。"
+    },
+    "no-new-tailwind": {
+      "unjudgedKind": "needs:gate-baseline",
+      "probe": "registry 里所有 cell.baseline 声明的文件都在（run-gates:PROBES[\"gate-baseline\"]，逐文件，非看目录）",
+      "ticket": "ISS-730",
+      "expires": "2026-12-12",
+      "ci": "machine",
+      "ciWhy": "基线文件在仓内，CI 与本地同判（不依赖本机专属资源）",
+      "note": "ISS-730：以前这一格基线缺席时由脚本 exit 0 冒充绿（旧 guard livecheck 的第4参前置检查在 ISS-755 迁移进 registry 时丢失）。现在派生格自己查基线，缺席⇒判不了。票在补齐基线后作废。"
+    },
+    "verify-plugin-shape": {
+      "unjudgedKind": "needs:next-manifest",
+      "probe": "扫 packages/<group>/<pkg>/package.json（verify-plugin-shape.ts:196 的 unjudged 条件就是「一个都没扫到」；行号由 ISS-849 前的 :168 后移，因该单加了文件头注释。⚠️ 本条措辞是「的 unjudged 条件」⇒ 行号指 unjudged(...) 语句行，不指它的 if 条件行 —— 两者差一行，按图索骥会翻到错的地方。⚠️ 这不是全表通则：其余 6 条 probe 的措辞是「共走 discoverPackages()」「collectCorpus」这类，指的就是语料发现函数，不是 unjudged 语句）",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "lint-complexity": {
+      "unjudgedKind": "needs:next-ts-corpus",
+      "probe": "扫 packages/ 下全部 .ts/.tsx，不要求 manifest（lint-complexity.ts:122-146 collectCorpus）",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "lint-dead-code": {
+      "unjudgedKind": "needs:next-src-corpus",
+      "probe": "扫 packages/<g>/<p>/src/** 的 .ts/.tsx（lint-dead-code.ts:262 collectFiles，比 complexity 窄一层）",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-client-domain-graph": {
+      "unjudgedKind": "needs:next-client-corpus",
+      "probe": "扫 packages/<g>/<p>/src/client/**（verify-client-domain-graph.ts:251 scanClientPackages）",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-client-ui-i18n": {
+      "unjudgedKind": "needs:next-client-corpus",
+      "probe": "扫 packages/client/<pkg>/src 下 .ts/.tsx（collectSources）+ 可解析到 typescript（loadTs）；no-corpus=0 源文件、no-binary=无 typescript。与 verify-client-domain-graph 同款资源，复用 needs:next-client-corpus。",
+      "note": "ISS-531 / W12：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了两种（no-corpus / no-binary）都是缺资源而非永远不判 ⇒ needs:*。本格当前真判绿（16 源文件、存量 21 条 description 豁免后 0 违例，--check EXIT=0），补票是因进档必有票。票挂 ISS-531，到期 2026-12-31（与同批一致）；到期续期或还债。",
+      "ticket": "ISS-531",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/client/ 随 clone 走，typescript 由装依赖可得，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-plugin-entry-exports": {
+      "unjudgedKind": "needs:next-entry-corpus",
+      "probe": "扫 packages/<g>/<p>/src/index.ts 且分类器能分出 >=1 个函数/服务插件——该格有第二种 unjudged（全是库），故委托判据自己的 scanEntries+judgeEntry",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-file-size-new": {
+      "unjudgedKind": "needs:next-indexed-corpus",
+      "probe": "走 git ls-files，只认已入索引的 packages/<g>/<p>/ 代码文件（verify-file-size-new.ts:192），未 git add 的看不见",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "lint-layer-new": {
+      "unjudgedKind": "needs:next-manifest",
+      "probe": "与 gen-layer-graph 共走 discoverPackages()：要 packages/<g>/<p>/package.json（lint-layer-new.ts:145-170）",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "gen-layer-graph": {
+      "unjudgedKind": "needs:next-manifest",
+      "probe": "同 discoverPackages()，要 package.json（gen-layer-graph.ts:439-447）",
+      "note": "ISS-835：W0 交付期发现 next 档整档红（8 格 unjudged(no-corpus) 全无票）。本格判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed，建包后若仍判不了会被 xfail_strict 判红（抓化石）。票挂 W0 父单 ISS-835；到期 2026-12-31（W1 建包前），到期即红逼补真票。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-workspace-constraints": {
+      "unjudgedKind": "needs:next-manifest",
+      "probe": "扫 packages/<group>/<pkg>/package.json（verify-workspace-constraints.ts:100 的 unjudged 条件就是「一个都没扫到」，与 verify-plugin-shape.ts:196 同一句 ⇒ 共用同一探针，不新造。⚠️ 同 verify-plugin-shape 那条：本条措辞是「的 unjudged 条件」⇒ 指 unjudged(...) 语句行，不指 if 条件行）",
+      "note": "ISS-849（P0-3）：本判据只判 3 条包名不变式（private / version 与根一致 / workspace 协议），语料就是 packages/<g>/<p>/package.json。现在 0 个包 ⇒ 判不了是**缺新树语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed（建包后若仍判不了会被 xfail_strict 判红抓化石）。**为什么可以共用 next-manifest 而不新造探针**：本格与 verify-plugin-shape 的 unjudged 触发条件逐字相同（都要 manifest、都走同一 packages/<g>/<p>/ 发现口径），探针问的问题与判据问的问题是同一个。票挂 W0 父单 ISS-835（与 next 档其余 8 格同票，先例见 ISS-843 加 lint-layer-new 时只动 registry、由 ISS-835 补票）；到期 2026-12-31。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 与 git 索引里，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-tsconfig-coverage": {
+      "unjudgedKind": "needs:next-manifest",
+      "probe": "扫 packages/<group>/<pkg>/tsconfig.json（verify-tsconfig-coverage.ts 的 unjudged 条件就是「盘上 0 个包级 tsconfig」；见 scanOnDisk + judgeCoverage 的空语料分支）",
+      "note": "ISS-850（P0-4）：本判据语料是盘上 packages/<g>/<p>/tsconfig.json。现在 2 个包都有 tsconfig ⇒ 真判（当前 passed）；0 个包级 tsconfig 时判不了是**缺语料**，不是设计上永远不判 ⇒ 用 needs:* 而不是 designed。票挂 ISS-835（与 next 档其余格同票）；到期 2026-12-31。⚠️ **探针口径有一处已知不对齐，据实记在这里**：`next-manifest` 问的是「有没有 packages/<g>/<p>/package.json」，而本判据 unjudged 的条件是「有没有 tsconfig.json」—— 两者不是同一个问题（纪律见 lib/next-packages-probes.mjs 头注「判据问什么就探什么」）。实测可达状态里两者同值（P0-2 之后有 manifest 的包都有 tsconfig；P0-2 之前两者都没有），唯一分歧态是「有 manifest、全树 0 个 tsconfig」，那时 xfail_strict 会报一条化石红 —— 该树确实是坏的（tsconfig 被删），红的方向对、文案不准。**为什么不新造 next-tsconfig-corpus 探针**：探针表在 scripts/lib/next-packages-probes.mjs，不在本单写范围内（写范围 = 两个 gate + registry + 本台账）；且现有 6 个探针没有一个是「tsconfig 存在性」（hasTs 那类都是判 .ts/.tsx 语料，不是 tsconfig）。已报 Lead，需要时由补探针的单收口。选它而不是 designed 的理由：本格**能判绿**（现在就是绿的），designed 的定义是「本档永远没有绿可言（report_only 只报不判）」，用它会把一条真判据错标成不判，还会让它脱离配额与 xfail_strict ⇒ 将来 tsconfig 出现了却仍判不了时无人发现（化石无人抓），比当前这处文案不准更坏。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 里，CI 与本地同判"
+    },
+    "verify-tsconfig-paths": {
+      "unjudgedKind": "needs:next-manifest",
+      "probe": "扫 packages/<group>/<pkg>/package.json（verify-tsconfig-paths.ts 的 readPaths 走 scanPackages()，unjudged(no-corpus) 的条件就是「一个包 manifest 都没扫到」—— 与 verify-plugin-shape / verify-workspace-constraints / verify-package-readme 同一探针同一问题，不新造。次情形：tsconfig.base.emit.json 缺席（同 no-corpus）或取不到 typescript（no-binary，JSONC 不降级正则）",
+      "note": "ISS-897（P3-Pb / ISS-518 盲区闭环）：进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。本格当前真绿（实测 8 包 ⇔ paths 8 键双向对上，EXIT=0），判不了是缺语料不是设计上永不判 ⇒ 用 needs:* 不用 designed（designed 会把真判据错标成永不判，还脱离 xfail_strict ⇒ 语料恢复却仍判不了时无人抓化石）。票挂本单；到期 2026-12-31（P3 计划窗口，与既有 needs:next-manifest 各票同口径）。",
+      "ticket": "ISS-897",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内（packages/*/*/package.json 与 tsconfig.base.emit.json 都进 git），typescript 走 loadTsFor 的仓内 node_modules 候选 ⇒ CI 与本地同判，不依赖本机专属资源"
+    },
+    "verify-tree-depth": {
+      "unjudgedKind": "needs:git-worktree-list",
+      "probe": "`git -C <repo> worktree list --porcelain` 至少给出一行（verify-tree-depth.ts 的 readWorktrees 退 unjudged 的条件就是「一棵树都没列出来」）",
+      "note": "ISS-870（W-0）：本判据进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了的两种情形都不是 packages 语料：① `git worktree list` 拿不到（不在 git 仓里 / git 不可用）② `.agents/trees.json` 存在但读不动（坏 JSON / 权限）。选 needs:* 而不是 designed：本格**能判绿**（真仓实测 trees=54 · maxDepth=1 · EXIT=0），designed 的定义是「本档永远没有绿可言」，用它会把一条真判据错标成不判，还会让它脱离配额与 xfail_strict ⇒ 将来 git 恢复了却仍判不了时无人发现（化石无人抓）。⚠️ 探针口径据实记：`needs:git-worktree-list` 是**新 kind**，不在 run-gates.mjs:1490 的 REPO_CONTENT_KINDS 里 ⇒ 写 `ci: needs-git` 而非 machine（那条自洽判据只查 ci===machine），故不触发 ③c-2。该 kind 的执行侧探针未接线 ⇒ xfail_strict 在「判不了且声称缺它」时会报一条措辞不准的化石红；红的方向对（那棵树确实判不了），文案不准，与 verify-coverage-collect / run-package-tests 是同一处既存缺口（探针表在 scripts/lib/，不在本单写范围）⇒ 已报 Lead，不自行扩范围。",
+      "ticket": "ISS-870",
+      "expires": "2026-12-31",
+      "ci": "needs-git",
+      "ciWhy": "`git worktree list` 要 git 可执行且 cwd 是 git 工作树；CI 上两者都成立（checkout 之后），但「工作树注册表」不是仓内容物（它不进 clone）⇒ 不能声称 machine 与本地同判。写 needs-git 而不写 needs-home：缺的不是家目录，是 git 的运行态。"
+    },
+    "verify-package-readme": {
+      "unjudgedKind": "needs:next-manifest",
+      "probe": "扫 packages/<group>/<pkg>/package.json（verify-package-readme.ts 的 readReadmes 只收「有 package.json 的包」，judgeReadmes 在 0 个时退 unjudged —— 与 next-manifest 探针问的是**同一个问题**）",
+      "note": "ISS-850（P0-4）：本判据语料 = 有 manifest 的包（3b「有 package.json 就必须有 README.md」本身就是语料定义）。⛔ **我不按任务书建议用 designed，理由如下（任务书那处括号自己把张力列出来了，让我判断）**：① 本格**能判绿** —— README 三件套齐 + Summary ≤100 词 + Limitations 在末位即 passed；台账 _rules 对 designed 的定义是「本档永远没有绿可言（report_only 只报不判）」，逐字不符。② designed 不计配额、**不受 xfail_strict** ⇒ 用了它，「有包了却仍判不了」这种化石永远不会被任何人发现 —— 而那正是 ISS-835 那批 needs:* 要抓的东西。③ 「有 0 个包」与「有包但都没 README」确实是两件事 —— 但后者**不是 unjudged、是红**（本单落地当天就是红的），所以它根本不进本台账：台账只管 unjudged 那一态，而 unjudged 的唯一触发条件就是「0 个有 manifest 的包」，与 next-manifest 探针同义。\n\n⚠️ **交付时的真实状态（据实记，不是判据缺陷）**：本判据落地时 `--only verify-package-readme` 是**红**的（6 条）—— storage/storage 与 storage/storage-json 都还没写 README（`find packages -name 'README*' | wc -l` = 0）。判据行为正确（3b 判红），补齐归 ISS-509/2192 建真包时。\n\n票挂 ISS-835（与 next 档其余格同票）；到期 2026-12-31。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/ 里，CI 与本地同判"
+    },
+    "lint-rule-fingerprint": {
+      "unjudgedKind": "needs:baseline",
+      "probe": "scripts/baseline/lint-rule-fingerprint.json 存在且 profiles ≥ 1；否则 typescript 可解析（lint-rule-fingerprint.ts:85 的 TS_CANDIDATES 三候选：forge-ui/node_modules/typescript · forge-pm/node_modules/typescript · node_modules/typescript）",
+      "note": "ISS-854：本格进 next 档但**一直绿着** ⇒ 无票从未被发现（无票检查只在 unjudged 时触发）。补票的原因不是「它现在判不了」，是「绿着的格也会转 unjudged」。⚠️ 本格**不是** packages 语料格：实测 `grep -c packages scripts/gates/lint-rule-fingerprint.ts` = 0，它读的是 .oxlintrc.json / .oxlintrc.next.json 与 scripts/baseline/lint-rule-fingerprint.json ⇒ 任务书建议的 needs:next-*corpus 那族探针（都探 packages/）在这里是**错的问题**，故不采用。用的 needs:baseline，与 format-debt（同为「基线文件 + typescript 双资源」形态）同 kind。⚠️ **已知不对齐，据实记**：执行侧探针 `PROBES.baseline`（run-gates.mjs:812）问的是「scripts/baseline/ 目录在不在」，对单文件缺席恒 true ⇒ typescript 缺失导致本格 unjudged 时 xfail_strict 会报一条措辞不准的「化石」。这与 format-debt / deps-hygiene / install-shape 三格是**同一处既存缺口**（ISS-730 把它写进 gate-baseline 的注释，但只修了 cell.baseline 那一族）。真正修法是「按文件 + typescript 双探 + 把新 kind 加进 run-gates.mjs:1503 的 REPO_CONTENT_KINDS」，后者不在本单写范围（任务书明令不改 run-gates.mjs）⇒ 已报 Lead，不自行扩范围。票挂 W0 父单 ISS-835（与 next 档其余格同票）；到期 2026-12-31。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内（oxlint 配置 + 指纹基线 + 根 devDependency typescript），CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-coverage-collect": {
+      "unjudgedKind": "needs:next-build",
+      "probe": "同步扫 packages/<group>/<pkg>/lib/index.js，要求**每个**包都有（next-build：twoLevelDirs().every + pkgs.length>0，空数组不算资源在）。依据是判据的退 2 条件是「这次 `vitest run packages/storage` 整批跑不起来」（verify-coverage-collect.ts:47 DEFAULT_ARGS 一个进程跑全部 4 包），任何一个包缺 lib ⇒ import 失败 ⇒ 整批退 2 ⇒ 探针须与「全体」同向；写成 .some() 会在部分包缺产物时判「资源在」而仍报化石（ISS-868 实测）",
+      "note": "ISS-868（改自 ISS-513/2227 的 needs:next-ts-corpus）：⛔ **本格判不了时意味着什么**：`verify-coverage-collect.ts` 退 2 只有两个条件 —— ① `no-binary`：`<repo>/node_modules/.bin/vitest` 不存在（没装依赖）；② `no-build`：这次 `vitest run packages/storage --coverage` 整批跑不起来，尾巴报 Failed to resolve entry / Cannot find (module|package)（`@matter/*` 的 main 指向 tsdown 产物 lib/index.js，缺了 import 不到）。⛔ **两条都不是「缺 .ts 语料」** —— 上一版票写 needs:next-ts-corpus，于是语料在（22 个 .ts）就成了 xfail_strict 的化石红。**「源码在」不等于「跑得起来」**，本票改成问构建产物。\n\n**为什么是 .every()**：判据的退 2 是「整批」语义（一个 vitest 进程跑全部 4 包），任一包缺 lib ⇒ 整批失败 ⇒ 探针必须要求全体有产物。`.some()` 在「部分包缺 lib」这一态会答 true ⇒ 与判据反着走 ⇒ 仍报化石。⚠️ `.every()` 对空数组返回 true，故探针显式判 `pkgs.length > 0`（零包该由 next-manifest 报，不该在这里被算成「产物齐了」）。\n\n**现在是快照，不是恒值**（`lib/` 是 .gitignore 的构建产物，随构建变、不随 clone 走）：2026-11-17 主检出 `ls packages/*/*/lib/index.js` = 2 有 / 2 无（storage · storage-json 有，storage-domain · storage-journal 无）⇒ 探针 false ⇒ 本格判不了是**真缺料**，不是化石。复检命令（改的是「资源在不在」，不是本票措辞）：`cd <repo> && node -e \"const{NEXT_PACKAGE_PROBES}=await import('./scripts/lib/next-packages-probes.mjs');console.log(NEXT_PACKAGE_PROBES['next-build'](process.cwd()))\" --input-type=module` ⇒ 想确认「现在齐没齐」，再跑 `node scripts/run-gates.mjs --only verify-coverage-collect` 看是 ✓ passed（齐）还是 ! unjudged（缺）。\n\n选 needs:* 而不是 designed 的理由：本格**能判绿**（构建后实测 ✓ passed / EXIT=0），designed 的定义是「本档永远没有绿可言」；用它会把一条真判据错标成不判，并让它脱离配额与 xfail_strict ⇒ 产物齐了却仍判不了时无人发现。\n\n票挂 W0 父单 ISS-835（与 next 档其余同票）；到期 2026-12-31（与同批一致，不自造日期）。",
+      "ticket": "ISS-835",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "缺的料是构建产物 packages/<g>/<p>/lib/index.js，而 lib/ 是 .gitignore 的 tsdown 产物 ⇒ 跟着构建走、不跟着 clone 走。CI 上为 false 只在 `pnpm run build` 之前（ci.yml 的 next lane 正是 install → build → run-gates 的顺序，故 CI 那一步探针为 true）。写 machine 会与 ③c-2「ci=machine 却声明缺本机资源」自相矛盾；写 needs-build 与 check-host-dist-fresh / run-package-tests 同 kind。"
+    },
+    "run-package-tests": {
+      "unjudgedKind": "needs:next-src-corpus",
+      "probe": "扫 packages/<g>/<p>/src/** 的 .ts/.tsx（next-src-corpus：twoLevelDirs + hasTs(<pkg>/src)）。⚠️ 与判据实际缺的东西不同向，据实记：本格 unjudged 问的是 <pkg>/tests 下有没有 .test.ts(x)，而此探针问 src —— 6 个现有 next-* 探针无一问 tests，详见 note。",
+      "note": "ISS-866：next 档唯一一格**跑测试**的判据（`run-package-tests.ts`）。⛔ **本格 unjudged 只剩一种条件** —— `packages/<g>/<p>/tests/` 下一个 `.test.ts(x)` 都没有（真分母为 0）。另两种「不算绿」的形态**不走 unjudged**：全部包缺构建 ⇒ 也是 unjudged(no-build)但那是**同一个格**的第二个理由；部分包缺构建 ⇒ **passed + 逐包出声**（主 checkout 不构建是环境常态，实测 2 包缺 lib/ 而另 2 包 111 断言真跑过）。\n\n⚠️ **探针口径有一处已知不对齐，据实记，不藏**：本格判不了问的是「**tests 目录**里有没有测试文件」，而现有 6 个 `next-*` 探针问的全是 `src` / `manifest` / `src/index.ts` / git 索引 —— **没有一个是问 tests 的**。借 `next-src-corpus` 的后果已**实测**（本单工作树，把 3 个 tests 目录移走后跑 `--only run-package-tests`）：判据正确地报 `unjudged(no-corpus)`，而 xfail_strict 同时报「声明缺 next-src-corpus，但探测显示资源在 —— 豁免成了化石」⇒ **正是 ISS-864 那个坑的同形复现**（票问的东西 ≠ 判据缺的东西）。\n\n**为什么不新造 `next-test-corpus` 探针（那才是语义正确的修法）**：探针表在 `scripts/lib/next-packages-probes.mjs`，**不在本单 write_scope**（本单只获批 4 个文件：`run-package-tests.ts` / 同名 `.spec.ts` / `registry.json` / 本台账）。⛔ 不自行扩范围 —— 已把「+8 行加一个 `next-test-corpus` 探针」作为需要 Lead 批准的动作写进交付回报（`run-gates.mjs` 不用改：`:848` 的 `...Object.fromEntries(...NEXT_PACKAGE_PROBES...)` 自动展开新探针，故「余量 24 行」的约束不触发；`REPO_CONTENT_KINDS` 也无须动，因为本格 `ci` 写 `needs-build` 而非 `machine`，`③c-2` 那条只查 `ci===machine`）。\n\n**为什么不写 `designed`**：`designed` 的语义是「本档永远没有绿可言」，而本格**现在就绿着**（4 包 9 文件 149 断言全绿，实测 1.07s）；用它等于谎报，且会让本格**脱离 xfail_strict 与配额** —— 那正是 ISS-835 那批 needs:* 要抓的化石，静默放行比假红坏（假红有人修，静默的假绿没人查）。\n\n**选借探针而不是越界改探针**的依据：假红 > 静默放行。分歧态只在「有 src 但 tests 一个没有」（或全部包缺构建）时出现；那时本格报的是一条**措辞不准的红**，而**红的方向对**（那棵树确实一个断言都没跑）。这与 `verify-coverage-collect`（ISS-513/2227）、`lint-complexity`、`lint-rule-fingerprint` 是**同一处既存缺口**，同一先例。\n\n**现在这个资源在不在**：在（实测 `packages/*/*/tests` 下 9 个 `.test.ts`，4 包齐全）⇒ 本格当前真判、绿。\n\n票挂本单 ISS-866（不蹭 ISS-835：那张单是同批 11 格的历史票，本格是新加的、且缺口性质不同）；到期 2026-12-31（与同批一致，不自造更近的日期）。",
+      "ticket": "ISS-866",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "本格在主 checkout 的部分包上依赖构建产物（lib/index.js）：新树 4 包里 domain/journal 缺 lib 时它们的测试按包名 import @matter/storage 会 Failed to resolve entry ⇒ 那部分包被跳过。故不能写 machine（`③c-2` 的口径是「依赖本机/仓内构建状态的不能声称 CI 与本地同判」）；写 needs-build 与 check-host-dist-fresh（CI 不构建 host 产物）同 kind。⚠️ 注：即便全部包缺构建，本格也是 unjudged(no-build)，不冒充绿 —— 那时 xfail_strict 会因 borrowed probe 报一条措辞不准的红（见 note），红的方向对。"
+    },
+    "flow-metrics": {
+      "unjudgedKind": "needs:matter-issues-dir",
+      "probe": "问 `<DSH_HOME 或 ~/.dsh-matter>/pm/issues` 是否存在（flow-metrics.ts readMatter 的 error 条件就是它）。不复用 pm-root：后者探 pm 目录，比本格宽一级；也不复用 pm-corpus（要求 md>=100，更严会造假化石）。",
+      "note": "ISS-858 / ISS-869：本格进了 next 档但一直绿着 ⇒ 无票从未被发现（无票检查只在 unjudged 时触发，ISS-854 才把它改成与状态无关）。补票的原因不是「它现在判不了」，是「绿着的格也会转 unjudged」。探针是新造的 —— 现有 pm-root / pm-corpus / next-* 都不问同一个问题。",
+      "ticket": "ISS-869",
+      "expires": "2026-12-31",
+      "ci": "needs-home",
+      "ciWhy": "探的是仓外的 Matter 数据根（$DSH_HOME 或 ~/.dsh-matter），不在仓内 ⇒ CI 上没有它时该格判不了（有票，不阻断）。原写 machine 会撞 run-gates --selftest 的 ③c-2「ci=machine 却声明缺本机资源」自洽判据（实测红，见 ISS-858 note）。"
+    },
+    "verify-coverage-threshold": {
+      "unjudgedKind": "needs:coverage-artifact",
+      "probe": "coverage/coverage-summary.json 存在（这是判据退 unjudged(no-corpus) 的唯一条件；coverage-final.json 缺失只让判词没行号，仍可判红绿，故不是判不了的条件）",
+      "note": "ISS-522（C-0a）：本格进 coverage 档 ⇒ 按 ISS-854 必须有票。判不了的唯一条件是没跑过 vitest --coverage（缺采集产物），不是设计上永远不判 ⇒ 用 needs:* 而不是 designed（designed 会让它脱离配额与 xfail_strict，将来产物齐了却仍判不了无人发现）。⛔ 探针口径据实记：needs:coverage-artifact 是新 kind，不在 run-gates.mjs 的 REPO_CONTENT_KINDS 里 ⇒ ci 写 needs-build 而非 machine（否则撞 ③c-2 自洽判据）；执行侧探针未接线，xfail_strict 在「判不了且声称缺它」时会报一条措辞不准的化石红，红的方向对，与 verify-coverage-collect / verify-tree-depth 是同一处既存缺口 ⇒ 已报 Lead，不自行扩范围。票挂 ISS-522；到期 2026-12-31（与同批一致）。",
+      "ticket": "ISS-522",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "coverage-summary.json 是 vitest --coverage 的产物，随采集/构建走、不随 clone 走；CI 上要先跑 vitest --coverage 才有（coverage 档目前不进 CI，C-2 才接远程）"
+    },
+    "verify-no-unknown-casts": {
+      "unjudgedKind": "needs:no-unknown-casts-artifact",
+      "probe": "三资源：scripts/baseline/no-unknown-casts.baseline.json 存在（基线在仓内、随 clone 走）· packages/<g>/<p>/src 下有 .ts/.tsx 源语料 · 可解析到 typescript（loadTs 候选路径之一或裸 typescript）。本判据三种 unjudged 各缺其一：no-baseline=基线缺席/读不动/结构非法，no-corpus=0 源文件，no-binary=无 typescript。",
+      "note": "ISS-879：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了有三种（no-baseline / no-corpus / no-binary），不是设计上永远不判 ⇒ 用 needs:* 而不是 designed（designed 会脱离配额与 xfail_strict，将来资源齐了却仍判不了无人发现）。⛔ 探针口径据实记：needs:no-unknown-casts-artifact 是新 kind，不在 run-gates.mjs:1489 的 REPO_CONTENT_KINDS 里 ⇒ ci 写 needs-build 而非 machine（否则撞 ③c-2 自洽判据）；执行侧探针未接线，xfail_strict 在「判不了且声称缺它」时会报一条措辞不准的化石红，红的方向对，与 verify-coverage-threshold / verify-coverage-collect / verify-tree-depth 是同一处既存缺口 ⇒ 已报 Lead，不自行扩范围。票挂 ISS-879；到期 2026-12-31（与同批一致）。",
+      "ticket": "ISS-879",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "基线文件在仓内随 clone 走，但 typescript 解析依赖装依赖（loadTs 候选路径来自 node_modules）；且本格当前真判绿（--check EXIT=0），补票是因 ISS-854 进档必有票，不是因为它现在判不了。写 needs-build 而非 machine 避免撞 ③c-2。"
+    },
+    "verify-export-jsdoc": {
+      "unjudgedKind": "needs:export-jsdoc-artifact",
+      "probe": "三资源：scripts/baseline/export-jsdoc.baseline.json 存在（基线在仓内随 clone 走）· packages/<g>/<p>/src 下有 .ts/.tsx 源语料 · 可解析到 typescript（loadTs 候选路径之一或裸 typescript）。本判据三种 unjudged 各缺其一：no-baseline=基线缺席/读不动/结构非法，no-corpus=0 源文件，no-binary=无 typescript。",
+      "note": "ISS-881：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了有三种（no-baseline / no-corpus / no-binary），不是设计上永远不判 ⇒ 用 needs:* 而不是 designed。⛔ 探针口径据实记：needs:export-jsdoc-artifact 是新 kind，不在 run-gates.mjs 的 REPO_CONTENT_KINDS 里 ⇒ ci 写 needs-build 而非 machine（否则撞 ③c-2 自洽判据）；执行侧探针未接线，xfail_strict 在「判不了且声称缺它」时会报一条措辞不准的化石红，红的方向对，与 verify-no-unknown-casts / verify-coverage-threshold / verify-tree-depth 是同一处既存缺口 ⇒ 已报 Lead，不自行扩范围。票挂 ISS-881；到期 2026-12-31（与同批一致）。",
+      "ticket": "ISS-881",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "基线文件在仓内随 clone 走，但 typescript 解析依赖装依赖（loadTs 候选路径来自 node_modules）；且本格当前真判绿（--check EXIT=0），补票是因 ISS-854 进档必有票，不是因为它现在判不了。写 needs-build 而非 machine 避免撞 ③c-2。"
+    },
+    "verify-node-next-types": {
+      "unjudgedKind": "needs:next-build",
+      "probe": "同步扫 packages/<g>/<p>/lib/index.js，要求每个包都有（next-build：twoLevelDirs().every + pkgs.length>0，空数组不算资源在）；与 verify-coverage-collect 共用同一探针（scripts/lib/next-packages-probes.mjs 的 next-build）。判据产物缺失 no-build 的退 2 条件 = manifest.types 指向的 lib/types/index.d.ts 不在盘上，与「构建产物在不在」同向。",
+      "note": "ISS-882：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了有三种（no-build 产物缺失 / no-binary 无 typescript / no-corpus 0 包或 0 specifier），不是设计上永远不判 ⇒ 用 needs:* 而不是 designed。⛔ 探针口径据实记：本格当前真判 unjudged(no-build)（工作树 6 包全无 lib/types 产物），next-build 探针实测 false ⇒ xfail_strict 不会报化石红；构建后判据转绿、探针转 true，两者同向。ci 写 needs-build 而非 machine：产物随构建走不随 clone 走，CI 上 build 之前为 false。与 DSH 的有意差异（产物缺失判不了而非判红）已写进 registry note，此处据实记，不藏。票挂 ISS-882；到期 2026-12-31（与同批一致，不自造更近日期）。",
+      "ticket": "ISS-882",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "缺的料是构建产物 packages/<g>/<p>/lib/types/index.d.ts，随构建走、不随 clone 走（lib/ 是 .gitignore 产物）。CI 的 next lane 顺序是 install → build → run-gates，build 后探针为 true、判据转绿；build 前为 false、判据 unjudged 且有票不阻断。写 needs-build 与 verify-coverage-collect 同 kind，避免撞 ③c-2 自洽判据。"
+    },
+    "verify-no-top-level-await": {
+      "unjudgedKind": "needs:no-top-level-await-artifact",
+      "probe": "两资源：packages/<g>/<p>/src 下有 .ts/.tsx 源语料（SOURCE_GLOB 非空）· 可解析到 typescript（loadTs 候选路径之一或裸 typescript）。本判据两种 unjudged 各缺其一：no-corpus=0 源文件、no-binary=无 typescript。禁令型判据不需要基线文件（不同于 2259/2261 的指纹基线）。",
+      "note": "ISS-883：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了有两种（no-corpus / no-binary），不是设计上永远不判 ⇒ 用 needs:* 而不是 designed（designed 会脱离配额与 xfail_strict，将来资源齐了却仍判不了无人发现）。本格当前真判绿（28 .ts / 0 顶层 await，--check EXIT=0），补票是因 ISS-854 进档必有票，不是因为它现在判不了。⛔ 探针口径据实记：needs:no-top-level-await-artifact 是新 kind，不在 run-gates.mjs 的 REPO_CONTENT_KINDS 里 ⇒ ci 写 needs-build 而非 machine（否则撞 ③c-2 自洽判据）；执行侧探针未接线，xfail_strict 在「判不了且声称缺它」时会报一条措辞不准的化石红，红的方向对，与 verify-no-unknown-casts / verify-export-jsdoc / verify-coverage-threshold 是同一处既存缺口 ⇒ 已报 Lead，不自行扩范围。票挂 ISS-883；到期 2026-12-31（与同批一致，不自造更近日期）。",
+      "ticket": "ISS-883",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "语料在仓内 packages/ 随 clone 走，但 typescript 解析依赖装依赖（loadTs 候选来自 node_modules）；本格当前真判绿，补票是因 ISS-854 进档必有票。写 needs-build 而非 machine 避免撞 ③c-2 自洽判据。"
+    },
+    "lint-log-outlet-next": {
+      "unjudgedKind": "needs:log-outlet-next-artifact",
+      "probe": "两资源：packages/<g>/<p>/src 下有 .ts/.tsx 源语料（SOURCE_GLOB 非空）· 可解析到 typescript（loadTs 候选路径之一或裸 typescript）。本判据两种 unjudged 各缺其一：no-corpus=0 源文件、no-binary=无 typescript。禁令型判据不需要基线文件。",
+      "note": "ISS-889：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了有两种（no-corpus / no-binary），不是设计上永远不判 ⇒ 用 needs:* 而不是 designed。本格当前真判绿（清债后 0 违例，--check EXIT=0），补票是因 ISS-854 进档必有票，不是因为它现在判不了。⛔ 探针口径据实记：needs:log-outlet-next-artifact 是新 kind，不在 run-gates.mjs 的 REPO_CONTENT_KINDS 里 ⇒ ci 写 needs-build 而非 machine（否则撞 ③c-2 自洽判据）；执行侧探针未接线，xfail_strict 在「判不了且声称缺它」时措辞不准的化石红是同批既存缺口 ⇒ 已报 Lead，不自行扩范围。票挂 ISS-889；到期 2026-12-31（与同批一致，不自造更近日期）。",
+      "ticket": "ISS-889",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "语料在仓内 packages/ 随 clone 走，但 typescript 解析依赖装依赖（loadTs 候选来自 node_modules）；本格当前真判绿，补票是因 ISS-854 进档必有票。写 needs-build 而非 machine 避免撞 ③c-2 自洽判据。"
+    },
+    "verify-remote-surface": {
+      "unjudgedKind": "needs:next-src-corpus",
+      "probe": "两资源：packages/api/<pkg>/src 下有 .ts 源语料（collectSources 扫到 ≥1 个 extends TypertRemoteService 的 controller，否则 no-corpus）· 可解析到 typescript（loadTs 候选路径之一，否则 no-binary）。",
+      "note": "ISS-533 / W12：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了两种（no-corpus / no-binary）都是缺资源而非永远不判 ⇒ needs:*。本格当前真判绿（1 个 controller、0 违例，--check EXIT=0），补票是因进档必有票。语料是仓内 packages/api/ 源码（随 clone 走），typescript 由装依赖可得 ⇒ needs:next-src-corpus（在 REPO_CONTENT_KINDS 白名单内），ci=machine 与本地同判。票挂 ISS-533，到期 2026-12-31（与同批一致）；到期续期或还债。",
+      "ticket": "ISS-533",
+      "expires": "2026-12-31",
+      "ci": "machine",
+      "ciWhy": "语料在仓内 packages/api/ 随 clone 走，typescript 由装依赖可得，CI 与本地同判（不依赖本机专属资源）"
+    },
+    "verify-shell-boot": {
+      "unjudgedKind": "needs:apps-web-corpus",
+      "probe": "apps/web 下有源文件（collectWebSources 扫 index.html + src/**/*.{ts,tsx,js,jsx}，0 个 ⇒ no-corpus）。本判据纯文本扫描、不解析 typescript、不读基线文件。",
+      "note": "ISS-537 / W12：本格进 next 档 ⇒ 按 ISS-854 必须有票（与它当前判不判得了无关）。判不了唯一条件 = apps/web 下无源文件（no-corpus），是缺资源而非永远不判 ⇒ needs:* 而非 designed。本格当前真判绿（real corpus passed，--check EXIT=0）。⛔ 探针口径据实记：needs:apps-web-corpus 是新 kind，不在 run-gates.mjs 的 REPO_CONTENT_KINDS 白名单 ⇒ ci 写 needs-build 而非 machine（否则撞 ③c-2 自洽判据）；执行侧探针未接线，xfail_strict 在「判不了且声称缺它」时会报措辞不准的化石红，红的方向对，与同批新 kind 同款缺口 ⇒ 已报 Lead，不自行扩范围。票挂 ISS-537，到期 2026-12-31（与同批一致）。",
+      "ticket": "ISS-537",
+      "expires": "2026-12-31",
+      "ci": "needs-build",
+      "ciWhy": "语料 apps/web 在仓内随 clone 走，但 needs:apps-web-corpus 新 kind 不在 REPO_CONTENT_KINDS 白名单 ⇒ ci 写 needs-build 而非 machine（避免 ③c-2 自洽判据红）"
+    }
+  }
+}

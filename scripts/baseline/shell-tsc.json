@@ -1,0 +1,7 @@
+{
+ "recordedAt": "2026-09-26",
+ "tool": "host-typecheck-ratchet.mjs --write（壳（非 workspace））",
+ "ceilings": {
+  "electron-shell": 0
+ }
+}

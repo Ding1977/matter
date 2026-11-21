@@ -1,0 +1,14 @@
+/*
+ * kb-shell 栏目名样式（ISS-907 / DOC-533 段三 · 层级倒挂必修）。
+ *
+ * 三处壳内 h2 原本是裸标签，吃浏览器 UA 的 24px，比设计标题 18px 还大——
+ * 页面最大的字成了栏目名。挂本 Module 后字号走 alias 档位，与 theme.css 真值源同步。
+ * 纪律：camelCase 单语义类、只消费 alias token、0 裸 hex、0 裸字号。
+ */
+
+.title {
+  margin: 0 0 12px;
+  font-size: var(--matter-alias-font-size-title);
+  line-height: var(--matter-alias-line-height-title);
+  color: var(--matter-alias-text-primary);
+}

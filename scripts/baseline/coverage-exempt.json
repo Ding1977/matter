@@ -1,0 +1,12 @@
+{
+  "_meta": {
+    "kind": "waiver",
+    "note": "覆盖率豁免，条目自带 why+ticket+expires，是带期限的豁免。"
+  },
+  "_note": "覆盖率阈值豁免清单（ISS-522 / C-0a）。与 vitest 的 coverage.exclude 不同：这里的文件仍进分母、仍被采集，只是判据不因它判红。每行必须带 why + ticket + expires，到期即恢复严格。⛔ 首批只放 brand.ts 一个 —— 一个 v8 统计盲区；其余 15 个不达标文件是真缺口（C-0b 补测），不许加进来变绿。",
+  "packages/storage/storage/src/brand.ts": {
+    "why": "v8 对单行恒等函数统计不到（实测：直调 issueId(value){return value} 且断言通过，仍记 statements 0/1、functions 0/1）⇒ 该语句实质不可达，补测试也无法覆盖",
+    "ticket": "ISS-876",
+    "expires": "2026-12-31"
+  }
+}

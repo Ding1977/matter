@@ -1,0 +1,20 @@
+{
+  "recordedAt": "2026-11-09",
+  "unit": "bytes",
+  "note": "常驻规范文档的字节上限。limit = 当前实测值（只降不升，提高须 --write --reason）；target 只作提示、不参与判定。",
+  "limits": {
+    "docs/code.md": { "limit": 148781 },
+    "docs/design.md": { "limit": 141852 },
+    "docs/project-code-rules.md": { "limit": 19055 },
+    "AGENTS.md": { "limit": 8950 },
+    "docs/architecture-overview.md": { "limit": 23135 },
+    "docs/project-ops-rules.md": { "limit": 24057 },
+    "docs/project-doc-rules.md": { "limit": 9224 },
+    "docs/project-principles.md": { "limit": 8180 },
+    "docs/project-skill-rules.md": { "limit": 22189 }
+  },
+  "lastWrite": {
+    "at": "2026-11-21",
+    "reason": "2026-11-21 UI 规范废止：design.md 等头部加 ⚠️ 标注、指针改指 DSH 官方体系，4 份文档体量增长，按 verify-doc-budgets 机制重记上限。其余 under 条目保留原上限，不做顺手收线。3 份原样复制的官方 .md 不入清单。"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "recordedAt": "2026-11-04",
+  "tool": "lint-code.mjs --write",
+  "note": "判据算法在 scripts/code-inventory.mjs（唯一口径）；这里只存\"允许哪些欠账 + 上限在哪\"。白名单理由为占位符「待补」时门禁判红。",
+  "whitelist": {
+    "K1a": {},
+    "K1b": {
+      "forge-memory": "凭什么允许：本单（ISS-861）故意不挂载 —— 注入 systemPrompt 两条通道即生效，不需要 profile bundles 声明；而 profile 装配属生产配置，本单不碰。收口动作归谁：挂载进 profile 的那张单拿掉本条。守卫：一旦它进 MOUNTED 或 LINK_A/LINK_B，B5 自会归零，本条变化石并由门禁判红。"
+    },
+    "K3c": {},
+    "K3f": {
+      "forge-trader": "已核：只有 src/lib/smc.ts:12 一处 `import type { PriceBar } from \"@/lib/api\"`，类型侧由 tsconfig.paths 兜住、esbuild 构建期剥掉 ⇒ 运行时不炸。豁免到此为止：出现第 2 处（或任何值导入用别名）就不再允许"
+    },
+    "K4a": {
+      "forge-widgets": "凭什么允许：**零源文件的纯声明聚合包**，类型/测试无对象可检。实测：整包只有 package.json + cordis.patch.yml + locale/{zh,en}.json 四个文件，package.json 自己的 description 写着「本包不含代码，只声明它交付哪些行」，files 字段也只列这三样。给它造 tsconfig 等于给不存在的代码造门禁 —— 那是把表格填满，不是把事做对。守卫（防它偷偷长出代码）：一旦本包出现 lib/** 或 src/** 源文件，code-inventory 的 H9 会重新把它算进「零 tsconfig 的包」⇒ 本条豁免随之失效、门禁当场红（判据在本规则本身，不需要另加守卫）。收口归谁：若日后真长出代码，补 tsconfig 的人同时删本条。"
+    },
+    "K4b": {},
+    "K7a": {},
+    "K7b": {
+      "electron-shell": "缺 typecheck/test script：壳工程。见 K4a 同一理由",
+      "forge-cad": "同上",
+      "forge-cli-provider": "缺 test 或 typecheck 入口之一：该包有测试但缺 host 半 tsconfig 门禁入口（ISS-706 待纳管）",
+      "forge-widgets": "凭什么允许：同 K4a 的 `forge-widgets` 那条 —— 零源文件的纯声明聚合包，typecheck / test 两个脚本都没有可跑的输入。（K7b 的口径是「门禁连入口都没有」，对零代码包而言不存在「入口」这东西。）守卫同上：出现 lib/** 或 src/** 即失去豁免。"
+    },
+    "K5i": {},
+    "K6g": {
+      "forge-cad · json": "凭什么允许：与内核差在 >4KB gzip 分支与 Content-Length 两处，本包 20 处调用共用「不写长度、不压缩」这一形状 —— 并回等于给 20 个响应加两条头，是运行态变更。收口归谁：与 monitor / codeguide / notify 的 json 同一批「响应头统一」处理，等老板点头（K6f 那把尺只数个数，量不出这种差异，故需本条署名）。",
+      "forge-canvas · readBody": "凭什么允许：三处真语义差 —— `for await` 累积 Buffer、limit 可配（默认 8MB，内核固定 4MB）、空体走 `JSON.parse(\"\")` 抛错而内核返回 `{}`；canvas 传图像数据，8MB 是功能不是装饰。且它**没有 origin 闸门**。收口归谁：limit 参数要并回内核须先补内核测试，origin 闸门那半挂 ISS-747（宿主层是否已拦未核）。",
+      "forge-cli-provider · readBody": "凭什么允许：与内核**只差开头 requestOriginProblem 那一段**，其余逐字节同 —— 不并不是因为做不到，而是「该不该加这道闸门」尚未核实（宿主 webServer 可能已在外层拦跨站写请求；若在包内再加一层，VS Code 扩展与 B 引擎的合法写请求可能被拒）。收口归谁：ISS-747 出结论后，本包与 files / monitor 的 readBody 一批处理。",
+      "forge-model · json": "凭什么允许：`writeHead(status, {\"Content-Type\": \"application/json\"})`，无 charset/长度/gzip；该文件头自己写着「json() 是唯一的响应出参形状，改它等于改全部端点的形状」⇒ 这是 /forge-plans 的**对外契约面**（VS Code 扩展与冒烟脚本按它调用）。收口归谁：任何统一都要连 forge-cli-provider 的 275 条契约测试与扩展侧手工验一起做，另批。 三条差异合并在 **ISS-748** 一张单里（含可达性与验证代价的说明）。",
+      "forge-model · parseQuery": "凭什么允许：**这一份比内核弱**（`pair.split(\"=\")` 解构 ⇒ 值里第二个 `=` 之后被静默截断，base64 padding 正属这类；且无 try/catch ⇒ 畸形百分号编码抛 URIError 冒成 500）。留着它的唯一理由不是\"设计如此\"，而是\"改它 = 改解析行为\"，属运行态。收口归谁：09-23 已另报缺陷单，修法方向就是**并回内核**，等老板点头后本条应随删除而变化石。 **⇒ 09-23 已另报单：ISS-748**（同单还收着 json 出参形状与 readBody 那两条）。",
+      "forge-model · readBody": "凭什么允许：无体积上限（客户端可持续灌内存）+ 坏 JSON 静默返回 `{}` —— cli-provider 的注释正是冲着这种静默写的（一次坏请求会变成「写了个空配置」）。同上一条：允许它继续存在只是因为修复属行为变更。收口归谁：与 forge-model · parseQuery 同一张缺陷单，方向是并回内核。 **收口单：ISS-748**。",
+      "forge-model-limits · json": "凭什么允许：与内核（forge-service-kit/lib/net.js）差在**两条响应头**，不是语义：内核那份 >4KB 且客户端收 gzip 时 gzipSync + Content-Encoding，否则写 Content-Length；本包这份是 `writeHead + content-type: application/json; charset=utf-8`，无 gzip、无 Content-Length。本包只用 2 处（overview 代理 + entries 路由），返回的都是小对象（`{entries}` / overview 元数据，**远小于内核那个 4096 字节阈值** ⇒ gzip 分支永不触发），所以两版在本包上的行为差异为零 —— 但「差异为零」不等于「可以不留名」，本条存在的意义正是把「我知道它和内核不一样、且知道为什么可以不一样」写下来。收口归谁：与 forge-cad · json / forge-codeguide · json / forge-model · json 同一批「响应头统一」处理。本包是这批里调用点最少的（2 处），并回收益最低，建议排在最后。",
+      "forge-pm · parseQuery": "凭什么允许：`forge-pm/lib/routes/auth.routes.js:35` 自己写了一份（`new URLSearchParams(q)`），与内核 `forge-service-kit/lib/net.js:41` 的手工 split **行为不同**：`?a=1+2` 内核给 1+2、这份给 1 空格 2（`+` 解成空格）；`%E4%B8%AD` / `%` / `?a` / `?a=1&a=2` / `%zz` 五种输入两者一致。⚠️ **本条登记的是「行为差异」，不是「两者等价」**。当前无实际断裂的唯一依据是配对码字符集 `CODE_ALPHABET = ABCDEFGHJKMNPQRSTUVWXYZ23456789`（`forge-pm/lib/auth-flow.js:31`）**不含 `+`** ⇒ `/forge-pm/auth/poll` 的 `?code=` 走不到那条差异分支。**若将来该字符集引入 `+`，此登记立即失效，必须改回内核 import。** 收口归谁：改 import 会动鉴权链路行为（`+` 不再解成空格），要连 `/forge-pm/auth/poll` 一起验真，不该在基线单里顺手做，另批；同型前例见本条之后的 `forge-pm-notify · parseQuery`。出处 `cb871e65`（ISS-auth-component）创建该文件时自带 —— 且该文件头注释写「与 platform.routes 一致」，而 `platform.routes.js:8` 是从内核 import 的 ⇒ 这句注释事实上不成立（注释腐坏，另记）。"
+    }
+  },
+  "ceiling": {
+    "K2a": 32,
+    "K2b": 39,
+    "K3c·b": 0,
+    "K3e": 1,
+    "K4c": 3,
+    "K5e": 4,
+    "K5f": 8,
+    "K5g": 14,
+    "K6a": 274,
+    "K6b": 103,
+    "K6c": 16,
+    "K6f": 13,
+    "K6e": 0,
+    "K9e": 92,
+    "K9b": 27,
+    "K9c": 89,
+    "K9f": 386,
+    "K10a": 17,
+    "K10b": 370
+  },
+  "reasonPolicy": "每条豁免必须写'凭什么允许 + 收口动作归谁'；占位符（待补/TODO）会被门禁判红；欠账清了不删条目也算红（化石）。",
+  "ratchetNotes": {
+    "_note": "ISS-620：棘轮上限从旧值调到实测现值。**这不是放行许可**，是「把已知欠账显式记账 + 锁住不许再涨」，还债挂在对应子单上。每条写清：为什么本单不还、还债归谁、以及有没有口径问题。",
+    "K2a": "27 → 32（2026-10-30 · ISS-654 收线）。**真实新增 5 个，不是「最大 4 个」**：`forge-trader/lib/tools.js` 1848 行 · `forge-messenger/lib/index.js` 1636 · `forge-messenger/lib/restart-resume.js` 1173 · `forge-pm/lib/domain.js` 1075 · `forge-pm/src/pm/members-settings.tsx` 1040。⚠️ **记账陷阱（已踩过一次）**：`lint-code.mjs:197` 对 offenders 做 `slice(0,4)` 只显示行数最大的 4 个，而 `canvas-core.js` / `providers.js` / `linear-issue-detail.tsx` / `md-store.js` **在旧基线里早已在册**（逐条 git 比对过）—— 把「展示层排序」当成「新增名单」会写错账。复核任一数字前请用 `node scripts/code-inventory.mjs --json --top 999 --only N` 拉**全量** offender 再做集合差。还债 = 拆模块，每个都是一次结构改动，不在本单范围；欠账单 ISS-623。",
+    "K6a": "237 → 253（2026-10-30 · ISS-654 收线 · **校准，不是放行**）。口径未变（D2_EXEMPT / D2_KERNEL_OWNED 两道剔除法在 `scripts/code-inventory.mjs` 的 D2 段，本单未动）。增加的 16 组全部是**小工具函数同名各写一遍**（num / fmt / has / walk 一类），分散在 trader / messenger / pm 的新增工具面里，抽公共层是跨包重构，不在本单范围。还债单 ISS-623。注意 K6a 与 K6f 是**两道尺量同一件事的两半**：K6f 只管内核件（json/readBody/parseQuery）的重抄，那部分已从 D2 剔除、单独记在 K6f，不在此处重复计账。",
+    "K6b": "72 → 116。111 簇 / 640 个函数。去重是跨包重构，本单硬做必出事。还债单：ISS-623。\n\n**111 → 100（2026-10-30 · ISS-654 · 收线，不是新增）**：实测现值 100，上限停在 111 意味着 **11 格余量** —— 下一批代码复制粘贴涨 11 个簇，门禁照样全绿，棘轮形同虚设（本单审查 finding high ②）。收到实测现值，零余量。复检：`node scripts/lint-code.mjs --check` 的 K6b 行，或 `node scripts/code-inventory.mjs --json --only D` 的 D3 首段。还债单 ISS-623 不变。",
+    "K9f": "345 → 357（2026-10-30 · ISS-654 收线 · **真增量，判据未变，已证**）。计数代码（`scripts/code-inventory.mjs:550` 的 `^(Error|TypeError|RangeError|AggregateError)$` 分支）自 `b8efd613` 起**一字未改**；在 `d4a2f782` 的临时树实跑盘点得 345（精确复现记录值）。增量**分散**：`forge-trader/lib/env-judgement.js` +3，其余 9 个文件各 +1（`forge-messenger/lib/index.js` · `forge-pm/mcp/matter-mcp.mjs` 13→14 · `forge-trader/src/pages/StockDetailPage.tsx` · `forge-pm/lib/auth-flow.js` · `forge-pm/lib/routes/auth.routes.js` · `forge-trader/src/store/account.ts` · `scripts/assembly-realize-check.mjs` · `scripts/lint-design.mjs` · `scripts/review-range.mjs`）—— 无单一成因，是各功能各自加的裸 throw。还债 = 逐点补 `kind` 字段，属跨模块改动，另批。",
+    "K9c": "404 → 442（2026-10-30 · ISS-654 收线 · **真增量，判据未变，已证**）。证明做在两层：① K9c 的口径改动 `ed2372c1`（剔除注释）**早于**记 404 的基线 `f4571f36` ⇒ 同一口径；② 用当前正则**重放**历史 commit 的 shell 内容：`f4571f36` = **404**（精确重现记录值）、`d4a2f782` = 404、HEAD = 442 ⇒ 判据一字未动。增量归属逐提交追查（`/tmp/k9c-walk.mjs`）：`scripts/restart-matter.sh` 22→48（+26）、`scripts/watchdog-matter.sh` 25→36（+11）、`scripts/ws.sh` +1，来源是 2026-10-26…10-29 的重启/看门狗加固（ISS-662 主导 +20 · ISS-665 · ISS-668 · ISS-670）。**这批增长本身不是债**（是 `|| true` 之类的兜底写法变多），但既已计入就要锁住。 · 2026-11-09 ISS-771：**442 → 87**（口径从「一律计数」改成「只计吞失败」，见 `_caliber-iss2014`）。",
+    "K9e": "79 → 93。+14 个文件裸用 console.*。正解是接 ctx.logger，已有 lint-log-outlet 在治同一族。**注意**：本项 offender 里的 forge-pm/lib/index.js 有 43 处，是本包历史形态，不是本单引入。还债单：ISS-622 的口径修完后一并处理。",
+    "K10a": "ISS-631（2026-10-20）：**18 → 17（降 3，是判据修正的成绩，不是放宽）**。\n① 判据修正：`isTestFile` 原先只认 `.test.` / `.spec.`，**不认 `test-preload.js` 这类测试辅助文件** ⇒ 3 个 `lib/test-preload.js`（forge-messenger / forge-pm-notify / forge-teammate-model）长期被当零引用死码计入。它们被测试运行器按**文件名**加载、没有任何生产代码 import，零引用是**正常态**而非坏味道 —— 已把辅助件并入同一个 `isTestFile`（不新造正则，避免又造一份尺）。\n② **`forge-pm/lib/auto-merge.js` 与 `auto-merge-run.js` 仍在账上（2 条），且不许豁免**：它们是 ISS-628 按老板裁决「废掉」后**加废止头保留**的历史判据（保留是为了追查「当年为什么那样判」），零生产消费者是**设计如此**。但它们是**真生产代码**（不是测试件），豁免等于给「废置代码」开后门 ⇒ 记在基线上、明码标价，等真要删时再收口。\n③ **反向守卫**：真生产文件仍必须被算进去 —— 本次实测 `auto-merge` ×2 未被测试豁免误伤，`LimitUpPage.tsx` / `trae-extension/extension.js` 等也仍在账上。\n④ 17 条里 `vendor-entry.ts` 的「构建脚本字符串引用」豁免口径不变（见上一版理由）。",
+    "K10b": "549 → 550（2026-10-31 · 合并 ISS-595 时暴露）。新增那个是 `forge-pm/src/pm/lexical/bridge-assertions.ts:619` 的 `runCorpusRoundTrip`，**不是死代码，是判据射程问题**：它由 `forge-pm/src/pm/lexical/bridge.test.ts:83` 以 `(await import(pathToFileURL(OUT).href)).runCorpusRoundTrip(...)` **动态导入构建产物**后调用 —— 该测试的设计意图就是「先 bundle 成 browser target，再在 node 侧 run」（bundle 不许碰 node:fs），所以静态扫描必然看不见这次引用。⇒ 收线到 550 而不是改代码：把它改成静态 import 会破坏「先 bundle 再 run」的设计。还债归谁：无欠账。若将来 bridge 测试改成静态引用，此条应回落到 549（棘轮只许降）。口径问题：无 —— K10b 量的「零引用导出」在静态面上算是对的，只是对动态 import 天然失明。 · 2026-11-09 ISS-770：**580 → 362**（口径修正后同批下降 —— `.d.ts` 不算实现面 + `scripts/` 子目录算消费者；详见 `_caliber-iss2013`）。",
+    "_tightened": "ISS-620 另收线 7 格（实测低于旧上限，棘轮只许降 ⇒ 就近收到现值）：K3e 5→2 · K5f 9→5 · K5g 19→11 · K6f 13→12 · K6e 3→0 · K9b 50→27 · K9f 348→339。收线不是放行，是把「已经还掉的余量」从账上划掉，防止下次悄悄涨回去。",
+    "_caliber-iss1458": "ISS-624（2026-10-19）**改口径，两处，均经变异验证**。① H5a 宿主注入豁免：`vscode` 由扩展宿主运行时注入（forge-trae-direct/trae-extension/package.json 有 engines.vscode=^1.70.0），旧口径把它记成「未声明且解析不到（换机器即崩）」是误报 ⇒ K3c 那条白名单条目**随口径修正转成化石并删除**（不是把欠账删了，是欠账本来不存在）。新判据三条全中才免：说明符整串命中 HOST_INJECTED + 上级 package.json 声明 engines/extensionKind + 不在 workspaces。变异验证：普通源文件里 `require(\"no-such-pkg-iss1458\")` ⇒ H5a 1 并点名（仍能抓）；workspace 包内 `require(\"vscode\")` ⇒ H5a 1（③ 不命中，不放行）。② D5 已退役包识别：`forge-shell` 早已整包淘汰（ISS-607 · 10-09，目录已删）却仍在 shared 名单 ⇒ 恒报 shell:0，像「共享层归零」实则「名单没跟着清」；`electron-shell/` 是「包已退役、目录未删」。新判据三条全中才判退役（不在 workspaces + 零消费者 + 目录在/不在两形态分开点名），每次重算、不写死跳过名单。变异验证：把 forge-shell 放回 workspaces ⇒ D5 立刻重新报 shell:0；给 electron-shell 造一个消费者 ⇒ 单列为「不在 workspaces 但有 N 个消费者」（旧写法下它会彻底消失，比归错类更坏，已修）。**基线未重存**：等 reviewer 审完、老板批后再 `--baseline-save`（本单硬约束）。",
+    "K2b": "37 → 38（2026-10-30 · ISS-654 收线）。新增的 1 个是 `forge-pm/src/pm`（41 文件）——它是 S1 分层重构后 `src/pm/` 顶层累积的入口/页面文件，与既有 `forge-pm/src/pm/shared`（26）同族。还债 = 继续下钻分子目录，属结构改动，另批。",
+    "K6f": "12 → 13（2026-10-30 · ISS-654 收线）。新增的 1 条就是 `forge-pm · parseQuery`（`forge-pm/lib/routes/auth.routes.js:35`），已同步登进 K6g 白名单并写明**行为差异 + 失效条件**（见 `whitelist.K6g` 同名键）。本格只记「多了一份」，为什么允许它在白名单里。",
+    "_caliber-iss2013": "ISS-770（2026-11-09）**改口径，两处，均经单元级变异验证（`--selftest-z2`，7 条含 3 条反向控制）**。① **`.d.ts` 不再算实现面**：消费方 `import { X } from \"pkg\"` 解析到的是 `lib/index.js`（barrel），`.d.ts` 是同一模块的**类型视图**，任何人都不可能 import 到 `.d.ts` 这个路径 ⇒ 旧口径把它的 `export declare` 当实现计数是系统性假阳性（实测 595 条零引用里 231 条 = 39%，`forge-agent-protocol/lib/index.d.ts` 一家 20 条）。Z1（零引用**文件**）早就排除 `.d.ts`（ENTRY_RE 那段），Z2 漏了同一条。② **`scripts/` 子目录参与符号解析（只做消费者，不进被测面）**：`toolFiles` 只 readdir 了 `scripts/` 根（非递归），于是 `scripts/gates/*.mjs` 从未进 SRC、它们的 import 不进 `used`。实测反例：`scripts/gates/lint-oxlint.mjs:45` `import { WORKTREE_IGNORE_GLOBS } from '../wt-exclude-lib.mjs'`，该符号在 346 行使用，却被判零引用 —— **照它删会让 lint-oxlint 当场 SyntaxError**。⇒ 口径是「只加消费者、不加盘面」：这些文件贡献\"谁 import 了谁\"，自己的导出/行数/其它度量一律不算。**上限同批下降 580 → 362，不是放行、也不是洗白**：分子分母同时变了（导出总数 3970 → 3673，零引用 595 → 362），这是「口径变了上限必须跟着降」——留 580 等于凭空多给 218 处额度。反向控制：真没人 import 的 `.js` 导出 **照旧计数**（`--selftest-z2` 里 `REALLY_DEAD` / `PASSTHRU` 两条断言）。",
+    "_caliber-iss2014": "ISS-771（2026-11-09）**K9c/E5 改口径：只把「吞失败」算欠账，「探测」不算**，经 `--selftest-k9c` 11 条变异验证（5 正控 / 4 反控 / 2 边界）。旧口径把 `2>/dev/null` 与 `|| true` 一律计数，于是把运维脚本里大量**正确写法**记成欠账：`readlink \"$link\" 2>/dev/null || true`（读一个可能不存在的软链）、`kill -0 \"$pid\" 2>/dev/null || continue`（进程死了是正常态）、`lsof -tiTCP:$PORT 2>/dev/null`（没人监听是正常态）—— 这些命令在正常路径上**天天返回非零**，把它们的 stderr 放出来只会污染运维日志。**如果按旧口径\"清掉 19 处\"，今晚就会有人去删 70 个正确的 `2>/dev/null`，门禁变绿、日志开始喷错。**新口径（**语法可判，不用命令白名单** —— 白名单是弱证据，K9a 的 `-probe` 已吃过亏）：命令退出码有消费者即判探测、不计 —— ① 行首 `if/elif/while/until` ② 重定向后紧跟 `||`/`&&` ③ `|| true` 本身是消费者。**上限同批下降 442 → 87**（实测值），否则等于凭空多给 355 处额度。残留（已知边界，另单）：`git push || true` 这种真吞失败在语法上与探测无法区分；条件位整行判，`if a; then cmd 2>/dev/null; fi` 一行写完会连带豁免（全仓无此写法）。",
+    "_resync-iss2093-lead": "**2026-11-12 · 复录与上限失配的修复（Lead 亲自记账，老板当面批：「我推荐甲」）。**\n\n### 为什么动这 5 个数\n\n三次「复录」提交只更新了快照（`dup-detail.json` / `dead-exports.json`），**没同步抬这里的上限**，于是判据读旧上限、比新快照 ⇒ 必然报红：\n\n| 提交 | 日期 | 干了什么 | 有没有同步 ceiling |\n|---|---|---|---|\n| `554f1f65` | 2026-11-10 | ISS-777 三条假红复录 | ❌ 提交说明自己写着「本单一个数都没动」 |\n| `3e9e3402` | 2026-11-10 | ISS-789 拆 proxy | ❌ |\n| `8610d889` | 2026-11-12 | ISS-800 门禁三套合一 | ❌ |\n\n⇒ 快照涨到 274/370/386/14/8，上限停在 266/361/382/11/5 ⇒ `lint-code` 报 5 条「新增」。\n\n### 这不是放行，是补记账\n\n**分子没有变**：274 个同名实现在 `8610d889` 之前就已经存在（`8610d889~1` 的快照是 275，还多 1）。这次改的只是「账本承认它存在」。\n\n**棘轮语义不变**：上限从此锁在实测值，再涨就是红。\n\n### 老板的定义（本单据以判断的依据）\n\n> 「新代码指的是重构规划里的重构代码，老代码就是现在维护的代码。」\n\n**重构代码尚未开工一行** ⇒ 当前仓库里全部是「现在维护的代码」⇒ 按老板已定的「老代码不纠缠、可豁免；新代码、新工单严格门禁」处理。\n\n### 配套规矩（防再犯）\n\n**任何 `--write 收线` / 复录快照的提交，必须同批抬这里对应的上限。**\n不同批抬 ⇒ 下一个人看到的是「凭空多出一批红」，会误以为是新代码写坏了（本单就是如此，浪费了一整轮排查）。这条已写进 `docs/code.md` §0.7.1 的收线流程。\n\n### 还债去向\n\n抽公共层是跨包重构，仍在 ISS-623 名下，本单不接。"
+  }
+}
