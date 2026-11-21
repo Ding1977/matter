@@ -1,6 +1,10 @@
 /**
  * doc 详情（layer 1，domain=detail）：打开 doc → 经 slot 渲染正文。
  *
+ * ISS-544 / P5-D1 设计态：加 CSS Module + 信息层级（面包屑座 / 标题 / 加载骨架 /
+ * 正文容器），视觉只消费 ui-theme alias token。渲染契约（data-ui-kb=detail/loading/body、
+ * data-doc-id、renderSurface slot）保持不变，既有测试零改。
+ *
  * ## W7 的落点
  *
  * 「打开 doc → 编辑器渲染正文」这一步**经 slot 拿 `blocks.editor.surface`**：
@@ -8,20 +12,19 @@
  * 只用契约里的 slot key 调用它，真正渲染正文的 React 组件由 ui-blocks 在 slot 上占用。
  * **零 import ui-blocks**——连类型都不引，跨包 UI 只走 slot（DOC-512 §4.5）。
  *
- * 数据（doc 正文）走 `loadDoc` 回调（behavior 走 controller/ctx 注入），
- * 与 UI 渲染位分开：这正是 DSH 「behavior through injected services, UI through slots」。
- *
  * @module @matter/client-ui-kb/client/detail/detail
  */
 
 import { createElement, useEffect, useState } from "react"
 import type { ReactElement } from "react"
+import clsx from "clsx"
 import {
   EDITOR_SURFACE_SLOT,
   type DocDetailRow,
   type SurfaceRenderer,
 } from "../contract/doc.ts"
 import type { Messages } from "../locale.ts"
+import css from "./detail.module.css"
 
 /** doc 详情入参。 */
 export interface DocDetailProps {
@@ -33,6 +36,8 @@ export interface DocDetailProps {
   readonly renderSurface: SurfaceRenderer
   /** 用户可见文案（locale 字典）。 */
   readonly messages: Messages
+  /** owner 附加 className（clsx 后置，支持覆盖）。 */
+  readonly className?: string
 }
 
 /**
@@ -41,7 +46,7 @@ export interface DocDetailProps {
  * @returns React 元素。
  */
 export function DocDetail(props: DocDetailProps): ReactElement {
-  const { docId, loadDoc, renderSurface, messages } = props
+  const { docId, loadDoc, renderSurface, messages, className } = props
   const [doc, setDoc] = useState<DocDetailRow | undefined>(undefined)
 
   useEffect(() => {
@@ -55,17 +60,24 @@ export function DocDetail(props: DocDetailProps): ReactElement {
   }, [docId, loadDoc])
 
   const body = doc === undefined
-    ? createElement("p", { "data-ui-kb": "loading" }, messages.loadingHint)
+    ? createElement(
+        "ul",
+        { "data-ui-kb": "loading", className: css.loading, "aria-label": messages.loadingHint },
+        createElement("li", { className: css.skeletonLine }),
+        createElement("li", { className: css.skeletonShort }),
+        createElement("li", { className: css.skeletonLine }),
+      )
     : createElement(
-      "article",
-      { "data-ui-kb": "body", "data-doc-id": doc.id },
-      renderSurface(EDITOR_SURFACE_SLOT, { editorRef: doc.id }),
-    )
+        "article",
+        { "data-ui-kb": "body", "data-doc-id": doc.id, className: css.body },
+        renderSurface(EDITOR_SURFACE_SLOT, { editorRef: doc.id }),
+      )
 
   return createElement(
     "section",
-    { "data-ui-kb": "detail" },
-    createElement("h2", null, doc?.title ?? messages.detailTitle),
+    { "data-ui-kb": "detail", "data-state": doc === undefined ? "loading" : "ready", className: clsx(css.root, className) },
+    createElement("span", { "data-ui-kb": "crumb", className: css.crumb }, messages.detailTitle),
+    createElement("h2", { className: css.title }, doc?.title ?? messages.detailTitle),
     body,
   )
 }

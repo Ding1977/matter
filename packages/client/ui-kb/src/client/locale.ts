@@ -34,6 +34,18 @@ export interface Messages {
   readonly loadingHint: string
   /** 无标题文档的占位。 */
   readonly untitled: string
+  /** 页壳侧栏标题（ISS-544）。 */
+  readonly sidebarTitle: string
+  /** 页壳属性栏标题（ISS-544）。 */
+  readonly propertiesTitle: string
+  /** 属性栏未选中文档时的空提示（ISS-544）。 */
+  readonly propertiesEmptyHint: string
+  /** 属性栏「编号」字段名（ISS-544）。 */
+  readonly propertiesIdLabel: string
+  /** 属性栏「标题」字段名（ISS-544）。 */
+  readonly propertiesTitleLabel: string
+  /** 列表行展开时的操作提示（ISS-544，状态五组合的展开态）。 */
+  readonly rowActionHint: string
 }
 
 /**
@@ -49,5 +61,11 @@ export function resolveMessages(t: Translator = identityTranslator): Messages {
     emptyHint: t("暂无文档"),
     loadingHint: t("加载中"),
     untitled: t("无标题"),
+    sidebarTitle: t("文档导航"),
+    propertiesTitle: t("属性"),
+    propertiesEmptyHint: t("选中文档后显示属性"),
+    propertiesIdLabel: t("编号"),
+    propertiesTitleLabel: t("标题"),
+    rowActionHint: t("操作"),
   }
 }

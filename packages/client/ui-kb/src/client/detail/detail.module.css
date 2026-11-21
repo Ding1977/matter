@@ -1,0 +1,59 @@
+/*
+ * DocDetail 设计态 CSS Module（ISS-544 / P5-D1）。
+ *
+ * 纪律同 list.module.css：camelCase 单语义类、仅 alias token、0.5px 发丝边、
+ * hover 进 @media (hover: hover)、状态走 data-*。正文仍经 renderSurface slot 注入，
+ * 本文件只管详情外框与信息层级（标题 / 面包屑座 / 加载骨架 / 正文容器）。
+ */
+
+.root {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 20px 24px;
+  border-radius: var(--matter-alias-radius-panel);
+  background: var(--matter-alias-surface);
+  color: var(--matter-alias-text-primary);
+}
+
+.crumb {
+  display: block;
+  color: var(--matter-alias-text-muted);
+  font-size: var(--matter-alias-font-size-caption);
+  line-height: var(--matter-alias-line-height-caption);
+  margin-bottom: 4px;
+}
+
+.title {
+  margin: 0 0 16px;
+  font-size: var(--matter-alias-font-size-title);
+  line-height: var(--matter-alias-line-height-title);
+  /* 信息层级（判词 4）：标题用主文字 + 足够留白，不靠堆色。 */
+  color: var(--matter-alias-text-primary);
+}
+
+/* 加载骨架：三档灰条，弱化提示在主文字之下（判词 11 加载态）。 */
+.loading {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.skeletonLine {
+  height: 12px;
+  border-radius: var(--matter-alias-radius-control);
+  background: var(--matter-alias-surface-raised);
+}
+.skeletonShort {
+  composes: skeletonLine;
+  width: 40%;
+}
+
+/* 正文容器：代码块/正文共用等宽或正文档（code 档另给 pre）。 */
+.body {
+  border-top: 0.5px solid var(--matter-alias-border-subtle);
+  padding-top: 16px;
+  color: var(--matter-alias-text-primary);
+  font-size: var(--matter-alias-font-size-body);
+  line-height: var(--matter-alias-line-height-body);
+}

@@ -1,0 +1,115 @@
+/*
+ * DocList 设计态 CSS Module（ISS-544 / P5-D1）。
+ *
+ * 纪律（dsh-design-survey 收尾判词 4/7/11/13）：
+ *   · camelCase 单语义类；变体走 css[variant]（density），状态走 data-*；
+ *   · 颜色/圆角/字号只消费 alias token，无 hex、无颜色函数、平面边框 0.5px；
+ *   · hover 一律进 @media (hover: hover)；焦点用 :focus-visible；
+ *   · 状态五组合（选中 + 他行悬停 / 悬停 / 焦点 / 禁用 / 展开+菜单打开）各留可辨视觉；
+ *   · 不建全局 spacing token —— 局部几何（gap / pad）走本壳私有自定义属性 --kb-*。
+ */
+
+.root {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* 判词 8：内容自适应，不写死列数。 */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--kb-list-gap, 2px);
+}
+
+.row {
+  min-width: 0;
+  border-radius: var(--matter-alias-radius-control);
+  /* 0.5px 发丝边（判词 13）；选中态改底色不叠中性 border。 */
+  border: 0.5px solid transparent;
+}
+
+/* 变体：密度（css[variant]，owner 用 clsx 组合）。 */
+.normal {
+  --kb-list-gap: 2px;
+}
+.compact {
+  --kb-list-gap: 0px;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  padding: var(--kb-row-pad-y, 8px) var(--kb-row-pad-x, 10px);
+  border: 0;
+  border-radius: var(--matter-alias-radius-control);
+  background: transparent;
+  color: var(--matter-alias-text-primary);
+  font: inherit;
+  font-size: var(--matter-alias-font-size-body);
+  line-height: var(--matter-alias-line-height-body);
+  cursor: pointer;
+}
+
+.compact .button {
+  --kb-row-pad-y: 4px;
+  --kb-row-pad-x: 8px;
+  font-size: var(--matter-alias-font-size-caption);
+  line-height: var(--matter-alias-line-height-caption);
+}
+
+/* 选中态：淡彩底 + 强调前景，稳定含义 = 当前所在项。 */
+.row[data-selected='true'] > .button {
+  background: var(--matter-alias-surface-selected);
+  color: var(--matter-alias-accent);
+  border-color: var(--matter-alias-accent);
+}
+
+/* 焦点态：键盘目标，焦点环（与悬停分离，判词 11）。 */
+.button:focus-visible {
+  outline: var(--matter-alias-focus-ring-width) solid var(--matter-alias-focus-ring-color);
+  outline-offset: -2px;
+}
+
+/* 禁用态：暂不可用，弱文字 + 默认光标（判词 5）。 */
+.row[data-disabled='true'] > .button {
+  color: var(--matter-alias-text-muted);
+  cursor: not-allowed;
+}
+
+/* 展开 + 菜单打开：选中保持可见，行尾浮出操作提示位。 */
+.row[data-expanded='true'] > .button,
+.row[data-menu-open='true'] > .button {
+  border-color: var(--matter-alias-accent);
+}
+
+.menu {
+  display: none;
+  color: var(--matter-alias-text-muted);
+  font-size: var(--matter-alias-font-size-caption);
+  line-height: var(--matter-alias-line-height-caption);
+  padding: 0 var(--kb-row-pad-x, 10px) 4px;
+}
+.row[data-menu-open='true'] > .menu {
+  display: block;
+}
+
+/* 悬停一律进 @media (hover: hover)：选中+他行悬停 / 选中+悬停都落这里。 */
+@media (hover: hover) {
+  .button:hover {
+    background: var(--matter-alias-interactive-bg-hover);
+  }
+  /* 选中行悬停：保留选中底色，不叠中性底盖掉选中语义（判词 11）。 */
+  .row[data-selected='true'] > .button:hover {
+    background: var(--matter-alias-surface-selected);
+  }
+  .row[data-disabled='true'] > .button:hover {
+    background: transparent;
+  }
+}
+
+.empty {
+  color: var(--matter-alias-text-muted);
+  font-size: var(--matter-alias-font-size-secondary);
+  line-height: var(--matter-alias-line-height-secondary);
+  padding: var(--kb-row-pad-y, 8px);
+}
